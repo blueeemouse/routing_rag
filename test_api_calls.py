@@ -1,0 +1,162 @@
+"""
+测试API调用的验证脚本，现在包括RAG实现
+用于测试decomposer、router以及naive RAG和graph RAG的基本功能
+"""
+from decomposer.decomposer import Decomposer
+from router.router import Router
+from rag_implementations.naive_rag.naive_rag_impl import NaiveRAG
+from rag_implementations.graph_rag.graph_rag_impl import GraphRAG
+import os
+
+
+def test_decomposer_api():
+    """
+    测试decomposer的API调用
+    """
+    print("=" * 50)
+    print("测试 Decomposer API 调用")
+    print("=" * 50)
+
+    try:
+        decomposer = Decomposer()
+
+        # 测试查询分解
+        test_query = "分析2023年人工智能发展状况，包括技术突破、行业应用和未来趋势"
+        print(f"原始查询: {test_query}")
+
+        sub_queries = decomposer.decompose(test_query)
+        print(f"分解结果: {sub_queries}")
+        print(f"分解出 {len(sub_queries)} 个子查询")
+
+        # 测试简单查询
+        simple_query = "今天天气如何"
+        print(f"\n原始查询: {simple_query}")
+
+        simple_sub_queries = decomposer.decompose(simple_query)
+        print(f"分解结果: {simple_sub_queries}")
+        print(f"分解出 {len(simple_sub_queries)} 个子查询")
+
+        print("\n[完成] Decomposer API 调用测试完成")
+
+    except Exception as e:
+        print(f"\n❌ Decomposer API 调用失败: {str(e)}")
+        print("请确保在 config/settings.yaml 中设置了正确的API密钥")
+
+
+def test_router_api():
+    """
+    测试router的API调用
+    """
+    print("\n" + "=" * 50)
+    print("测试 Router API 调用")
+    print("=" * 50)
+
+    try:
+        router = Router()
+
+        # 测试不同类型的查询路由
+        queries_and_expected = [
+            ("今天天气如何", "no_rag"),
+            ("如何做番茄炒蛋", "no_rag"),
+            ("2023年人工智能最新技术", "naive_rag"),
+            ("美国独立战争对现代政治的影响", "naive_rag"),
+            ("分析公司内部员工关系网络", "graph_rag")
+        ]
+
+        for query, expected_type in queries_and_expected:
+            print(f"\n子查询: {query}")
+            strategy = router.route(query)
+            print(f"路由策略: {strategy}")
+
+        print("\n[完成] Router API 调用测试完成")
+
+    except Exception as e:
+        print(f"\n[错误] Router API 调用失败: {str(e)}")
+        print("请确保在 config/settings.yaml 中设置了正确的API密钥")
+
+
+def test_naive_rag():
+    """
+    测试naive RAG的基本功能
+    """
+    print("\n" + "=" * 50)
+    print("测试 Naive RAG 功能")
+    print("=" * 50)
+
+    try:
+        naive_rag = NaiveRAG()
+
+        print(f"API URL: {naive_rag.api_url}")
+        print(f"模型: {naive_rag.model}")
+        print(f"嵌入模型: {naive_rag.embedding_model}")
+
+        # 测试execute方法
+        result = naive_rag.execute("什么是人工智能？")
+        print(f"查询结果: {result}")
+
+        # 如果LlamaIndex可用，将返回实际查询结果
+        # 如果不可用，将返回错误信息
+        if "错误" in result or "LlamaIndex" in result:
+            print("[警告] LlamaIndex库不可用或配置有问题，这是预期的环境限制")
+        else:
+            print("[完成] Naive RAG 功能测试完成")
+
+    except Exception as e:
+        print(f"\n❌ Naive RAG 功能测试失败: {str(e)}")
+
+
+def test_graph_rag():
+    """
+    测试graph RAG的基本功能
+    """
+    print("\n" + "=" * 50)
+    print("测试 Graph RAG 功能")
+    print("=" * 50)
+
+    try:
+        graph_rag = GraphRAG()
+
+        print(f"API URL: {graph_rag.api_url}")
+        print(f"模型: {graph_rag.model}")
+        print(f"嵌入模型: {graph_rag.embedding_model}")
+
+        # 测试execute方法
+        result = graph_rag.execute("分析公司内部员工关系")
+        print(f"查询结果: {result}")
+
+        # 检查GraphRAG是否可用
+        if "错误" in result or "GraphRAG" in result:
+            print("[警告] GraphRAG库不可用或配置有问题，这是预期的环境限制")
+        else:
+            print("[完成] Graph RAG 功能测试完成")
+
+    except Exception as e:
+        print(f"\n❌ Graph RAG 功能测试失败: {str(e)}")
+
+
+def main():
+    """
+    主函数，运行所有测试
+    """
+    print("开始测试API调用和RAG功能...")
+
+    print("\n[警告] 注意：要成功运行此测试，您需要在 config/settings.yaml 中设置有效的API密钥")
+    print("当前配置的API URL:", os.environ.get('LLM_API_URL', '请检查 config/settings.yaml'))
+
+    test_decomposer_api()
+    test_router_api()
+    test_naive_rag()
+    test_graph_rag()
+
+    print("\n" + "=" * 50)
+    print("所有API调用和RAG功能测试完成")
+    print("=" * 50)
+    print("如果出现API错误，请检查：")
+    print("1. config/settings.yaml 中的API密钥是否正确")
+    print("2. 网络连接是否正常")
+    print("3. API服务商是否正常运行")
+    print("\n对于RAG实现，如果提示LlamaIndex或GraphRAG不可用，请检查相应依赖是否安装")
+
+
+if __name__ == "__main__":
+    main()
