@@ -92,7 +92,7 @@ def test_naive_rag():
 
         # 测试execute方法
         result = naive_rag.execute("什么是人工智能？")
-        print(f"查询结果: {result}")
+        # print(f"查询结果: {result}")
 
         # 如果LlamaIndex可用，将返回实际查询结果
         # 如果不可用，将返回错误信息
@@ -143,10 +143,12 @@ def main():
     print("\n[警告] 注意：要成功运行此测试，您需要在 config/settings.yaml 中设置有效的API密钥")
     print("当前配置的API URL:", os.environ.get('LLM_API_URL', '请检查 config/settings.yaml'))
 
-    test_decomposer_api()
-    test_router_api()
+    # test_decomposer_api()
+    # test_router_api()
+    # 前面两个已经测试成功了，就是简单的调用api
+
     test_naive_rag()
-    test_graph_rag()
+    # test_graph_rag()
 
     print("\n" + "=" * 50)
     print("所有API调用和RAG功能测试完成")

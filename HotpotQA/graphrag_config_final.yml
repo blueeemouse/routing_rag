@@ -1,0 +1,104 @@
+# GraphRAG Index Configuration for HotpotQA Dataset
+root_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA"
+
+# Language model configuration
+models:
+  default_chat_model:
+    type: "chat"
+    api_key: "${GRAPHRAG_API_KEY}"
+    # model: "deepseek/deepseek-v3"
+    model: "gpt-3.5-turbo"
+    model_provider: "openai"
+    # api_base: "https://api.agicto.cn/v1/chat/completions"
+    api_base: "https://api.agicto.cn/v1"
+    temperature: 0
+    max_tokens: 4096
+    request_timeout: 180.0
+    concurrent_requests: 25
+  default_embedding_model:
+    type: "embedding"
+    api_key: "${GRAPHRAG_API_KEY}"
+    model: "text-embedding-ada-002"
+    model_provider: "openai"
+    api_base: "https://api.agicto.cn/v1"
+    # api_base: "https://api.agicto.cn/v1"
+    request_timeout: 180.0
+    concurrent_requests: 25
+
+# Input configuration
+input:
+  type: "file"
+  file_type: "json"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/raw"
+  encoding: "utf-8"
+  json_format: "jsonl"
+  text_column: "context"  # Using "context" column which contains the relevant texts
+
+# Output configuration
+output:
+  type: "file"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/indexed"
+
+# Cache configuration
+cache:
+  type: "file"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/cache"
+
+# Logging/Reporting configuration
+reporting:
+  type: "file"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/logs"
+
+chunks:
+  size: 1200
+  overlap: 100
+  group_by_columns: ["id"]
+
+extract_graph:
+  prompt: null
+  entity_types: ["organization", "person", "geo", "event"]
+  max_gleanings: 1
+  model: "default_chat_model"
+
+embed_graph:
+  enabled: true
+  dimensions: 1536
+  num_walks: 10
+  walk_length: 40
+
+cluster_graph:
+  max_cluster_size: 10
+  use_lcc: true
+
+community_reports:
+  max_length: 2000
+  max_input_length: 8000
+  model_id: "default_chat_model"
+
+summarize_descriptions:
+  max_length: 500
+  max_input_tokens: 4000
+  model_id: "default_chat_model"
+
+prune_graph:
+  min_node_degree: 1
+  min_edge_weight_pct: 40.0
+
+embeddings:
+  model: "text-embedding-ada-002"
+  batch_size: 16
+  batch_max_tokens: 8191
+  model_id: "default_embedding_model"
+
+local_search:
+  chat_model_id: "default_chat_model"
+  embedding_model_id: "default_embedding_model"
+
+global_search:
+  chat_model_id: "default_chat_model"
+  embedding_model_id: "default_embedding_model"
+
+snapshots:
+  embeddings: false
+  graphml: false
+  raw_graph: false

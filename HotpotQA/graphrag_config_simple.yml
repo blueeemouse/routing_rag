@@ -1,0 +1,97 @@
+# GraphRAG Index Configuration for HotpotQA Dataset
+root_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA"
+
+# 语言模型配置
+models:
+  gpt-4-turbo:
+    type: "chat"
+    api_key: "${GRAPHRAG_API_KEY}"
+    model: "deepseek-v3"
+    api_base: "https://api.agicto.cn/v1/chat/completions"
+    temperature: 0
+    max_tokens: 4096
+    request_timeout: 180.0
+    concurrent_requests: 25
+  text-embedding-ada-002:
+    type: "embedding"
+    api_key: "${GRAPHRAG_API_KEY}"
+    model: "text-embedding-ada-002"
+    api_base: "https://api.agicto.cn/v1/chat/completions"
+    request_timeout: 180.0
+    concurrent_requests: 25
+
+# 输入配置
+input:
+  type: "file"
+  file_type: "json"
+  file_pattern: "\\*\\.json$"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/raw"
+  encoding: "utf-8"
+  text_column: "question"
+
+# 输出配置
+output:
+  type: "file"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/indexed"
+
+# 缓存配置
+cache:
+  type: "file"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/cache"
+
+# 日志/报告配置
+reporting:
+  type: "file"
+  base_dir: "D:/Develop/all_RAG/routing_rag/HotpotQA/logs"
+
+# 文本分块配置
+chunks:
+  size: 1200
+  overlap: 100
+  group_by_columns: ["id"]
+
+# 实体提取配置
+extract_graph:
+  prompt: ~
+  entity_types: ["organization", "person", "geo", "event", "date", "amount", "law", "policy", "product", "topic", "subject"]
+  max_gleanings: 1
+  model: "gpt-4-turbo"
+
+# 关系提取配置
+embed_graph:
+  enabled: true
+  dimensions: 1536
+  num_walks: 10
+  walk_length: 40
+
+# 社区发现配置
+cluster_graph:
+  max_cluster_size: 10
+  use_lcc: true
+
+# 社区报告配置
+community_reports:
+  max_length: 2000
+  max_input_length: 8000
+
+# 摘要描述配置
+summarize_descriptions:
+  max_length: 500
+  max_input_tokens: 4000
+
+# 图剪枝配置
+prune_graph:
+  min_node_degree: 1
+  min_edge_weight_pct: 40.0
+
+# 文本嵌入配置
+embeddings:
+  model: "text-embedding-ada-002"
+  batch_size: 16
+  batch_max_tokens: 8191
+
+# 快照配置
+snapshots:
+  embeddings: false
+  graphml: false
+  raw_graph: false

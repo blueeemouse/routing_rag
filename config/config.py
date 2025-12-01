@@ -1,6 +1,39 @@
-import yaml
+import sys
 import os
+import yaml
+import re
 from typing import Dict, Any
+
+# 动态添加上一级目录到模块搜索路径
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+print(parent_dir)
+sys.path.append(parent_dir)
+
+
+def _expand_env_vars(obj):
+    """
+    递归展开配置对象中的环境变量
+    Recursively expand environment variables in the configuration object
+    """
+    if isinstance(obj, str):
+        # 匹配 ${VAR_NAME} 格式的环境变量
+        pattern = r'\$\{([^}^{]+)\}'
+        matches = re.findall(pattern, obj)
+        for match in matches:
+            env_value = os.getenv(match)
+            if env_value is not None:
+                obj = obj.replace(f"${{{match}}}", env_value)
+            else:
+                # 如果环境变量不存在，保留原始格式
+                print(f"警告: 环境变量 '{match}' 未定义，保留原始值")
+        return obj
+    elif isinstance(obj, dict):
+        return {key: _expand_env_vars(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [_expand_env_vars(item) for item in obj]
+    else:
+        return obj
 
 
 class Config:
@@ -26,7 +59,9 @@ class Config:
         Load configuration from YAML file
         """
         with open(self.config_path, 'r', encoding='utf-8') as f:
-            return yaml.safe_load(f)
+            raw_config = yaml.safe_load(f)
+            # 展开环境变量
+            return _expand_env_vars(raw_config)
 
     @property
     def decomposer_api_url(self) -> str:

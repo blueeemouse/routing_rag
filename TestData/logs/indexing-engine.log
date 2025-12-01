@@ -1,0 +1,1754 @@
+2025-12-01 16:18:08.0126 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=1, delay=2.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:18:11.0320 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=2, delay=4.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:18:16.0572 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=3, delay=8.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:18:24.0901 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=4, delay=16.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:18:42.0043 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=5, delay=32.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:19:15.0224 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=6, delay=64.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:20:19.0546 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=7, delay=128.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:22:28.0198 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=8, delay=256.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:26:45.0444 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=9, delay=512.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:35:18.0810 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=10, delay=1024.0, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:52:24.0082 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Max retries exceeded, retries=10, max_retries=10, exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:52:24.0082 - ERROR - graphrag.language_model.providers.litellm.request_wrappers.with_logging - with_logging: Async request failed with exception=litellm.APIError: APIError: DeepseekException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\custom_httpx\llm_http_handler.py", line 300, in async_completion
+    return provider_config.transform_response(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\chat\gpt_transformation.py", line 636, in transform_response
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\request_wrappers\with_logging.py", line 49, in _wrapped_with_logging_async
+    return await async_fn(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\request_wrappers\with_retries.py", line 52, in _wrapped_with_retries_async
+    return await retry_service.aretry(func=async_fn, **kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 16:52:24.0235 - ERROR - graphrag.index.validate_config - LLM configuration error detected.
+litellm.APIError: APIError: DeepseekException - invalid_model
+2025-12-01 18:09:56.0681 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=1, delay=2.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:09:59.0717 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=2, delay=4.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:10:04.0694 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=3, delay=8.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:10:13.0212 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=4, delay=16.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:10:29.0755 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=5, delay=32.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:11:02.0509 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=6, delay=64.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:12:07.0541 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=7, delay=128.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:14:16.0624 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=8, delay=256.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:18:33.0010 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=9, delay=512.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:27:05.0583 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Request failed, retrying, retries=10, delay=1024.0, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:44:10.0603 - ERROR - graphrag.language_model.providers.litellm.services.retry.exponential_retry - ExponentialRetry: Max retries exceeded, retries=10, max_retries=10, exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:44:10.0605 - ERROR - graphrag.language_model.providers.litellm.request_wrappers.with_logging - with_logging: Async request failed with exception=litellm.APIError: APIError: OpenAIException - invalid_model
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 838, in acompletion
+    final_response_obj = convert_to_model_response_object(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\llm_response_utils\convert_dict_to_response.py", line 454, in convert_to_model_response_object
+    raise raised_exception
+Exception
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 603, in acompletion
+    response = await init_response
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\llms\openai\openai.py", line 870, in acompletion
+    raise OpenAIError(
+litellm.llms.openai.common_utils.OpenAIError: invalid_model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\request_wrappers\with_logging.py", line 49, in _wrapped_with_logging_async
+    return await async_fn(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\request_wrappers\with_retries.py", line 52, in _wrapped_with_retries_async
+    return await retry_service.aretry(func=async_fn, **kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\services\retry\exponential_retry.py", line 71, in aretry
+    return await func(**kwargs)
+  File "D:\Develop/all_RAG/routing_rag/graphrag\graphrag\language_model\providers\litellm\chat_model.py", line 109, in _base_acompletion
+    return await acompletion(**new_args)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1643, in wrapper_async
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\utils.py", line 1489, in wrapper_async
+    result = await original_function(*args, **kwargs)
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\main.py", line 622, in acompletion
+    raise exception_type(
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2328, in exception_type
+    raise e
+  File "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 563, in exception_type
+    raise APIError(
+litellm.exceptions.APIError: litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 18:44:10.0605 - ERROR - graphrag.index.validate_config - LLM configuration error detected.
+litellm.APIError: APIError: OpenAIException - invalid_model
+2025-12-01 20:09:07.0246 - INFO - graphrag.index.validate_config - LLM Config Params Validated
+2025-12-01 20:09:11.0462 - INFO - graphrag.index.validate_config - Embedding LLM Config Params Validated
+2025-12-01 20:09:11.0462 - INFO - graphrag.cli.index - Starting pipeline run. False
+2025-12-01 20:09:11.0468 - INFO - graphrag.cli.index - Using default configuration: {
+    "root_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData",
+    "models": {
+        "default_chat_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "chat",
+            "model_provider": "openai",
+            "model": "gpt-3.5-turbo",
+            "encoding_model": "",
+            "api_base": "https://api.agicto.cn/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": null,
+            "request_timeout": 180.0,
+            "tokens_per_minute": null,
+            "requests_per_minute": null,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 25,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": 4096,
+            "temperature": 0.0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        },
+        "default_embedding_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "embedding",
+            "model_provider": "openai",
+            "model": "text-embedding-ada-002",
+            "encoding_model": "",
+            "api_base": "https://api.agicto.cn/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": null,
+            "request_timeout": 180.0,
+            "tokens_per_minute": null,
+            "requests_per_minute": null,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 25,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        }
+    },
+    "input": {
+        "storage": {
+            "type": "file",
+            "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\input",
+            "storage_account_blob_url": null,
+            "cosmosdb_account_url": null
+        },
+        "file_type": "text",
+        "encoding": "utf-8",
+        "file_pattern": ".*\\.txt$",
+        "file_filter": null,
+        "text_column": "text",
+        "title_column": null,
+        "metadata": null
+    },
+    "chunks": {
+        "size": 300,
+        "overlap": 50,
+        "group_by_columns": [
+            "id"
+        ],
+        "strategy": "tokens",
+        "encoding_model": "cl100k_base",
+        "prepend_metadata": false,
+        "chunk_size_includes_metadata": false
+    },
+    "output": {
+        "type": "file",
+        "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "outputs": null,
+    "update_index_output": {
+        "type": "file",
+        "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\update_output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "cache": {
+        "type": "file",
+        "base_dir": "D:/Develop/all_RAG/routing_rag/TestData/cache",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "reporting": {
+        "type": "file",
+        "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\logs",
+        "storage_account_blob_url": null
+    },
+    "vector_store": {
+        "default_vector_store": {
+            "type": "lancedb",
+            "db_uri": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\output\\lancedb",
+            "url": null,
+            "audience": null,
+            "container_name": "==== REDACTED ====",
+            "database_name": null,
+            "overwrite": true,
+            "embeddings_schema": {}
+        }
+    },
+    "workflows": null,
+    "embed_text": {
+        "model_id": "default_embedding_model",
+        "vector_store_id": "default_vector_store",
+        "batch_size": 16,
+        "batch_max_tokens": 8191,
+        "names": [
+            "entity.description",
+            "community.full_content",
+            "text_unit.text"
+        ],
+        "strategy": null
+    },
+    "extract_graph": {
+        "model_id": "default_chat_model",
+        "prompt": null,
+        "entity_types": [
+            "person",
+            "organization",
+            "event"
+        ],
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "summarize_descriptions": {
+        "model_id": "default_chat_model",
+        "prompt": null,
+        "max_length": 200,
+        "max_input_tokens": 1000,
+        "strategy": null
+    },
+    "extract_graph_nlp": {
+        "normalize_edge_weights": true,
+        "text_analyzer": {
+            "extractor_type": "regex_english",
+            "model_name": "en_core_web_md",
+            "max_word_length": 15,
+            "word_delimiter": " ",
+            "include_named_entities": true,
+            "exclude_nouns": [
+                "stuff",
+                "thing",
+                "things",
+                "bunch",
+                "bit",
+                "bits",
+                "people",
+                "person",
+                "okay",
+                "hey",
+                "hi",
+                "hello",
+                "laughter",
+                "oh"
+            ],
+            "exclude_entity_tags": [
+                "DATE"
+            ],
+            "exclude_pos_tags": [
+                "DET",
+                "PRON",
+                "INTJ",
+                "X"
+            ],
+            "noun_phrase_tags": [
+                "PROPN",
+                "NOUNS"
+            ],
+            "noun_phrase_grammars": {
+                "PROPN,PROPN": "PROPN",
+                "NOUN,NOUN": "NOUNS",
+                "NOUNS,NOUN": "NOUNS",
+                "ADJ,ADJ": "ADJ",
+                "ADJ,NOUN": "NOUNS"
+            }
+        },
+        "concurrent_requests": 25,
+        "async_mode": "threaded"
+    },
+    "prune_graph": {
+        "min_node_freq": 2,
+        "max_node_freq_std": null,
+        "min_node_degree": 1,
+        "max_node_degree_std": null,
+        "min_edge_weight_pct": 40.0,
+        "remove_ego_nodes": true,
+        "lcc_only": false
+    },
+    "cluster_graph": {
+        "max_cluster_size": 10,
+        "use_lcc": true,
+        "seed": 3735928559
+    },
+    "extract_claims": {
+        "enabled": false,
+        "model_id": "default_chat_model",
+        "prompt": null,
+        "description": "Any claims or facts that could be relevant to information discovery.",
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "community_reports": {
+        "model_id": "default_chat_model",
+        "graph_prompt": null,
+        "text_prompt": null,
+        "max_length": 500,
+        "max_input_length": 2000,
+        "strategy": null
+    },
+    "embed_graph": {
+        "enabled": true,
+        "dimensions": 1536,
+        "num_walks": 10,
+        "walk_length": 40,
+        "window_size": 2,
+        "iterations": 3,
+        "random_seed": 597832,
+        "use_lcc": true
+    },
+    "umap": {
+        "enabled": false
+    },
+    "snapshots": {
+        "embeddings": false,
+        "graphml": false,
+        "raw_graph": false
+    },
+    "local_search": {
+        "prompt": null,
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "text_unit_prop": 0.5,
+        "community_prop": 0.15,
+        "conversation_history_max_turns": 5,
+        "top_k_entities": 10,
+        "top_k_relationships": 10,
+        "max_context_tokens": 12000
+    },
+    "global_search": {
+        "map_prompt": null,
+        "reduce_prompt": null,
+        "chat_model_id": "default_chat_model",
+        "knowledge_prompt": null,
+        "max_context_tokens": 12000,
+        "data_max_tokens": 12000,
+        "map_max_length": 1000,
+        "reduce_max_length": 2000,
+        "dynamic_search_threshold": 1,
+        "dynamic_search_keep_parent": false,
+        "dynamic_search_num_repeats": 1,
+        "dynamic_search_use_summary": false,
+        "dynamic_search_max_level": 2
+    },
+    "drift_search": {
+        "prompt": null,
+        "reduce_prompt": null,
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "data_max_tokens": 12000,
+        "reduce_max_tokens": null,
+        "reduce_temperature": 0,
+        "reduce_max_completion_tokens": null,
+        "concurrency": 32,
+        "drift_k_followups": 20,
+        "primer_folds": 5,
+        "primer_llm_max_tokens": 12000,
+        "n_depth": 3,
+        "local_search_text_unit_prop": 0.9,
+        "local_search_community_prop": 0.1,
+        "local_search_top_k_mapped_entities": 10,
+        "local_search_top_k_relationships": 10,
+        "local_search_max_data_tokens": 12000,
+        "local_search_temperature": 0,
+        "local_search_top_p": 1,
+        "local_search_n": 1,
+        "local_search_llm_max_gen_tokens": null,
+        "local_search_llm_max_gen_completion_tokens": null
+    },
+    "basic_search": {
+        "prompt": null,
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "k": 10,
+        "max_context_tokens": 12000
+    }
+}
+2025-12-01 20:09:11.0471 - INFO - graphrag.api.index - Initializing indexing pipeline...
+2025-12-01 20:09:11.0471 - INFO - graphrag.index.workflows.factory - Creating pipeline with workflows: ['load_input_documents', 'create_base_text_units', 'create_final_documents', 'extract_graph', 'finalize_graph', 'extract_covariates', 'create_communities', 'create_final_text_units', 'create_community_reports', 'generate_text_embeddings']
+2025-12-01 20:09:11.0471 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\input
+2025-12-01 20:09:11.0471 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\output
+2025-12-01 20:09:11.0473 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData
+2025-12-01 20:09:11.0473 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache
+2025-12-01 20:09:11.0474 - INFO - graphrag.index.run.run_pipeline - Running standard indexing.
+2025-12-01 20:09:11.0474 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at 
+2025-12-01 20:09:11.0476 - INFO - graphrag.index.run.run_pipeline - Executing pipeline...
+2025-12-01 20:09:11.0477 - INFO - graphrag.index.input.factory - loading input from root_dir=D:\Develop\all_RAG\routing_rag\TestData\input
+2025-12-01 20:09:11.0477 - INFO - graphrag.index.input.factory - Loading Input InputFileType.text
+2025-12-01 20:09:11.0477 - INFO - graphrag.storage.file_pipeline_storage - search D:\Develop\all_RAG\routing_rag\TestData\input for files matching .*\.txt$
+2025-12-01 20:09:11.0477 - DEBUG - graphrag.storage.file_pipeline_storage - Files loaded: 1, filtered: 0, total: 1
+2025-12-01 20:09:11.0489 - INFO - graphrag.index.input.util - Found 1 InputFileType.text files, loading 1
+2025-12-01 20:09:11.0490 - INFO - graphrag.index.input.util - Total number of unfiltered text rows: 1
+2025-12-01 20:09:11.0491 - INFO - graphrag.index.workflows.load_input_documents - Final # of rows loaded: 1
+2025-12-01 20:09:11.0550 - INFO - graphrag.api.index - Workflow load_input_documents completed successfully
+2025-12-01 20:09:11.0553 - DEBUG - graphrag.api.index -                                                 text  ...              creation_date
+0  人工智能是计算机科学的一个分支，它试图理解智能的实质，并生产出一种新的能以人类智能相似的方式...  ...  2025-12-01 15:58:37 +0800
+
+[1 rows x 4 columns]
+2025-12-01 20:09:11.0554 - INFO - graphrag.index.workflows.create_base_text_units - Workflow started: create_base_text_units
+2025-12-01 20:09:11.0554 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2025-12-01 20:09:11.0604 - INFO - graphrag.index.workflows.create_base_text_units - Starting chunking process for 1 documents
+2025-12-01 20:09:11.0610 - INFO - graphrag.index.workflows.create_base_text_units - chunker progress:  1/1
+2025-12-01 20:09:11.0623 - INFO - graphrag.index.workflows.create_base_text_units - Workflow completed: create_base_text_units
+2025-12-01 20:09:11.0627 - INFO - graphrag.api.index - Workflow create_base_text_units completed successfully
+2025-12-01 20:09:11.0631 - DEBUG - graphrag.api.index -                                                   id  ... n_tokens
+0  62535725cb26ec112332e90342a0ce3af33417ef964315...  ...      260
+
+[1 rows x 4 columns]
+2025-12-01 20:09:11.0631 - INFO - graphrag.index.workflows.create_final_documents - Workflow started: create_final_documents
+2025-12-01 20:09:11.0632 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2025-12-01 20:09:11.0635 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 20:09:11.0658 - INFO - graphrag.index.workflows.create_final_documents - Workflow completed: create_final_documents
+2025-12-01 20:09:11.0665 - INFO - graphrag.api.index - Workflow create_final_documents completed successfully
+2025-12-01 20:09:11.0670 - DEBUG - graphrag.api.index -                                                   id  human_readable_id  ...              creation_date metadata
+0  2e1f60b0817f8ffd8b8a90720fcdf879d2bd7cd29269a7...                  0  ...  2025-12-01 15:58:37 +0800      NaN
+
+[1 rows x 7 columns]
+2025-12-01 20:09:11.0671 - INFO - graphrag.index.workflows.extract_graph - Workflow started: extract_graph
+2025-12-01 20:09:11.0671 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 20:09:11.0674 - DEBUG - graphrag.index.operations.extract_graph.extract_graph - entity_extract strategy={'type': "graph_intelligence", 'llm': {'api_key': 'sk-KvFwXLq2X3lKan2Sb76XIV9bVX1ErILvGOVpsggsqmpN1YHp', 'auth_type': <AuthType.APIKey: 'api_key'>, 'type': 'chat', 'model_provider': 'openai', 'model': 'gpt-3.5-turbo', 'encoding_model': '', 'api_base': 'https://api.agicto.cn/v1', 'api_version': None, 'deployment_name': None, 'organization': None, 'proxy': None, 'audience': None, 'model_supports_json': None, 'request_timeout': 180.0, 'tokens_per_minute': None, 'requests_per_minute': None, 'rate_limit_strategy': 'static', 'retry_strategy': 'exponential_backoff', 'max_retries': 10, 'max_retry_wait': 10.0, 'concurrent_requests': 25, 'async_mode': <AsyncType.Threaded: 'threaded'>, 'responses': None, 'max_tokens': 4096, 'temperature': 0.0, 'max_completion_tokens': None, 'reasoning_effort': None, 'top_p': 1, 'n': 1, 'frequency_penalty': 0.0, 'presence_penalty': 0.0}, 'extraction_prompt': None, 'max_gleanings': 1}
+2025-12-01 20:09:11.0729 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\extract_graph
+2025-12-01 20:09:18.0571 - INFO - graphrag.logger.progress - extract graph progress: 1/1
+2025-12-01 20:09:18.0590 - DEBUG - graphrag.index.operations.summarize_descriptions.summarize_descriptions - summarize_descriptions strategy={'type': "graph_intelligence", 'llm': {'api_key': 'sk-KvFwXLq2X3lKan2Sb76XIV9bVX1ErILvGOVpsggsqmpN1YHp', 'auth_type': <AuthType.APIKey: 'api_key'>, 'type': 'chat', 'model_provider': 'openai', 'model': 'gpt-3.5-turbo', 'encoding_model': '', 'api_base': 'https://api.agicto.cn/v1', 'api_version': None, 'deployment_name': None, 'organization': None, 'proxy': None, 'audience': None, 'model_supports_json': None, 'request_timeout': 180.0, 'tokens_per_minute': None, 'requests_per_minute': None, 'rate_limit_strategy': 'static', 'retry_strategy': 'exponential_backoff', 'max_retries': 10, 'max_retry_wait': 10.0, 'concurrent_requests': 25, 'async_mode': <AsyncType.Threaded: 'threaded'>, 'responses': None, 'max_tokens': 4096, 'temperature': 0.0, 'max_completion_tokens': None, 'reasoning_effort': None, 'top_p': 1, 'n': 1, 'frequency_penalty': 0.0, 'presence_penalty': 0.0}, 'summarize_prompt': None, 'max_summary_length': 200, 'max_input_tokens': 1000}
+2025-12-01 20:09:18.0622 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\summarize_descriptions
+2025-12-01 20:09:18.0623 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 1/9
+2025-12-01 20:09:18.0623 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 2/9
+2025-12-01 20:09:18.0623 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 3/9
+2025-12-01 20:09:18.0623 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 4/9
+2025-12-01 20:09:18.0623 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 5/9
+2025-12-01 20:09:18.0624 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 6/9
+2025-12-01 20:09:18.0624 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 7/9
+2025-12-01 20:09:18.0624 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 8/9
+2025-12-01 20:09:18.0624 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 9/9
+2025-12-01 20:09:18.0637 - INFO - graphrag.index.workflows.extract_graph - Workflow completed: extract_graph
+2025-12-01 20:09:18.0648 - INFO - graphrag.api.index - Workflow extract_graph completed successfully
+2025-12-01 20:09:18.0657 - DEBUG - graphrag.api.index - {'entities':                          title          type  ... frequency                                        description
+0             MACHINE LEARNING  ORGANIZATION  ...         1  Machine Learning is a subset of Artificial Int...
+1                DEEP LEARNING  ORGANIZATION  ...         1  Deep Learning is a type of Machine Learning th...
+2  NATURAL LANGUAGE PROCESSING  ORGANIZATION  ...         1  Natural Language Processing (NLP) is a branch ...
+3              COMPUTER VISION  ORGANIZATION  ...         1  Computer Vision is an important field of Artif...
+4      ARTIFICIAL INTELLIGENCE                ...         1                                                   
+
+[5 rows x 5 columns], 'relationships':                         source                   target  ... weight                                        description
+0             MACHINE LEARNING  ARTIFICIAL INTELLIGENCE  ...    9.0  Machine Learning is a subset of Artificial Int...
+1             MACHINE LEARNING            DEEP LEARNING  ...    9.0        Deep Learning is a type of Machine Learning
+2  NATURAL LANGUAGE PROCESSING  ARTIFICIAL INTELLIGENCE  ...    8.0  Natural Language Processing is a branch of Art...
+3              COMPUTER VISION  ARTIFICIAL INTELLIGENCE  ...    1.0  Computer Vision is a field within Artificial I...
+
+[4 rows x 5 columns]}
+2025-12-01 20:09:18.0657 - INFO - graphrag.index.workflows.finalize_graph - Workflow started: finalize_graph
+2025-12-01 20:09:18.0658 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 20:09:18.0671 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 20:09:18.0730 - INFO - graphrag.index.workflows.finalize_graph - Workflow completed: finalize_graph
+2025-12-01 20:09:18.0739 - INFO - graphrag.api.index - Workflow finalize_graph completed successfully
+2025-12-01 20:09:18.0748 - DEBUG - graphrag.api.index - {'entities':                          title          type  ... frequency                                        description
+0             MACHINE LEARNING  ORGANIZATION  ...         1  Machine Learning is a subset of Artificial Int...
+1                DEEP LEARNING  ORGANIZATION  ...         1  Deep Learning is a type of Machine Learning th...
+2  NATURAL LANGUAGE PROCESSING  ORGANIZATION  ...         1  Natural Language Processing (NLP) is a branch ...
+3              COMPUTER VISION  ORGANIZATION  ...         1  Computer Vision is an important field of Artif...
+4      ARTIFICIAL INTELLIGENCE                ...         1                                                   
+
+[5 rows x 5 columns], 'relationships':                         source                   target  ... weight                                        description
+0             MACHINE LEARNING  ARTIFICIAL INTELLIGENCE  ...    9.0  Machine Learning is a subset of Artificial Int...
+1             MACHINE LEARNING            DEEP LEARNING  ...    9.0        Deep Learning is a type of Machine Learning
+2  NATURAL LANGUAGE PROCESSING  ARTIFICIAL INTELLIGENCE  ...    8.0  Natural Language Processing is a branch of Art...
+3              COMPUTER VISION  ARTIFICIAL INTELLIGENCE  ...    1.0  Computer Vision is a field within Artificial I...
+
+[4 rows x 5 columns]}
+2025-12-01 20:09:18.0749 - INFO - graphrag.index.workflows.extract_covariates - Workflow started: extract_covariates
+2025-12-01 20:09:18.0749 - INFO - graphrag.index.workflows.extract_covariates - Workflow completed: extract_covariates
+2025-12-01 20:09:18.0749 - INFO - graphrag.api.index - Workflow extract_covariates completed successfully
+2025-12-01 20:09:18.0750 - DEBUG - graphrag.api.index - None
+2025-12-01 20:09:18.0750 - INFO - graphrag.index.workflows.create_communities - Workflow started: create_communities
+2025-12-01 20:09:18.0751 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 20:09:18.0762 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 20:09:18.0802 - INFO - graphrag.index.workflows.create_communities - Workflow completed: create_communities
+2025-12-01 20:09:18.0809 - INFO - graphrag.api.index - Workflow create_communities completed successfully
+2025-12-01 20:09:18.0816 - DEBUG - graphrag.api.index -                                      id human_readable_id  ...      period size
+0  199bc79a-66ae-4f3b-8482-1f7b406fee6a                 0  ...  2025-12-01    2
+1  2a0d451b-1163-4f9e-a9fd-10a9055c0942                 1  ...  2025-12-01    3
+
+[2 rows x 12 columns]
+2025-12-01 20:09:18.0816 - INFO - graphrag.index.workflows.create_final_text_units - Workflow started: create_final_text_units
+2025-12-01 20:09:18.0817 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 20:09:18.0820 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 20:09:18.0823 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 20:09:18.0842 - INFO - graphrag.index.workflows.create_final_text_units - Workflow completed: create_final_text_units
+2025-12-01 20:09:18.0848 - INFO - graphrag.api.index - Workflow create_final_text_units completed successfully
+2025-12-01 20:09:18.0854 - DEBUG - graphrag.api.index -                                                   id  ...  covariate_ids
+0  62535725cb26ec112332e90342a0ce3af33417ef964315...  ...             []
+
+[1 rows x 8 columns]
+2025-12-01 20:09:18.0854 - INFO - graphrag.index.workflows.create_community_reports - Workflow started: create_community_reports
+2025-12-01 20:09:18.0854 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 20:09:18.0858 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 20:09:18.0861 - INFO - graphrag.utils.storage - reading table from storage: communities.parquet
+2025-12-01 20:09:18.0880 - INFO - graphrag.index.operations.summarize_communities.graph_context.context_builder - Number of nodes at level=0 => 5
+2025-12-01 20:09:18.0940 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\community_reporting
+2025-12-01 20:09:25.0471 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 1/2
+2025-12-01 20:09:26.0416 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 2/2
+2025-12-01 20:09:26.0431 - INFO - graphrag.index.workflows.create_community_reports - Workflow completed: create_community_reports
+2025-12-01 20:09:26.0441 - INFO - graphrag.api.index - Workflow create_community_reports completed successfully
+2025-12-01 20:09:26.0449 - DEBUG - graphrag.api.index -                                  id  human_readable_id  ...      period  size
+0  f5d3cdbcc3e84a87a0d008b649ab95c5                  0  ...  2025-12-01     2
+1  cffb97553639464b91548cd1add6b680                  1  ...  2025-12-01     3
+
+[2 rows x 15 columns]
+2025-12-01 20:09:26.0450 - INFO - graphrag.index.workflows.generate_text_embeddings - Workflow started: generate_text_embeddings
+2025-12-01 20:09:26.0451 - INFO - graphrag.index.workflows.generate_text_embeddings - Embedding the following fields: ['entity.description', 'community.full_content', 'text_unit.text']
+2025-12-01 20:09:26.0451 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 20:09:26.0465 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 20:09:26.0469 - INFO - graphrag.utils.storage - reading table from storage: community_reports.parquet
+2025-12-01 20:09:26.0485 - INFO - graphrag.index.workflows.generate_text_embeddings - Creating embeddings
+2025-12-01 20:09:26.0485 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding entity.description: default-entity-description
+2025-12-01 20:09:26.0521 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-12-01 20:09:26.0521 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\text_embedding
+2025-12-01 20:09:26.0522 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 5 inputs via 5 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-12-01 20:09:31.0444 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-12-01 20:09:31.0723 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding community.full_content: default-community-full_content
+2025-12-01 20:09:31.0725 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-12-01 20:09:31.0727 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 2 inputs via 2 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-12-01 20:09:36.0245 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-12-01 20:09:36.0273 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding text_unit.text: default-text_unit-text
+2025-12-01 20:09:36.0275 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-12-01 20:09:36.0276 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 1 inputs via 1 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-12-01 20:09:38.0610 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-12-01 20:09:38.0637 - INFO - graphrag.index.workflows.generate_text_embeddings - Workflow completed: generate_text_embeddings
+2025-12-01 20:09:38.0648 - INFO - graphrag.api.index - Workflow generate_text_embeddings completed successfully
+2025-12-01 20:09:38.0658 - DEBUG - graphrag.api.index - {'entity.description':                                      id                                          embedding
+0  3dcd5a09-760d-48d5-94ca-4325bfbf74fb  [-0.02027507685124874, -0.010291623882949352, ...
+1  2bfa6abb-9421-4a37-9f61-d7d68041a463  [-0.0225383210927248, 0.00018990266835317016, ...
+2  583a3ac8-a5f7-4dff-8bf9-60391f15b593  [-0.012924638576805592, 0.009013908915221691, ...
+3  87350d2f-fa4d-4519-8fa7-f1b3bbe97db8  [-0.01813104748725891, -0.018422666937112808, ...
+4  acce64e1-5c46-455a-b34e-3ccb03be9ac5  [-0.03178892657160759, -0.009005054831504822, ..., 'community.full_content':                                  id                                          embedding
+0  f5d3cdbcc3e84a87a0d008b649ab95c5  [-0.008851820603013039, 0.0007899888441897929,...
+1  cffb97553639464b91548cd1add6b680  [0.006196556147187948, 0.009450424462556839, 0..., 'text_unit.text':                                                   id                                          embedding
+0  62535725cb26ec112332e90342a0ce3af33417ef964315...  [-0.00560866529121995, 0.0022003971971571445, ...}
+2025-12-01 20:09:38.0658 - INFO - graphrag.index.run.run_pipeline - Indexing pipeline complete.
+2025-12-01 20:09:38.0662 - INFO - graphrag.cli.index - All workflows completed successfully.
+2025-12-01 22:06:28.0645 - INFO - graphrag.index.validate_config - LLM Config Params Validated
+2025-12-01 22:06:41.0293 - INFO - graphrag.index.validate_config - Embedding LLM Config Params Validated
+2025-12-01 22:06:41.0293 - INFO - graphrag.cli.index - Starting pipeline run. False
+2025-12-01 22:06:41.0294 - INFO - graphrag.cli.index - Using default configuration: {
+    "root_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData",
+    "models": {
+        "default_chat_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "chat",
+            "model_provider": "openai",
+            "model": "gpt-3.5-turbo",
+            "encoding_model": "",
+            "api_base": "https://api.agicto.cn/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": null,
+            "request_timeout": 180.0,
+            "tokens_per_minute": null,
+            "requests_per_minute": null,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 25,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": 4096,
+            "temperature": 0.0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        },
+        "default_embedding_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "embedding",
+            "model_provider": "openai",
+            "model": "text-embedding-ada-002",
+            "encoding_model": "",
+            "api_base": "https://api.agicto.cn/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": null,
+            "request_timeout": 180.0,
+            "tokens_per_minute": null,
+            "requests_per_minute": null,
+            "rate_limit_strategy": "static",
+            "retry_strategy": "exponential_backoff",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 25,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        }
+    },
+    "input": {
+        "storage": {
+            "type": "file",
+            "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\input",
+            "storage_account_blob_url": null,
+            "cosmosdb_account_url": null
+        },
+        "file_type": "text",
+        "encoding": "utf-8",
+        "file_pattern": ".*\\.txt$",
+        "file_filter": null,
+        "text_column": "text",
+        "title_column": null,
+        "metadata": null
+    },
+    "chunks": {
+        "size": 300,
+        "overlap": 50,
+        "group_by_columns": [
+            "id"
+        ],
+        "strategy": "tokens",
+        "encoding_model": "cl100k_base",
+        "prepend_metadata": false,
+        "chunk_size_includes_metadata": false
+    },
+    "output": {
+        "type": "file",
+        "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "outputs": null,
+    "update_index_output": {
+        "type": "file",
+        "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\update_output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "cache": {
+        "type": "file",
+        "base_dir": "D:/Develop/all_RAG/routing_rag/TestData/cache",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "reporting": {
+        "type": "file",
+        "base_dir": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\logs",
+        "storage_account_blob_url": null
+    },
+    "vector_store": {
+        "default_vector_store": {
+            "type": "lancedb",
+            "db_uri": "D:\\Develop\\all_RAG\\routing_rag\\TestData\\output\\lancedb",
+            "url": null,
+            "audience": null,
+            "container_name": "==== REDACTED ====",
+            "database_name": null,
+            "overwrite": true,
+            "embeddings_schema": {}
+        }
+    },
+    "workflows": null,
+    "embed_text": {
+        "model_id": "default_embedding_model",
+        "vector_store_id": "default_vector_store",
+        "batch_size": 16,
+        "batch_max_tokens": 8191,
+        "names": [
+            "entity.description",
+            "community.full_content",
+            "text_unit.text"
+        ],
+        "strategy": null
+    },
+    "extract_graph": {
+        "model_id": "default_chat_model",
+        "prompt": null,
+        "entity_types": [
+            "person",
+            "organization",
+            "event"
+        ],
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "summarize_descriptions": {
+        "model_id": "default_chat_model",
+        "prompt": null,
+        "max_length": 200,
+        "max_input_tokens": 1000,
+        "strategy": null
+    },
+    "extract_graph_nlp": {
+        "normalize_edge_weights": true,
+        "text_analyzer": {
+            "extractor_type": "regex_english",
+            "model_name": "en_core_web_md",
+            "max_word_length": 15,
+            "word_delimiter": " ",
+            "include_named_entities": true,
+            "exclude_nouns": [
+                "stuff",
+                "thing",
+                "things",
+                "bunch",
+                "bit",
+                "bits",
+                "people",
+                "person",
+                "okay",
+                "hey",
+                "hi",
+                "hello",
+                "laughter",
+                "oh"
+            ],
+            "exclude_entity_tags": [
+                "DATE"
+            ],
+            "exclude_pos_tags": [
+                "DET",
+                "PRON",
+                "INTJ",
+                "X"
+            ],
+            "noun_phrase_tags": [
+                "PROPN",
+                "NOUNS"
+            ],
+            "noun_phrase_grammars": {
+                "PROPN,PROPN": "PROPN",
+                "NOUN,NOUN": "NOUNS",
+                "NOUNS,NOUN": "NOUNS",
+                "ADJ,ADJ": "ADJ",
+                "ADJ,NOUN": "NOUNS"
+            }
+        },
+        "concurrent_requests": 25,
+        "async_mode": "threaded"
+    },
+    "prune_graph": {
+        "min_node_freq": 2,
+        "max_node_freq_std": null,
+        "min_node_degree": 1,
+        "max_node_degree_std": null,
+        "min_edge_weight_pct": 40.0,
+        "remove_ego_nodes": true,
+        "lcc_only": false
+    },
+    "cluster_graph": {
+        "max_cluster_size": 10,
+        "use_lcc": true,
+        "seed": 3735928559
+    },
+    "extract_claims": {
+        "enabled": false,
+        "model_id": "default_chat_model",
+        "prompt": null,
+        "description": "Any claims or facts that could be relevant to information discovery.",
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "community_reports": {
+        "model_id": "default_chat_model",
+        "graph_prompt": null,
+        "text_prompt": null,
+        "max_length": 500,
+        "max_input_length": 2000,
+        "strategy": null
+    },
+    "embed_graph": {
+        "enabled": true,
+        "dimensions": 1536,
+        "num_walks": 10,
+        "walk_length": 40,
+        "window_size": 2,
+        "iterations": 3,
+        "random_seed": 597832,
+        "use_lcc": true
+    },
+    "umap": {
+        "enabled": false
+    },
+    "snapshots": {
+        "embeddings": false,
+        "graphml": false,
+        "raw_graph": false
+    },
+    "local_search": {
+        "prompt": null,
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "text_unit_prop": 0.5,
+        "community_prop": 0.15,
+        "conversation_history_max_turns": 5,
+        "top_k_entities": 10,
+        "top_k_relationships": 10,
+        "max_context_tokens": 12000
+    },
+    "global_search": {
+        "map_prompt": null,
+        "reduce_prompt": null,
+        "chat_model_id": "default_chat_model",
+        "knowledge_prompt": null,
+        "max_context_tokens": 12000,
+        "data_max_tokens": 12000,
+        "map_max_length": 1000,
+        "reduce_max_length": 2000,
+        "dynamic_search_threshold": 1,
+        "dynamic_search_keep_parent": false,
+        "dynamic_search_num_repeats": 1,
+        "dynamic_search_use_summary": false,
+        "dynamic_search_max_level": 2
+    },
+    "drift_search": {
+        "prompt": null,
+        "reduce_prompt": null,
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "data_max_tokens": 12000,
+        "reduce_max_tokens": null,
+        "reduce_temperature": 0,
+        "reduce_max_completion_tokens": null,
+        "concurrency": 32,
+        "drift_k_followups": 20,
+        "primer_folds": 5,
+        "primer_llm_max_tokens": 12000,
+        "n_depth": 3,
+        "local_search_text_unit_prop": 0.9,
+        "local_search_community_prop": 0.1,
+        "local_search_top_k_mapped_entities": 10,
+        "local_search_top_k_relationships": 10,
+        "local_search_max_data_tokens": 12000,
+        "local_search_temperature": 0,
+        "local_search_top_p": 1,
+        "local_search_n": 1,
+        "local_search_llm_max_gen_tokens": null,
+        "local_search_llm_max_gen_completion_tokens": null
+    },
+    "basic_search": {
+        "prompt": null,
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "k": 10,
+        "max_context_tokens": 12000
+    }
+}
+2025-12-01 22:06:41.0294 - INFO - graphrag.api.index - Initializing indexing pipeline...
+2025-12-01 22:06:41.0294 - INFO - graphrag.index.workflows.factory - Creating pipeline with workflows: ['load_input_documents', 'create_base_text_units', 'create_final_documents', 'extract_graph', 'finalize_graph', 'extract_covariates', 'create_communities', 'create_final_text_units', 'create_community_reports', 'generate_text_embeddings']
+2025-12-01 22:06:41.0294 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\input
+2025-12-01 22:06:41.0294 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\output
+2025-12-01 22:06:41.0294 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData
+2025-12-01 22:06:41.0294 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache
+2025-12-01 22:06:41.0294 - INFO - graphrag.index.run.run_pipeline - Running standard indexing.
+2025-12-01 22:06:41.0294 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at 
+2025-12-01 22:06:41.0300 - INFO - graphrag.index.run.run_pipeline - Executing pipeline...
+2025-12-01 22:06:41.0300 - INFO - graphrag.index.input.factory - loading input from root_dir=D:\Develop\all_RAG\routing_rag\TestData\input
+2025-12-01 22:06:41.0300 - INFO - graphrag.index.input.factory - Loading Input InputFileType.text
+2025-12-01 22:06:41.0300 - INFO - graphrag.storage.file_pipeline_storage - search D:\Develop\all_RAG\routing_rag\TestData\input for files matching .*\.txt$
+2025-12-01 22:06:41.0300 - DEBUG - graphrag.storage.file_pipeline_storage - Files loaded: 1, filtered: 0, total: 1
+2025-12-01 22:06:41.0312 - INFO - graphrag.index.input.util - Found 1 InputFileType.text files, loading 1
+2025-12-01 22:06:41.0313 - INFO - graphrag.index.input.util - Total number of unfiltered text rows: 1
+2025-12-01 22:06:41.0313 - INFO - graphrag.index.workflows.load_input_documents - Final # of rows loaded: 1
+2025-12-01 22:06:41.0369 - INFO - graphrag.api.index - Workflow load_input_documents completed successfully
+2025-12-01 22:06:41.0373 - DEBUG - graphrag.api.index -                                                 text  ...              creation_date
+0  人工智能是计算机科学的一个分支，它试图理解智能的实质，并生产出一种新的能以人类智能相似的方式...  ...  2025-12-01 15:58:37 +0800
+
+[1 rows x 4 columns]
+2025-12-01 22:06:41.0373 - INFO - graphrag.index.workflows.create_base_text_units - Workflow started: create_base_text_units
+2025-12-01 22:06:41.0373 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2025-12-01 22:06:41.0427 - INFO - graphrag.index.workflows.create_base_text_units - Starting chunking process for 1 documents
+2025-12-01 22:06:41.0430 - INFO - graphrag.index.workflows.create_base_text_units - chunker progress:  1/1
+2025-12-01 22:06:41.0442 - INFO - graphrag.index.workflows.create_base_text_units - Workflow completed: create_base_text_units
+2025-12-01 22:06:41.0446 - INFO - graphrag.api.index - Workflow create_base_text_units completed successfully
+2025-12-01 22:06:41.0447 - DEBUG - graphrag.api.index -                                                   id  ... n_tokens
+0  62535725cb26ec112332e90342a0ce3af33417ef964315...  ...      260
+
+[1 rows x 4 columns]
+2025-12-01 22:06:41.0447 - INFO - graphrag.index.workflows.create_final_documents - Workflow started: create_final_documents
+2025-12-01 22:06:41.0447 - INFO - graphrag.utils.storage - reading table from storage: documents.parquet
+2025-12-01 22:06:41.0453 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 22:06:41.0476 - INFO - graphrag.index.workflows.create_final_documents - Workflow completed: create_final_documents
+2025-12-01 22:06:41.0482 - INFO - graphrag.api.index - Workflow create_final_documents completed successfully
+2025-12-01 22:06:41.0486 - DEBUG - graphrag.api.index -                                                   id  human_readable_id  ...              creation_date metadata
+0  2e1f60b0817f8ffd8b8a90720fcdf879d2bd7cd29269a7...                  0  ...  2025-12-01 15:58:37 +0800      NaN
+
+[1 rows x 7 columns]
+2025-12-01 22:06:41.0486 - INFO - graphrag.index.workflows.extract_graph - Workflow started: extract_graph
+2025-12-01 22:06:41.0487 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 22:06:41.0489 - DEBUG - graphrag.index.operations.extract_graph.extract_graph - entity_extract strategy={'type': "graph_intelligence", 'llm': {'api_key': 'sk-KvFwXLq2X3lKan2Sb76XIV9bVX1ErILvGOVpsggsqmpN1YHp', 'auth_type': <AuthType.APIKey: 'api_key'>, 'type': 'chat', 'model_provider': 'openai', 'model': 'gpt-3.5-turbo', 'encoding_model': '', 'api_base': 'https://api.agicto.cn/v1', 'api_version': None, 'deployment_name': None, 'organization': None, 'proxy': None, 'audience': None, 'model_supports_json': None, 'request_timeout': 180.0, 'tokens_per_minute': None, 'requests_per_minute': None, 'rate_limit_strategy': 'static', 'retry_strategy': 'exponential_backoff', 'max_retries': 10, 'max_retry_wait': 10.0, 'concurrent_requests': 25, 'async_mode': <AsyncType.Threaded: 'threaded'>, 'responses': None, 'max_tokens': 4096, 'temperature': 0.0, 'max_completion_tokens': None, 'reasoning_effort': None, 'top_p': 1, 'n': 1, 'frequency_penalty': 0.0, 'presence_penalty': 0.0}, 'extraction_prompt': None, 'max_gleanings': 1}
+2025-12-01 22:06:41.0493 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\extract_graph
+2025-12-01 22:06:41.0513 - INFO - graphrag.logger.progress - extract graph progress: 1/1
+2025-12-01 22:06:41.0529 - DEBUG - graphrag.index.operations.summarize_descriptions.summarize_descriptions - summarize_descriptions strategy={'type': "graph_intelligence", 'llm': {'api_key': 'sk-KvFwXLq2X3lKan2Sb76XIV9bVX1ErILvGOVpsggsqmpN1YHp', 'auth_type': <AuthType.APIKey: 'api_key'>, 'type': 'chat', 'model_provider': 'openai', 'model': 'gpt-3.5-turbo', 'encoding_model': '', 'api_base': 'https://api.agicto.cn/v1', 'api_version': None, 'deployment_name': None, 'organization': None, 'proxy': None, 'audience': None, 'model_supports_json': None, 'request_timeout': 180.0, 'tokens_per_minute': None, 'requests_per_minute': None, 'rate_limit_strategy': 'static', 'retry_strategy': 'exponential_backoff', 'max_retries': 10, 'max_retry_wait': 10.0, 'concurrent_requests': 25, 'async_mode': <AsyncType.Threaded: 'threaded'>, 'responses': None, 'max_tokens': 4096, 'temperature': 0.0, 'max_completion_tokens': None, 'reasoning_effort': None, 'top_p': 1, 'n': 1, 'frequency_penalty': 0.0, 'presence_penalty': 0.0}, 'summarize_prompt': None, 'max_summary_length': 200, 'max_input_tokens': 1000}
+2025-12-01 22:06:41.0532 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\summarize_descriptions
+2025-12-01 22:06:41.0533 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 1/9
+2025-12-01 22:06:41.0533 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 2/9
+2025-12-01 22:06:41.0533 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 3/9
+2025-12-01 22:06:41.0533 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 4/9
+2025-12-01 22:06:41.0533 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 5/9
+2025-12-01 22:06:41.0534 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 6/9
+2025-12-01 22:06:41.0534 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 7/9
+2025-12-01 22:06:41.0534 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 8/9
+2025-12-01 22:06:41.0535 - INFO - graphrag.logger.progress - Summarize entity/relationship description progress: 9/9
+2025-12-01 22:06:41.0542 - INFO - graphrag.index.workflows.extract_graph - Workflow completed: extract_graph
+2025-12-01 22:06:41.0550 - INFO - graphrag.api.index - Workflow extract_graph completed successfully
+2025-12-01 22:06:41.0560 - DEBUG - graphrag.api.index - {'entities':                          title          type  ... frequency                                        description
+0             MACHINE LEARNING  ORGANIZATION  ...         1  Machine Learning is a subset of Artificial Int...
+1                DEEP LEARNING  ORGANIZATION  ...         1  Deep Learning is a type of Machine Learning th...
+2  NATURAL LANGUAGE PROCESSING  ORGANIZATION  ...         1  Natural Language Processing (NLP) is a branch ...
+3              COMPUTER VISION  ORGANIZATION  ...         1  Computer Vision is an important field of Artif...
+4      ARTIFICIAL INTELLIGENCE                ...         1                                                   
+
+[5 rows x 5 columns], 'relationships':                         source                   target  ... weight                                        description
+0             MACHINE LEARNING  ARTIFICIAL INTELLIGENCE  ...    9.0  Machine Learning is a subset of Artificial Int...
+1             MACHINE LEARNING            DEEP LEARNING  ...    9.0        Deep Learning is a type of Machine Learning
+2  NATURAL LANGUAGE PROCESSING  ARTIFICIAL INTELLIGENCE  ...    8.0  Natural Language Processing is a branch of Art...
+3              COMPUTER VISION  ARTIFICIAL INTELLIGENCE  ...    1.0  Computer Vision is a field within Artificial I...
+
+[4 rows x 5 columns]}
+2025-12-01 22:06:41.0561 - INFO - graphrag.index.workflows.finalize_graph - Workflow started: finalize_graph
+2025-12-01 22:06:41.0562 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 22:06:41.0574 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 22:06:41.0621 - INFO - graphrag.index.workflows.finalize_graph - Workflow completed: finalize_graph
+2025-12-01 22:06:41.0630 - INFO - graphrag.api.index - Workflow finalize_graph completed successfully
+2025-12-01 22:06:41.0639 - DEBUG - graphrag.api.index - {'entities':                          title          type  ... frequency                                        description
+0             MACHINE LEARNING  ORGANIZATION  ...         1  Machine Learning is a subset of Artificial Int...
+1                DEEP LEARNING  ORGANIZATION  ...         1  Deep Learning is a type of Machine Learning th...
+2  NATURAL LANGUAGE PROCESSING  ORGANIZATION  ...         1  Natural Language Processing (NLP) is a branch ...
+3              COMPUTER VISION  ORGANIZATION  ...         1  Computer Vision is an important field of Artif...
+4      ARTIFICIAL INTELLIGENCE                ...         1                                                   
+
+[5 rows x 5 columns], 'relationships':                         source                   target  ... weight                                        description
+0             MACHINE LEARNING  ARTIFICIAL INTELLIGENCE  ...    9.0  Machine Learning is a subset of Artificial Int...
+1             MACHINE LEARNING            DEEP LEARNING  ...    9.0        Deep Learning is a type of Machine Learning
+2  NATURAL LANGUAGE PROCESSING  ARTIFICIAL INTELLIGENCE  ...    8.0  Natural Language Processing is a branch of Art...
+3              COMPUTER VISION  ARTIFICIAL INTELLIGENCE  ...    1.0  Computer Vision is a field within Artificial I...
+
+[4 rows x 5 columns]}
+2025-12-01 22:06:41.0640 - INFO - graphrag.index.workflows.extract_covariates - Workflow started: extract_covariates
+2025-12-01 22:06:41.0640 - INFO - graphrag.index.workflows.extract_covariates - Workflow completed: extract_covariates
+2025-12-01 22:06:41.0640 - INFO - graphrag.api.index - Workflow extract_covariates completed successfully
+2025-12-01 22:06:41.0640 - DEBUG - graphrag.api.index - None
+2025-12-01 22:06:41.0640 - INFO - graphrag.index.workflows.create_communities - Workflow started: create_communities
+2025-12-01 22:06:41.0640 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 22:06:41.0651 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 22:06:41.0689 - INFO - graphrag.index.workflows.create_communities - Workflow completed: create_communities
+2025-12-01 22:06:41.0696 - INFO - graphrag.api.index - Workflow create_communities completed successfully
+2025-12-01 22:06:41.0703 - DEBUG - graphrag.api.index -                                      id human_readable_id  ...      period size
+0  79175c2a-43a2-48c6-98b0-d7d555f63a12                 0  ...  2025-12-01    2
+1  73c2b9d1-8f5c-47a2-b1f5-afcb20218833                 1  ...  2025-12-01    3
+
+[2 rows x 12 columns]
+2025-12-01 22:06:41.0703 - INFO - graphrag.index.workflows.create_final_text_units - Workflow started: create_final_text_units
+2025-12-01 22:06:41.0704 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 22:06:41.0708 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 22:06:41.0708 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 22:06:41.0730 - INFO - graphrag.index.workflows.create_final_text_units - Workflow completed: create_final_text_units
+2025-12-01 22:06:41.0736 - INFO - graphrag.api.index - Workflow create_final_text_units completed successfully
+2025-12-01 22:06:41.0741 - DEBUG - graphrag.api.index -                                                   id  ...  covariate_ids
+0  62535725cb26ec112332e90342a0ce3af33417ef964315...  ...             []
+
+[1 rows x 8 columns]
+2025-12-01 22:06:41.0741 - INFO - graphrag.index.workflows.create_community_reports - Workflow started: create_community_reports
+2025-12-01 22:06:41.0741 - INFO - graphrag.utils.storage - reading table from storage: relationships.parquet
+2025-12-01 22:06:41.0743 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 22:06:41.0748 - INFO - graphrag.utils.storage - reading table from storage: communities.parquet
+2025-12-01 22:06:41.0768 - INFO - graphrag.index.operations.summarize_communities.graph_context.context_builder - Number of nodes at level=0 => 5
+2025-12-01 22:06:41.0797 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\community_reporting
+2025-12-01 22:06:41.0810 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 1/2
+2025-12-01 22:06:41.0810 - INFO - graphrag.logger.progress - level 0 summarize communities progress: 2/2
+2025-12-01 22:06:41.0816 - INFO - graphrag.index.workflows.create_community_reports - Workflow completed: create_community_reports
+2025-12-01 22:06:41.0827 - INFO - graphrag.api.index - Workflow create_community_reports completed successfully
+2025-12-01 22:06:41.0837 - DEBUG - graphrag.api.index -                                  id  human_readable_id  ...      period  size
+0  9a2d6a341af440a2bc3cc03e0836ed32                  0  ...  2025-12-01     2
+1  2f6c1744672d49ec8beb0901fbda2678                  1  ...  2025-12-01     3
+
+[2 rows x 15 columns]
+2025-12-01 22:06:41.0837 - INFO - graphrag.index.workflows.generate_text_embeddings - Workflow started: generate_text_embeddings
+2025-12-01 22:06:41.0838 - INFO - graphrag.index.workflows.generate_text_embeddings - Embedding the following fields: ['entity.description', 'community.full_content', 'text_unit.text']
+2025-12-01 22:06:41.0838 - INFO - graphrag.utils.storage - reading table from storage: text_units.parquet
+2025-12-01 22:06:41.0847 - INFO - graphrag.utils.storage - reading table from storage: entities.parquet
+2025-12-01 22:06:41.0852 - INFO - graphrag.utils.storage - reading table from storage: community_reports.parquet
+2025-12-01 22:06:41.0865 - INFO - graphrag.index.workflows.generate_text_embeddings - Creating embeddings
+2025-12-01 22:06:41.0865 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding entity.description: default-entity-description
+2025-12-01 22:06:41.0936 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-12-01 22:06:41.0936 - INFO - graphrag.storage.file_pipeline_storage - Creating file storage at D:\Develop\all_RAG\routing_rag\TestData\cache\text_embedding
+2025-12-01 22:06:41.0936 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 5 inputs via 5 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-12-01 22:06:41.0942 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-12-01 22:06:42.0159 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding community.full_content: default-community-full_content
+2025-12-01 22:06:42.0160 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-12-01 22:06:42.0160 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 2 inputs via 2 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-12-01 22:06:42.0160 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-12-01 22:06:42.0186 - INFO - graphrag.index.operations.embed_text.embed_text - using vector store lancedb with container_name default for embedding text_unit.text: default-text_unit-text
+2025-12-01 22:06:42.0189 - INFO - graphrag.index.operations.embed_text.embed_text - uploading text embeddings batch 1/1 of size 500 to vector store
+2025-12-01 22:06:42.0189 - INFO - graphrag.index.operations.embed_text.strategies.openai - embedding 1 inputs via 1 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+2025-12-01 22:06:42.0191 - INFO - graphrag.logger.progress - generate embeddings progress: 1/1
+2025-12-01 22:06:42.0212 - INFO - graphrag.index.workflows.generate_text_embeddings - Workflow completed: generate_text_embeddings
+2025-12-01 22:06:42.0223 - INFO - graphrag.api.index - Workflow generate_text_embeddings completed successfully
+2025-12-01 22:06:42.0233 - DEBUG - graphrag.api.index - {'entity.description':                                      id                                          embedding
+0  c2a8bad6-354c-42cb-a5b7-98dcb06b591b  [-0.02027507685124874, -0.010291623882949352, ...
+1  193a5ed3-56fb-4a55-9199-15fb4edc232f  [-0.0225383210927248, 0.00018990266835317016, ...
+2  3d163844-6f9c-4aa0-933f-80d88c07d755  [-0.012924638576805592, 0.009013908915221691, ...
+3  02c0c66c-9fa2-4eda-98a0-e50d734f951e  [-0.01813104748725891, -0.018422666937112808, ...
+4  eab06c66-b755-41c8-925d-56ab63f7aabd  [-0.03178892657160759, -0.009005054831504822, ..., 'community.full_content':                                  id                                          embedding
+0  9a2d6a341af440a2bc3cc03e0836ed32  [-0.008851820603013039, 0.0007899888441897929,...
+1  2f6c1744672d49ec8beb0901fbda2678  [0.006196556147187948, 0.009450424462556839, 0..., 'text_unit.text':                                                   id                                          embedding
+0  62535725cb26ec112332e90342a0ce3af33417ef964315...  [-0.00560866529121995, 0.0022003971971571445, ...}
+2025-12-01 22:06:42.0233 - INFO - graphrag.index.run.run_pipeline - Indexing pipeline complete.
+2025-12-01 22:06:42.0233 - INFO - graphrag.cli.index - All workflows completed successfully.

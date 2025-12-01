@@ -3,6 +3,15 @@ Test cases for the Graph RAG module.
 """
 import unittest
 from unittest.mock import patch, MagicMock
+
+import os, sys
+# 动态添加 rag_implementations 模块的父目录到搜索路径
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# print(current_dir)
+parent_dir = os.path.dirname(current_dir)
+# print(parent_dir)
+sys.path.append(parent_dir)
+
 from rag_implementations.graph_rag.graph_rag_impl import GraphRAG
 
 

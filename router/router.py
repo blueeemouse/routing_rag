@@ -35,23 +35,43 @@ class Router(RouterInterface):
         }
 
         try:
-            response = requests.post(self.api_url, headers=headers, json=data)
-            response.raise_for_status()
-            result = response.json()
-
-            # 提取AI响应内容
-            content = result.get('choices', [{}])[0].get('message', {}).get('content', "").strip().lower()
-
-            # 解析响应，确保返回有效的策略
-            if 'no_rag' in content or 'no rag' in content:
+            # print("router api key: ", self.api_key)
+            # response = requests.post(self.api_url, headers=headers, json=data)
+            # response.raise_for_status()
+            # result = response.json()
+            # # print("router api response: ", result)
+            # # 提取AI响应内容
+            # content = result.get('choices', [{}])[0].get('message', {}).get('content', "").strip().lower()
+            # # print(f"Router response content: {content}"
+            # #       )
+            # # 解析响应，确保返回有效的策略
+            # if 'no_rag' in content or 'no rag' in content:
+            #     return 'no_rag'
+            # elif 'naive_rag' in content or 'naive rag' in content:
+            #     return 'naive_rag'
+            # elif 'graph_rag' in content or 'graph rag' in content:
+            #     return 'graph_rag'
+            # else:
+            #     # 默认返回no_rag
+            #     return 'no_rag'
+            try:
+                response = requests.post(self.api_url, headers=headers, json=data)
+                response.raise_for_status()  # 检查 HTTP 错误
+                result = response.json()
+                content = result.get('choices', [{}])[0].get('message', {}).get('content', "").strip().lower()
+                if 'no_rag' in content or 'no rag' in content:
+                    return 'no_rag'
+                elif 'naive_rag' in content or 'naive rag' in content:
+                    return 'naive_rag'
+                elif 'graph_rag' in content or 'graph rag' in content:
+                    return 'graph_rag'
+                else:
+                    return 'no_rag'
+            except Exception as e:
+                # 捕获所有异常（如网络错误、API 错误等），并返回默认的 no_rag
+                print(f"Error: {e}")  # 可选：打印错误日志
                 return 'no_rag'
-            elif 'naive_rag' in content or 'naive rag' in content:
-                return 'naive_rag'
-            elif 'graph_rag' in content or 'graph rag' in content:
-                return 'graph_rag'
-            else:
-                # 默认返回no_rag
-                return 'no_rag'
+
         except requests.exceptions.RequestException as e:
             print(f"Error routing query: {e}")
             return 'no_rag'

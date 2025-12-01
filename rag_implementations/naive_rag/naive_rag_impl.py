@@ -7,6 +7,7 @@ from interfaces.rag_interface import RAGInterface
 from config.config import settings
 import logging
 
+import os
 
 class NaiveRAG(RAGInterface):
     """
@@ -96,18 +97,37 @@ class NaiveRAG(RAGInterface):
                     )
             else:
                 # 如果没有上下文，使用示例数据
-                llama_docs = [self.Document(text="这是一个示例文档，用于演示Naive RAG功能。")]
-                self.index = self.VectorStoreIndex.from_documents(
-                    llama_docs,
-                    embed_model=self.OpenAIEmbedding(model=self.embedding_model)
+                llama_docs = [self.Document(text="人工智能（AI）是计算机科学的分支，旨在模拟人类智能，让机器完成原本需要人类思考的任务。AI 主要分为弱人工智能（专注单一任务，如语音助手）和强人工智能（具备通用智能，尚未实现）两大类型。核心分支包括机器学习（让机器从数据中学习规律）、深度学习（基于神经网络的机器学习子集，如ChatGPT、图像识别）、计算机视觉（让机器“看懂”图像/视频，如人脸识别）、自然语言处理（让机器理解人类语言，如翻译、对话机器人）。AI 的典型应用有智能客服、自动驾驶、医疗影像分析、推荐系统等，已广泛应用于电商、交通、医疗等领域。")]
+                # print("使用示例数据创建索引")
+                # 运行到下面这里就报错了
+
+                from llama_index.embeddings.openai import OpenAIEmbedding
+                from llama_index.core import Settings, VectorStoreIndex
+
+                # 1. 创建自定义配置的嵌入模型
+                embed_model = OpenAIEmbedding(
+                    api_key=os.getenv('NAIVE_RAG_API_KEY', os.getenv('GRAPHRAG_API_KEY', 'YOUR_API_KEY_HERE')),
+                    api_base="https://api.agicto.cn/v1",  # 替换为你的 base URL
+                    model="text-embedding-ada-002"  # 或你的服务商支持的模型
                 )
 
+                # 2. 设置到全局配置（关键步骤）
+                Settings.embed_model = embed_model
+
+                # 3. 现在调用 from_documents 会自动使用你的配置
+                self.index = self.VectorStoreIndex.from_documents(
+                    llama_docs
+                )
+                print("没有提供上下文，所以使用示例数据创建索引")
+
             # 执行查询 - 使用配置中的模型和API参数
+
             query_engine = self.index.as_query_engine(
                 llm=self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url)
             )
+            print("执行查询...")
             response = query_engine.query(query)
-
+            print("response", str(response))
             return str(response)
 
         except Exception as e:
