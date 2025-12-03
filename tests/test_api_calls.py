@@ -2,6 +2,16 @@
 测试API调用的验证脚本，现在包括RAG实现
 用于测试decomposer、router以及naive RAG和graph RAG的基本功能
 """
+
+import sys
+from pathlib import Path
+
+current_file_path = Path(__file__).resolve()
+
+parent_dir_path = current_file_path.parent.parent
+
+sys.path.append(str(parent_dir_path))
+
 from decomposer.decomposer import Decomposer
 from router.router import Router
 from rag_implementations.naive_rag.naive_rag_impl import NaiveRAG
@@ -22,6 +32,7 @@ def test_decomposer_api():
 
         # 测试查询分解
         test_query = "分析2023年人工智能发展状况，包括技术突破、行业应用和未来趋势"
+        # test_query = "分析我国2024年经济发展前景，包括主要驱动力和潜在挑战"
         print(f"原始查询: {test_query}")
 
         sub_queries = decomposer.decompose(test_query)
@@ -147,8 +158,8 @@ def main():
     # test_router_api()
     # 前面两个已经测试成功了，就是简单的调用api
 
-    test_naive_rag()
-    # test_graph_rag()
+    # test_naive_rag()  # 这个也通过了
+    test_graph_rag()
 
     print("\n" + "=" * 50)
     print("所有API调用和RAG功能测试完成")

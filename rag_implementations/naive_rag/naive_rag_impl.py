@@ -123,12 +123,25 @@ class NaiveRAG(RAGInterface):
                 )
                 print("没有提供上下文，所以使用示例数据创建索引")
 
-            # 执行查询 - 使用配置中的模型和API参数
+                # # 打印索引中的文档内容
+                # print("索引中的文档内容:")
+                # for doc in llama_docs:
+                #     print(f"- {doc.text}")
 
+            # 执行查询 - 使用配置中的模型和API参数
             query_engine = self.index.as_query_engine(
                 llm=self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url)
             )
             print("执行查询...")
+
+            # # 打印检索到的文档（仅用于调试）
+            # retriever = self.index.as_retriever()
+            # retrieved_docs = retriever.retrieve(query)
+            # print("检索到的文档:")
+            # for doc in retrieved_docs:
+            #     print(f"- 文档内容: {doc.node.text}")
+            #     print(f"  相关性分数: {doc.score}")
+
             response = query_engine.query(query)
             print("response", str(response))
             return str(response)

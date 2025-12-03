@@ -1,7 +1,8 @@
 decomposer:
   api_url: "https://api.agicto.cn/v1/chat/completions"
   api_key: "${DECOMPOSER_API_KEY}"
-  model: "deepseek-v3"
+  # model: "deepseek-v3"
+  model: "gpt-5.1-chat"
   prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个："
 
 router:

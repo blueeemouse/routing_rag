@@ -90,7 +90,7 @@ class GraphRAG(RAGInterface):
                 result = self._execute_with_graph_data(query, graph_data)
                 return result
             else:
-                return f"GraphRAG查询结果: {query} - 实际部署需要完整的图数据集结构，当前返回模拟结果。"
+                return f"GraphRAG查询结果: {query} - (实际部署需要完整的图数据集结构，当前直接返回原query。)"
                 
         except Exception as e:
             self.logger.error(f"执行Graph RAG查询时出错: {str(e)}")

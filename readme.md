@@ -59,18 +59,18 @@
 
 ### 8. 其它
 
-- `quick_api_test.py`，用于测试api调用版本的decomposer，router，naive_rag，graphrag能否跑通
--
+- `tests`文件夹, 包含各种测试文件
+- `source_env_var.sh`脚本, Windows系统直接把里面的内容复制到终端进行运行即可激活.env里的环境变量并进行对应的赋值
 
 ## 安装
 
 1. 安装依赖：
-
+   
    ```bash
    pip install -r requirements.txt
    ```
 2. 配置API密钥和其他设置：
-
+   
    - 编辑 `config/settings.yaml` 文件以配置API端点、密钥和其他参数
 
 ## 使用
@@ -97,3 +97,4 @@
 - 新的路由器实现可以轻松添加并遵循 `RouterInterface`
 - 新的RAG实现可以轻松添加并遵循 `RAGInterface`
 - 通过配置文件可灵活切换不同实现
+

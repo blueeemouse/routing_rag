@@ -5,14 +5,16 @@
 本项目包含以下测试文件：
 
 ### 1. test_decomposer.py
+
 - **目的**: 测试decomposer模块的功能
-- **测试内容**: 
+- **测试内容**:
   - 查询分解功能
   - API调用模拟
   - 边界情况处理
 - **依赖**: decomposer模块、DecomposerInterface
 
-### 2. test_router.py  
+### 2. test_router.py
+
 - **目的**: 测试router模块的功能
 - **测试内容**:
   - 查询路由功能
@@ -21,26 +23,37 @@
 - **依赖**: router模块、RouterInterface
 
 ### 3. test_api_calls.py (功能测试脚本)
+
 - **目的**: 验证实际API调用是否正常
 - **测试内容**:
+
   - 真实的decomposer API调用
-  - 真实的router API调用
-- **注意**: 需要在settings.yaml中配置有效的API密钥
+  - 真实的router API调用(前两部分的测试, 因为需要打开`config/settings.yaml`, 故需要在routing_rag路径下运行`tests/test_api_calls.py`
+  - API调用版本的naive_rag
+    - 通过在这里的测试结果, 我们可以发现, 给定的模拟数据不同的时候, 答复也是不同的. 由此进一步证明了确实有在检索增强生成
+  - API调用版本的微软graphrag
+
+### 4. test_graph_rag.py
+
+- 目的: 测试graphrag类的各个函数(目的是好的, 但现在可以说是一点没测试到...)
 
 ## 配置说明
 
 ### 独立配置结构
+
 - `decomposer` 部分包含decomposer模块的独立配置
 - `router` 部分包含router模块的独立配置
 - 每个模块都有自己的 `api_url`、`api_key` 和 `model`
 
 ### 配置文件路径
+
 - 配置文件: `config/settings.yaml`
 - 配置管理类: `config/config.py`
 
 ## 运行测试
 
 ### 单元测试
+
 ```bash
 cd tests
 python -m pytest test_decomposer.py -v
@@ -48,12 +61,14 @@ python -m pytest test_router.py -v
 ```
 
 或者运行所有测试：
+
 ```bash
 cd tests
 python -m pytest . -v
 ```
 
 ### 功能测试（API调用验证）
+
 ```bash
 python test_api_calls.py
 ```
@@ -68,10 +83,12 @@ python test_api_calls.py
 ## 测试用例说明
 
 ### test_decomposer.py 中的测试用例
+
 - `test_decompose_query`: 测试正常查询分解
 - `test_decompose_empty_response`: 测试空响应情况
 
-### test_router.py 中的测试用例  
+### test_router.py 中的测试用例
+
 - `test_route_to_no_rag`: 测试路由到no_rag策略
 - `test_route_to_naive_rag`: 测试路由到naive_rag策略
 - `test_route_to_graph_rag`: 测试路由到graph_rag策略
@@ -81,6 +98,7 @@ python test_api_calls.py
 ## API调用验证脚本说明
 
 `test_api_calls.py` 脚本会:
+
 1. 初始化decomposer并测试查询分解
 2. 初始化router并测试查询路由
 3. 验证API调用是否成功

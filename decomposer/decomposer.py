@@ -1,3 +1,12 @@
+import sys
+from pathlib import Path
+
+current_file_path = Path(__file__).resolve()
+
+parent_dir_path = current_file_path.parent.parent
+
+sys.path.append(str(parent_dir_path))
+
 import requests
 from typing import List
 from interfaces.decomposer_interface import DecomposerInterface
