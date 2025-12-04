@@ -1,0 +1,1 @@
+### 这个目录是存放模拟数据的, 是用来测试GraphRAG类里面的build_index方法能不能跑通的(对应了tests目录下的test_graphrag_build_index.py文件)

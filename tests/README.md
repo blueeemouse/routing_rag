@@ -26,7 +26,7 @@
 
 - **目的**: 验证实际API调用是否正常
 - **测试内容**:
-  
+
   - 真实的decomposer API调用
   - 真实的router API调用(前两部分的测试, 因为需要打开 `config/settings.yaml`, 故需要在routing_rag路径下运行 `tests/test_api_calls.py`
   - API调用版本的naive_rag
@@ -44,6 +44,33 @@
 ### 6. quick_litellm_api_test.py
 
 - **目的**: 测试litellm调用api(主要是确认下格式. 这个之所以需要测试, 是因为之前跑LlamaIndex的时候, 遇到报错, 似乎说是LlamaIndex内部是用litellm调用api的
+
+### 7. test_graphrag_import.py
+
+- **目的**: 测试GraphRAG库的导入功能
+- **测试内容**:
+  - 验证微软GraphRAG库组件是否能正确导入
+  - 检查支持的搜索模式是否可用
+  - 验证库的可用性状态
+- **依赖**: graphrag_impl模块
+
+### 8. test_graphrag_config.py
+
+- **目的**: 测试GraphRAG的配置加载功能
+- **测试内容**:
+  - 验证配置参数从settings.yaml正确加载
+  - 检查API URL、密钥、模型等参数
+  - 验证配置的一致性
+- **依赖**: graphrag_impl模块、config模块
+
+### 9. test_graphrag_build_index.py
+
+- **目的**: 测试GraphRAG类里面的build_index方法
+- **测试内容**:
+  - 验证build_index方法接口的可用性
+  - 测试方法参数验证
+  - 验证索引构建功能的基本调用
+- **依赖**: graphrag_impl模块
 
 ## 配置说明
 
@@ -111,4 +138,3 @@ python test_api_calls.py
 2. 初始化router并测试查询路由
 3. 验证API调用是否成功
 4. 展示详细的测试结果和错误信息
-

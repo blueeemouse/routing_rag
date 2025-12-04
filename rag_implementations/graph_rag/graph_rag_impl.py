@@ -29,7 +29,7 @@ class GraphRAG(RAGInterface):
             config: 配置参数字典
         """
         self.config = config or {}
-        
+
         # 从配置中获取参数
         self.api_url = settings.graph_rag_api_url
         self.api_key = settings.graph_rag_api_key
@@ -46,13 +46,36 @@ class GraphRAG(RAGInterface):
         try:
             # 检查GraphRAG模块是否可用
             import graphrag
-            from graphrag.query.factory import get_local_search_engine, get_global_search_engine
             from graphrag.config.models.graph_rag_config import GraphRagConfig
-            
+            from graphrag.query.factory import (
+                get_local_search_engine,
+                get_global_search_engine,
+                get_drift_search_engine,
+                get_basic_search_engine
+            )
+            from graphrag.query.structured_search.local_search.search import LocalSearch
+            from graphrag.query.structured_search.global_search.search import GlobalSearch
+            from graphrag.data_model.community_report import CommunityReport
+            from graphrag.data_model.text_unit import TextUnit
+            from graphrag.data_model.entity import Entity
+            from graphrag.data_model.relationship import Relationship
+            from graphrag.data_model.covariate import Covariate
+            from graphrag.vector_stores.base import BaseVectorStore
+
             self._graph_rag_available = True
             self.get_local_search_engine = get_local_search_engine
             self.get_global_search_engine = get_global_search_engine
+            self.get_drift_search_engine = get_drift_search_engine
+            self.get_basic_search_engine = get_basic_search_engine
             self.GraphRagConfig = GraphRagConfig
+            self.LocalSearch = LocalSearch
+            self.GlobalSearch = GlobalSearch
+            self.CommunityReport = CommunityReport
+            self.TextUnit = TextUnit
+            self.Entity = Entity
+            self.Relationship = Relationship
+            self.Covariate = Covariate
+            self.BaseVectorStore = BaseVectorStore
 
         except ImportError as e:
             self._graph_rag_available = False
@@ -118,6 +141,57 @@ class GraphRAG(RAGInterface):
         # 模拟GraphRAG查询结果
         return f"GraphRAG已处理查询: '{query}'，使用图数据进行增强检索。"
     
+    def build_index(self, root_dir: str, config_filepath: str = None, output_dir: str = None):
+        """
+        构建GraphRAG索引
+        Build GraphRAG index from documents
+
+        Args:
+            root_dir (str): 项目根目录路径，配置文件中的相对路径将相对于此目录解析
+            config_filepath (str, optional): 配置文件路径
+            output_dir (str, optional): 输出目录路径，可覆盖配置文件中的设置
+        """
+        if not self._graph_rag_available:
+            self.logger.error("GraphRAG不可用，无法构建索引")
+            return False
+
+        try:
+            from graphrag.cli.index import index_cli
+            from graphrag.config.enums import IndexingMethod
+            from pathlib import Path
+
+            # 确保提供了有效的配置文件
+            if config_filepath is None:
+                self.logger.error("必须提供配置文件路径")
+                return False
+
+            # 验证根目录存在
+            if not Path(root_dir).exists():
+                self.logger.error(f"根目录不存在: {root_dir}")
+                return False
+
+            # 使用CLI接口构建索引
+            # root_dir参数是项目根目录，配置文件中的相对路径将相对于此目录解析
+            index_cli(
+                root_dir=Path(root_dir),
+                verbose=True,
+                memprofile=False,
+                cache=True,
+                config_filepath=Path(config_filepath),
+                dry_run=False,
+                skip_validation=False,
+                # output_dir=Path(output_dir) if output_dir else None,
+                output_dir=None,
+                method=IndexingMethod.Standard
+            )
+
+            self.logger.info("GraphRAG索引构建成功")
+            return True
+
+        except Exception as e:
+            self.logger.error(f"构建GraphRAG索引时出错: {str(e)}")
+            return False
+
     def add_document(self, text: str, metadata: Dict[str, Any] = None):
         """
         添加文档到图索引（简化实现）
