@@ -72,6 +72,15 @@
   - 验证索引构建功能的基本调用
 - **依赖**: graphrag_impl模块
 
+### 10. test_graphrag_local_search.py
+
+- **目的**: 测试GraphRAG的_local_search方法
+- **测试内容**:
+  - 验证本地搜索功能的可用性
+  - 测试数据加载和查询执行
+  - 验证与已构建索引的集成
+- **依赖**: graphrag_impl模块
+
 ## 配置说明
 
 ### 独立配置结构

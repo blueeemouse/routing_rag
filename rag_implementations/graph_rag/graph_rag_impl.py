@@ -98,23 +98,20 @@ class GraphRAG(RAGInterface):
             return f"错误：Microsoft GraphRAG库不可用。无法执行查询: {query}"
 
         try:
-            # 注意：微软GraphRAG需要复杂的图数据结构，如实体、关系、社区报告等
-            # 在简单实现中，如果没有提供图数据，返回提示信息
-            if context is None or not self._has_graph_data(context):
-                return f"警告：GraphRAG需要图数据（实体、关系、社区报告等）才能工作。当前仅返回简单响应：{query} 的图增强检索结果。"
-            
-            # 如果提供上下文包含图数据，尝试使用GraphRAG进行查询
-            # 这里是简化实现，实际GraphRAG需要大量预处理的数据
-            if 'graph_data' in context:
-                graph_data = context['graph_data']
-                
-                # 尝试使用GraphRAG进行查询，但这需要完整的数据集结构
-                # 在此简化实现中，我们将返回一个模拟响应
-                result = self._execute_with_graph_data(query, graph_data)
-                return result
+            # 从上下文中获取必要参数
+            search_mode = context.get('search_mode', 'local') if context else 'local'
+            data_path = context.get('data_path', None) if context else None
+
+            if not data_path:
+                return f"错误：需要提供包含已索引数据的路径。请在context中指定'data_path'参数。"
+
+            # 根据指定的搜索模式执行查询
+            if search_mode == 'local':
+                return self._local_search(query, data_path)
             else:
-                return f"GraphRAG查询结果: {query} - (实际部署需要完整的图数据集结构，当前直接返回原query。)"
-                
+                # 暂时只支持本地搜索，其他模式返回提示
+                return f"当前仅支持本地搜索模式。查询: {query}"
+
         except Exception as e:
             self.logger.error(f"执行Graph RAG查询时出错: {str(e)}")
             return f"错误：执行Graph RAG查询时出现问题 - {str(e)}"
@@ -207,3 +204,332 @@ class GraphRAG(RAGInterface):
 
         # 在完整实现中，这将涉及到实体提取、关系识别、社区发现等复杂流程
         self.logger.info("GraphRAG添加文档功能需要完整的图构建流程，当前为简化实现")
+
+    def _local_search(self, query: str, data_path: str) -> str:
+        """
+        本地搜索模式
+        Local search mode
+        """
+        try:
+            from graphrag.query.factory import get_local_search_engine
+            from graphrag.config.models.graph_rag_config import GraphRagConfig
+            from graphrag.config.load_config import load_config
+            from pathlib import Path
+            import pandas as pd
+            import os
+
+            # 要使用本地搜索，需要加载GraphRAG生成的数据
+            data_dir = Path(data_path)
+            output_dir = data_dir / "output"
+
+            if not output_dir.exists():
+                return f"错误：输出目录不存在: {output_dir}"
+
+            # 尝试加载GraphRAG的索引数据
+            # 读取实体、关系、报告和文本单元数据
+            # 注意：根据实际生成的文件名进行调整
+            entities_path = output_dir / "entities.parquet"
+            relationships_path = output_dir / "relationships.parquet"
+            reports_path = output_dir / "community_reports.parquet"
+            text_units_path = output_dir / "text_units.parquet"
+
+            # 检查必要的文件是否存在
+            if not entities_path.exists():
+                return f"错误：实体数据文件不存在: {entities_path}"
+            if not relationships_path.exists():
+                return f"错误：关系数据文件不存在: {relationships_path}"
+            if not reports_path.exists():
+                return f"错误：报告数据文件不存在: {reports_path}"
+            if not text_units_path.exists():
+                return f"错误：文本单元数据文件不存在: {text_units_path}"
+
+            # 尝试加载这些parquet文件
+            entities_df = pd.read_parquet(entities_path)
+            relationships_df = pd.read_parquet(relationships_path)
+            reports_df = pd.read_parquet(reports_path)
+            text_units_df = pd.read_parquet(text_units_path)
+
+            # 尝试加载配置文件（我们假设配置文件路径可以通过context传递）
+            # 在实际使用中，用户需要提供索引构建时使用的配置文件路径
+            config_file_path = data_dir / "graphrag_class_test_config.yml"
+            if not config_file_path.exists():
+                # 如果没有找到配置文件，返回错误信息
+                # 在实际应用中，配置文件路径应该在context中提供
+                return f"错误：未找到配置文件: {config_file_path}。请确保提供索引构建时使用的配置文件。"
+
+            # 加载配置
+            # 这里需要从配置文件目录作为根目录加载配置
+            config_dir = data_dir  # 配置文件所在目录作为root_dir
+            config = load_config(root_dir=Path(config_dir), config_filepath=Path(config_file_path))
+
+            # 尝试加载LanceDB向量存储（GraphRAG使用）
+            lancedb_path = output_dir / "lancedb"
+
+            # 将pandas数据转换为GraphRAG所需的格式
+            from graphrag.data_model.community_report import CommunityReport
+            from graphrag.data_model.text_unit import TextUnit
+            from graphrag.data_model.entity import Entity
+            from graphrag.data_model.relationship import Relationship
+            from graphrag.data_model.covariate import Covariate
+
+            # 将DataFrame转换为相应对象列表（使用from_dict方法）
+            import numpy as np
+            entities = []
+            for _, row in entities_df.iterrows():
+                row_dict = row.to_dict()
+                # 处理NaN值和数据类型，确保标识符字段是字符串
+                # 对于Identified和Named基类要求的字段，需要确保是字符串类型
+                cleaned_row = {}
+                for key, value in row_dict.items():
+                    if isinstance(value, np.ndarray):
+                        cleaned_row[key] = value.tolist()  # 转换numpy数组
+                    elif pd.isna(value):
+                        cleaned_row[key] = None
+                    elif isinstance(value, (np.integer, int)):
+                        # 对于id、short_id（human_readable_id）和title字段，必须是字符串
+                        if key in ['id', 'human_readable_id', 'title']:
+                            cleaned_row[key] = str(value)
+                        else:
+                            # 其他数值字段可以保持数值类型
+                            cleaned_row[key] = int(value)
+                    elif isinstance(value, (np.floating, float)):
+                        cleaned_row[key] = float(value) if not pd.isna(value) else None
+                    else:
+                        cleaned_row[key] = value
+                # 使用Entity的from_dict方法来正确构建对象
+                entity = Entity.from_dict(cleaned_row)
+                entities.append(entity)
+
+            relationships = []
+            reports = []
+            text_units = []
+            # 同样处理其他数据类型，但先简化处理避免复杂性
+            # 对于其他类型，我们先使用基本构造方法
+            from graphrag.data_model.relationship import Relationship
+            from graphrag.data_model.community_report import CommunityReport
+            from graphrag.data_model.text_unit import TextUnit
+
+            # 为Relationship、CommunityReport和TextUnit也使用适当的方法
+            import numpy as np
+            for _, row in relationships_df.iterrows():
+                row_dict = row.to_dict()
+                # 处理NaN值和数据类型，确保标识符字段是字符串
+                cleaned_row = {}
+                for key, value in row_dict.items():
+                    if isinstance(value, np.ndarray):
+                        cleaned_row[key] = value.tolist()
+                    elif pd.isna(value):
+                        cleaned_row[key] = None
+                    elif isinstance(value, (np.integer, int)):
+                        # 对于id和human_readable_id字段，必须是字符串
+                        if key in ['id', 'human_readable_id', 'source', 'target']:
+                            cleaned_row[key] = str(value)
+                        else:
+                            cleaned_row[key] = int(value)
+                    elif isinstance(value, (np.floating, float)):
+                        cleaned_row[key] = float(value) if not pd.isna(value) else None
+                    else:
+                        cleaned_row[key] = value
+                # 使用Relationship的from_dict方法来正确构建对象
+                try:
+                    relationship = Relationship.from_dict(cleaned_row)
+                except Exception:
+                    # 如果from_dict失败，尝试手动构造
+                    relationship = Relationship(
+                        id=cleaned_row.get('id', ''),
+                        short_id=cleaned_row.get('human_readable_id'),
+                        source=cleaned_row.get('source', ''),
+                        target=cleaned_row.get('target', ''),
+                        description=cleaned_row.get('description', ''),
+                        rank=cleaned_row.get('rank', 1),
+                        weight=cleaned_row.get('weight', 1.0),
+                        text_unit_ids=cleaned_row.get('text_unit_ids'),
+                        attributes=cleaned_row.get('attributes')
+                    )
+                relationships.append(relationship)
+
+            for _, row in reports_df.iterrows():
+                row_dict = row.to_dict()
+                # 处理NaN值和数据类型，确保标识符字段是字符串
+                cleaned_row = {}
+                for key, value in row_dict.items():
+                    if isinstance(value, np.ndarray):
+                        cleaned_row[key] = value.tolist()
+                    elif pd.isna(value):
+                        cleaned_row[key] = None
+                    elif isinstance(value, (np.integer, int)):
+                        # 对于id、human_readable_id和title字段，必须是字符串
+                        if key in ['id', 'human_readable_id', 'title', 'community', 'community_id']:
+                            cleaned_row[key] = str(value)
+                        else:
+                            cleaned_row[key] = int(value)
+                    elif isinstance(value, (np.floating, float)):
+                        cleaned_row[key] = float(value) if not pd.isna(value) else None
+                    else:
+                        cleaned_row[key] = value
+                # 使用CommunityReport的from_dict方法来正确构建对象
+                try:
+                    report = CommunityReport.from_dict(cleaned_row)
+                except Exception:
+                    # 如果from_dict失败，尝试手动构造
+                    report = CommunityReport(
+                        id=cleaned_row.get('id', ''),
+                        title=cleaned_row.get('title', ''),
+                        short_id=cleaned_row.get('human_readable_id'),
+                        community_id=cleaned_row.get('community', ''),
+                        summary=cleaned_row.get('summary', ''),
+                        full_content=cleaned_row.get('full_content', ''),
+                        rank=cleaned_row.get('rank', 1.0),
+                        attributes=cleaned_row.get('attributes'),
+                        size=cleaned_row.get('size'),
+                        period=cleaned_row.get('period')
+                    )
+                reports.append(report)
+
+            for _, row in text_units_df.iterrows():
+                row_dict = row.to_dict()
+                # 处理NaN值和数据类型，确保标识符字段是字符串
+                cleaned_row = {}
+                for key, value in row_dict.items():
+                    if isinstance(value, np.ndarray):
+                        cleaned_row[key] = value.tolist()
+                    elif pd.isna(value):
+                        cleaned_row[key] = None
+                    elif isinstance(value, (np.integer, int)):
+                        # 对于id和human_readable_id字段，必须是字符串
+                        if key in ['id', 'human_readable_id']:
+                            cleaned_row[key] = str(value)
+                        else:
+                            cleaned_row[key] = int(value)
+                    elif isinstance(value, (np.floating, float)):
+                        cleaned_row[key] = float(value) if not pd.isna(value) else None
+                    else:
+                        cleaned_row[key] = value
+                # 使用TextUnit的from_dict方法来正确构建对象
+                try:
+                    text_unit = TextUnit.from_dict(cleaned_row)
+                except Exception:
+                    # 如果from_dict失败，尝试手动构造
+                    text_unit = TextUnit(
+                        id=cleaned_row.get('id', ''),
+                        short_id=cleaned_row.get('human_readable_id'),
+                        text=cleaned_row.get('text', ''),
+                        entity_ids=cleaned_row.get('entity_ids'),
+                        relationship_ids=cleaned_row.get('relationship_ids'),
+                        covariate_ids=cleaned_row.get('covariate_ids'),
+                        n_tokens=cleaned_row.get('n_tokens'),
+                        document_ids=cleaned_row.get('document_ids'),
+                        attributes=cleaned_row.get('attributes')
+                    )
+                text_units.append(text_unit)
+
+            # 尝试创建本地搜索引擎
+            # 注意：这需要向量存储，而不仅仅是DataFrame
+            from graphrag.vector_stores.lancedb import LanceDBVectorStore
+            from graphrag.vector_stores.base import BaseVectorStore
+
+            # 实际的向量存储路径
+            entity_description_vector_store_path = lancedb_path / "default-entity-description.lance"
+            community_full_content_vector_store_path = lancedb_path / "default-community-full_content.lance"
+            text_unit_text_vector_store_path = lancedb_path / "default-text_unit-text.lance"
+
+            # 检查向量存储是否存在
+            if entity_description_vector_store_path.exists():
+                # 创建向量存储配置
+                # index_name: 向量数据库中集合的名称
+                # id_field: 存储文档ID的字段名
+                # text_field: 存储文本内容的字段名
+                # vector_field: 存储向量嵌入的字段名
+                # attributes_field: 存储额外属性的字段名
+                # vector_size: 向量的维度（如text-embedding-ada-002是1536维）
+                from graphrag.config.models.vector_store_schema_config import VectorStoreSchemaConfig
+                schema_config = VectorStoreSchemaConfig(
+                    index_name="default-entity-description",
+                    id_field="id",
+                    text_field="text",
+                    vector_field="vector",
+                    attributes_field="attributes",
+                    vector_size=1536
+                )
+
+                # 初始化向量存储
+                entity_description_embedding_store = LanceDBVectorStore(
+                    vector_store_schema_config=schema_config
+                )
+                # 连接数据库
+                entity_description_embedding_store.connect(
+                    db_uri=str(lancedb_path),
+                    collection_name="default-entity-description"
+                )
+            else:
+                # 如果向量存储不存在，返回错误
+                return f"错误：未找到实体描述向量存储: {entity_description_vector_store_path}"
+
+            # 创建本地搜索引擎
+            # response_type选项:
+            # - "general": 详细格式，包含数据引用标记
+            # - "multiple paragraphs": 多段落格式，较少引用标记
+            # - "single paragraph": 单段落格式，最简洁
+            # - "list": 列表格式
+            search_engine = get_local_search_engine(
+                config=config,
+                reports=reports,
+                text_units=text_units,
+                entities=entities,
+                relationships=relationships,
+                covariates={},
+                response_type="general",  # 改为更简洁的输出格式
+                description_embedding_store=entity_description_embedding_store
+            )
+
+            # # 执行查询
+            # result = search_engine.search(query=query)
+            # return str(result)
+            
+            # 执行查询 - search方法是异步的，需要在同步函数中调用
+            # 使用 asyncio.run() 是在同步环境中运行异步代码的标准做法
+            import asyncio
+
+            try:
+                if asyncio.iscoroutinefunction(search_engine.search):
+                    # 如果search是协程函数，使用asyncio.run来运行它
+                    # import pdb
+                    # pdb.set_trace()
+                    result = asyncio.run(search_engine.search(query=query))
+                    
+                    # # --- 添加的调试代码 ---
+                    # print(f"Type of result: {type(result)}")
+                    # print(f"Content of result: {result}")
+
+                    # # 如果 result 是一个对象，尝试查看它的所有属性
+                    # if hasattr(result, '__dict__'):
+                    #     print(f"Result attributes (vars): {vars(result)}")
+                    # else:
+                    #     # 如果没有 __dict__，用 dir() 查看所有方法和属性
+                    #     print(f"Result attributes (dir): {[attr for attr in dir(result) if not attr.startswith('_')]}")
+                    # # --- 调试代码结束 ---
+
+                else:
+                    # 如果不是（未来版本可能变化），则直接调用
+                    result = search_engine.search(query=query)
+                
+                
+                # 最终输出: 检查 result 对象是否有 'response' 属性
+                if hasattr(result, 'response'):
+                    # 如果有，返回答案
+                    return result.response
+                else:
+                    # 如果没有，返回一个错误信息或者整个对象的字符串表示作为备选
+                    self.logger.warning("Search result object does not have a 'response' attribute.")
+                    return "错误：无法从搜索结果中提取答案。"
+                # return str(result)
+            except Exception as e:
+                # 捕获 asyncio.run 或 search 本身可能抛出的异常
+                self.logger.error(f"执行异步搜索时出错: {str(e)}")
+                return f"执行异步搜索时出错: {str(e)}"
+
+        except Exception as e:
+            self.logger.error(f"本地搜索执行错误: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return f"本地搜索错误: {str(e)}"
