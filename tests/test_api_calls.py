@@ -132,7 +132,15 @@ def test_graph_rag():
         print(f"嵌入模型: {graph_rag.embedding_model}")
 
         # 测试execute方法
-        result = graph_rag.execute("分析公司内部员工关系")
+        # 注意路径可能会被转义导致错误.最好全都用双斜杠(如果是Linux系统或mac os,就不会有这个问题了.因为那边都是用正斜杠作为路径分隔符
+        # 而正斜杠在python字符串里不是转义字符,因此不会有类似的问题.Windows用反斜杠就可能产生问题)
+        # 或者用原始字符串 (r"...") 来表示路径(不过这个只能在Windows上用)
+        # 最通用还是用pathlib里的 Path 来包装一下
+        param = {"search_mode":'local', "data_path": "D:\Develop\\all_RAG\\routing_rag\graphrag_class_test_data"}
+        # result = graph_rag.execute("分析公司内部员工关系", param)
+        # # 在这里设置断点！
+        # import pdb; pdb.set_trace() 
+        result = graph_rag.execute("什么是人工智能？", param)
         print(f"查询结果: {result}")
 
         # 检查GraphRAG是否可用

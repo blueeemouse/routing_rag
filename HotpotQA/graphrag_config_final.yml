@@ -10,7 +10,7 @@ models:
     model: "gpt-3.5-turbo"
     model_provider: "openai"
     # api_base: "https://api.agicto.cn/v1/chat/completions"
-    api_base: "https://api.agicto.cn/v1"
+    api_base: "${API_BASE_URL}"  # ← 修改：使用环境变量
     temperature: 0
     max_tokens: 4096
     request_timeout: 180.0
@@ -20,7 +20,7 @@ models:
     api_key: "${GRAPHRAG_API_KEY}"
     model: "text-embedding-ada-002"
     model_provider: "openai"
-    api_base: "https://api.agicto.cn/v1"
+    api_base: "${API_BASE_URL}"  # ← 修改：使用环境变量
     # api_base: "https://api.agicto.cn/v1"
     request_timeout: 180.0
     concurrent_requests: 25

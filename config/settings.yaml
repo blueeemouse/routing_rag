@@ -1,19 +1,18 @@
 decomposer:
-  api_url: "https://api.agicto.cn/v1/chat/completions"
+  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
   api_key: "${DECOMPOSER_API_KEY}"
   # model: "deepseek-v3"
   model: "gpt-5.1-chat"
   prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个："
 
 router:
-  api_url: "https://api.agicto.cn/v1/chat/completions"
+  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
   api_key: "${ROUTER_API_KEY}"
   model: "deepseek-v3"
   prompt: "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
 
 naive_rag:
-  api_url: "https://api.agicto.cn/v1"   # 为什么这里调用api的时候，只需要具体到v1，而不是v1/chat/completions呢？
-  # 这个评判标准是什么？
+  api_url: "${API_BASE_URL}"  # ← 修改：使用环境变量
   api_key: "${NAIVE_RAG_API_KEY}"
   # model: "deepseek-v3"  # 试一下，把naive_rag的模型全都换成openai的。看报错，似乎LlamaIndex默认是用的openai的base_url
   # 和api-key的
@@ -24,7 +23,7 @@ naive_rag:
   temperature: 0.7
 
 graph_rag:
-  api_url: "https://api.agicto.cn/v1/chat/completions"
+  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
   api_key: "${GRAPHRAG_API_KEY}"
   model: "deepseek-v3"
   embedding_model: "text-embedding-ada-002"

@@ -75,7 +75,7 @@ class NaiveRAG(RAGInterface):
             # 1. 创建自定义配置的嵌入模型
             embed_model = OpenAIEmbedding(
                 api_key=os.getenv('NAIVE_RAG_API_KEY', os.getenv('GRAPHRAG_API_KEY', 'YOUR_API_KEY_HERE')),
-                api_base="https://api.agicto.cn/v1",  # 替换为你的 base URL
+                api_base=self.api_url,  # ← 修改：使用配置中的API URL
                 model="text-embedding-ada-002"  # 或你的服务商支持的模型
             )
 

@@ -4,7 +4,8 @@ import os
 
 # 测试API端点是否可用
 def test_api_connectivity():
-    api_url = "https://api.agicto.cn/v1/chat/completions"
+    api_base_url = os.getenv('API_BASE_URL', 'https://api.agicto.cn/v1')  # ← 修改：使用环境变量
+    api_url = f"{api_base_url}/chat/completions"  # ← 修改：动态构建URL
     api_key = os.getenv('GRAPHRAG_API_KEY', 'YOUR_API_KEY_HERE')
 
     # 简单的模型列表查询
@@ -16,7 +17,7 @@ def test_api_connectivity():
     # 测试API连接
     try:
         response = requests.get(
-            "https://api.agicto.cn/v1/models",
+            f"{api_base_url}/models",  # ← 修改：使用环境变量
             headers=headers,
             timeout=10  # 设置较短的超时时间
         )
@@ -71,10 +72,11 @@ def test_with_litellm():
         from litellm import completion
 
         # 测试API调用 - 使用正确的deepseek前缀
+        api_base_url = os.getenv('API_BASE_URL', 'https://api.agicto.cn/v1')  # ← 修改：使用环境变量
         response = completion(
             model="deepseek/deepseek-v3",
             messages=[{"role": "user", "content": "Hello"}],
-            api_base="https://api.agicto.cn/v1/chat/completions",
+            api_base=f"{api_base_url}/chat/completions",  # ← 修改：动态构建URL
             api_key=os.getenv('GRAPHRAG_API_KEY', 'YOUR_API_KEY_HERE'),
             timeout=10
         )
@@ -93,10 +95,11 @@ def test_embedding_with_litellm():
         from litellm import embedding
 
         # 测试embedding API调用
+        api_base_url = os.getenv('API_BASE_URL', 'https://api.agicto.cn/v1')  # ← 修改：使用环境变量
         response = embedding(
             model="text-embedding-ada-002",
             input=["Hello world", "Goodbye world"],
-            api_base="https://api.agicto.cn/v1",
+            api_base=api_base_url,  # ← 修改：使用环境变量
             api_key=os.getenv('GRAPHRAG_API_KEY', 'YOUR_API_KEY_HERE'),
             timeout=10
         )

@@ -7,7 +7,7 @@ models:
     type: "chat"
     api_key: "${GRAPHRAG_API_KEY}"
     model: "deepseek-v3"
-    api_base: "https://api.agicto.cn/v1/chat/completions"
+    api_base: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
     temperature: 0
     max_tokens: 4096
     request_timeout: 180.0
@@ -16,7 +16,7 @@ models:
     type: "embedding"
     api_key: "${GRAPHRAG_API_KEY}"
     model: "text-embedding-ada-002"
-    api_base: "https://api.agicto.cn/v1/chat/completions"
+    api_base: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
     request_timeout: 180.0
     concurrent_requests: 25
 

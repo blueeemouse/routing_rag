@@ -107,6 +107,7 @@ class GraphRAG(RAGInterface):
 
             # 根据指定的搜索模式执行查询
             if search_mode == 'local':
+                # print("使用本地搜索模式")
                 return self._local_search(query, data_path)
             else:
                 # 暂时只支持本地搜索，其他模式返回提示
@@ -471,6 +472,7 @@ class GraphRAG(RAGInterface):
             # - "multiple paragraphs": 多段落格式，较少引用标记
             # - "single paragraph": 单段落格式，最简洁
             # - "list": 列表格式
+            # print("创建本地搜索引擎...")
             search_engine = get_local_search_engine(
                 config=config,
                 reports=reports,
