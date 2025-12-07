@@ -81,6 +81,15 @@
   - 验证与已构建索引的集成
 - **依赖**: graphrag_impl模块
 
+### 11. test_graphrag_execute_integration.py
+
+- **目的**: 测试GraphRAG的execute方法与_local_search的集成
+- **测试内容**:
+  - 验证execute方法能够正确调用_local_search
+  - 测试端到端查询流程
+  - 验证集成后的功能完整性
+- **依赖**: graphrag_impl模块
+
 ## 配置说明
 
 ### 独立配置结构
