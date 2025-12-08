@@ -90,6 +90,23 @@
   - 验证集成后的功能完整性
 - **依赖**: graphrag_impl模块
 
+### 12. test_naive_rag_refactor.py
+
+- **目的**: 测试NaiveRAG重构后的功能
+- **测试内容**:
+  - 验证build_index方法的功能
+  - 测试execute方法使用预构建索引
+  - 验证向后兼容性
+- **依赖**: naive_rag_impl模块
+- **说明**: 在重构NaiveRAG以实现索引构建与查询执行解耦后，验证重构功能的正确性
+
+### 重要说明：接口更新
+
+- **RAGInterface** 已扩展，现在包含 `build_index` 方法，以支持解耦的索引构建与查询执行
+- **NaiveRAG** 已更新以实现新的接口，支持独立的索引构建
+- **GraphRAG** 当前的 `build_index` 方法与新接口不完全兼容，将在后续更新中使其兼容
+- 现有测试文件（如 `test_naive_rag.py` 和 `test_api_calls.py`）仍可正常运行，因为保持了向后兼容性
+
 ## 配置说明
 
 ### 独立配置结构

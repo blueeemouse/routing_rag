@@ -166,8 +166,8 @@ def main():
     # test_router_api()
     # 前面两个已经测试成功了，就是简单的调用api
 
-    # test_naive_rag()  # 这个也通过了
-    test_graph_rag()
+    test_naive_rag()  # 这个也通过了
+    # test_graph_rag()
 
     print("\n" + "=" * 50)
     print("所有API调用和RAG功能测试完成")
