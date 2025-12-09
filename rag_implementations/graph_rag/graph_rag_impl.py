@@ -81,7 +81,7 @@ class GraphRAG(RAGInterface):
             self._graph_rag_available = False
             self.logger.warning(f"Microsoft GraphRAG not available: {str(e)}")
             self.logger.warning("Please ensure GraphRAG is properly installed in your environment")
-    
+
     def execute(self, query: str, context: Dict[str, Any] = None) -> str:
         """
         执行Graph RAG查询
@@ -116,7 +116,7 @@ class GraphRAG(RAGInterface):
         except Exception as e:
             self.logger.error(f"执行Graph RAG查询时出错: {str(e)}")
             return f"错误：执行Graph RAG查询时出现问题 - {str(e)}"
-    
+
     def _has_graph_data(self, context: Dict[str, Any]) -> bool:
         """
         检查上下文是否包含图数据
@@ -127,7 +127,7 @@ class GraphRAG(RAGInterface):
         # 检查是否包含GraphRAG所需的关键数据结构
         required_keys = ['entities', 'relationships', 'reports', 'text_units', 'communities']
         return any(key in context for key in required_keys)
-    
+
     def _execute_with_graph_data(self, query: str, graph_data: Dict[str, Any]) -> str:
         """
         使用图数据执行查询
@@ -135,19 +135,20 @@ class GraphRAG(RAGInterface):
         """
         # 这是一个简化实现，实际GraphRAG需要完整的索引数据
         # 包括实体、关系、社区报告等复杂结构
-        
+
         # 模拟GraphRAG查询结果
         return f"GraphRAG已处理查询: '{query}'，使用图数据进行增强检索。"
-    
-    def build_index(self, root_dir: str, config_filepath: str = None, output_dir: str = None):
+
+    def build_index_from_path(self, root_dir: str, config_filepath: str = None, output_dir: str = None, **kwargs):
         """
-        构建GraphRAG索引
-        Build GraphRAG index from documents
+        从路径构建索引（适用于文件系统驱动的RAG）
+        Build index from file path (suitable for file system-based RAG)
 
         Args:
             root_dir (str): 项目根目录路径，配置文件中的相对路径将相对于此目录解析
             config_filepath (str, optional): 配置文件路径
             output_dir (str, optional): 输出目录路径，可覆盖配置文件中的设置
+            **kwargs: 额外的参数，用于特定实现的配置
         """
         if not self._graph_rag_available:
             self.logger.error("GraphRAG不可用，无法构建索引")
@@ -189,6 +190,25 @@ class GraphRAG(RAGInterface):
         except Exception as e:
             self.logger.error(f"构建GraphRAG索引时出错: {str(e)}")
             return False
+
+    def build_index_from_data(self, data, metadata=None, **kwargs):
+        """
+        从数据列表构建索引（适用于内存驱动的RAG）
+        Build index from data list (suitable for in-memory RAG)
+
+        GraphRAG需要数据在文件系统中，不支持直接从数据列表构建索引。
+        GraphRAG requires data to be in file system, does not support building index directly from data list.
+
+        Args:
+            data (List[str]): 用于构建索引的文档数据列表
+            metadata (Optional[List[Dict[str, Any]]]): 与文档关联的元数据列表
+            **kwargs: 额外的参数，用于特定实现的配置
+
+        Returns:
+            bool: 总是返回False，因为GraphRAG不支持此功能
+        """
+        self.logger.error("GraphRAG requires data to be in file system. Please use build_index_from_path().")
+        return False
 
     def add_document(self, text: str, metadata: Dict[str, Any] = None):
         """
@@ -487,7 +507,7 @@ class GraphRAG(RAGInterface):
             # # 执行查询
             # result = search_engine.search(query=query)
             # return str(result)
-            
+
             # 执行查询 - search方法是异步的，需要在同步函数中调用
             # 使用 asyncio.run() 是在同步环境中运行异步代码的标准做法
             import asyncio
@@ -498,7 +518,7 @@ class GraphRAG(RAGInterface):
                     # import pdb
                     # pdb.set_trace()
                     result = asyncio.run(search_engine.search(query=query))
-                    
+
                     # # --- 添加的调试代码 ---
                     # print(f"Type of result: {type(result)}")
                     # print(f"Content of result: {result}")
@@ -514,8 +534,8 @@ class GraphRAG(RAGInterface):
                 else:
                     # 如果不是（未来版本可能变化），则直接调用
                     result = search_engine.search(query=query)
-                
-                
+
+
                 # 最终输出: 检查 result 对象是否有 'response' 属性
                 if hasattr(result, 'response'):
                     # 如果有，返回答案

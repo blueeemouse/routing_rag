@@ -110,7 +110,7 @@ def test_naive_rag():
         ]
 
         print("正在构建索引...")
-        build_result = naive_rag.build_index(test_documents)
+        build_result = naive_rag.build_index_from_data(test_documents)
 
         if not build_result:
             print("[警告] 索引构建失败，这可能是由于API配置问题")

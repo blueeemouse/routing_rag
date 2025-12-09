@@ -84,7 +84,7 @@ class NaiveRAG(RAGInterface):
                             llama_docs.append(self.Document(text=doc_data))
                         elif isinstance(doc_data, dict) and 'text' in doc_data:
                             llama_docs.append(self.Document(text=doc_data['text']))
-                    self.build_index([doc.text for doc in llama_docs])
+                    self.build_index_from_data([doc.text for doc in llama_docs])
                 else:
                     # 没有有效文档数据，返回错误
                     return "错误：没有可用的索引，也未提供文档数据用于构建索引"
@@ -119,10 +119,10 @@ class NaiveRAG(RAGInterface):
             self.logger.error(f"执行RAG查询时出错: {str(e)}")
             return f"错误：执行查询时出现问题 - {str(e)}"
 
-    def build_index(self, data, metadata=None, **kwargs):
+    def build_index_from_data(self, data, metadata=None, **kwargs):
         """
-        构建索引
-        Build index from data
+        从数据列表构建索引（适用于内存驱动的RAG）
+        Build index from data list (suitable for in-memory RAG)
 
         Args:
             data (List[str]): 用于构建索引的文档数据列表
@@ -161,10 +161,9 @@ class NaiveRAG(RAGInterface):
                 for text in data:
                     llama_docs.append(self.Document(text=text))
 
-            # 创建索引 - 使用配置中的嵌入模型
+            # 创建索引 - 使用全局设置中的嵌入模型
             self.index = self.VectorStoreIndex.from_documents(
-                llama_docs,
-                # embed_model=self.OpenAIEmbedding(model=self.embedding_model)
+                llama_docs
             )
 
             # 标记索引已初始化

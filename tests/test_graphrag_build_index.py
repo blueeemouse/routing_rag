@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-测试GraphRAG的build_index方法
-用于测试GraphRAG类build_index方法的功能接口和参数验证
+测试GraphRAG的build_index_from_path方法
+用于测试GraphRAG类build_index_from_path方法的功能接口和参数验证
 注意：此测试不执行完整的索引构建过程，因为这可能需要长时间运行和大量资源
 """
 
@@ -20,7 +20,7 @@ def test_graphrag_build_index():
     try:
         from rag_implementations.graph_rag.graph_rag_impl import GraphRAG
 
-        print("正在测试GraphRAG的build_index方法...")
+        print("正在测试GraphRAG的build_index_from_path方法...")
 
         # 创建GraphRAG实例
         graph_rag = GraphRAG()
@@ -28,7 +28,7 @@ def test_graphrag_build_index():
         print(f"GraphRAG可用性: {graph_rag._graph_rag_available}")
 
         if not graph_rag._graph_rag_available:
-            print("[ERROR] GraphRAG不可用，无法测试build_index方法")
+            print("[ERROR] GraphRAG不可用，无法测试build_index_from_path方法")
             return False
 
         # 使用专门的测试数据路径
@@ -67,19 +67,19 @@ def test_graphrag_build_index():
             content = f.read()
             print(f"测试文档内容: {content[:100]}...")  # 只显示前100个字符
 
-        # 验证build_index方法存在且可用
-        build_index_method = getattr(graph_rag, 'build_index', None)
-        if build_index_method is None:
-            print("[ERROR] build_index方法不存在")
+        # 验证build_index_from_path方法存在且可用
+        build_index_from_path_method = getattr(graph_rag, 'build_index_from_path', None)
+        if build_index_from_path_method is None:
+            print("[ERROR] build_index_from_path方法不存在")
             return False
 
-        print("[INFO] build_index方法存在，接口验证通过")
-        print(f"[INFO] build_index方法签名: {build_index_method.__doc__}")
+        print("[INFO] build_index_from_path方法存在，接口验证通过")
+        print(f"[INFO] build_index_from_path方法签名: {build_index_from_path_method.__doc__}")
 
-        # 实际尝试调用build_index方法（但使用dry_run模式或小数据集）
+        # 实际尝试调用build_index_from_path方法（但使用dry_run模式或小数据集）
         # 为了测试接口是否正常，我们可以尝试调用它
-        print("[INFO] 尝试调用build_index方法（使用小数据集）")
-        result = graph_rag.build_index(
+        print("[INFO] 尝试调用build_index_from_path方法（使用小数据集）")
+        result = graph_rag.build_index_from_path(
             root_dir=test_root_path,  # root_dir是项目根目录，配置文件中的相对路径将相对于此目录解析
             config_filepath=test_config_path,
             output_dir=test_output_path  # 这个参数会被配置文件中的output设置覆盖
@@ -88,10 +88,10 @@ def test_graphrag_build_index():
         # 注意：实际的索引构建可能需要较长时间和大量资源
         # 返回值可能是False，但这主要是因为实际构建需要很长时间或API密钥问题
         # 所以我们主要验证方法能够被调用，而不是实际构建成功
-        print(f"[INFO] build_index返回结果: {result}")
-        print("[INFO] build_index方法调用完成")
+        print(f"[INFO] build_index_from_path返回结果: {result}")
+        print("[INFO] build_index_from_path方法调用完成")
 
-        print("[SUCCESS] GraphRAG build_index方法接口验证完成")
+        print("[SUCCESS] GraphRAG build_index_from_path方法接口验证完成")
         return True
 
     except Exception as e:
@@ -103,6 +103,6 @@ def test_graphrag_build_index():
 if __name__ == "__main__":
     success = test_graphrag_build_index()
     if success:
-        print("\n[SUCCESS] GraphRAG build_index方法接口测试成功！")
+        print("\n[SUCCESS] GraphRAG build_index_from_path方法接口测试成功！")
     else:
-        print("\n[ERROR] GraphRAG build_index方法接口测试失败！")
+        print("\n[ERROR] GraphRAG build_index_from_path方法接口测试失败！")

@@ -27,7 +27,7 @@ def test_naive_rag_refactor():
     ]
 
     print("1. 测试build_index方法...")
-    success = naive_rag.build_index(test_documents)
+    success = naive_rag.build_index_from_data(test_documents)
     if success:
         print("   [OK] build_index方法执行成功")
     else:

@@ -102,10 +102,12 @@
 
 ### 重要说明：接口更新
 
-- **RAGInterface** 已扩展，现在包含 `build_index` 方法，以支持解耦的索引构建与查询执行
-- **NaiveRAG** 已更新以实现新的接口，支持独立的索引构建
-- **GraphRAG** 当前的 `build_index` 方法与新接口不完全兼容，将在后续更新中使其兼容
-- 现有测试文件（如 `test_naive_rag.py` 和 `test_api_calls.py`）仍可正常运行，因为保持了向后兼容性
+- **RAGInterface** 已重构，从单一的 `build_index` 方法改为两个专门的方法：
+  - `build_index_from_data`: 适用于内存数据驱动的RAG实现（如NaiveRAG）
+  - `build_index_from_path`: 适用于文件系统驱动的RAG实现（如GraphRAG）
+- **NaiveRAG** 已更新以实现 `build_index_from_data` 方法
+- **GraphRAG** 已更新以实现 `build_index_from_path` 方法
+- 现有测试文件已更新以使用新的方法名
 
 ## 配置说明
 
