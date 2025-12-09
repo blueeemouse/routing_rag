@@ -101,7 +101,23 @@ def test_naive_rag():
         print(f"模型: {naive_rag.model}")
         print(f"嵌入模型: {naive_rag.embedding_model}")
 
-        # 测试execute方法
+        # 首先构建索引，提供一些测试文档
+        test_documents = [
+            "人工智能（AI）是计算机科学的一个分支，旨在创建能够执行通常需要人类智能的任务的系统。",
+            "机器学习是人工智能的一个子集，它使计算机能够从数据中学习并做出决策。",
+            "深度学习是机器学习的一个分支，使用神经网络来模拟人脑处理数据的方式。",
+            "自然语言处理（NLP）是人工智能的一个领域，专注于计算机与人类语言的交互。"
+        ]
+
+        print("正在构建索引...")
+        build_result = naive_rag.build_index(test_documents)
+
+        if not build_result:
+            print("[警告] 索引构建失败，这可能是由于API配置问题")
+            print("继续测试，但execute调用可能会失败")
+
+        # 测试execute方法（现在应该使用已构建的索引）
+        print("正在执行查询...")
         result = naive_rag.execute("什么是人工智能？")
         # print(f"查询结果: {result}")
 
@@ -139,7 +155,7 @@ def test_graph_rag():
         param = {"search_mode":'local', "data_path": "D:\Develop\\all_RAG\\routing_rag\graphrag_class_test_data"}
         # result = graph_rag.execute("分析公司内部员工关系", param)
         # # 在这里设置断点！
-        # import pdb; pdb.set_trace() 
+        # import pdb; pdb.set_trace()
         result = graph_rag.execute("什么是人工智能？", param)
         print(f"查询结果: {result}")
 
