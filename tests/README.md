@@ -100,6 +100,19 @@
 - **依赖**: naive_rag_impl模块
 - **说明**: 在重构NaiveRAG以实现索引构建与查询执行解耦后，验证重构功能的正确性
 
+### 13. test_orchestrator_mock.py
+
+- **目的**: 使用模拟组件测试orchestrator的完整流程
+- **测试内容**:
+  - 验证orchestrator与decomposer的集成
+  - 验证orchestrator与router的集成
+  - 验证orchestrator与各种RAG实现的集成
+  - 端到端测试：查询 → 分解 → 路由 → 执行 → 合并结果
+- **依赖**:
+  - core/orchestrator.py
+  - mocks/mock_components.py
+- **说明**: 使用mock组件验证orchestrator架构和流程的正确性
+
 ### 重要说明：接口更新
 
 - **RAGInterface** 已重构，从单一的 `build_index` 方法改为两个专门的方法：

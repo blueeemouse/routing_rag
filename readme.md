@@ -62,6 +62,7 @@
 - `tests`文件夹, 包含各种测试文件
 - `source_env_var.sh`脚本, Windows系统直接把里面的内容复制到终端进行运行即可激活.env里的环境变量并进行对应的赋值
 - `graphrag_class_test_data`文件夹 (具体说明见目录内 `readme`)
+- `mocks`文件夹 (用于存放模拟的rag实现类和router类还有decomposer类）
 
 ## 安装
 
