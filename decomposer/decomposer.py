@@ -7,6 +7,8 @@ parent_dir_path = current_file_path.parent.parent
 
 sys.path.append(str(parent_dir_path))
 
+import logging
+
 import requests
 from typing import List
 from interfaces.decomposer_interface import DecomposerInterface
@@ -19,6 +21,8 @@ class Decomposer(DecomposerInterface):
         self.api_key = settings.decomposer_api_key
         self.prompt_template = settings.decomposer_prompt
         self.model = settings.decomposer_model
+
+        self.logger = logging.getLogger(__name__)
 
     def decompose(self, query: str) -> List[str]:
         """
@@ -46,8 +50,14 @@ class Decomposer(DecomposerInterface):
         response.raise_for_status()
         result = response.json()
 
+        # print("Decomposer response JSON:", result)
         # 提取AI响应内容
         content = result.get('choices', [{}])[0].get('message', {}).get('content', "")
         # 按行分割并过滤空行
+        # print("Decomposer response content:", content)
         sub_queries = [q.strip() for q in content.split('\n') if q.strip()]
+        # --- 关键的健壮性检查 ---
+        if not sub_queries:
+            self.logger.warning(f"分解器返回空结果，将使用原始查询作为子查询。原始查询: {query}")
+            return [query] # 如果分解失败，回退到原始查询
         return sub_queries

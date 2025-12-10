@@ -35,12 +35,13 @@ class Orchestrator:
         self.router = router
         self.rag_implementations = rag_implementations
 
-    def process_query(self, query: str) -> str:
+    def process_query(self, query: str, context: Dict[str, Any] = None) -> str:
         """
         处理输入查询的主流程
 
         Args:
             query: 输入查询字符串
+            context: 上下文信息（可选）
 
         Returns:
             str: 最终结果
@@ -51,12 +52,17 @@ class Orchestrator:
         subqueries = self.decompose_query(query)
         print(f"查询分解结果: {subqueries}")
 
+        # 如果查询无法分解（返回空列表），将原始查询作为子查询
+        if not subqueries:
+            print(f"查询未被分解，使用原始查询: {query}")
+            subqueries = [query]
+
         # 2. 路由子查询
         routed_queries = self.route_subqueries(subqueries)
         print(f"子查询路由结果: {routed_queries}")
 
         # 3. 执行子查询
-        results = self.execute_subqueries(routed_queries)
+        results = self.execute_subqueries(routed_queries, context)
         print(f"子查询执行结果: {results}")
 
         # 4. 合并结果
@@ -96,12 +102,13 @@ class Orchestrator:
             })
         return routed_queries
 
-    def execute_subqueries(self, routed_queries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def execute_subqueries(self, routed_queries: List[Dict[str, Any]], context: Dict[str, Any] = None) -> List[Dict[str, Any]]:
         """
         执行已路由的子查询
 
         Args:
             routed_queries: 已路由的查询列表
+            context: 上下文信息（可选）
 
         Returns:
             List[Dict[str, Any]]: 执行结果列表
@@ -116,8 +123,8 @@ class Orchestrator:
             if rag_impl is None:
                 result = f"错误：未找到策略 '{strategy}' 对应的RAG实现"
             else:
-                # 执行查询
-                result = rag_impl.execute(query)
+                # 执行查询，传递上下文（RAG实现可以选择是否使用）
+                result = rag_impl.execute(query, context)
 
             results.append({
                 'query': query,

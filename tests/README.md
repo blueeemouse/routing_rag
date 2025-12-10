@@ -113,6 +113,24 @@
   - mocks/mock_components.py
 - **说明**: 使用mock组件验证orchestrator架构和流程的正确性
 
+### 14. test_orchestrator_real_components.py
+
+- **目的**: 使用真实组件测试orchestrator的完整流程
+- **测试内容**:
+  - 验证orchestrator与真实decomposer的集成
+  - 验证orchestrator与真实router的集成
+  - 验证orchestrator与真实RAG实现的集成（包括NaiveRAG、GraphRAG、NoRAG）
+  - 验证orchestrator的context参数传递功能，特别是对GraphRAG的支持
+  - 端到端测试：查询 → 分解 → 路由 → 执行 → 合并结果
+- **依赖**:
+  - core/orchestrator.py
+  - decomposer/decomposer.py
+  - router/router.py
+  - rag_implementations/naive_rag/naive_rag_impl.py
+  - rag_implementations/graph_rag/graph_rag_impl.py
+  - rag_implementations/no_rag/no_rag_impl.py
+- **说明**: 使用真实组件验证orchestrator在实际环境中的工作流程，包括传递context参数以支持需要额外配置的RAG实现（如GraphRAG）
+
 ### 重要说明：接口更新
 
 - **RAGInterface** 已重构，从单一的 `build_index` 方法改为两个专门的方法：

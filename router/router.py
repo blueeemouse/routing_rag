@@ -35,25 +35,6 @@ class Router(RouterInterface):
         }
 
         try:
-            # print("router api key: ", self.api_key)
-            # response = requests.post(self.api_url, headers=headers, json=data)
-            # response.raise_for_status()
-            # result = response.json()
-            # # print("router api response: ", result)
-            # # 提取AI响应内容
-            # content = result.get('choices', [{}])[0].get('message', {}).get('content', "").strip().lower()
-            # # print(f"Router response content: {content}"
-            # #       )
-            # # 解析响应，确保返回有效的策略
-            # if 'no_rag' in content or 'no rag' in content:
-            #     return 'no_rag'
-            # elif 'naive_rag' in content or 'naive rag' in content:
-            #     return 'naive_rag'
-            # elif 'graph_rag' in content or 'graph rag' in content:
-            #     return 'graph_rag'
-            # else:
-            #     # 默认返回no_rag
-            #     return 'no_rag'
             try:
                 response = requests.post(self.api_url, headers=headers, json=data)
                 response.raise_for_status()  # 检查 HTTP 错误

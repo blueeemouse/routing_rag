@@ -3,7 +3,8 @@ decomposer:
   api_key: "${DECOMPOSER_API_KEY}"
   # model: "deepseek-v3"
   model: "gpt-5.1-chat"
-  prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个："
+  # prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个："
+  prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
 
 router:
   api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
@@ -25,7 +26,8 @@ naive_rag:
 graph_rag:
   api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
   api_key: "${GRAPHRAG_API_KEY}"
-  model: "deepseek-v3"
+  # model: "deepseek-v3"
+  model: "gpt-3.5-turbo"
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
   top_k: 5
