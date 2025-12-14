@@ -55,7 +55,18 @@ class NaiveRAG(RAGInterface):
         except ImportError:
             self._llama_index_available = False
             self.logger.warning("LlamaIndex not available. Please install it using: pip install llama-index")
+        # 在初始化函数里就设置好embedding model，以便加载索引时使用
+        from llama_index.embeddings.openai import OpenAIEmbedding
+        from llama_index.core import Settings, VectorStoreIndex
+        
+        embed_model = OpenAIEmbedding(
+            api_key=self.api_key,      # ← 统一使用 self.api_key
+            api_base=self.api_url,     # ← 统一使用 self.api_url  
+            model=self.embedding_model # ← 统一使用 self.embedding_model
+        )
 
+        # 2. 设置到全局配置（关键步骤）
+        Settings.embed_model = embed_model
     def execute(self, query: str, context: Dict[str, Any] = None) -> str:
         """
         执行RAG查询
@@ -93,17 +104,6 @@ class NaiveRAG(RAGInterface):
                 return "错误：没有可用的索引。请先调用build_index方法构建索引，或在context中提供文档数据。"
 
         try:
-            from llama_index.embeddings.openai import OpenAIEmbedding
-            from llama_index.core import Settings, VectorStoreIndex
-            # 1. 创建自定义配置的嵌入模型
-            embed_model = OpenAIEmbedding(
-                api_key=os.getenv('NAIVE_RAG_API_KEY', os.getenv('GRAPHRAG_API_KEY', 'YOUR_API_KEY_HERE')),
-                api_base=self.api_url,  # ← 修改：使用配置中的API URL
-                model="text-embedding-ada-002"  # 或你的服务商支持的模型
-            )
-
-            # 2. 设置到全局配置（关键步骤）
-            Settings.embed_model = embed_model
 
             # 执行查询 - 使用配置中的模型和API参数
             query_engine = self.index.as_query_engine(
@@ -137,18 +137,6 @@ class NaiveRAG(RAGInterface):
             return False
 
         try:
-            from llama_index.embeddings.openai import OpenAIEmbedding
-            from llama_index.core import Settings, VectorStoreIndex
-
-            # 1. 创建自定义配置的嵌入模型
-            embed_model = OpenAIEmbedding(
-                api_key=os.getenv('NAIVE_RAG_API_KEY', os.getenv('GRAPHRAG_API_KEY', 'YOUR_API_KEY_HERE')),
-                api_base=self.api_url,
-                model="text-embedding-ada-002"
-            )
-
-            # 2. 设置到全局配置（关键步骤）
-            Settings.embed_model = embed_model
 
             # 处理输入数据
             llama_docs = []

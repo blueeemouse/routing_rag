@@ -131,6 +131,33 @@
   - rag_implementations/no_rag/no_rag_impl.py
 - **说明**: 使用真实组件验证orchestrator在实际环境中的工作流程，包括传递context参数以支持需要额外配置的RAG实现（如GraphRAG）
 
+### 15. test_naive_rag_build_and_query_index.py
+
+- **目的**: 测试NaiveRAG的完整索引构建和查询流程
+- **测试内容**:
+  - 从HotpotQA数据集中提取样本文档
+  - 使用NaiveRAG构建索引
+  - 保存索引到磁盘
+  - 加载已保存的索引
+  - 使用加载的索引执行查询
+- **依赖**:
+  - rag_implementations/naive_rag/naive_rag_impl.py
+  - HotpotQA/hotpot_1000_samples.jsonl
+- **说明**: 验证NaiveRAG从数据提取到索引构建再到查询执行的完整工作流程
+
+### 16. test_naive_rag_load_prebuilt_index.py
+
+- **目的**: 测试NaiveRAG直接加载预构建索引并执行查询
+- **测试内容**:
+  - 不重新构建索引，直接从磁盘加载预构建索引
+  - 验证索引加载功能
+  - 使用加载的索引执行查询
+  - 验证API配置在索引加载时的正确性
+- **依赖**:
+  - rag_implementations/naive_rag/naive_rag_impl.py
+  - 预构建的索引文件（naive_rag_index_storage_1000_samples）
+- **说明**: 专门用于测试NaiveRAG的索引加载功能，验证在直接加载预构建索引时的API配置问题
+
 ### 重要说明：接口更新
 
 - **RAGInterface** 已重构，从单一的 `build_index` 方法改为两个专门的方法：
