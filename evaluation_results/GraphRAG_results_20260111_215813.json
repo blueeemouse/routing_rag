@@ -1,0 +1,196 @@
+{
+  "model_name": "GraphRAG",
+  "settings": {
+    "decomposer": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-5.1",
+      "prompt": "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
+    },
+    "router": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "deepseek-v3",
+      "prompt": "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
+    },
+    "naive_rag": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "gpt-3.5-turbo",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.7
+    },
+    "graph_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-3.5-turbo",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.7
+    },
+    "rag": {
+      "naive_rag_enabled": true,
+      "graph_rag_enabled": true
+    }
+  },
+  "results": {
+    "model_name": "GraphRAG",
+    "predictions": [
+      {
+        "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+        "gold_answer": [
+          "Major League Soccer"
+        ],
+        "prediction": "I do not have information about Donnie Smith, his team New England Revolution, or the league they belong to in the provided data. Therefore, I cannot specify the league featuring 22 teams that includes New England Revolution.",
+        "em": 0.0,
+        "f1": 0.05405405405405406,
+        "total_time": 11.426803827285767,
+        "generation_time": 11.426803827285767,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are The Datsuns and The Black Crowes both rock bands?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "I do not have information about The Datsuns or The Black Crowes in the provided data. Therefore, I cannot confirm whether both are rock bands based on the available data.",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 13.891870498657227,
+        "generation_time": 13.891870498657227,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+        "gold_answer": [
+          "December 31, 2015"
+        ],
+        "prediction": "I’m sorry, but I don’t have information about the date of the college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17.",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 185.94902420043945,
+        "generation_time": 185.94902420043945,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+        "gold_answer": [
+          "The Social Network"
+        ],
+        "prediction": "I’m sorry, but I don’t have information about Robin R. Bottin or his collaborations with any American director and producer, nor details about any awards related to such collaborations in the data provided.",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 4.835593938827515,
+        "generation_time": 4.835593938827515,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+        "gold_answer": [
+          "1522"
+        ],
+        "prediction": "I’m sorry, but I don’t have information about the mileage of the train passing through the Amtrak Jacksonville station or details about the Silver Meteor route in the data provided.",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 7.060672760009766,
+        "generation_time": 7.060672760009766,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former American football player had a part in the movie \"Gamer?\"",
+        "gold_answer": [
+          "Terry Crews"
+        ],
+        "prediction": "I do not have information about which former American football player had a part in the movie \"Gamer\" in the provided data.",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 9.229959726333618,
+        "generation_time": 9.229959726333618,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+        "gold_answer": [
+          "Fatih Ozmen"
+        ],
+        "prediction": "I’m sorry, but I don’t have information about the Chief Executive Officer of the corporation that owns Space Dev in the data provided.",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 15.320331811904907,
+        "generation_time": 15.320331811904907,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Cromwell station is located in which Maryland county?",
+        "gold_answer": [
+          "Anne Arundel County"
+        ],
+        "prediction": "I do not have information about the Cromwell station or its location in Maryland county in the provided data.",
+        "em": 0.0,
+        "f1": 0.1,
+        "total_time": 5.2328455448150635,
+        "generation_time": 5.2328455448150635,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+        "gold_answer": [
+          "Podocarpus"
+        ],
+        "prediction": "I do not have information on the number of species for Podocarpus or Osmunda in the provided data. Therefore, I cannot determine which species is more numerous based on the available information.",
+        "em": 0.0,
+        "f1": 0.06666666666666667,
+        "total_time": 3.67541241645813,
+        "generation_time": 3.67541241645813,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+        "gold_answer": [
+          "Jay Van Andel"
+        ],
+        "prediction": "I do not have information about the founder of the Van Andel Institute or its connection to the co-founder of the Amway Corporation in the provided data. If you would like, I can help find general information based on external knowledge.\n\nBased on general knowledge, the Van Andel Institute was founded by Jay Van Andel, who was an American businessman best known as the co-founder of the Amway Corporation.",
+        "em": 0.0,
+        "f1": 0.09523809523809523,
+        "total_time": 4.224895715713501,
+        "generation_time": 4.224895715713501,
+        "generation_tokens": 0
+      }
+    ],
+    "exact_matches": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "f1_scores": [
+      0.05405405405405406,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      0.06666666666666667,
+      0.09523809523809523
+    ],
+    "total_time": 260.84741044044495,
+    "avg_time": 26.084741044044495,
+    "total_generation_time": 260.84741044044495,
+    "avg_generation_time": 26.084741044044495,
+    "total_generation_tokens": 0,
+    "avg_generation_tokens": 0,
+    "avg_em": 0.0,
+    "avg_f1": 0.0315958815958816
+  }
+}

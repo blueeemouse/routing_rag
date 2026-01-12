@@ -7,6 +7,7 @@ from typing import Dict, Any
 from interfaces.rag_interface import RAGInterface
 from config.config import settings
 import logging
+import time
 
 
 class NoRAG(RAGInterface):
@@ -38,6 +39,11 @@ class NoRAG(RAGInterface):
         # 设置日志
         self.logger = logging.getLogger(__name__)
 
+        # 记录最后一次生成的时间和token信息
+        self.last_generation_time = 0.0
+        self.last_generation_tokens = 0
+        self.last_total_tokens = 0
+
     def execute(self, query: str, context: Dict[str, Any] = None) -> str:
         """
         直接调用LLM回答查询，不使用检索增强
@@ -63,25 +69,29 @@ class NoRAG(RAGInterface):
         }
         
         try:
+            # 记录开始时间
+            generation_start = time.time()
+
             response = requests.post(self.api_url, headers=headers, json=data)
             response.raise_for_status()
             result = response.json()
-        # 下面是用于调试的代码段，可以帮助查看响应内容
-        # try:
-        #     response = requests.post(self.api_url, headers=headers, json=data)
-            
-        #     # --- 调试代码开始 ---
-        #     print(f"状态码: {response.status_code}")
-        #     print(f"响应头: {response.headers}")
-        #     print(f"原始响应内容: {response.text}") # 这是关键！
-        #     # --- 调试代码结束 ---
 
-        #     response.raise_for_status() # 检查状态码
-            
-        #     result = response.json() # 在这里解析 JSON
-            
+            # 记录结束时间
+            generation_end = time.time()
+
             # 提取AI响应内容
             content = result.get('choices', [{}])[0].get('message', {}).get('content', "")
+
+            # 提取usage信息
+            usage = result.get('usage', {})
+            completion_tokens = usage.get('completion_tokens', 0)
+            total_tokens = usage.get('total_tokens', 0)
+
+            # 记录生成时间和token信息
+            self.last_generation_time = generation_end - generation_start
+            self.last_generation_tokens = completion_tokens
+            self.last_total_tokens = total_tokens
+
             return content.strip()
         except Exception as e:
             self.logger.error(f"NoRAG调用LLM时出错: {str(e)}")

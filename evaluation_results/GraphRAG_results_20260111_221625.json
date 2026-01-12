@@ -1,0 +1,196 @@
+{
+  "model_name": "GraphRAG",
+  "settings": {
+    "decomposer": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-5.1",
+      "prompt": "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
+    },
+    "router": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "deepseek-v3",
+      "prompt": "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
+    },
+    "naive_rag": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "gpt-3.5-turbo",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.7
+    },
+    "graph_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-3.5-turbo",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.7
+    },
+    "rag": {
+      "naive_rag_enabled": true,
+      "graph_rag_enabled": true
+    }
+  },
+  "results": {
+    "model_name": "GraphRAG",
+    "predictions": [
+      {
+        "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+        "gold_answer": [
+          "Major League Soccer"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.08070921897888184,
+        "generation_time": 0.08070921897888184,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are The Datsuns and The Black Crowes both rock bands?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.01516103744506836,
+        "generation_time": 0.01516103744506836,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+        "gold_answer": [
+          "December 31, 2015"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.012981176376342773,
+        "generation_time": 0.012981176376342773,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+        "gold_answer": [
+          "The Social Network"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.012890338897705078,
+        "generation_time": 0.012890338897705078,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+        "gold_answer": [
+          "1522"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.015001296997070312,
+        "generation_time": 0.015001296997070312,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former American football player had a part in the movie \"Gamer?\"",
+        "gold_answer": [
+          "Terry Crews"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.013991117477416992,
+        "generation_time": 0.013991117477416992,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+        "gold_answer": [
+          "Fatih Ozmen"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.016512632369995117,
+        "generation_time": 0.016512632369995117,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Cromwell station is located in which Maryland county?",
+        "gold_answer": [
+          "Anne Arundel County"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.014003276824951172,
+        "generation_time": 0.014003276824951172,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+        "gold_answer": [
+          "Podocarpus"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.01600050926208496,
+        "generation_time": 0.01600050926208496,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+        "gold_answer": [
+          "Jay Van Andel"
+        ],
+        "prediction": "错误：未找到配置文件: D:\\Develop\\all_RAG\\routing_rag\\graphrag_hotpotqa_data\\graphrag_class_test_config.yml。请确保提供索引构建时使用的配置文件。",
+        "em": 0.0,
+        "f1": 0.0,
+        "total_time": 0.013509511947631836,
+        "generation_time": 0.013509511947631836,
+        "generation_tokens": 0
+      }
+    ],
+    "exact_matches": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "f1_scores": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "total_time": 0.21076011657714844,
+    "avg_time": 0.021076011657714843,
+    "total_generation_time": 0.21076011657714844,
+    "avg_generation_time": 0.021076011657714843,
+    "total_generation_tokens": 0,
+    "avg_generation_tokens": 0,
+    "avg_em": 0.0,
+    "avg_f1": 0.0
+  }
+}

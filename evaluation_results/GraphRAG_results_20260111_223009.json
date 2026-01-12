@@ -1,0 +1,196 @@
+{
+  "model_name": "GraphRAG",
+  "settings": {
+    "decomposer": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-5.1",
+      "prompt": "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
+    },
+    "router": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "deepseek-v3",
+      "prompt": "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
+    },
+    "naive_rag": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "gpt-3.5-turbo",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.7
+    },
+    "graph_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-3.5-turbo",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.7
+    },
+    "rag": {
+      "naive_rag_enabled": true,
+      "graph_rag_enabled": true
+    }
+  },
+  "results": {
+    "model_name": "GraphRAG",
+    "predictions": [
+      {
+        "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+        "gold_answer": [
+          "Major League Soccer"
+        ],
+        "prediction": "Donnie Smith, who plays as a left back for the New England Revolution, belongs to Major League Soccer (MLS). MLS is the top men's professional soccer league sanctioned by U.S. Soccer and represents the highest level of the sport in both the United States and Canada. The league features 22 teams in total, with 19 based in the United States and 3 in Canada. MLS operates a regular season from March to October, followed by a postseason culminating in the MLS Cup championship game [Data: Entities (799, 23, 282); Relationships (1110, 1113, 998, 1001)].",
+        "em": 0.0,
+        "f1": 0.06976744186046512,
+        "total_time": 10.480215311050415,
+        "generation_time": 10.480215311050415,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are The Datsuns and The Black Crowes both rock bands?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "Yes, both The Datsuns and The Black Crowes are rock bands.\n\n### The Black Crowes\n- The Black Crowes are an American rock band formed in 1989.\n- They are known for their blues and southern rock style.\n- The band has released eight studio albums and four live albums.\n- They were signed to Def American Recordings in 1989 and released their debut album *Shake Your Money Maker* in 1990.\n- Their follow-up album, *The Southern Harmony and Musical Companion*, reached number one on the Billboard 200 chart in 1992.\n- The Black Crowes are recognized for their dynamic live performances and have a significant influence in the rock genre, blending blues, southern rock, and jam band elements [Data: Entities (124, 340, 458); Relationships (454, 452)].\n\n### The Datsuns\n- The Datsuns are a hard rock band formed in 2000.\n- They originate from Cambridge, New Zealand.\n- The band has released six albums and several singles, many of which have charted in New Zealand and the United Kingdom.\n- Their latest album, *Deep Sleep*, was released in October 2014 [Data: Entities (458); Sources (52)].\n\nIn summary, both bands are indeed rock bands, with The Black Crowes focusing more on blues and southern rock, while The Datsuns are known for hard rock [Data: Entities (124, 458); Relationships (454)].",
+        "em": 0.0,
+        "f1": 0.010526315789473682,
+        "total_time": 10.299284934997559,
+        "generation_time": 10.299284934997559,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+        "gold_answer": [
+          "December 31, 2015"
+        ],
+        "prediction": "The college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners 37–17, was the 2015 Capital One Orange Bowl. This game was played on December 31, 2015. It was a College Football Playoff semifinal game, and Clemson's victory in this game allowed them to advance to the 2016 College Football Playoff National Championship [Data: Entities (610, 609, 210); Relationships (272, 832, 839); Sources (23, 73)].",
+        "em": 0.0,
+        "f1": 0.08333333333333333,
+        "total_time": 8.22708511352539,
+        "generation_time": 8.22708511352539,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+        "gold_answer": [
+          "The Social Network"
+        ],
+        "prediction": "Robin R. Bottin is known for his collaboration with the American director and producer David Fincher. David Fincher won the Academy Award nomination for Best Director, the Golden Globe Award for Best Director, and the BAFTA Award for Best Direction for the movie \"The Social Network\" (2010). Bottin worked with Fincher on films including \"Se7en\" and \"Fight Club\" [Data: Entities (429, 769, 768, 767); Relationships (583, 585, 586, 589, 590, 591, 1069, 1070, 1063); Sources (91, 49)].",
+        "em": 0.0,
+        "f1": 0.05479452054794521,
+        "total_time": 6.275274276733398,
+        "generation_time": 6.275274276733398,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+        "gold_answer": [
+          "1522"
+        ],
+        "prediction": "The train that passes through the Amtrak Jacksonville Station and shares much of its track with the Silver Meteor is the Silver Star. The Silver Star is a passenger train route operated by Amtrak under the \"Silver Service\" brand, running from New York City to Miami, Florida. It covers a distance of approximately 1,522 miles.\n\nThe Silver Star serves several key stations including Jacksonville Station, Orlando Health/Amtrak station, and the Helen P. Gay Rocky Mount Historic Train Station. It shares much of its track with the Silver Meteor, although the Silver Meteor runs further east through North Carolina and South Carolina.\n\nThus, the train in question, the Silver Star, runs about 1,522 miles [Data: Entities (32, 27, 408); Relationships (552, 525); Sources (43)].",
+        "em": 0.0,
+        "f1": 0.018181818181818184,
+        "total_time": 4.882326126098633,
+        "generation_time": 4.882326126098633,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former American football player had a part in the movie \"Gamer?\"",
+        "gold_answer": [
+          "Terry Crews"
+        ],
+        "prediction": "Based on the available data, there is no indication that any former American football player had a part in the movie \"Gamer.\" The film \"Gamer\" (2009) stars actors such as Gerard Butler, Logan Lerman, Michael C. Hall, Ludacris, Amber Valletta, Terry Crews, Alison Lohman, John Leguizamo, and Zoë Bell, but none of these individuals are noted as former American football players.\n\nThe former American football players mentioned in the data, such as Gino Cappelletti, Robert John Landsee, George Deiderich, and Sung Jun Huh, have no recorded involvement in the film \"Gamer\" or any acting roles related to it.\n\nTherefore, no former American football player is known to have had a part in the movie \"Gamer\" based on the provided information.",
+        "em": 0.0,
+        "f1": 0.03571428571428572,
+        "total_time": 7.058948278427124,
+        "generation_time": 7.058948278427124,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+        "gold_answer": [
+          "Fatih Ozmen"
+        ],
+        "prediction": "The corporation that owns SpaceDev is the Sierra Nevada Corporation. The Chief Executive Officer (CEO) of Sierra Nevada Corporation is Fatih Ozmen. Additionally, Eren Ozmen serves as the President of the company. SpaceDev operates as part of the Space Systems Business division within Sierra Nevada Corporation [Data: Entities (437, 597, 798, 799); Relationships (597, 798, 799)].",
+        "em": 0.0,
+        "f1": 0.07692307692307693,
+        "total_time": 5.951997518539429,
+        "generation_time": 5.951997518539429,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Cromwell station is located in which Maryland county?",
+        "gold_answer": [
+          "Anne Arundel County"
+        ],
+        "prediction": "# Cromwell Station Location\n\nCromwell Station is located in Glen Burnie, which is a community within Anne Arundel County, Maryland. Anne Arundel County is situated south of Baltimore County and includes notable areas such as Glen Burnie and Cromwell Station itself. This station serves as one of the two southern terminals of the Baltimore Light Rail system and plays a key role in connecting the Glen Burnie area to the broader Baltimore metropolitan region.\n\nThus, Cromwell Station is in **Anne Arundel County, Maryland**.\n\n[Data: Entities (254, 255, 392); Relationships (324, 44)]",
+        "em": 0.0,
+        "f1": 0.0689655172413793,
+        "total_time": 5.296522617340088,
+        "generation_time": 5.296522617340088,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+        "gold_answer": [
+          "Podocarpus"
+        ],
+        "prediction": "### Comparison of Species Numbers: Podocarpus vs Osmunda\n\n- **Podocarpus** is a genus of coniferous evergreen trees and shrubs in the Podocarpaceae family. It comprises approximately **97 to 107 species** depending on the circumscription of the species. These species are widely distributed and ecologically significant within the conifer group [Data: Entities (233); Sources (25)].\n\n- **Osmunda** is a genus of primarily temperate-zone ferns in the Osmundaceae family. It includes about **five to ten species** [Data: Entities (14); Sources (1)].\n\n### Conclusion\n\nPodocarpus is significantly more numerous in terms of species count compared to Osmunda. Podocarpus has roughly 97 to 107 species, whereas Osmunda has only about 5 to 10 species.\n\nThus, **Podocarpus is the more numerous genus in terms of species diversity**.",
+        "em": 0.0,
+        "f1": 0.018018018018018018,
+        "total_time": 10.59535551071167,
+        "generation_time": 10.59535551071167,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+        "gold_answer": [
+          "Jay Van Andel"
+        ],
+        "prediction": "The Van Andel Institute was co-founded by Jay Van Andel, an American businessman best known as the co-founder of the Amway Corporation. Jay Van Andel, along with Richard DeVos, established Amway in 1959, and later, in 1996, he co-founded the Van Andel Institute, a nonprofit biomedical research and education organization located in Grand Rapids, Michigan. The institute focuses on advancing scientific understanding and improving human health through research and education. Jay Van Andel's significant contributions to both business and medical research highlight his lasting impact [Data: Entities (162, 171, 180); Relationships (199, 222, 227, 232)].",
+        "em": 0.0,
+        "f1": 0.06593406593406592,
+        "total_time": 7.004270792007446,
+        "generation_time": 7.004270792007446,
+        "generation_tokens": 0
+      }
+    ],
+    "exact_matches": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "f1_scores": [
+      0.06976744186046512,
+      0.010526315789473682,
+      0.08333333333333333,
+      0.05479452054794521,
+      0.018181818181818184,
+      0.03571428571428572,
+      0.07692307692307693,
+      0.0689655172413793,
+      0.018018018018018018,
+      0.06593406593406592
+    ],
+    "total_time": 76.07128047943115,
+    "avg_time": 7.607128047943116,
+    "total_generation_time": 76.07128047943115,
+    "avg_generation_time": 7.607128047943116,
+    "total_generation_tokens": 0,
+    "avg_generation_tokens": 0,
+    "avg_em": 0.0,
+    "avg_f1": 0.05021583935438614
+  }
+}

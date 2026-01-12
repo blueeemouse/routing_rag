@@ -63,6 +63,9 @@ class TestDecomposer(unittest.TestCase):
         self.assertIn("子查询2", result)
         self.assertIn("子查询3", result)
 
+    # 这里在decomposer.decomposer模块把requests.post替换成下面的mock_post
+    # 也就是用我们的模拟的结果代替真实的结果。主要是为了测试指定结果下的行为
+    # 这里想测试的就是，当decomposer调用的api返回空结果的时候，decomposer理应返回原查询
     @patch('decomposer.decomposer.requests.post')
     def test_decompose_empty_response(self, mock_post):
         """
@@ -82,9 +85,11 @@ class TestDecomposer(unittest.TestCase):
         }
         result = self.decomposer.decompose("复杂查询示例")
 
-        # 验证返回空列表
+        # 验证返回原查询
         # Verify that an empty response results in an empty list
-        self.assertEqual(result, [])
+        # self.assertEqual(result, [])
+        self.assertEqual(result, ["复杂查询示例"])
+
 
 
 if __name__ == "__main__":

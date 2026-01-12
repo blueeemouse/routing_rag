@@ -108,7 +108,7 @@ class GraphRAG(RAGInterface):
             # 根据指定的搜索模式执行查询
             if search_mode == 'local':
                 # print("使用本地搜索模式")
-                return self._local_search(query, data_path)
+                return self._local_search(query, data_path, context)
             else:
                 # 暂时只支持本地搜索，其他模式返回提示
                 return f"当前仅支持本地搜索模式。查询: {query}"
@@ -226,11 +226,88 @@ class GraphRAG(RAGInterface):
         # 在完整实现中，这将涉及到实体提取、关系识别、社区发现等复杂流程
         self.logger.info("GraphRAG添加文档功能需要完整的图构建流程，当前为简化实现")
 
-    def _local_search(self, query: str, data_path: str) -> str:
+    def _find_config_file(self, data_dir) -> str:
+        """
+        在指定目录下查找GraphRAG配置文件
+        Find GraphRAG config file in the specified directory
+
+        Args:
+            data_dir: 数据目录路径
+
+        Returns:
+            配置文件路径，如果未找到则返回None
+        """
+        from pathlib import Path
+
+        # 常见的配置文件名列表（按优先级排序）
+        config_file_names = [
+            'config.yml',
+            'settings.yml',
+            'graphrag_config.yml',
+            'graphrag.yml',
+        ]
+
+        for config_name in config_file_names:
+            config_path = data_dir / config_name
+            if config_path.exists():
+                self.logger.info(f"找到配置文件: {config_path}")
+                return str(config_path)
+
+        return None
+
+    def _get_vector_store_schema(self, config, context: Dict[str, Any] = None):
+        """
+        获取向量存储schema配置
+        Get vector store schema configuration
+
+        Args:
+            config: GraphRAG配置对象
+            context: 上下文信息，可包含自定义的向量存储配置
+
+        Returns:
+            VectorStoreSchemaConfig对象
+        """
+        from graphrag.config.models.vector_store_schema_config import VectorStoreSchemaConfig
+
+        # 默认配置
+        default_schema = {
+            'index_name': 'default-entity-description',
+            'id_field': 'id',
+            'text_field': 'text',
+            'vector_field': 'vector',
+            'attributes_field': 'attributes',
+            'vector_size': 1536
+        }
+
+        # 尝试从context中获取自定义配置
+        if context and 'vector_store_schema' in context:
+            custom_schema = context['vector_store_schema']
+            # 合并默认配置和自定义配置
+            merged_schema = {**default_schema, **custom_schema}
+            self.logger.info("使用自定义向量存储schema配置")
+        else:
+            merged_schema = default_schema
+            self.logger.info("使用默认向量存储schema配置")
+
+        # 创建VectorStoreSchemaConfig对象
+        return VectorStoreSchemaConfig(**merged_schema)
+
+    def _local_search(self, query: str, data_path: str, context: Dict[str, Any] = None) -> str:
         """
         本地搜索模式
         Local search mode
+
+        Args:
+            query: 查询字符串
+            data_path: 数据目录路径
+            context: 上下文信息，可包含：
+                - config_filename: 配置文件名（相对于data_path）
+                - response_type: 搜索响应类型
+                - vector_store_schema: 向量存储schema配置
+                - 其他自定义配置
         """
+        if context is None:
+            context = {}
         try:
             from graphrag.query.factory import get_local_search_engine
             from graphrag.config.models.graph_rag_config import GraphRagConfig
@@ -270,16 +347,23 @@ class GraphRAG(RAGInterface):
             reports_df = pd.read_parquet(reports_path)
             text_units_df = pd.read_parquet(text_units_path)
 
-            # 尝试加载配置文件（我们假设配置文件路径可以通过context传递）
-            # 在实际使用中，用户需要提供索引构建时使用的配置文件路径
-            config_file_path = data_dir / "graphrag_class_test_config.yml"
-            if not config_file_path.exists():
-                # 如果没有找到配置文件，返回错误信息
-                # 在实际应用中，配置文件路径应该在context中提供
-                return f"错误：未找到配置文件: {config_file_path}。请确保提供索引构建时使用的配置文件。"
+            # 加载配置文件 - 使用新的参数化方式
+            # 优先从context中获取配置文件名
+            config_filename = context.get('config_filename', None)
+            if config_filename:
+                # 如果用户指定了配置文件名
+                config_file_path = data_dir / config_filename
+                if not config_file_path.exists():
+                    return f"错误：指定的配置文件不存在: {config_file_path}"
+                self.logger.info(f"使用指定的配置文件: {config_file_path}")
+            else:
+                # 如果用户没有指定，尝试自动查找
+                config_file_path = self._find_config_file(data_dir)
+                if not config_file_path:
+                    return f"错误：未找到GraphRAG配置文件。尝试过的文件名: config.yml, settings.yml, graphrag_config.yml, graphrag.yml。请在context中指定'config_filename'参数。"
+                self.logger.info(f"自动找到配置文件: {config_file_path}")
 
             # 加载配置
-            # 这里需要从配置文件目录作为根目录加载配置
             config_dir = data_dir  # 配置文件所在目录作为root_dir
             config = load_config(root_dir=Path(config_dir), config_filepath=Path(config_file_path))
 

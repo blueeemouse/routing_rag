@@ -22,6 +22,7 @@ class Decomposer(DecomposerInterface):
         self.prompt_template = settings.decomposer_prompt
         self.model = settings.decomposer_model
 
+
         self.logger = logging.getLogger(__name__)
 
     def decompose(self, query: str) -> List[str]:

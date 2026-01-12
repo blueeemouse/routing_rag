@@ -2,7 +2,7 @@ decomposer:
   api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
   api_key: "${DECOMPOSER_API_KEY}"
   # model: "deepseek-v3"
-  model: "gpt-5.1-chat"
+  model: "gpt-5.1"
   # prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个："
   prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
 
@@ -18,6 +18,7 @@ naive_rag:
   # model: "deepseek-v3"  # 试一下，把naive_rag的模型全都换成openai的。看报错，似乎LlamaIndex默认是用的openai的base_url
   # 和api-key的
   model: "gpt-3.5-turbo"
+  # model: "gpt-5.1"
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
   top_k: 5
@@ -28,6 +29,7 @@ graph_rag:
   api_key: "${GRAPHRAG_API_KEY}"
   # model: "deepseek-v3"
   model: "gpt-3.5-turbo"
+  # model: "gpt-5.1"
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
   top_k: 5

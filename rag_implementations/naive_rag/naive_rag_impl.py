@@ -6,6 +6,7 @@ from typing import Dict, Any
 from interfaces.rag_interface import RAGInterface
 from config.config import settings
 import logging
+import time
 
 import os
 
@@ -39,6 +40,14 @@ class NaiveRAG(RAGInterface):
 
         # 设置日志
         self.logger = logging.getLogger(__name__)
+
+        # 记录最后一次检索的时间（用于性能评测）
+        self.last_retrieval_time = 0.0
+
+        # 记录最后一次生成的时间和token信息
+        self.last_generation_time = 0.0
+        self.last_generation_tokens = 0
+        self.last_total_tokens = 0
 
         # 尝试导入LlamaIndex，如果不存在则后续处理
         try:
@@ -104,14 +113,31 @@ class NaiveRAG(RAGInterface):
                 return "错误：没有可用的索引。请先调用build_index方法构建索引，或在context中提供文档数据。"
 
         try:
+            # 1. 先执行检索（记录检索时间）
+            retriever = self.index.as_retriever(similarity_top_k=self.top_k)
+            retrieval_start = time.time()
+            nodes = retriever.retrieve(query)
+            retrieval_end = time.time()
+            self.last_retrieval_time = retrieval_end - retrieval_start
 
-            # 执行查询 - 使用配置中的模型和API参数
+            # 2. 再执行生成
             query_engine = self.index.as_query_engine(
                 llm=self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url)
             )
             print("执行查询...")
 
+            generation_start = time.time()
             response = query_engine.query(query)
+            generation_end = time.time()
+
+            # 记录生成时间
+            self.last_generation_time = generation_end - generation_start
+
+            # 注意：LlamaIndex的query_engine可能不直接返回usage信息
+            # 如果需要token信息，可能需要更底层的API调用
+            self.last_generation_tokens = 0  # 暂时设为0，后续可以优化
+            self.last_total_tokens = 0
+
             print("response", str(response))
             return str(response)
 
@@ -137,7 +163,20 @@ class NaiveRAG(RAGInterface):
             return False
 
         try:
+            
+            #############################
+            from llama_index.embeddings.openai import OpenAIEmbedding
+            from llama_index.core import Settings, VectorStoreIndex
+            
+            embed_model = OpenAIEmbedding(
+                api_key=self.api_key,      # ← 统一使用 self.api_key
+                api_base=self.api_url,     # ← 统一使用 self.api_url  
+                model=self.embedding_model # ← 统一使用 self.embedding_model
+            )
 
+            # 2. 设置到全局配置（关键步骤）
+            Settings.embed_model = embed_model
+            #############################
             # 处理输入数据
             llama_docs = []
             if metadata and len(metadata) == len(data):
