@@ -4,7 +4,103 @@
 
 本项目包含以下测试文件：
 
-### 1. test_decomposer.py
+### naive rag部分
+
+#### test_naive_rag_build_and_query_index.py
+
+- **目的**: 测试NaiveRAG的完整索引构建和查询流程
+- **测试内容**:
+  - 从HotpotQA数据集中提取样本文档
+  - 使用NaiveRAG构建索引
+  - 保存索引到磁盘
+  - 加载已保存的索引
+  - 使用加载的索引执行查询
+- **依赖**:
+  - rag_implementations/naive_rag/naive_rag_impl.py
+  - HotpotQA/hotpot_1000_samples.jsonl
+- **说明**: 验证NaiveRAG从数据提取到索引构建再到查询执行的完整工作流程
+
+#### test_naive_rag_load_prebuilt_index.py
+
+- **目的**: 测试NaiveRAG直接加载预构建索引并执行查询
+- **测试内容**:
+  - 不重新构建索引，直接从磁盘加载预构建索引
+  - 验证索引加载功能
+  - 使用加载的索引执行查询
+  - 验证API配置在索引加载时的正确性
+- **依赖**:
+  - rag_implementations/naive_rag/naive_rag_impl.py
+  - 预构建的索引文件（naive_rag_index_storage_1000_samples）
+- **说明**: 专门用于测试NaiveRAG的索引加载功能，验证在直接加载预构建索引时的API配置问题
+
+#### test_naive_rag_refactor.py
+
+- **目的**: 测试NaiveRAG重构后的功能
+- **测试内容**:
+  - 验证build_index方法的功能
+  - 测试execute方法使用预构建索引
+  - 验证向后兼容性
+- **依赖**: naive_rag_impl模块
+- **说明**: 在重构NaiveRAG以实现索引构建与查询执行解耦后，验证重构功能的正确性
+
+### graphrag部分
+
+#### test_graphrag_local_search.py
+
+- **目的**: 测试GraphRAG的_local_search方法
+- **测试内容**:
+  - 验证本地搜索功能的可用性
+  - 测试数据加载和查询执行
+  - 验证与已构建索引的集成
+- **依赖**: graphrag_impl模块
+
+#### test_graphrag_execute_integration.py
+
+- **目的**: 测试GraphRAG的execute方法与_local_search的集成
+- **测试内容**:
+  - 验证execute方法能够正确调用_local_search
+  - 测试端到端查询流程
+  - 验证集成后的功能完整性
+- **依赖**: graphrag_impl模块
+
+#### test_graphrag_build_index.py
+
+- **目的**: 测试GraphRAG类里面的build_index方法
+- **测试内容**:
+  - 验证build_index方法接口的可用性
+  - 测试方法参数验证
+  - 验证索引构建功能的基本调用
+- **依赖**: graphrag_impl模块
+
+#### test_graphrag_config.py
+
+- **目的**: 测试GraphRAG的配置加载功能
+- **测试内容**:
+  - 验证配置参数从settings.yaml正确加载
+  - 检查API URL、密钥、模型等参数
+  - 验证配置的一致性
+- **依赖**: graphrag_impl模块、config模块
+
+#### test_graphrag_import.py
+
+- **目的**: 测试GraphRAG库的导入功能
+- **测试内容**:
+  - 验证微软GraphRAG库组件是否能正确导入
+  - 检查支持的搜索模式是否可用
+  - 验证库的可用性状态
+- **依赖**: graphrag_impl模块
+
+#### quick_test_graph_index.py
+
+- **目的**: 快速测试能不能通过调用项目根目录下的微软graphrag的函数, 实现建立索引
+
+#### test_graphrag_config_parameterization.py
+
+- **目的**: 验证GraphRAG类能不能正常传入context参数（用于指定配置文件路径和向量存储参数）
+
+### 其它部分
+
+#### test_decomposer.py
 
 - **目的**: 测试decomposer模块的功能
 - **测试内容**:
@@ -13,7 +109,7 @@
   - 边界情况处理
 - **依赖**: decomposer模块、DecomposerInterface
 
-### 2. test_router.py
+#### test_router.py
 
 - **目的**: 测试router模块的功能
 - **测试内容**:
@@ -22,7 +118,7 @@
   - 策略识别
 - **依赖**: router模块、RouterInterface
 
-### 3. test_api_calls.py (功能测试脚本)
+#### test_api_calls.py (功能测试脚本)
 
 - **目的**: 验证实际API调用是否正常
 - **测试内容**:
@@ -33,74 +129,11 @@
     - 通过在这里的测试结果, 我们可以发现, 给定的模拟数据不同的时候, 答复也是不同的. 由此进一步证明了确实有在检索增强生成
   - API调用版本的微软graphrag
 
-### 4. test_graph_rag.py
-
-- **目的**: 测试graphrag类的各个函数(目的是好的, 但现在可以说是一点没测试到...)
-
-### 5. quick_test_graph_index.py
-
-- **目的**: 快速测试能不能通过调用项目根目录下的微软graphrag的函数, 实现建立索引
-
-### 6. quick_litellm_api_test.py
+#### quick_litellm_api_test.py
 
 - **目的**: 测试litellm调用api(主要是确认下格式. 这个之所以需要测试, 是因为之前跑LlamaIndex的时候, 遇到报错, 似乎说是LlamaIndex内部是用litellm调用api的
 
-### 7. test_graphrag_import.py
-
-- **目的**: 测试GraphRAG库的导入功能
-- **测试内容**:
-  - 验证微软GraphRAG库组件是否能正确导入
-  - 检查支持的搜索模式是否可用
-  - 验证库的可用性状态
-- **依赖**: graphrag_impl模块
-
-### 8. test_graphrag_config.py
-
-- **目的**: 测试GraphRAG的配置加载功能
-- **测试内容**:
-  - 验证配置参数从settings.yaml正确加载
-  - 检查API URL、密钥、模型等参数
-  - 验证配置的一致性
-- **依赖**: graphrag_impl模块、config模块
-
-### 9. test_graphrag_build_index.py
-
-- **目的**: 测试GraphRAG类里面的build_index方法
-- **测试内容**:
-  - 验证build_index方法接口的可用性
-  - 测试方法参数验证
-  - 验证索引构建功能的基本调用
-- **依赖**: graphrag_impl模块
-
-### 10. test_graphrag_local_search.py
-
-- **目的**: 测试GraphRAG的_local_search方法
-- **测试内容**:
-  - 验证本地搜索功能的可用性
-  - 测试数据加载和查询执行
-  - 验证与已构建索引的集成
-- **依赖**: graphrag_impl模块
-
-### 11. test_graphrag_execute_integration.py
-
-- **目的**: 测试GraphRAG的execute方法与_local_search的集成
-- **测试内容**:
-  - 验证execute方法能够正确调用_local_search
-  - 测试端到端查询流程
-  - 验证集成后的功能完整性
-- **依赖**: graphrag_impl模块
-
-### 12. test_naive_rag_refactor.py
-
-- **目的**: 测试NaiveRAG重构后的功能
-- **测试内容**:
-  - 验证build_index方法的功能
-  - 测试execute方法使用预构建索引
-  - 验证向后兼容性
-- **依赖**: naive_rag_impl模块
-- **说明**: 在重构NaiveRAG以实现索引构建与查询执行解耦后，验证重构功能的正确性
-
-### 13. test_orchestrator_mock.py
+#### test_orchestrator_mock.py
 
 - **目的**: 使用模拟组件测试orchestrator的完整流程
 - **测试内容**:
@@ -113,7 +146,7 @@
   - mocks/mock_components.py
 - **说明**: 使用mock组件验证orchestrator架构和流程的正确性
 
-### 14. test_orchestrator_real_components.py
+#### test_orchestrator_real_components.py
 
 - **目的**: 使用真实组件测试orchestrator的完整流程
 - **测试内容**:
@@ -130,33 +163,6 @@
   - rag_implementations/graph_rag/graph_rag_impl.py
   - rag_implementations/no_rag/no_rag_impl.py
 - **说明**: 使用真实组件验证orchestrator在实际环境中的工作流程，包括传递context参数以支持需要额外配置的RAG实现（如GraphRAG）
-
-### 15. test_naive_rag_build_and_query_index.py
-
-- **目的**: 测试NaiveRAG的完整索引构建和查询流程
-- **测试内容**:
-  - 从HotpotQA数据集中提取样本文档
-  - 使用NaiveRAG构建索引
-  - 保存索引到磁盘
-  - 加载已保存的索引
-  - 使用加载的索引执行查询
-- **依赖**:
-  - rag_implementations/naive_rag/naive_rag_impl.py
-  - HotpotQA/hotpot_1000_samples.jsonl
-- **说明**: 验证NaiveRAG从数据提取到索引构建再到查询执行的完整工作流程
-
-### 16. test_naive_rag_load_prebuilt_index.py
-
-- **目的**: 测试NaiveRAG直接加载预构建索引并执行查询
-- **测试内容**:
-  - 不重新构建索引，直接从磁盘加载预构建索引
-  - 验证索引加载功能
-  - 使用加载的索引执行查询
-  - 验证API配置在索引加载时的正确性
-- **依赖**:
-  - rag_implementations/naive_rag/naive_rag_impl.py
-  - 预构建的索引文件（naive_rag_index_storage_1000_samples）
-- **说明**: 专门用于测试NaiveRAG的索引加载功能，验证在直接加载预构建索引时的API配置问题
 
 ### 重要说明：接口更新
 
@@ -182,25 +188,9 @@
 
 ## 运行测试
 
-### 单元测试
-
 ```bash
-cd tests
-python -m pytest test_decomposer.py -v
-python -m pytest test_router.py -v
-```
-
-或者运行所有测试：
-
-```bash
-cd tests
-python -m pytest . -v
-```
-
-### 功能测试（API调用验证）
-
-```bash
-python test_api_calls.py
+cd routing_rag
+python tests/test_router.py
 ```
 
 ## 注意事项

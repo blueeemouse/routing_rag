@@ -85,7 +85,7 @@ def load_index_from_disk(storage_dir="./naive_rag_index_storage"):
 if __name__ == "__main__":
     # 1. 从 HopRAG 的 1000 样本 JSONL 中提取文档
     hotpot_jsonl_path = os.path.join(PARENT_DIR, "HotpotQA", "hotpot_1000_samples.jsonl")
-    num_samples_to_use = 50 # 先测试 50 条
+    num_samples_to_use = 60 # 先测试 50 条
     # num_samples_to_use = 1000
     sample_docs_data_list = extract_sample_docs_from_jsonl(hotpot_jsonl_path, num_samples=num_samples_to_use)
 

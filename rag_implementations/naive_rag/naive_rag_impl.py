@@ -49,9 +49,9 @@ class NaiveRAG(RAGInterface):
         self.last_generation_tokens = 0
         self.last_total_tokens = 0
 
-        # 尝试导入LlamaIndex，如果不存在则后续处理
+        # 尝试导入LlamaIndex，如果不存在则后续execute的时候是不会执行的（会报错说没安装）
         try:
-            from llama_index.core import VectorStoreIndex, Document
+            from llama_index.core import VectorStoreIndex, Document, Settings
             from llama_index.llms.openai import OpenAI
             from llama_index.embeddings.openai import OpenAIEmbedding
 
@@ -61,21 +61,21 @@ class NaiveRAG(RAGInterface):
             self.OpenAI = OpenAI
             self.OpenAIEmbedding = OpenAIEmbedding
 
+            # 在初始化函数里就设置好embedding model，以便加载索引时使用
+            embed_model = OpenAIEmbedding(
+                api_key=self.api_key,      # ← 统一使用 self.api_key
+                api_base=self.api_url,     # ← 统一使用 self.api_url  
+                model=self.embedding_model # ← 统一使用 self.embedding_model
+            )
+
+            # 2. 设置到全局配置（关键步骤）
+            Settings.embed_model = embed_model
+
         except ImportError:
             self._llama_index_available = False
             self.logger.warning("LlamaIndex not available. Please install it using: pip install llama-index")
-        # 在初始化函数里就设置好embedding model，以便加载索引时使用
-        from llama_index.embeddings.openai import OpenAIEmbedding
-        from llama_index.core import Settings, VectorStoreIndex
         
-        embed_model = OpenAIEmbedding(
-            api_key=self.api_key,      # ← 统一使用 self.api_key
-            api_base=self.api_url,     # ← 统一使用 self.api_url  
-            model=self.embedding_model # ← 统一使用 self.embedding_model
-        )
-
-        # 2. 设置到全局配置（关键步骤）
-        Settings.embed_model = embed_model
+        
     def execute(self, query: str, context: Dict[str, Any] = None) -> str:
         """
         执行RAG查询

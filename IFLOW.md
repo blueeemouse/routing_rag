@@ -7,18 +7,21 @@
 ## 核心架构
 
 ### 1. 查询分解器 (decomposer/)
+
 - 负责将复杂查询拆分为子查询
 - 当前实现：基于LLM API调用
 - 接口：遵循 `DecomposerInterface`
 - 配置：支持自定义prompt和模型选择
 
 ### 2. 查询路由器 (router/)
+
 - 确定如何处理每个子查询
 - 选项：无RAG（直接响应）、朴素RAG、图RAG
 - 当前实现：基于LLM API调用
 - 接口：遵循 `RouterInterface`
 
 ### 3. RAG实现 (rag_implementations/)
+
 - **朴素RAG** (`naive_rag/`) - 基于LlamaIndex实现
 - **图RAG** (`graph_rag/`) - 基于微软GraphRAG实现
 - **无RAG** (`no_rag/`) - 直接LLM响应实现
@@ -26,18 +29,21 @@
 - 接口：遵循 `RAGInterface`
 
 ### 4. 核心编排器 (core/)
+
 - 主管道，结合所有组件
 - 处理流程：输入查询 → 分解 → 路由 → 执行 → 合并结果
 - 支持上下文传递
 - 包含：`orchestrator.py`
 
 ### 5. 配置系统 (config/)
+
 - 定义每个组件的设置
 - 允许在实现之间切换
 - 支持环境变量配置
 - 包含：`config.py`, `settings.yaml`
 
 ### 6. 抽象接口 (interfaces/)
+
 - 定义每种组件类型的通用接口
 - 确保可交换的实现
 - 包含：`decomposer_interface.py`, `router_interface.py`, `rag_interface.py`
@@ -54,6 +60,7 @@
 ## 安装和设置
 
 ### 1. 环境准备
+
 ```bash
 # 创建虚拟环境
 python -m venv venv
@@ -66,6 +73,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. 配置API密钥
+
 1. 复制 `.env.example` 为 `.env`
 2. 编辑 `.env` 文件，添加你的API密钥：
    ```
@@ -77,6 +85,7 @@ pip install -r requirements.txt
    ```
 
 ### 3. 加载环境变量（Windows）
+
 ```powershell
 # 在项目根目录执行
 Get-Content .env | ForEach-Object {
@@ -87,7 +96,9 @@ Get-Content .env | ForEach-Object {
 ```
 
 ### 4. 配置系统参数
+
 编辑 `config/settings.yaml` 文件以配置：
+
 - 各组件的API参数
 - 模型选择
 - 检索参数（chunk_size、top_k等）
@@ -96,6 +107,7 @@ Get-Content .env | ForEach-Object {
 ## 使用方法
 
 ### 基本使用
+
 ```python
 from core.orchestrator import Orchestrator
 from config.config import load_config
@@ -126,6 +138,7 @@ print(result)
 ```
 
 ### 索引构建
+
 ```python
 # NaiveRAG索引构建
 naive_rag = NaiveRAG(config['naive_rag'])
@@ -139,11 +152,13 @@ graph_rag.build_index_from_path("/path/to/data", "/path/to/output")
 ## 测试
 
 项目包含全面的测试套件：
+
 - 单元测试：各组件独立功能测试
 - 集成测试：完整流程测试
 - 模拟测试：使用模拟组件验证架构
 
 运行测试：
+
 ```bash
 # 运行所有测试
 python -m pytest tests/
@@ -155,22 +170,25 @@ python tests/test_orchestrator_real_components.py
 ## 项目状态
 
 ### 已完成功能
-- [x] 基础架构搭建
-- [x] 查询分解器实现
-- [x] 查询路由器实现
-- [x] NaiveRAG实现
-- [x] GraphRAG实现
-- [x] NoRAG实现
-- [x] 核心编排器实现
-- [x] 配置管理系统
-- [x] 索引构建与查询解耦
-- [x] 端到端集成测试
+
+- [X] 基础架构搭建
+- [X] 查询分解器实现
+- [X] 查询路由器实现
+- [X] NaiveRAG实现
+- [X] GraphRAG实现
+- [X] NoRAG实现
+- [X] 核心编排器实现
+- [X] 配置管理系统
+- [X] 索引构建与查询解耦
+- [X] 端到端集成测试
 
 ### 正在进行
+
 - [ ] GraphRAG其他搜索模式实现
 - [ ] 性能优化
 
 ### 计划中
+
 - [ ] 更多RAG策略实现
 - [ ] 高级路由策略
 - [ ] 结果合并策略优化
@@ -181,16 +199,19 @@ python tests/test_orchestrator_real_components.py
 该框架设计为高度可扩展：
 
 ### 添加新的分解器实现
+
 1. 实现 `DecomposerInterface` 接口
 2. 在 `decomposer/` 目录下创建新模块
 3. 在配置文件中添加相应配置
 
 ### 添加新的路由器实现
+
 1. 实现 `RouterInterface` 接口
 2. 在 `router/` 目录下创建新模块
 3. 在配置文件中添加相应配置
 
 ### 添加新的RAG实现
+
 1. 实现 `RAGInterface` 接口
 2. 在 `rag_implementations/` 目录下创建新子目录
 3. 在配置文件中添加相应配置
@@ -211,12 +232,15 @@ python tests/test_orchestrator_real_components.py
 ## 常见问题
 
 ### Q: 如何切换不同的LLM提供商？
+
 A: 在 `config/settings.yaml` 中修改 `api_url` 和相应的 `api_key`，支持OpenAI、DeepSeek等兼容OpenAI API格式的提供商。
 
 ### Q: 如何添加自定义文档数据？
+
 A: 对于NaiveRAG，使用 `build_index_from_data` 方法传入文档列表；对于GraphRAG，使用 `build_index_from_path` 方法指定数据目录路径。
 
 ### Q: 如何优化查询性能？
+
 A: 可以通过调整 `chunk_size`、`top_k` 等参数，或者选择更快的模型来优化性能。
 
 ## 贡献指南
@@ -234,6 +258,7 @@ A: 可以通过调整 `chunk_size`、`top_k` 等参数，或者选择更快的�
 ## 联系方式
 
 如有问题或建议，请通过以下方式联系：
+
 - 创建Issue
 - 发送邮件至项目维护者
 

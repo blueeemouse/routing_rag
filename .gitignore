@@ -7,3 +7,5 @@ __pycache__/
 naive_rag_index_storage_50_samples/
 naive_rag_index_storage_100_samples/
 naive_rag_index_storage_1000_samples/
+IFLOW.md
+duplicated/
