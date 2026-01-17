@@ -60,13 +60,27 @@ class NoRAG(RAGInterface):
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
         }
+        ##############################
+        # 定义 NoRAG 专用的 prompt（试试改prompt有没有效果）
+        prompt_template = self.config.get('prompt_template', 
+                                        "After thinking, please reply the query directly(without irrelevant information and internal details): {query}")
+        
+        # 格式化 prompt
+        formatted_query = prompt_template.format(query=query)
         
         data = {
             "model": self.model,
-            "messages": [{"role": "user", "content": query}],
+            "messages": [{"role": "user", "content": formatted_query}],  # ← 使用格式化后的 query
             "max_tokens": 200,
             "temperature": self.temperature
         }
+        ##############################
+        # data = {
+        #     "model": self.model,
+        #     "messages": [{"role": "user", "content": query}],
+        #     "max_tokens": 200,
+        #     "temperature": self.temperature
+        # }
         
         try:
             # 记录开始时间

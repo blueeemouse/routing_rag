@@ -17,7 +17,9 @@ naive_rag:
   api_key: "${NAIVE_RAG_API_KEY}"
   # model: "deepseek-v3"  # 试一下，把naive_rag的模型全都换成openai的。看报错，似乎LlamaIndex默认是用的openai的base_url
   # 和api-key的
-  model: "gpt-3.5-turbo"
+  # model: "gpt-3.5-turbo"
+  model: "gpt-4o"
+  # model: "gemini-3-pro-preview-thinking"
   # model: "gpt-5.1"
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
@@ -28,7 +30,9 @@ graph_rag:
   api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
   api_key: "${GRAPHRAG_API_KEY}"
   # model: "deepseek-v3"
-  model: "gpt-3.5-turbo"
+  # model: "gpt-3.5-turbo"
+  model: "gpt-4o"
+  # model: "gemini-3-pro-preview-thinking"
   # model: "gpt-5.1"
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512

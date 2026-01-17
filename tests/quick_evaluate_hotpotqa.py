@@ -362,7 +362,7 @@ def main():
     """主流程"""
     # 配置
     HOTPOTQA_FILE = r"D:\Develop\all_RAG\routing_rag\HotpotQA\hotpot_1000_samples.jsonl"
-    NUM_SAMPLES = 1000  # 快速测试只用5个样本
+    NUM_SAMPLES = 5  # 快速测试只用5个样本
     OUTPUT_DIR = r"D:\Develop\all_RAG\routing_rag\evaluation_results"  # 输出目录
     SETTINGS_FILE = r"D:\Develop\all_RAG\routing_rag\config\settings.yaml"  # 配置文件路径
 
@@ -386,26 +386,26 @@ def main():
     print("\n初始化NoRAG...")
     no_rag = NoRAG()
 
-    # 3. 初始化NaiveRAG并构建索引
-    print("\n初始化NaiveRAG...")
-    naive_rag = NaiveRAG()
+    # # 3. 初始化NaiveRAG并构建索引
+    # print("\n初始化NaiveRAG...")
+    # naive_rag = NaiveRAG()
 
-    print("构建NaiveRAG索引...")
-    success = naive_rag.build_index_from_data(documents)
+    # print("构建NaiveRAG索引...")
+    # success = naive_rag.build_index_from_data(documents)
 
-    if not success:
-        print("NaiveRAG索引构建失败，退出。")
-        return
+    # if not success:
+    #     print("NaiveRAG索引构建失败，退出。")
+    #     return
 
-    print(f"索引构建成功，包含 {len(naive_rag.documents)} 个文档。")
+    # print(f"索引构建成功，包含 {len(naive_rag.documents)} 个文档。")
 
     # 4. 评测NoRAG
     no_rag_results = quick_evaluate(no_rag, queries, "NoRAG")
     print_results(no_rag_results)
 
-    # 5. 评测NaiveRAG（记录检索时间）
-    naive_rag_results = quick_evaluate(naive_rag, queries, "NaiveRAG", record_retrieval_time=True)
-    print_results(naive_rag_results)
+    # # 5. 评测NaiveRAG（记录检索时间）
+    # naive_rag_results = quick_evaluate(naive_rag, queries, "NaiveRAG", record_retrieval_time=True)
+    # print_results(naive_rag_results)
 
     # 6. 对比
     print(f"\n{'='*80}")
@@ -414,15 +414,15 @@ def main():
     print(f"{'模型':<15} {'EM':<10} {'F1':<10}")
     print(f"{'-'*80}")
     print(f"{'NoRAG':<15} {no_rag_results['avg_em']:<10.4f} {no_rag_results['avg_f1']:<10.4f}")
-    print(f"{'NaiveRAG':<15} {naive_rag_results['avg_em']:<10.4f} {naive_rag_results['avg_f1']:<10.4f}")
-    print(f"{'-'*80}")
-    print(f"{'提升':<15} {naive_rag_results['avg_em'] - no_rag_results['avg_em']:<10.4f} {naive_rag_results['avg_f1'] - no_rag_results['avg_f1']:<10.4f}")
-    print(f"{'='*80}\n")
+    # print(f"{'NaiveRAG':<15} {naive_rag_results['avg_em']:<10.4f} {naive_rag_results['avg_f1']:<10.4f}")
+    # print(f"{'-'*80}")
+    # print(f"{'提升':<15} {naive_rag_results['avg_em'] - no_rag_results['avg_em']:<10.4f} {naive_rag_results['avg_f1'] - no_rag_results['avg_f1']:<10.4f}")
+    # print(f"{'='*80}\n")
 
     # 7. 保存结果（传入配置信息）
     timestamp = time.strftime("%Y%m%d_%H%M%S")
     save_results(no_rag_results, OUTPUT_DIR, timestamp, filtered_settings)
-    save_results(naive_rag_results, OUTPUT_DIR, timestamp, filtered_settings)
+    # save_results(naive_rag_results, OUTPUT_DIR, timestamp, filtered_settings)
 
     print("快速评测完成！")
 
