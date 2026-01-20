@@ -1,0 +1,361 @@
+{
+  "model_name": "Graph Rag",
+  "settings": {
+    "decomposer": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-5.1",
+      "prompt": "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
+    },
+    "router": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "deepseek-v3",
+      "prompt": "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
+    },
+    "no_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-4o",
+      "temperature": 0.0,
+      "prompt_template": "You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n\nQuestion: {query}\nAnswer:\n"
+    },
+    "naive_rag": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "gpt-4o",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "graph_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "gpt-4o",
+      "embedding_model": "text-embedding-ada-002",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "rag": {
+      "naive_rag_enabled": true,
+      "graph_rag_enabled": true
+    }
+  },
+  "results": {
+    "model_name": "Graph Rag",
+    "predictions": [
+      {
+        "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+        "gold_answer": [
+          "Major League Soccer"
+        ],
+        "prediction": "Major League Soccer",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 6.977191209793091,
+        "retrieval_time": 0.0,
+        "generation_time": 6.977191209793091,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are The Datsuns and The Black Crowes both rock bands?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "yes",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 3.750559091567993,
+        "retrieval_time": 0.0,
+        "generation_time": 3.750559091567993,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+        "gold_answer": [
+          "December 31, 2015"
+        ],
+        "prediction": "January 1, 2019",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 5.140528440475464,
+        "retrieval_time": 0.0,
+        "generation_time": 5.140528440475464,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+        "gold_answer": [
+          "The Social Network"
+        ],
+        "prediction": "The Silence of the Lambs",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 3.6687026023864746,
+        "retrieval_time": 0.0,
+        "generation_time": 3.6687026023864746,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+        "gold_answer": [
+          "1522"
+        ],
+        "prediction": "1522 miles",
+        "em": 0.0,
+        "f1": 0.6666666666666666,
+        "precision": 0.5,
+        "recall": 1.0,
+        "total_time": 4.367321014404297,
+        "retrieval_time": 0.0,
+        "generation_time": 4.367321014404297,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former American football player had a part in the movie \"Gamer?\"",
+        "gold_answer": [
+          "Terry Crews"
+        ],
+        "prediction": "Terry Crews",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 2.9303550720214844,
+        "retrieval_time": 0.0,
+        "generation_time": 2.9303550720214844,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+        "gold_answer": [
+          "Fatih Ozmen"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 3.482008218765259,
+        "retrieval_time": 0.0,
+        "generation_time": 3.482008218765259,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Cromwell station is located in which Maryland county?",
+        "gold_answer": [
+          "Anne Arundel County"
+        ],
+        "prediction": "Prince George's County",
+        "em": 0.0,
+        "f1": 0.3333333333333333,
+        "precision": 0.3333333333333333,
+        "recall": 0.3333333333333333,
+        "total_time": 5.434749126434326,
+        "retrieval_time": 0.0,
+        "generation_time": 5.434749126434326,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+        "gold_answer": [
+          "Podocarpus"
+        ],
+        "prediction": "Podocarpus",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 4.812963962554932,
+        "retrieval_time": 0.0,
+        "generation_time": 4.812963962554932,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+        "gold_answer": [
+          "Jay Van Andel"
+        ],
+        "prediction": "Richard DeVos",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 3.9106221199035645,
+        "retrieval_time": 0.0,
+        "generation_time": 3.9106221199035645,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Were Thomas H. Ince and Joseph McGrath of the same nationality?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "yes",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 3.9255528450012207,
+        "retrieval_time": 0.0,
+        "generation_time": 3.9255528450012207,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What type of product is the sponsor of the Premiership Rugby Sevens SeriesSeries ? ",
+        "gold_answer": [
+          "pale lager"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 3.663433313369751,
+        "retrieval_time": 0.0,
+        "generation_time": 3.663433313369751,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The director of Panic 5 Bravo was born in what year?",
+        "gold_answer": [
+          "1978"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 3.7517876625061035,
+        "retrieval_time": 0.0,
+        "generation_time": 3.7517876625061035,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was the gunman of the hostage crisis which Chris Reason was awarded the Graham Perkin Australian Journalist of the Year Award for his coverage of?",
+        "gold_answer": [
+          "Man Haron"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 4.600815057754517,
+        "retrieval_time": 0.0,
+        "generation_time": 4.600815057754517,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What country is both Thornton–Cleveleys railway station and Poulton-le-Fylde railway station located?",
+        "gold_answer": [
+          "England"
+        ],
+        "prediction": "England",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 9.152992963790894,
+        "retrieval_time": 0.0,
+        "generation_time": 9.152992963790894,
+        "generation_tokens": 0
+      }
+    ],
+    "exact_matches": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "f1_scores": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.6666666666666666,
+      1.0,
+      0.0,
+      0.3333333333333333,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "precisions": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.5,
+      1.0,
+      0.0,
+      0.3333333333333333,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "recalls": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.3333333333333333,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "total_time": 69.56958270072937,
+    "avg_time": 4.637972180048624,
+    "total_retrieval_time": 0.0,
+    "avg_retrieval_time": 0.0,
+    "total_generation_time": 69.56958270072937,
+    "avg_generation_time": 4.637972180048624,
+    "total_generation_tokens": 0,
+    "avg_generation_tokens": 0,
+    "errors": [],
+    "avg_em": 0.3333333333333333,
+    "avg_f1": 0.4,
+    "avg_precision": 0.38888888888888895,
+    "avg_recall": 0.4222222222222222,
+    "accuracy": 0.3333333333333333,
+    "num_errors": 0
+  }
+}

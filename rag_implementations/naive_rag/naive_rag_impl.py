@@ -120,9 +120,40 @@ class NaiveRAG(RAGInterface):
             retrieval_end = time.time()
             self.last_retrieval_time = retrieval_end - retrieval_start
 
-            # 2. 再执行生成
+            # 2. 再执行生成 - 使用自定义 prompt 模板
+            # 定义优化的 prompt 模板
+            from llama_index.core import PromptTemplate
+
+            # 获取配置中的 prompt 模板，如果没有则使用默认模板
+            prompt_template_str = self.config.get('prompt_template',
+"""Context information is below.
+---------------------
+{context_str}
+---------------------
+Given the context information and not prior knowledge, answer the query.
+
+Guidelines:
+1. Provide ONLY the answer, no explanations or reasoning
+2. Keep the answer as short as possible - typically 1-5 words
+3. For yes/no questions, answer only "yes" or "no"
+4. For dates, use the exact format (e.g., "December 31, 2015")
+5. For numbers, provide just the number (e.g., "1522")
+6. For names, provide just the name (e.g., "Terry Crews")
+7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+8. DO NOT add any additional context or information
+9. If the answer is not in the context, say "I don't know"
+
+Query: {query_str}
+Answer:""")
+
+            # 创建 PromptTemplate
+            prompt_template = PromptTemplate(prompt_template_str)
+
+            # 创建自定义的 query_engine
             query_engine = self.index.as_query_engine(
-                llm=self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url)
+                llm=self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url),
+                text_qa_template=prompt_template,
+                similarity_top_k=self.top_k
             )
             print("执行查询...")
 
@@ -171,7 +202,8 @@ class NaiveRAG(RAGInterface):
             embed_model = OpenAIEmbedding(
                 api_key=self.api_key,      # ← 统一使用 self.api_key
                 api_base=self.api_url,     # ← 统一使用 self.api_url  
-                model=self.embedding_model # ← 统一使用 self.embedding_model
+                model=self.embedding_model, # ← 统一使用 self.embedding_model
+                timeout=300.0  # 增加超时时间到 300 秒
             )
 
             # 2. 设置到全局配置（关键步骤）
@@ -227,3 +259,61 @@ class NaiveRAG(RAGInterface):
                 self.documents,
                 embed_model=self.OpenAIEmbedding(model=self.embedding_model)
             )
+
+    def save_index(self, storage_dir: str) -> bool:
+        """
+        保存索引到磁盘
+        
+        Args:
+            storage_dir: 存储目录路径
+        
+        Returns:
+            bool: 保存成功返回 True
+        """
+        if not self.is_index_initialized:
+            self.logger.error("索引未初始化，无法保存")
+            return False
+        
+        try:
+            os.makedirs(storage_dir, exist_ok=True)
+            self.index.storage_context.persist(persist_dir=storage_dir)
+            self.logger.info(f"索引已保存到: {storage_dir}")
+            return True
+        except Exception as e:
+            self.logger.error(f"保存索引失败: {e}")
+            return False
+    
+    def load_index(self, storage_dir: str) -> bool:
+        """
+        从磁盘加载索引
+        
+        Args:
+            storage_dir: 存储目录路径
+        
+        Returns:
+            bool: 加载成功返回 True
+        """
+        try:
+            from llama_index.core import StorageContext, load_index_from_storage
+            
+            storage_context = StorageContext.from_defaults(persist_dir=storage_dir)
+            self.index = load_index_from_storage(storage_context)
+            
+            # 重新设置嵌入模型（重要！）
+            from llama_index.embeddings.openai import OpenAIEmbedding
+            from llama_index.core import Settings
+            
+            embed_model = OpenAIEmbedding(
+                api_key=self.api_key,
+                api_base=self.api_url,
+                model=self.embedding_model,
+                timeout=300.0  # 增加超时时间
+            )
+            Settings.embed_model = embed_model
+            
+            self.is_index_initialized = True
+            self.logger.info(f"索引已从 {storage_dir} 加载")
+            return True
+        except Exception as e:
+            self.logger.error(f"加载索引失败: {e}")
+            return False

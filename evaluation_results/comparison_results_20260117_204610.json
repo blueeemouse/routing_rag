@@ -1,0 +1,308 @@
+{
+  "timestamp": "20260117_204610",
+  "models": [
+    {
+      "model_name": "Graph Rag",
+      "predictions": [
+        {
+          "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+          "gold_answer": [
+            "Major League Soccer"
+          ],
+          "prediction": "错误：需要提供包含已索引数据的路径。请在context中指定'data_path'参数。",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 0.0,
+          "retrieval_time": 0.0,
+          "generation_time": 0.0,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Are The Datsuns and The Black Crowes both rock bands?",
+          "gold_answer": [
+            "yes"
+          ],
+          "prediction": "错误：需要提供包含已索引数据的路径。请在context中指定'data_path'参数。",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 0.0,
+          "retrieval_time": 0.0,
+          "generation_time": 0.0,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+          "gold_answer": [
+            "December 31, 2015"
+          ],
+          "prediction": "错误：需要提供包含已索引数据的路径。请在context中指定'data_path'参数。",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 0.0,
+          "retrieval_time": 0.0,
+          "generation_time": 0.0,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold_answer": [
+            "The Social Network"
+          ],
+          "prediction": "错误：需要提供包含已索引数据的路径。请在context中指定'data_path'参数。",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 0.0,
+          "retrieval_time": 0.0,
+          "generation_time": 0.0,
+          "generation_tokens": 0
+        },
+        {
+          "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+          "gold_answer": [
+            "1522"
+          ],
+          "prediction": "错误：需要提供包含已索引数据的路径。请在context中指定'data_path'参数。",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 0.0,
+          "retrieval_time": 0.0,
+          "generation_time": 0.0,
+          "generation_tokens": 0
+        }
+      ],
+      "exact_matches": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "f1_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "total_time": 0.0,
+      "avg_time": 0.0,
+      "total_retrieval_time": 0.0,
+      "avg_retrieval_time": 0.0,
+      "total_generation_time": 0.0,
+      "avg_generation_time": 0.0,
+      "total_generation_tokens": 0,
+      "avg_generation_tokens": 0,
+      "errors": [],
+      "avg_em": 0.0,
+      "avg_f1": 0.0,
+      "accuracy": 0.0,
+      "num_errors": 0
+    },
+    {
+      "model_name": "Naive Rag",
+      "predictions": [
+        {
+          "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+          "gold_answer": [
+            "Major League Soccer"
+          ],
+          "prediction": "MLS",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 5.774529695510864,
+          "retrieval_time": 1.9212071895599365,
+          "generation_time": 3.851811170578003,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Are The Datsuns and The Black Crowes both rock bands?",
+          "gold_answer": [
+            "yes"
+          ],
+          "prediction": "Yes",
+          "em": 1.0,
+          "f1": 1.0,
+          "total_time": 4.736823797225952,
+          "retrieval_time": 2.0529987812042236,
+          "generation_time": 2.6825554370880127,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+          "gold_answer": [
+            "December 31, 2015"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 7.831471920013428,
+          "retrieval_time": 2.4503118991851807,
+          "generation_time": 5.379616975784302,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold_answer": [
+            "The Social Network"
+          ],
+          "prediction": "The Social Network",
+          "em": 1.0,
+          "f1": 1.0,
+          "total_time": 6.822831392288208,
+          "retrieval_time": 2.8941190242767334,
+          "generation_time": 3.926708459854126,
+          "generation_tokens": 0
+        },
+        {
+          "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+          "gold_answer": [
+            "1522"
+          ],
+          "prediction": "1522",
+          "em": 1.0,
+          "f1": 1.0,
+          "total_time": 5.379512310028076,
+          "retrieval_time": 2.465711832046509,
+          "generation_time": 2.911790132522583,
+          "generation_tokens": 0
+        }
+      ],
+      "exact_matches": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "f1_scores": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "total_time": 30.54516911506653,
+      "avg_time": 6.109033823013306,
+      "total_retrieval_time": 11.784348726272583,
+      "avg_retrieval_time": 2.3568697452545164,
+      "total_generation_time": 18.752482175827026,
+      "avg_generation_time": 3.750496435165405,
+      "total_generation_tokens": 0,
+      "avg_generation_tokens": 0,
+      "errors": [],
+      "avg_em": 0.6,
+      "avg_f1": 0.6,
+      "accuracy": 0.6,
+      "num_errors": 0
+    },
+    {
+      "model_name": "No Rag",
+      "predictions": [
+        {
+          "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+          "gold_answer": [
+            "Major League Soccer"
+          ],
+          "prediction": "MLS",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 1.214097499847412,
+          "retrieval_time": 0.0,
+          "generation_time": 1.214097499847412,
+          "generation_tokens": 2
+        },
+        {
+          "question": "Are The Datsuns and The Black Crowes both rock bands?",
+          "gold_answer": [
+            "yes"
+          ],
+          "prediction": "Yes",
+          "em": 1.0,
+          "f1": 1.0,
+          "total_time": 1.0042271614074707,
+          "retrieval_time": 0.0,
+          "generation_time": 1.0032048225402832,
+          "generation_tokens": 2
+        },
+        {
+          "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+          "gold_answer": [
+            "December 31, 2015"
+          ],
+          "prediction": "December 31, 2015",
+          "em": 1.0,
+          "f1": 1.0,
+          "total_time": 1.0907080173492432,
+          "retrieval_time": 0.0,
+          "generation_time": 1.0895254611968994,
+          "generation_tokens": 8
+        },
+        {
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold_answer": [
+            "The Social Network"
+          ],
+          "prediction": "The Revenant",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 1.2471332550048828,
+          "retrieval_time": 0.0,
+          "generation_time": 1.2455999851226807,
+          "generation_tokens": 4
+        },
+        {
+          "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+          "gold_answer": [
+            "1522"
+          ],
+          "prediction": "1,389",
+          "em": 0.0,
+          "f1": 0.0,
+          "total_time": 1.1354410648345947,
+          "retrieval_time": 0.0,
+          "generation_time": 1.134422779083252,
+          "generation_tokens": 4
+        }
+      ],
+      "exact_matches": [
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "f1_scores": [
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "total_time": 5.6916069984436035,
+      "avg_time": 1.1383213996887207,
+      "total_retrieval_time": 0.0,
+      "avg_retrieval_time": 0.0,
+      "total_generation_time": 5.686850547790527,
+      "avg_generation_time": 1.1373701095581055,
+      "total_generation_tokens": 20,
+      "avg_generation_tokens": 4.0,
+      "errors": [],
+      "avg_em": 0.4,
+      "avg_f1": 0.4,
+      "accuracy": 0.4,
+      "num_errors": 0
+    }
+  ],
+  "summary": {
+    "Naive Rag_vs_Graph Rag": {
+      "em_improvement": 0.6,
+      "f1_improvement": 0.6,
+      "time_diff": 6.109033823013306
+    },
+    "No Rag_vs_Graph Rag": {
+      "em_improvement": 0.4,
+      "f1_improvement": 0.4,
+      "time_diff": 1.1383213996887207
+    }
+  }
+}

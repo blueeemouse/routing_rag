@@ -9,3 +9,4 @@ naive_rag_index_storage_100_samples/
 naive_rag_index_storage_1000_samples/
 IFLOW.md
 duplicated/
+official_evaluate.py

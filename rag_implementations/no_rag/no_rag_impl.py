@@ -61,18 +61,32 @@ class NoRAG(RAGInterface):
             "Content-Type": "application/json"
         }
         ##############################
-        # 定义 NoRAG 专用的 prompt（试试改prompt有没有效果）
-        prompt_template = self.config.get('prompt_template', 
-                                        "After thinking, please reply the query directly(without irrelevant information and internal details): {query}")
-        
+        # 定义 NoRAG 专用的 prompt（优化版本）
+        # 这个 prompt 专门针对 HotpotQA 等问答任务设计，强调简洁准确的答案
+        prompt_template = self.config.get('prompt_template',
+"""You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.
+
+Guidelines:
+1. Provide ONLY the answer, no explanations or reasoning
+2. Keep the answer as short as possible - typically 1-5 words
+3. For yes/no questions, answer only "yes" or "no"
+4. For dates, use the exact format (e.g., "December 31, 2015")
+5. For numbers, provide just the number (e.g., "1522")
+6. For names, provide just the name (e.g., "Terry Crews")
+7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+8. DO NOT add any additional context or information
+
+Question: {query}
+Answer:""")
+
         # 格式化 prompt
         formatted_query = prompt_template.format(query=query)
-        
+
         data = {
             "model": self.model,
             "messages": [{"role": "user", "content": formatted_query}],  # ← 使用格式化后的 query
-            "max_tokens": 200,
-            "temperature": self.temperature
+            "max_tokens": 50,  # 减少最大 token 数，强制生成简洁答案
+            "temperature": 0.0  # 降低温度，减少随机性，提高确定性
         }
         ##############################
         # data = {

@@ -12,6 +12,28 @@ router:
   model: "deepseek-v3"
   prompt: "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
 
+no_rag:
+  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
+  api_key: "${NAIVE_RAG_API_KEY}"
+  model: "gpt-4o"
+  temperature: 0.0  # 降低温度，提高答案确定性
+  # 优化的 prompt 模板，用于生成简洁准确的答案
+  prompt_template: |
+    You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.
+
+    Guidelines:
+    1. Provide ONLY the answer, no explanations or reasoning
+    2. Keep the answer as short as possible - typically 1-5 words
+    3. For yes/no questions, answer only "yes" or "no"
+    4. For dates, use the exact format (e.g., "December 31, 2015")
+    5. For numbers, provide just the number (e.g., "1522")
+    6. For names, provide just the name (e.g., "Terry Crews")
+    7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+    8. DO NOT add any additional context or information
+
+    Question: {query}
+    Answer:
+
 naive_rag:
   api_url: "${API_BASE_URL}"  # ← 修改：使用环境变量
   api_key: "${NAIVE_RAG_API_KEY}"
@@ -24,7 +46,28 @@ naive_rag:
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
   top_k: 5
-  temperature: 0.7
+  temperature: 0.0  # 降低温度，提高答案确定性
+  # 优化的 prompt 模板，用于生成简洁准确的答案
+  prompt_template: |
+    Context information is below.
+    ---------------------
+    {context_str}
+    ---------------------
+    Given the context information and not prior knowledge, answer the query.
+
+    Guidelines:
+    1. Provide ONLY the answer, no explanations or reasoning
+    2. Keep the answer as short as possible - typically 1-5 words
+    3. For yes/no questions, answer only "yes" or "no"
+    4. For dates, use the exact format (e.g., "December 31, 2015")
+    5. For numbers, provide just the number (e.g., "1522")
+    6. For names, provide just the name (e.g., "Terry Crews")
+    7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+    8. DO NOT add any additional context or information
+    9. If the answer is not in the context, say "I don't know"
+
+    Query: {query_str}
+    Answer:
 
 graph_rag:
   api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
@@ -37,7 +80,28 @@ graph_rag:
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
   top_k: 5
-  temperature: 0.7
+  temperature: 0.0  # 降低温度，提高答案确定性
+  # 优化的 prompt 模板，用于生成简洁准确的答案
+  prompt_template: |
+    Context information is below.
+    ---------------------
+    {context_str}
+    ---------------------
+    Given the context information and not prior knowledge, answer the query.
+
+    Guidelines:
+    1. Provide ONLY the answer, no explanations or reasoning
+    2. Keep the answer as short as possible - typically 1-5 words
+    3. For yes/no questions, answer only "yes" or "no"
+    4. For dates, use the exact format (e.g., "December 31, 2015")
+    5. For numbers, provide just the number (e.g., "1522")
+    6. For names, provide just the name (e.g., "Terry Crews")
+    7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+    8. DO NOT add any additional context or information
+    9. If the answer is not in the context, say "I don't know"
+
+    Query: {query_str}
+    Answer:
 
 rag:
   naive_rag_enabled: true

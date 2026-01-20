@@ -1,0 +1,956 @@
+{
+  "timestamp": "20260118_221237",
+  "models": [
+    {
+      "model_name": "Graph Rag",
+      "predictions": [
+        {
+          "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+          "gold_answer": [
+            "Major League Soccer"
+          ],
+          "prediction": "Major League Soccer",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 9.33760929107666,
+          "retrieval_time": 0.0,
+          "generation_time": 9.33760929107666,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Are The Datsuns and The Black Crowes both rock bands?",
+          "gold_answer": [
+            "yes"
+          ],
+          "prediction": "yes",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 3.573711633682251,
+          "retrieval_time": 0.0,
+          "generation_time": 3.573711633682251,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+          "gold_answer": [
+            "December 31, 2015"
+          ],
+          "prediction": "January 1, 2019",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 3.328373670578003,
+          "retrieval_time": 0.0,
+          "generation_time": 3.328373670578003,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold_answer": [
+            "The Social Network"
+          ],
+          "prediction": "The Silence of the Lambs",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 4.458254337310791,
+          "retrieval_time": 0.0,
+          "generation_time": 4.458254337310791,
+          "generation_tokens": 0
+        },
+        {
+          "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+          "gold_answer": [
+            "1522"
+          ],
+          "prediction": "1364 miles",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 2.9935710430145264,
+          "retrieval_time": 0.0,
+          "generation_time": 2.9935710430145264,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Which former American football player had a part in the movie \"Gamer?\"",
+          "gold_answer": [
+            "Terry Crews"
+          ],
+          "prediction": "Terry Crews",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 3.916111707687378,
+          "retrieval_time": 0.0,
+          "generation_time": 3.916111707687378,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+          "gold_answer": [
+            "Fatih Ozmen"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 3.073744058609009,
+          "retrieval_time": 0.0,
+          "generation_time": 3.073744058609009,
+          "generation_tokens": 0
+        },
+        {
+          "question": "The Cromwell station is located in which Maryland county?",
+          "gold_answer": [
+            "Anne Arundel County"
+          ],
+          "prediction": "Baltimore County",
+          "em": 0.0,
+          "f1": 0.4,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "total_time": 3.4765102863311768,
+          "retrieval_time": 0.0,
+          "generation_time": 3.4765102863311768,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+          "gold_answer": [
+            "Podocarpus"
+          ],
+          "prediction": "Podocarpus",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 3.9551613330841064,
+          "retrieval_time": 0.0,
+          "generation_time": 3.9551613330841064,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+          "gold_answer": [
+            "Jay Van Andel"
+          ],
+          "prediction": "Richard DeVos",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 3.802889347076416,
+          "retrieval_time": 0.0,
+          "generation_time": 3.802889347076416,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Were Thomas H. Ince and Joseph McGrath of the same nationality?",
+          "gold_answer": [
+            "no"
+          ],
+          "prediction": "yes",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 4.008727788925171,
+          "retrieval_time": 0.0,
+          "generation_time": 4.008727788925171,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What type of product is the sponsor of the Premiership Rugby Sevens SeriesSeries ? ",
+          "gold_answer": [
+            "pale lager"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 3.868271827697754,
+          "retrieval_time": 0.0,
+          "generation_time": 3.868271827697754,
+          "generation_tokens": 0
+        },
+        {
+          "question": "The director of Panic 5 Bravo was born in what year?",
+          "gold_answer": [
+            "1978"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 5.439177513122559,
+          "retrieval_time": 0.0,
+          "generation_time": 5.439177513122559,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Who was the gunman of the hostage crisis which Chris Reason was awarded the Graham Perkin Australian Journalist of the Year Award for his coverage of?",
+          "gold_answer": [
+            "Man Haron"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 4.083581209182739,
+          "retrieval_time": 0.0,
+          "generation_time": 4.083581209182739,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What country is both Thornton–Cleveleys railway station and Poulton-le-Fylde railway station located?",
+          "gold_answer": [
+            "England"
+          ],
+          "prediction": "England",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 4.829407215118408,
+          "retrieval_time": 0.0,
+          "generation_time": 4.829407215118408,
+          "generation_tokens": 0
+        }
+      ],
+      "exact_matches": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "f1_scores": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.4,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "precisions": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.5,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "recalls": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.3333333333333333,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "total_time": 64.14510226249695,
+      "avg_time": 4.27634015083313,
+      "total_retrieval_time": 0.0,
+      "avg_retrieval_time": 0.0,
+      "total_generation_time": 64.14510226249695,
+      "avg_generation_time": 4.27634015083313,
+      "total_generation_tokens": 0,
+      "avg_generation_tokens": 0,
+      "errors": [],
+      "avg_em": 0.3333333333333333,
+      "avg_f1": 0.36000000000000004,
+      "avg_precision": 0.36666666666666664,
+      "avg_recall": 0.35555555555555557,
+      "accuracy": 0.3333333333333333,
+      "num_errors": 0
+    },
+    {
+      "model_name": "Naive Rag",
+      "predictions": [
+        {
+          "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+          "gold_answer": [
+            "Major League Soccer"
+          ],
+          "prediction": "MLS",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 6.945630788803101,
+          "retrieval_time": 3.1220927238464355,
+          "generation_time": 3.8221659660339355,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Are The Datsuns and The Black Crowes both rock bands?",
+          "gold_answer": [
+            "yes"
+          ],
+          "prediction": "Yes",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 7.300656318664551,
+          "retrieval_time": 3.6026577949523926,
+          "generation_time": 3.6960933208465576,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+          "gold_answer": [
+            "December 31, 2015"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 5.46295690536499,
+          "retrieval_time": 2.052280902862549,
+          "generation_time": 3.4091672897338867,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold_answer": [
+            "The Social Network"
+          ],
+          "prediction": "The Social Network",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 9.096673727035522,
+          "retrieval_time": 4.063962697982788,
+          "generation_time": 5.032711029052734,
+          "generation_tokens": 0
+        },
+        {
+          "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+          "gold_answer": [
+            "1522"
+          ],
+          "prediction": "1522",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 8.215818166732788,
+          "retrieval_time": 3.1509475708007812,
+          "generation_time": 5.0627970695495605,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Which former American football player had a part in the movie \"Gamer?\"",
+          "gold_answer": [
+            "Terry Crews"
+          ],
+          "prediction": "Terry Crews",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 8.48336672782898,
+          "retrieval_time": 2.6308367252349854,
+          "generation_time": 5.848878860473633,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+          "gold_answer": [
+            "Fatih Ozmen"
+          ],
+          "prediction": "Fatih Ozmen",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 12.182579278945923,
+          "retrieval_time": 5.379421710968018,
+          "generation_time": 6.801644802093506,
+          "generation_tokens": 0
+        },
+        {
+          "question": "The Cromwell station is located in which Maryland county?",
+          "gold_answer": [
+            "Anne Arundel County"
+          ],
+          "prediction": "Anne Arundel County",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 6.4722301959991455,
+          "retrieval_time": 2.896328926086426,
+          "generation_time": 3.5738425254821777,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+          "gold_answer": [
+            "Podocarpus"
+          ],
+          "prediction": "Podocarpus",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 6.8477935791015625,
+          "retrieval_time": 3.3726394176483154,
+          "generation_time": 3.475154161453247,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+          "gold_answer": [
+            "Jay Van Andel"
+          ],
+          "prediction": "Jay Van Andel",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 8.16113829612732,
+          "retrieval_time": 1.8115649223327637,
+          "generation_time": 6.349070310592651,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Were Thomas H. Ince and Joseph McGrath of the same nationality?",
+          "gold_answer": [
+            "no"
+          ],
+          "prediction": "No",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 6.495809316635132,
+          "retrieval_time": 3.306581974029541,
+          "generation_time": 3.188711166381836,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What type of product is the sponsor of the Premiership Rugby Sevens SeriesSeries ? ",
+          "gold_answer": [
+            "pale lager"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 5.485473155975342,
+          "retrieval_time": 1.6525373458862305,
+          "generation_time": 3.8329358100891113,
+          "generation_tokens": 0
+        },
+        {
+          "question": "The director of Panic 5 Bravo was born in what year?",
+          "gold_answer": [
+            "1978"
+          ],
+          "prediction": "I don't know",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 5.375557899475098,
+          "retrieval_time": 2.2356245517730713,
+          "generation_time": 3.1399333477020264,
+          "generation_tokens": 0
+        },
+        {
+          "question": "Who was the gunman of the hostage crisis which Chris Reason was awarded the Graham Perkin Australian Journalist of the Year Award for his coverage of?",
+          "gold_answer": [
+            "Man Haron"
+          ],
+          "prediction": "Man Haron Monis",
+          "em": 0.0,
+          "f1": 0.8,
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "total_time": 6.883367538452148,
+          "retrieval_time": 3.463019371032715,
+          "generation_time": 3.4172699451446533,
+          "generation_tokens": 0
+        },
+        {
+          "question": "What country is both Thornton–Cleveleys railway station and Poulton-le-Fylde railway station located?",
+          "gold_answer": [
+            "England"
+          ],
+          "prediction": "England",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 5.000579833984375,
+          "retrieval_time": 1.855130672454834,
+          "generation_time": 3.1449356079101562,
+          "generation_tokens": 0
+        }
+      ],
+      "exact_matches": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "f1_scores": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.8,
+        1.0
+      ],
+      "precisions": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.6666666666666666,
+        1.0
+      ],
+      "recalls": [
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "total_time": 108.40963172912598,
+      "avg_time": 7.227308781941732,
+      "total_retrieval_time": 44.595627307891846,
+      "avg_retrieval_time": 2.973041820526123,
+      "total_generation_time": 63.79531121253967,
+      "avg_generation_time": 4.253020747502645,
+      "total_generation_tokens": 0,
+      "avg_generation_tokens": 0,
+      "errors": [],
+      "avg_em": 0.6666666666666666,
+      "avg_f1": 0.7200000000000001,
+      "avg_precision": 0.711111111111111,
+      "avg_recall": 0.7333333333333333,
+      "accuracy": 0.6666666666666666,
+      "num_errors": 0
+    },
+    {
+      "model_name": "No Rag",
+      "predictions": [
+        {
+          "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+          "gold_answer": [
+            "Major League Soccer"
+          ],
+          "prediction": "MLS",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 1.1304190158843994,
+          "retrieval_time": 0.0,
+          "generation_time": 1.1304190158843994,
+          "generation_tokens": 2
+        },
+        {
+          "question": "Are The Datsuns and The Black Crowes both rock bands?",
+          "gold_answer": [
+            "yes"
+          ],
+          "prediction": "Yes",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 1.2103002071380615,
+          "retrieval_time": 0.0,
+          "generation_time": 1.209646224975586,
+          "generation_tokens": 2
+        },
+        {
+          "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+          "gold_answer": [
+            "December 31, 2015"
+          ],
+          "prediction": "December 31, 2015",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 1.1829185485839844,
+          "retrieval_time": 0.0,
+          "generation_time": 1.181872844696045,
+          "generation_tokens": 8
+        },
+        {
+          "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+          "gold_answer": [
+            "The Social Network"
+          ],
+          "prediction": "The Revenant",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 1.50950288772583,
+          "retrieval_time": 0.0,
+          "generation_time": 1.5090930461883545,
+          "generation_tokens": 4
+        },
+        {
+          "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+          "gold_answer": [
+            "1522"
+          ],
+          "prediction": "1,389",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 1.409921407699585,
+          "retrieval_time": 0.0,
+          "generation_time": 1.4094786643981934,
+          "generation_tokens": 4
+        },
+        {
+          "question": "Which former American football player had a part in the movie \"Gamer?\"",
+          "gold_answer": [
+            "Terry Crews"
+          ],
+          "prediction": "Terry Crews",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 1.2366788387298584,
+          "retrieval_time": 0.0,
+          "generation_time": 1.2361547946929932,
+          "generation_tokens": 5
+        },
+        {
+          "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+          "gold_answer": [
+            "Fatih Ozmen"
+          ],
+          "prediction": "Fatih Ozmen",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 2.1102020740509033,
+          "retrieval_time": 0.0,
+          "generation_time": 2.10947847366333,
+          "generation_tokens": 5
+        },
+        {
+          "question": "The Cromwell station is located in which Maryland county?",
+          "gold_answer": [
+            "Anne Arundel County"
+          ],
+          "prediction": "Anne Arundel",
+          "em": 0.0,
+          "f1": 0.8,
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "total_time": 1.2176454067230225,
+          "retrieval_time": 0.0,
+          "generation_time": 1.2164573669433594,
+          "generation_tokens": 5
+        },
+        {
+          "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+          "gold_answer": [
+            "Podocarpus"
+          ],
+          "prediction": "Podocarpus",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 1.3876709938049316,
+          "retrieval_time": 0.0,
+          "generation_time": 1.3876709938049316,
+          "generation_tokens": 5
+        },
+        {
+          "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+          "gold_answer": [
+            "Jay Van Andel"
+          ],
+          "prediction": "Jay Van Andel",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 1.5166053771972656,
+          "retrieval_time": 0.0,
+          "generation_time": 1.5166053771972656,
+          "generation_tokens": 5
+        },
+        {
+          "question": "Were Thomas H. Ince and Joseph McGrath of the same nationality?",
+          "gold_answer": [
+            "no"
+          ],
+          "prediction": "Yes",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 1.0494334697723389,
+          "retrieval_time": 0.0,
+          "generation_time": 1.048919677734375,
+          "generation_tokens": 2
+        },
+        {
+          "question": "What type of product is the sponsor of the Premiership Rugby Sevens SeriesSeries ? ",
+          "gold_answer": [
+            "pale lager"
+          ],
+          "prediction": "Insurance",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 1.823596477508545,
+          "retrieval_time": 0.0,
+          "generation_time": 1.8219754695892334,
+          "generation_tokens": 2
+        },
+        {
+          "question": "The director of Panic 5 Bravo was born in what year?",
+          "gold_answer": [
+            "1978"
+          ],
+          "prediction": "1973",
+          "em": 0.0,
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "total_time": 1.098667860031128,
+          "retrieval_time": 0.0,
+          "generation_time": 1.098667860031128,
+          "generation_tokens": 3
+        },
+        {
+          "question": "Who was the gunman of the hostage crisis which Chris Reason was awarded the Graham Perkin Australian Journalist of the Year Award for his coverage of?",
+          "gold_answer": [
+            "Man Haron"
+          ],
+          "prediction": "Man Haron Monis",
+          "em": 0.0,
+          "f1": 0.8,
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "total_time": 1.2254414558410645,
+          "retrieval_time": 0.0,
+          "generation_time": 1.2246921062469482,
+          "generation_tokens": 6
+        },
+        {
+          "question": "What country is both Thornton–Cleveleys railway station and Poulton-le-Fylde railway station located?",
+          "gold_answer": [
+            "England"
+          ],
+          "prediction": "England",
+          "em": 1.0,
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "total_time": 1.0584630966186523,
+          "retrieval_time": 0.0,
+          "generation_time": 1.0579497814178467,
+          "generation_tokens": 2
+        }
+      ],
+      "exact_matches": [
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "f1_scores": [
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.8,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.8,
+        1.0
+      ],
+      "precisions": [
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6666666666666666,
+        1.0
+      ],
+      "recalls": [
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "total_time": 20.16746711730957,
+      "avg_time": 1.344497807820638,
+      "total_retrieval_time": 0.0,
+      "avg_retrieval_time": 0.0,
+      "total_generation_time": 20.15908169746399,
+      "avg_generation_time": 1.3439387798309326,
+      "total_generation_tokens": 60,
+      "avg_generation_tokens": 4.0,
+      "errors": [],
+      "avg_em": 0.4666666666666667,
+      "avg_f1": 0.5733333333333334,
+      "avg_precision": 0.5777777777777778,
+      "avg_recall": 0.5777777777777778,
+      "accuracy": 0.4666666666666667,
+      "num_errors": 0
+    }
+  ],
+  "summary": {
+    "Naive Rag_vs_Graph Rag": {
+      "em_improvement": 0.3333333333333333,
+      "f1_improvement": 0.36000000000000004,
+      "time_diff": 2.9509686311086014
+    },
+    "No Rag_vs_Graph Rag": {
+      "em_improvement": 0.13333333333333336,
+      "f1_improvement": 0.21333333333333332,
+      "time_diff": -2.9318423430124922
+    }
+  }
+}

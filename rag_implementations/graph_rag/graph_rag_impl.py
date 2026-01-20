@@ -576,7 +576,22 @@ class GraphRAG(RAGInterface):
             # - "multiple paragraphs": 多段落格式，较少引用标记
             # - "single paragraph": 单段落格式，最简洁
             # - "list": 列表格式
-            # print("创建本地搜索引擎...")
+            print("创建本地搜索引擎...")
+
+            # 使用 system_prompt 参数来传递优化的 prompt
+            system_prompt = """You are a precise question-answering assistant. Answer the question based on the provided context.
+
+Guidelines:
+1. Provide ONLY the answer, no explanations or reasoning
+2. Keep the answer as short as possible - typically 1-5 words
+3. For yes/no questions, answer only "yes" or "no"
+4. For dates, use the exact format (e.g., "December 31, 2015")
+5. For numbers, provide just the number (e.g., "1522")
+6. For names, provide just the name (e.g., "Terry Crews")
+7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+8. DO NOT add any additional context or information
+9. If the answer is not in the context, say "I don't know" """
+
             search_engine = get_local_search_engine(
                 config=config,
                 reports=reports,
@@ -584,8 +599,9 @@ class GraphRAG(RAGInterface):
                 entities=entities,
                 relationships=relationships,
                 covariates={},
-                response_type="general",  # 改为更简洁的输出格式
-                description_embedding_store=entity_description_embedding_store
+                response_type="single paragraph",  # 使用最简洁的输出格式
+                description_embedding_store=entity_description_embedding_store,
+                system_prompt=system_prompt  # 使用 system_prompt 参数
             )
 
             # # 执行查询

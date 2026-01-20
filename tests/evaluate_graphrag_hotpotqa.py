@@ -500,8 +500,8 @@ def main():
     """主流程"""
     # 配置
     HOTPOTQA_FILE = r"D:\Develop\all_RAG\routing_rag\HotpotQA\hotpot_1000_samples.jsonl"
-    NUM_SAMPLES = 1  # 使用全部1000条数据构建索引
-    NUM_TEST_SAMPLES = 1  # 评测时只用10条
+    NUM_SAMPLES = 5  # 使用全部1000条数据构建索引
+    NUM_TEST_SAMPLES = 5  # 评测时只用10条
     GRAPH_RAG_WORK_DIR = r"D:\Develop\all_RAG\routing_rag\graphrag_hotpotqa_data"  # GraphRAG工作目录
     GRAPH_RAG_CONFIG_FILE = r"D:\Develop\all_RAG\routing_rag\graphrag_hotpotqa_data\graphrag_hotpotqa_config.yml"  # GraphRAG配置文件
     OUTPUT_DIR = r"D:\Develop\all_RAG\routing_rag\evaluation_results"
