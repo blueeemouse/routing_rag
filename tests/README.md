@@ -4,6 +4,30 @@
 
 本项目包含以下测试文件：
 
+### Ollama 本地模型测试
+
+#### test_ollama_stage0.py
+
+- **目的**: 验证 Ollama 环境是否就绪
+- **测试内容**:
+  - 测试 Ollama 服务连接
+  - 测试模型生成功能
+  - 测试 OpenAI 兼容 API
+- **依赖**: Ollama 服务, qwen2.5:3b 模型
+- **说明**: 阶段0 的环境验证测试，确保 Ollama 服务正常运行
+
+#### test_ollama_norag.py
+
+- **目的**: 测试 NoRAG 使用 Ollama 本地模型
+- **测试内容**:
+  - 测试 NoRAG 初始化
+  - 测试多个查询的响应
+  - 验证 Ollama 模型的正确性
+- **依赖**:
+  - rag_implementations/no_rag/no_rag_impl.py
+  - Ollama 服务, qwen2.5:3b 模型
+- **说明**: 验证 NoRAG 组件可以使用 Ollama 本地模型，测试结果：✓ 通过
+
 ### naive rag部分
 
 #### test_naive_rag_build_and_query_index.py

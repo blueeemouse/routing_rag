@@ -1,23 +1,34 @@
 decomposer:
-  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
+  api_url: "${API_BASE_URL}/chat/completions"
   api_key: "${DECOMPOSER_API_KEY}"
-  # model: "deepseek-v3"
   model: "gpt-5.1"
-  # prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个："
   prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
 
 router:
-  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
+  api_url: "${API_BASE_URL}/chat/completions"
   api_key: "${ROUTER_API_KEY}"
   model: "deepseek-v3"
   prompt: "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
 
+# ============================================
+# NoRAG 配置
+# ============================================
+# 选项 1: 使用 API 服务（当前注释）
+# no_rag:
+#   api_url: "${API_BASE_URL}/chat/completions"
+#   api_key: "${NAIVE_RAG_API_KEY}"
+#   model: "gpt-4o"
+#   temperature: 0.0
+#   prompt_template: |
+#     You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.
+#     ...
+
+# 选项 2: 使用本地 Ollama（当前启用）
 no_rag:
-  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
+  api_url: "${API_BASE_URL}/chat/completions"
   api_key: "${NAIVE_RAG_API_KEY}"
-  model: "gpt-4o"
-  temperature: 0.0  # 降低温度，提高答案确定性
-  # 优化的 prompt 模板，用于生成简洁准确的答案
+  model: "qwen2.5:3b"
+  temperature: 0.0
   prompt_template: |
     You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.
 
@@ -35,19 +46,13 @@ no_rag:
     Answer:
 
 naive_rag:
-  api_url: "${API_BASE_URL}"  # ← 修改：使用环境变量
+  api_url: "${API_BASE_URL}"
   api_key: "${NAIVE_RAG_API_KEY}"
-  # model: "deepseek-v3"  # 试一下，把naive_rag的模型全都换成openai的。看报错，似乎LlamaIndex默认是用的openai的base_url
-  # 和api-key的
-  # model: "gpt-3.5-turbo"
   model: "gpt-4o"
-  # model: "gemini-3-pro-preview-thinking"
-  # model: "gpt-5.1"
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
   top_k: 5
-  temperature: 0.0  # 降低温度，提高答案确定性
-  # 优化的 prompt 模板，用于生成简洁准确的答案
+  temperature: 0.0
   prompt_template: |
     Context information is below.
     ---------------------
@@ -70,18 +75,13 @@ naive_rag:
     Answer:
 
 graph_rag:
-  api_url: "${API_BASE_URL}/chat/completions"  # ← 修改：使用环境变量
+  api_url: "${API_BASE_URL}/chat/completions"
   api_key: "${GRAPHRAG_API_KEY}"
-  # model: "deepseek-v3"
-  # model: "gpt-3.5-turbo"
   model: "gpt-4o"
-  # model: "gemini-3-pro-preview-thinking"
-  # model: "gpt-5.1"
   embedding_model: "text-embedding-ada-002"
   chunk_size: 512
   top_k: 5
-  temperature: 0.0  # 降低温度，提高答案确定性
-  # 优化的 prompt 模板，用于生成简洁准确的答案
+  temperature: 0.0
   prompt_template: |
     Context information is below.
     ---------------------
