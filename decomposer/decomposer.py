@@ -21,7 +21,7 @@ class Decomposer(DecomposerInterface):
         self.api_key = settings.decomposer_api_key
         self.prompt_template = settings.decomposer_prompt
         self.model = settings.decomposer_model
-
+        self.temperature = settings.decomposer_temperature
 
         self.logger = logging.getLogger(__name__)
 
@@ -45,7 +45,7 @@ class Decomposer(DecomposerInterface):
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 200,
-            "temperature": 0.3
+            "temperature": self.temperature
         }
         response = requests.post(self.api_url, headers=headers, json=data)
         response.raise_for_status()

@@ -1,8 +1,46 @@
+# ============================================
+# Decomposer 配置
+# ============================================
+# 选项 1: 使用 API 服务（当前注释）
+# decomposer:
+#   api_url: "${API_BASE_URL}/chat/completions"
+#   api_key: "${DECOMPOSER_API_KEY}"
+#   model: "gpt-5.1"
+#   prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
+
+# 选项 2: 使用本地 Ollama（当前启用）
 decomposer:
   api_url: "${API_BASE_URL}/chat/completions"
   api_key: "${DECOMPOSER_API_KEY}"
-  model: "gpt-5.1"
-  prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
+  model: "qwen2.5:3b"
+  temperature: 0.0
+  prompt: |
+    任务：将复杂查询分解为简单子查询
+
+    规则：
+    1. 如果查询很简单，直接返回原查询
+    2. 如果查询复杂，分解为多个子查询
+    3. 每行一个子查询
+    4. 不要包含任何解释、分析或说明文字
+    5. 只输出子查询内容
+
+    示例：
+    输入：什么是人工智能？它有哪些应用？
+    输出：
+    什么是人工智能？
+    人工智能有哪些应用？
+
+    输入：北京是中国的首都吗？
+    输出：
+    北京是中国的首都吗？
+
+    输入：1+1等于几？
+    输出：
+    1+1等于几？
+
+    现在请处理以下查询：
+    输入：{query}
+    输出：
 
 router:
   api_url: "${API_BASE_URL}/chat/completions"

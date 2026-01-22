@@ -28,6 +28,18 @@
   - Ollama 服务, qwen2.5:3b 模型
 - **说明**: 验证 NoRAG 组件可以使用 Ollama 本地模型，测试结果：✓ 通过
 
+#### test_ollama_decomposer.py
+
+- **目的**: 测试 Decomposer 使用 Ollama 本地模型
+- **测试内容**:
+  - 测试 Decomposer 初始化
+  - 测试查询分解功能
+  - 验证复杂查询和简单查询的分解结果
+- **依赖**:
+  - decomposer/decomposer.py
+  - Ollama 服务, qwen2.5:3b 模型
+- **说明**: 验证 Decomposer 组件可以使用 Ollama 本地模型，测试结果：✓ 通过
+
 ### naive rag部分
 
 #### test_naive_rag_build_and_query_index.py

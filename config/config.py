@@ -79,6 +79,11 @@ class Config:
         return self.config.get('decomposer', {}).get('model', 'gpt-3.5-turbo')
 
     @property
+    def decomposer_temperature(self) -> float:
+        """获取decomposer温度参数"""
+        return self.config.get('decomposer', {}).get('temperature', 0.0)
+
+    @property
     def decomposer_prompt(self) -> str:
         """获取decomposer提示词模板"""
         return self.config.get('decomposer', {}).get('prompt',
