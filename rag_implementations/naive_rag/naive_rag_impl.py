@@ -49,33 +49,80 @@ class NaiveRAG(RAGInterface):
         self.last_generation_tokens = 0
         self.last_total_tokens = 0
 
-        # 尝试导入LlamaIndex，如果不存在则后续execute的时候是不会执行的（会报错说没安装）
+        # 自动处理 Ollama API URL（移除 /v1 后缀）
+        self.api_url = self._adjust_api_url_for_ollama()
+
+        # 尝试导入LlamaIndex核心组件，如果不存在则后续execute的时候是不会执行的（会报错说没安装）
         try:
             from llama_index.core import VectorStoreIndex, Document, Settings
             from llama_index.llms.openai import OpenAI
-            from llama_index.embeddings.openai import OpenAIEmbedding
 
             self._llama_index_available = True
             self.VectorStoreIndex = VectorStoreIndex
             self.Document = Document
             self.OpenAI = OpenAI
-            self.OpenAIEmbedding = OpenAIEmbedding
 
-            # 在初始化函数里就设置好embedding model，以便加载索引时使用
-            embed_model = OpenAIEmbedding(
-                api_key=self.api_key,      # ← 统一使用 self.api_key
-                api_base=self.api_url,     # ← 统一使用 self.api_url  
-                model=self.embedding_model # ← 统一使用 self.embedding_model
-            )
+            self.logger.info("LlamaIndex 核心模块导入成功")
 
-            # 2. 设置到全局配置（关键步骤）
-            Settings.embed_model = embed_model
+            # 设置全局嵌入模型（仅在初始化时设置一次）
+            self._setup_global_embed_model()
 
-        except ImportError:
+        except ImportError as e:
             self._llama_index_available = False
+            self.logger.error(f"LlamaIndex 导入失败: {str(e)}")
             self.logger.warning("LlamaIndex not available. Please install it using: pip install llama-index")
-        
-        
+        except Exception as e:
+            self._llama_index_available = False
+            self.logger.error(f"LlamaIndex 初始化时发生未知错误: {str(e)}")
+            self.logger.warning("LlamaIndex not available. Please install it using: pip install llama-index")
+
+    def _adjust_api_url_for_ollama(self) -> str:
+        """根据模型类型调整 API URL，如果是 Ollama 模型则移除 /v1 后缀"""
+        # 如果模型是 Ollama 模型，且 URL 以 /v1 结尾，则移除它
+        if self._is_ollama_model(self.model) or self._is_ollama_endpoint():
+            # 移除末尾的 /v1 或 /v1/
+            adjusted_url = self.api_url.rstrip('/')
+            if adjusted_url.endswith('/v1'):
+                adjusted_url = adjusted_url[:-3]  # 移除 /v1
+                self.logger.info(f"检测到 Ollama 模型，调整 API URL 从 {self.api_url} 到 {adjusted_url}")
+            return adjusted_url
+        return self.api_url
+
+    def _setup_global_embed_model(self):
+        """设置全局嵌入模型"""
+        from llama_index.core import Settings
+
+        # 检查是否使用 Ollama embedding 模型
+        if self.embedding_model in ['nomic-embed-text', 'mxbai-embed-large', 'all-minilm']:
+            # 使用 Ollama 嵌入模型
+            try:
+                from llama_index.embeddings.ollama import OllamaEmbedding
+                embed_model = OllamaEmbedding(
+                    model_name=self.embedding_model,
+                    base_url=self.api_url,
+                    ollama_additional_kwargs={"temperature": self.temperature},
+                )
+                self.logger.info(f"使用 Ollama embedding 模型: {self.embedding_model}")
+            except Exception as e:
+                self.logger.error(f"无法初始化 Ollama embedding 模型 {self.embedding_model}: {str(e)}")
+                self.logger.info("请确保 Ollama 服务正在运行，并且模型已下载。例如：ollama pull nomic-embed-text")
+                raise
+        else:
+            # 使用标准 OpenAI embedding 模型
+            from llama_index.embeddings.openai import OpenAIEmbedding
+            # 对于 OpenAI 兼容的 API，可能需要调整 URL 格式
+            embed_model = OpenAIEmbedding(
+                api_key=self.api_key,
+                api_base=self.api_url,
+                model=self.embedding_model,
+                timeout=300.0  # 增加超时时间
+            )
+            self.logger.info(f"使用 OpenAI embedding 模型: {self.embedding_model}")
+
+        # 设置到全局配置（关键步骤）
+        Settings.embed_model = embed_model
+
+
     def execute(self, query: str, context: Dict[str, Any] = None) -> str:
         """
         执行RAG查询
@@ -149,13 +196,26 @@ Answer:""")
             # 创建 PromptTemplate
             prompt_template = PromptTemplate(prompt_template_str)
 
+            # 检查是否使用 Ollama 模型，如果是则使用 Ollama LLM
+            if self._is_ollama_model(self.model):
+                from llama_index.llms.ollama import Ollama
+                llm = Ollama(
+                    model=self.model,
+                    base_url=self.api_url,
+                    temperature=self.temperature,
+                    request_timeout=300.0
+                )
+            else:
+                # 使用 OpenAI 兼容的 LLM
+                llm = self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url)
+
             # 创建自定义的 query_engine
             query_engine = self.index.as_query_engine(
-                llm=self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url),
+                llm=llm,
                 text_qa_template=prompt_template,
                 similarity_top_k=self.top_k
             )
-            print("执行查询...")
+            # print("执行查询...")
 
             generation_start = time.time()
             response = query_engine.query(query)
@@ -169,12 +229,41 @@ Answer:""")
             self.last_generation_tokens = 0  # 暂时设为0，后续可以优化
             self.last_total_tokens = 0
 
-            print("response", str(response))
+            # print("response", str(response))
             return str(response)
 
         except Exception as e:
             self.logger.error(f"执行RAG查询时出错: {str(e)}")
             return f"错误：执行查询时出现问题 - {str(e)}"
+
+    def _is_ollama_model(self, model_name: str) -> bool:
+        """判断是否为 Ollama 模型"""
+        # 检查模型名称是否包含 Ollama 特有的参数格式（如 :3b, :7b 等）
+        ollama_param_patterns = [':3b', ':7b', ':8b', ':13b', ':70b', ':9b', ':34b', ':67b', ':110b', ':latest']
+
+        model_lower = model_name.lower()
+
+        # 如果包含特定的参数标签（如 :3b），则几乎可以确定是 Ollama 模型
+        if any(pattern in model_lower for pattern in ollama_param_patterns):
+            return True
+
+        # 检查是否包含常见的 Ollama 模型前缀
+        ollama_model_prefixes = [
+            'qwen', 'llama', 'mistral', 'mixtral', 'phi3', 'gemma', 'yi', 'codellama',
+            'command-r', 'nomic', 'mxbai', 'all-'
+        ]
+
+        # 检查是否匹配 Ollama 模型前缀且包含参数
+        for prefix in ollama_model_prefixes:
+            if prefix in model_lower and (':' in model_name or any(c.isdigit() for c in model_name)):
+                return True
+
+        return False
+
+    def _is_ollama_endpoint(self) -> bool:
+        """判断是否为 Ollama 服务端点"""
+        # 如果 API URL 包含 11434 端口，很可能是 Ollama 服务
+        return '11434' in self.api_url or 'ollama' in self.api_url.lower()
 
     def build_index_from_data(self, data, metadata=None, **kwargs):
         """
@@ -194,21 +283,9 @@ Answer:""")
             return False
 
         try:
-            
-            #############################
-            from llama_index.embeddings.openai import OpenAIEmbedding
-            from llama_index.core import Settings, VectorStoreIndex
-            
-            embed_model = OpenAIEmbedding(
-                api_key=self.api_key,      # ← 统一使用 self.api_key
-                api_base=self.api_url,     # ← 统一使用 self.api_url  
-                model=self.embedding_model, # ← 统一使用 self.embedding_model
-                timeout=300.0  # 增加超时时间到 300 秒
-            )
+            # 确保嵌入模型设置正确
+            self._setup_global_embed_model()
 
-            # 2. 设置到全局配置（关键步骤）
-            Settings.embed_model = embed_model
-            #############################
             # 处理输入数据
             llama_docs = []
             if metadata and len(metadata) == len(data):
@@ -233,7 +310,9 @@ Answer:""")
             return True
 
         except Exception as e:
+            import traceback
             self.logger.error(f"构建索引时出错: {str(e)}")
+            self.logger.error(f"详细错误信息: {traceback.format_exc()}")
             return False
 
     def add_document(self, text: str, metadata: Dict[str, Any] = None):
@@ -263,17 +342,17 @@ Answer:""")
     def save_index(self, storage_dir: str) -> bool:
         """
         保存索引到磁盘
-        
+
         Args:
             storage_dir: 存储目录路径
-        
+
         Returns:
             bool: 保存成功返回 True
         """
         if not self.is_index_initialized:
             self.logger.error("索引未初始化，无法保存")
             return False
-        
+
         try:
             os.makedirs(storage_dir, exist_ok=True)
             self.index.storage_context.persist(persist_dir=storage_dir)
@@ -282,35 +361,61 @@ Answer:""")
         except Exception as e:
             self.logger.error(f"保存索引失败: {e}")
             return False
-    
+
     def load_index(self, storage_dir: str) -> bool:
         """
         从磁盘加载索引
-        
+
         Args:
             storage_dir: 存储目录路径
-        
+
         Returns:
             bool: 加载成功返回 True
         """
         try:
             from llama_index.core import StorageContext, load_index_from_storage
-            
+
             storage_context = StorageContext.from_defaults(persist_dir=storage_dir)
             self.index = load_index_from_storage(storage_context)
-            
+
             # 重新设置嵌入模型（重要！）
-            from llama_index.embeddings.openai import OpenAIEmbedding
             from llama_index.core import Settings
-            
-            embed_model = OpenAIEmbedding(
-                api_key=self.api_key,
-                api_base=self.api_url,
-                model=self.embedding_model,
-                timeout=300.0  # 增加超时时间
-            )
+
+            # 检查是否使用 Ollama embedding 模型
+            if self.embedding_model in ['nomic-embed-text', 'mxbai-embed-large', 'all-minilm']:
+                # 尝试导入 Ollama 嵌入模型
+                try:
+                    from llama_index.embeddings.ollama import OllamaEmbedding
+                    embed_model = OllamaEmbedding(
+                        model_name=self.embedding_model,
+                        base_url=self.api_url,
+                        ollama_additional_kwargs={"temperature": self.temperature},
+                    )
+                    self.logger.info(f"使用 Ollama embedding 模型: {self.embedding_model}")
+                except ImportError:
+                    # 如果 OllamaEmbedding 不可用，尝试使用 OpenAIEmbedding 并指定基础URL
+                    from llama_index.embeddings.openai import OpenAIEmbedding
+                    embed_model = OpenAIEmbedding(
+                        api_key=self.api_key,
+                        api_base=self.api_url,
+                        model=self.embedding_model,
+                        embed_batch_size=10,
+                        timeout=300.0  # 增加超时时间
+                    )
+                    self.logger.info(f"使用 OpenAIEmbedding 适配 Ollama 模型: {self.embedding_model}")
+            else:
+                # 使用标准 OpenAI embedding 模型
+                from llama_index.embeddings.openai import OpenAIEmbedding
+                embed_model = OpenAIEmbedding(
+                    api_key=self.api_key,
+                    api_base=self.api_url,
+                    model=self.embedding_model,
+                    timeout=300.0  # 增加超时时间
+                )
+                self.logger.info(f"使用 OpenAI embedding 模型: {self.embedding_model}")
+
             Settings.embed_model = embed_model
-            
+
             self.is_index_initialized = True
             self.logger.info(f"索引已从 {storage_dir} 加载")
             return True

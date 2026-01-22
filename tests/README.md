@@ -91,6 +91,19 @@
 - **依赖**: naive_rag_impl模块
 - **说明**: 在重构NaiveRAG以实现索引构建与查询执行解耦后，验证重构功能的正确性
 
+#### test_ollama_naive_rag.py
+
+- **目的**: 测试 NaiveRAG 使用 Ollama 本地模型
+- **测试内容**:
+  - 测试 NaiveRAG 初始化
+  - 测试索引构建功能（使用 Ollama 嵌入模型）
+  - 测试查询执行功能（使用 Ollama LLM）
+  - 验证 Ollama 模型的正确性
+- **依赖**:
+  - rag_implementations/naive_rag/naive_rag_impl.py
+  - Ollama 服务, chat model（如qwen2.5:3b模型）, embedding model（如nomic-embed-text嵌入模型）
+- **说明**: 验证 NaiveRAG 组件可以使用 Ollama 本地模型，包括嵌入模型和 LLM，测试结果：✓ 通过
+
 ### graphrag部分
 
 #### test_graphrag_local_search.py

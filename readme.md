@@ -88,8 +88,53 @@
 - 分解器API设置
 - 路由器API设置
 - Naive RAG设置（API、模型、嵌入模型等）
+- NoRAG设置（API、模型等）
 - Graph RAG设置（API、模型、嵌入模型等）
 - 系统级设置
+
+## Ollama 本地部署支持
+
+本项目支持使用 Ollama在本地运行模型，无需依赖外部API。
+
+### 配置 Ollama
+
+1. 安装并启动 Ollama：
+
+   ```bash
+   # 下载并安装 Ollama
+   curl -fsSL https://ollama.ai/install.sh | sh
+
+   # 启动 Ollama 服务
+   ollama serve
+   ```
+2. 下载所需模型：
+
+   ```bash
+   # 下载主模型
+   ollama pull qwen2.5:3b
+
+   # 下载嵌入模型
+   ollama pull nomic-embed-text
+   ```
+3. 配置 settings.yaml：
+
+   ```yaml
+   naive_rag:
+     api_url: "http://127.0.0.1:11434"  # Ollama不需要 /v1 后缀
+     api_key: "ollama"  # Ollama部署时实际用不到
+     model: "qwen2.5:3b"
+     embedding_model: "nomic-embed-text"
+     # ... 其他配置
+   ```
+
+### 模型命名约定
+
+Ollama 模型通常使用以下格式：
+
+- `模型名:参数量` (如 `qwen2.5:3b`, `llama3:8b`)
+- 或者 `模型名:tag` (如 `mistral:latest`)
+
+系统会自动检测这些模型并使用 Ollama 接口。
 
 ## 进度跟踪
 

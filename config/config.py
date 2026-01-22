@@ -146,6 +146,26 @@ class Config:
         return self.config.get('naive_rag', {}).get('temperature', 0.7)
 
     @property
+    def no_rag_api_url(self) -> str:
+        """获取no_rag API URL"""
+        return self.config.get('no_rag', {}).get('api_url', '')
+
+    @property
+    def no_rag_api_key(self) -> str:
+        """获取no_rag API密钥"""
+        return self.config.get('no_rag', {}).get('api_key', '')
+
+    @property
+    def no_rag_model(self) -> str:
+        """获取no_rag模型名称"""
+        return self.config.get('no_rag', {}).get('model', 'gpt-3.5-turbo')
+
+    @property
+    def no_rag_temperature(self) -> float:
+        """获取no_rag生成温度"""
+        return self.config.get('no_rag', {}).get('temperature', 0.7)
+
+    @property
     def graph_rag_api_url(self) -> str:
         """获取graph_rag API URL"""
         return self.config.get('graph_rag', {}).get('api_url', '')

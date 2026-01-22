@@ -3,14 +3,14 @@
 # ============================================
 # 选项 1: 使用 API 服务（当前注释）
 # decomposer:
-#   api_url: "${API_BASE_URL}/chat/completions"
+#   api_url: "${API_BASE_URL}"
 #   api_key: "${DECOMPOSER_API_KEY}"
 #   model: "gpt-5.1"
 #   prompt: "将复杂查询分解为简单子查询。输入：{query}\n输出子查询，每行一个：（如果判断不需要分解，则返回原查询）"
 
 # 选项 2: 使用本地 Ollama（当前启用）
 decomposer:
-  api_url: "${API_BASE_URL}/chat/completions"
+  api_url: "${API_BASE_URL}"  # 基础 URL，代码中会自动添加 /chat/completions
   api_key: "${DECOMPOSER_API_KEY}"
   model: "qwen2.5:3b"
   temperature: 0.0
@@ -54,10 +54,10 @@ decomposer:
 
 # 选项 2: 使用本地 Ollama（当前启用）
 router:
-  api_url: "${API_BASE_URL}/chat/completions"
+  api_url: "${API_BASE_URL}"  # 基础 URL，代码中会自动添加 /chat/completions
   api_key: "${ROUTER_API_KEY}"
   model: "qwen2.5:3b"
-  temperature: 0.1
+  temperature: 0.0
   prompt: |
     任务：确定查询处理策略
 
@@ -105,7 +105,7 @@ router:
 # 选项 2: 使用本地 Ollama（当前启用）
 no_rag:
   api_url: "${API_BASE_URL}/chat/completions"
-  api_key: "${NAIVE_RAG_API_KEY}"
+  api_key: "${NO_RAG_API_KEY}"
   model: "qwen2.5:3b"
   temperature: 0.0
   prompt_template: |
@@ -124,11 +124,25 @@ no_rag:
     Question: {query}
     Answer:
 
+# ============================================
+# NaiveRAG 配置
+# ============================================
+# 选项 1: 使用 API 服务（当前注释）
+# naive_rag:
+#   api_url: "${API_BASE_URL}"
+#   api_key: "${NAIVE_RAG_API_KEY}"
+#   model: "gpt-4o"
+#   embedding_model: "text-embedding-ada-002"
+#   chunk_size: 512
+#   top_k: 5
+#   temperature: 0.0
+
+# 选项 2: 使用本地 Ollama（当前启用）
 naive_rag:
-  api_url: "${API_BASE_URL}"
-  api_key: "${NAIVE_RAG_API_KEY}"
-  model: "gpt-4o"
-  embedding_model: "text-embedding-ada-002"
+  api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
+  api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
+  model: "qwen2.5:3b"
+  embedding_model: "nomic-embed-text"
   chunk_size: 512
   top_k: 5
   temperature: 0.0

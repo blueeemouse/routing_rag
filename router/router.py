@@ -11,6 +11,13 @@ class Router(RouterInterface):
         self.prompt_template = settings.router_prompt
         self.model = settings.router_model
 
+        # 检查是否是 Ollama 端点，如果是则自动添加 /v1/chat/completions
+        if not self.api_url.endswith("/chat/completions"):
+            if self.api_url.endswith("/v1"):
+                self.api_url = self.api_url + "/chat/completions"
+            else:
+                self.api_url = self.api_url.rstrip('/') + "/v1/chat/completions"
+
     def route(self, sub_query: str) -> str:
         """
         确定如何处理子查询

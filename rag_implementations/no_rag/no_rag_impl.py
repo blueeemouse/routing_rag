@@ -26,15 +26,15 @@ class NoRAG(RAGInterface):
         self.config = config or {}
 
         # 优先使用传入的配置，否则使用全局配置
-        self.api_url = self.config.get('api_url', settings.naive_rag_api_url)
+        self.api_url = self.config.get('api_url', settings.no_rag_api_url)
         # print(f"Using NoRAG api_url: {self.api_url}")
         # 智能补全后缀
         if not self.api_url.endswith("/chat/completions"):
             self.api_url = self.api_url.rstrip('/') + "/chat/completions"
 
-        self.api_key = self.config.get('api_key', settings.naive_rag_api_key)
-        self.model = self.config.get('model', settings.naive_rag_model)
-        self.temperature = self.config.get('temperature', settings.naive_rag_temperature)
+        self.api_key = self.config.get('api_key', settings.no_rag_api_key)
+        self.model = self.config.get('model', settings.no_rag_model)
+        self.temperature = self.config.get('temperature', settings.no_rag_temperature)
 
         # 设置日志
         self.logger = logging.getLogger(__name__)
@@ -95,7 +95,7 @@ Answer:""")
         #     "max_tokens": 200,
         #     "temperature": self.temperature
         # }
-        
+
         try:
             # 记录开始时间
             generation_start = time.time()

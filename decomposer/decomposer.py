@@ -23,6 +23,13 @@ class Decomposer(DecomposerInterface):
         self.model = settings.decomposer_model
         self.temperature = settings.decomposer_temperature
 
+        # 检查是否是 Ollama 端点，如果是则自动添加 /v1/chat/completions
+        if not self.api_url.endswith("/chat/completions"):
+            if self.api_url.endswith("/v1"):
+                self.api_url = self.api_url + "/chat/completions"
+            else:
+                self.api_url = self.api_url.rstrip('/') + "/v1/chat/completions"
+
         self.logger = logging.getLogger(__name__)
 
     def decompose(self, query: str) -> List[str]:
