@@ -42,11 +42,52 @@ decomposer:
     输入：{query}
     输出：
 
+# ============================================
+# Router 配置
+# ============================================
+# 选项 1: 使用 API 服务（当前注释）
+# router:
+#   api_url: "${API_BASE_URL}/chat/completions"
+#   api_key: "${ROUTER_API_KEY}"
+#   model: "deepseek-v3"
+#   prompt: "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
+
+# 选项 2: 使用本地 Ollama（当前启用）
 router:
   api_url: "${API_BASE_URL}/chat/completions"
   api_key: "${ROUTER_API_KEY}"
-  model: "deepseek-v3"
-  prompt: "确定查询处理策略：no_rag, naive_rag, 或 graph_rag。查询：{sub_query}\n策略："
+  model: "qwen2.5:3b"
+  temperature: 0.1
+  prompt: |
+    任务：确定查询处理策略
+
+    可选策略：
+    - no_rag: 直接回答，无需检索
+    - naive_rag: 使用向量检索
+    - graph_rag: 使用图检索
+
+    规则：
+    1. 简单事实性问题 → no_rag
+    2. 需要信息检索的问题 → naive_rag
+    3. 复杂关系查询 → graph_rag
+    4. 只输出策略名称，不要任何解释
+
+    示例：
+    查询：1+1等于几？
+    策略：no_rag
+
+    查询：北京是中国的首都吗？
+    策略：no_rag
+
+    查询：什么是人工智能？
+    策略：naive_rag
+
+    查询：张三和李四的关系是什么？
+    策略：graph_rag
+
+    现在请处理以下查询：
+    查询：{sub_query}
+    策略：
 
 # ============================================
 # NoRAG 配置

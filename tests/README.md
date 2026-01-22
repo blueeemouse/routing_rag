@@ -40,6 +40,18 @@
   - Ollama 服务, qwen2.5:3b 模型
 - **说明**: 验证 Decomposer 组件可以使用 Ollama 本地模型，测试结果：✓ 通过
 
+#### test_ollama_router.py
+
+- **目的**: 测试 Router 使用 Ollama 本地模型
+- **测试内容**:
+  - 测试 Router 初始化
+  - 测试查询路由功能
+  - 验证不同类型查询的路由策略
+- **依赖**:
+  - router/router.py
+  - Ollama 服务, qwen2.5:3b 模型
+- **说明**: 验证 Router 组件可以使用 Ollama 本地模型，测试结果：✓ 通过
+
 ### naive rag部分
 
 #### test_naive_rag_build_and_query_index.py
