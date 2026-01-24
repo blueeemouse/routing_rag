@@ -167,11 +167,45 @@ naive_rag:
     Query: {query_str}
     Answer:
 
+# ============================================
+# GraphRAG 配置
+# ============================================
+# 选项 1: 使用 API 服务（当前注释）
+# graph_rag:
+#   api_url: "${API_BASE_URL}/chat/completions"
+#   api_key: "${GRAPHRAG_API_KEY}"
+#   model: "gpt-4o"
+#   embedding_model: "text-embedding-ada-002"
+#   chunk_size: 512
+#   top_k: 5
+#   temperature: 0.0
+#   prompt_template: |
+#     Context information is below.
+#     ---------------------
+#     {context_str}
+#     ---------------------
+#     Given the context information and not prior knowledge, answer the query.
+
+#     Guidelines:
+#     1. Provide ONLY the answer, no explanations or reasoning
+#     2. Keep the answer as short as possible - typically 1-5 words
+#     3. For yes/no questions, answer only "yes" or "no"
+#     4. For dates, use the exact format (e.g., "December 31, 2015")
+#     5. For numbers, provide just the number (e.g., "1522")
+#     6. For names, provide just the name (e.g., "Terry Crews")
+#     7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+#     8. DO NOT add any additional context or information
+#     9. If the answer is not in the context, say "I don't know"
+
+#     Query: {query_str}
+#     Answer:
+
+# 选项 2: 使用本地 Ollama（当前启用）
 graph_rag:
-  api_url: "${API_BASE_URL}/chat/completions"
-  api_key: "${GRAPHRAG_API_KEY}"
-  model: "gpt-4o"
-  embedding_model: "text-embedding-ada-002"
+  api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
+  api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
+  model: "qwen2.5:3b"  # 本地 LLM 模型
+  embedding_model: "nomic-embed-text"  # 本地 embedding 模型
   chunk_size: 512
   top_k: 5
   temperature: 0.0

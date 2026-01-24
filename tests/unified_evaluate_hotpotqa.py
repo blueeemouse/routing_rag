@@ -533,6 +533,9 @@ def prepare_hotpotqa_data_for_graphrag(hotpotqa_file: str, output_dir: str, num_
                     # 保存为文本文件
                     # 使用安全的文件名
                     safe_title = title.replace('/', '_').replace('\\', '_').replace(':', '_')
+                    # 这一段是添加针对Windows不允许字符的处理（Linux上应该不会有这个问题的）
+                    for char in '<>:"\\|?*':
+                        safe_title = safe_title.replace(char, '_')
                     doc_file = os.path.join(output_dir, f"{safe_title}.txt")
 
                     with open(doc_file, 'w', encoding='utf-8') as f:
@@ -723,7 +726,7 @@ def main():
     parser.add_argument(
         '--hotpotqa_file',
         type=str,
-        default=r"D:\Develop\all_RAG\routing_rag\HotpotQA\hotpot_1000_samples.jsonl",
+        default=r"D:\Develop\all_RAG\routing_rag\HotpotQA\hotpot_dev_distractor_1000_samples.jsonl",
         help='HotpotQA数据文件路径'
     )
 

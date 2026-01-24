@@ -46,21 +46,42 @@ local_search:
   chat_model_id: default_chat_model
   embedding_model_id: default_embedding_model
 models:
+  # ===== OpenAI 云端配置（已注释） =====
+  # default_chat_model:
+  #   api_base: ${API_BASE_URL}
+  #   api_key: ${GRAPHRAG_API_KEY}
+  #   concurrent_requests: 25
+  #   max_tokens: 4096
+  #   model: gpt-3.5-turbo
+  #   model_provider: openai
+  #   request_timeout: 180.0
+  #   temperature: 0
+  #   type: chat
+  # default_embedding_model:
+  #   api_base: ${API_BASE_URL}
+  #   api_key: ${GRAPHRAG_API_KEY}
+  #   concurrent_requests: 25
+  #   model: text-embedding-ada-002
+  #   model_provider: openai
+  #   request_timeout: 180.0
+  #   type: embedding
+
+  # ===== Ollama 本地配置（当前启用） =====
   default_chat_model:
-    api_base: ${API_BASE_URL}
-    api_key: ${GRAPHRAG_API_KEY}
+    api_base: http://127.0.0.1:11434/v1
+    api_key: ollama
     concurrent_requests: 25
     max_tokens: 4096
-    model: gpt-3.5-turbo
+    model: qwen2.5:3b
     model_provider: openai
     request_timeout: 180.0
     temperature: 0
     type: chat
   default_embedding_model:
-    api_base: ${API_BASE_URL}
-    api_key: ${GRAPHRAG_API_KEY}
+    api_base: http://127.0.0.1:11434/v1
+    api_key: ollama
     concurrent_requests: 25
-    model: text-embedding-ada-002
+    model: nomic-embed-text
     model_provider: openai
     request_timeout: 180.0
     type: embedding

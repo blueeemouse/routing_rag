@@ -11,3 +11,9 @@ IFLOW.md
 duplicated/
 official_evaluate.py
 dev_readme.md
+graphrag_hotpotqa_data/
+graphrag_hotpotqa_data_15_samples/
+graphrag_ollama_hotpotqa_test_data/
+graphrag_ollama_hotpotqa_1000_test_data/
+
+graphrag_class_test_data/
