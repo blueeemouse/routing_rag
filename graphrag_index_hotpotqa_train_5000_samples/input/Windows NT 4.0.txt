@@ -1,0 +1,7 @@
+Windows NT 4.0
+
+Windows NT 4.0 is a preemptively multitasked graphical operating system, designed to work with either uniprocessor or symmetric multi-processor computers.
+
+ It was part of Microsoft's Windows NT family of operating systems and was released to manufacturing on 31 July 1996.
+
+ It is a 32-bit operating system available in both workstation and server editions with a graphical environment similar to that of Windows 95.

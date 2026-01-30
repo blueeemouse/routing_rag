@@ -1,0 +1,7 @@
+Title 47 CFR Part 15
+
+Code of Federal Regulations, Title 47, Part 15 (47 CFR 15) is an oft-quoted part of Federal Communications Commission (FCC) rules and regulations regarding unlicensed transmissions.
+
+ It is a part of Title 47 of the Code of Federal Regulations (CFR), and regulates everything from spurious emissions to unlicensed low-power broadcasting.
+
+ Nearly every electronics device sold inside the United States radiates unintentional emissions, and must be reviewed to comply with Part 15 before it can be advertised or sold in the US market.

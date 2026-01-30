@@ -1,0 +1,17 @@
+Ruff (cards)
+
+In trick-taking games, to ruff means to play a trump card to a trick (other than when trumps were led).
+
+ According to the rules of most games, a player must have no cards left in the suit led in order to ruff.
+
+ Since the other players are constrained to follow suit if they can, even a low trump can win a trick.
+
+ In some games, like Pinochle and Preferans, the player who cannot follow suit is required to ruff.
+
+ In others, like Bridge and Whist, he may instead discard (play any card in any other suit).
+
+ Normally, ruffing will win a trick.
+
+ But it is also possible that a subsequent player will overruff (play a higher trump).
+
+ This is not always a bad thing—see uppercut below.

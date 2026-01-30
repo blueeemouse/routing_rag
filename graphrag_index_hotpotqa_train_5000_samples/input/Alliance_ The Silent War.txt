@@ -1,0 +1,11 @@
+Alliance: The Silent War
+
+Alliance: The Silent War is a first-person shooter video game for Microsoft Windows being developed by Windward Mark Interactive to simulate combat over 90 years of human history, taking the player from World War I to modern day.
+
+ The player will have access to 200 real world weapons using an innovative system called the War Studio.
+
+ With it, gamers can search for firearms from a number of different parameters, such as caliber, country of origin, and year of production, create multiplayer matches in which weapons from different time periods can be used by each team, or give different types of units weapons that would not normally be used.
+
+ Players will also have the ability to adjust the amount of realism as a part of their settings.
+
+ The game will run on the Alliance Engine.

@@ -1,0 +1,7 @@
+Ribonuclease V1
+
+Ribonuclease V1 (RNase V1) is a ribonuclease enzyme found in the venom of the Caspian cobra ("Naja oxiana").
+
+ It cleaves double-stranded RNA in a non-sequence-specific manner, usually requiring a substrate of at least six stacked nucleotides.
+
+ Like many ribonucleases, the enzyme requires the presence of magnesium ions for activity.

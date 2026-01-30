@@ -1,0 +1,7 @@
+Structural subordination
+
+In corporate finance, Structural subordination is the concept that a lender to a company will not have access to the assets of the company's subsidiary until after all of the subsidiary's creditors have been paid and the remaining assets have been distributed up to the company as an equity holder.
+
+ For example, if a lender loans money to a parent company, that lender is structurally subordinated to a lender who loaned money to a subsidiary operating company which is lower down in the company organizational structure.
+
+ The operating company lender is structurally senior, and the parent company lender can only be repaid from the operating assets after the operating company lender has been repaid.

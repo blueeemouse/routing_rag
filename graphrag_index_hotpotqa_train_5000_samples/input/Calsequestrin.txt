@@ -1,0 +1,27 @@
+Calsequestrin
+
+Calsequestrin is a calcium-binding protein of the sarcoplasmic reticulum.
+
+ The protein helps hold calcium in the cisterna of the sarcoplasmic reticulum after a muscle contraction, even though the concentration of calcium in the sarcoplasmic reticulum is much higher than in the cytosol.
+
+ It also helps the sarcoplasmic reticulum store an extraordinarily high amount of calcium ions.
+
+ Each molecule of calsequestrin can bind 18 to 50 Ca ions.
+
+ Sequence analysis has suggested that calcium is not bound in distinct pockets via EF-hand motifs, but rather via presentation of a charged protein surface.
+
+ Two forms of calsequestrin have been identified.
+
+ The cardiac form Calsequestrin-2 (CASQ2) is present in cardiac and slow skeletal muscle and the fast skeletal form Calsequestrin-1(CASQ1) is found in fast skeletal muscle.
+
+ The release of calsequestrin-bound calcium (through a calcium release channel) triggers muscle contraction.
+
+ The active protein is not highly structured, more than 50% of it adopting a random coil conformation.
+
+ When calcium binds there is a structural change whereby the alpha-helical content of the protein increases from 3 to 11%.
+
+ Both forms of calsequestrin are phosphorylated by casein kinase 2, but the cardiac form is phosphorylated more rapidly and to a higher degree.
+
+ Calsequestrin is also secreted in the gut where it deprives bacteria of calcium ions.
+
+ .

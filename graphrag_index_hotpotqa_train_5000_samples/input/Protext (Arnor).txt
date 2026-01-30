@@ -1,0 +1,7 @@
+Protext (Arnor)
+
+Protext is a British word processing program, developed by Arnor Ltd, of Peterborough in the decade following 1985.
+
+ Originally written for the Amstrad CPC464, it was later sold for the Amstrad PCW series of word processors, for MS-DOS based PCs, the Atari ST, and the Commodore Amiga.
+
+ A version was developed for the Acorn Archimedes and released in October 1990 which ran in full screen text mode, an accompanying note in the box mentioned Arnor's intention to develop a future release that would support operation in the RISC OS desktop with drag and drop capabilities, etc. but this was never developed.

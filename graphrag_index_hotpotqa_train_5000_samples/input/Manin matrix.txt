@@ -1,0 +1,9 @@
+Manin matrix
+
+In mathematics, Manin matrices, named after Yuri Manin who introduced them around 1987–88, are a class of matrices with elements in a not-necessarily commutative ring, which in a certain sense behave like matrices whose elements commute.
+
+ In particular there is natural definition of the determinant for them and most linear algebra theorems like Cramer's rule, Cayley–Hamilton theorem, etc. hold true for them.
+
+ Any matrix with commuting elements is a Manin matrix.
+
+ These matrices have applications in representation theory in particular to Capelli's identity, Yangian and quantum integrable systems.

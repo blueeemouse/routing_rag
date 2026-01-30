@@ -1,0 +1,5 @@
+Firing squad synchronization problem
+
+The firing squad synchronization problem is a problem in computer science and cellular automata in which the goal is to design a cellular automaton that, starting with a single active cell, eventually reaches a state in which all cells are simultaneously active.
+
+ It was first proposed by John Myhill in 1957 and published (with a solution) in 1962 by Edward Moore.

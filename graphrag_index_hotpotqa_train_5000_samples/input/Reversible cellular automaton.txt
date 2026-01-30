@@ -1,0 +1,7 @@
+Reversible cellular automaton
+
+A reversible cellular automaton is a cellular automaton in which every configuration has a unique predecessor.
+
+ That is, it is a regular grid of cells, each containing a state drawn from a finite set of states, with a rule for updating all cells simultaneously based on the states of their neighbors, such that the previous state of any cell before an update can be determined uniquely from the updated states of all the cells.
+
+ The time-reversed dynamics of a reversible cellular automaton can always be described by another cellular automaton rule, possibly on a much larger neighborhood.

@@ -1,0 +1,11 @@
+Contactless smart card
+
+A contactless smart card is a contactless 13.56-MHz credential whose dimensions are credit-card size.
+
+ Its embedded integrated circuits can store and sometimes process data and communicate with a terminal via radio waves.
+
+ There are two broad categories of contactless smart cards.
+
+ Memory cards contain non-volatile memory storage components, and perhaps some specific security logic.
+
+ Contactless smart cards do contain read-only RFID called CSN (Card Serial Number) or UID, and a re-writeable smart card microchip that can be transcribed via radio waves.

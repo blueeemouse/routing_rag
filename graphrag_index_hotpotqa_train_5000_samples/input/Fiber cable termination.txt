@@ -1,0 +1,7 @@
+Fiber cable termination
+
+Fiber cable termination is the addition of connectors to each optical fiber in a cable.
+
+ The fibers need to have connectors fitted before they can attach to other equipment.
+
+ Two common solutions for fiber cable termination are pigtails and fanout kits or breakout kits.

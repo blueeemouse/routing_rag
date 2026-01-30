@@ -1,0 +1,15 @@
+Bell state
+
+The Bell states are a concept in quantum information science and represent the simplest examples of entanglement.
+
+ They are named after John S. Bell because they are the subject of his famous Bell inequality.
+
+ An EPR pair is a pair of qubits (or quantum bits) that are in a Bell state together.
+
+ Because of the entanglement, measurement of one qubit will assign a value to the other qubit immedeately in one of four ways, where the value assigned depends on which bell state the two qubits are in.
+
+ This behaviour is not subject to relativistic limitations such as the speed of light, but the no-communication theorem prevents this behaviour to be used to transmit information faster than light.
+
+ The phenomena can be used to agree upon random numbers in less time than it would take to communicate the numbers at the speed of light over the distance between the peers - This was originally assumed to be a result of an error in quantum physics and was named the EPR paradox.
+
+ Originally, the paradox was resolved by giving up the assumption that the principle of locality is true, but other interpretations have also emerged.

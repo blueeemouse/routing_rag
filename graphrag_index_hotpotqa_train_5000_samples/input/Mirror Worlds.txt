@@ -1,0 +1,7 @@
+Mirror Worlds
+
+Mirror Worlds Technologies, Inc. was a company based in New Haven, Connecticut, which created software using ideas from the book "Mirror Worlds: or the Day Software Puts the Universe in a Shoebox...How It Will Happen and What It Will Mean" (1992) by Yale professor David Gelernter, who helped found the company with Eric Freeman and served as chief scientist.
+
+ Gelernter believed that computers can free users from being filing clerks by organizing their data.
+
+ The company's main product, Scopeware, was released in March 2001 and attempted to organize a user's files into time-based "streams" and make such data more easily accessible across networks and a variety of devices.

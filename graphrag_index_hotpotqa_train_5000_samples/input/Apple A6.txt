@@ -1,0 +1,5 @@
+Apple A6
+
+The Apple A6 is a 32-bit package on package (PoP) system on a chip (SoC) designed by Apple Inc. that was introduced on September 12, 2012 at the launch of the iPhone 5.
+
+ Apple states that it is up to twice as fast and has up to twice the graphics power compared with its predecessor, the Apple A5.

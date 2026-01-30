@@ -1,0 +1,9 @@
+Spacecraft Magnetic Test Facility
+
+The Spacecraft Magnetic Test Facility, also known historically as the Attitude Control Test Facility, is an experimental spacecraft test facility at the Goddard Space Flight Center in Greenbelt, Maryland, United States.
+
+ It was built in 1966 to allow the evaluation of magnetic movement in manned and unmanned spacecraft, and for the precision calibration of magnetometers used in space flight.
+
+ The building is constructed of non-magnetic materials and contains a magnetic coil system that allows the cancellation of the Earth's magnetic field.
+
+ This unique building was designated a National Historic Landmark in 1985.

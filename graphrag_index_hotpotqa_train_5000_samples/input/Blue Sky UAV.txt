@@ -1,0 +1,7 @@
+Blue Sky UAV
+
+Blue Sky LT series UAVs are Chinese UAV developed by Beijing Blue Sky UAV Co., Ltd. (北京蓝天无人机) subsidiary of  Beijing Blue Sky Rise Science and Technology Co., Ltd. (Blue Sky, 北京蓝天飞扬科技有限公司).
+
+ Originally an aerial survey company, Blue Sky has been deploying various UAVs developed by other manufacturers.
+
+ Based on the experience, Blue Sky has begun to develop its own UAVs by integrating commercial off-the-shelf (COTS) airframes with indigenously developed flight control systems for most UAVs of its own brand.

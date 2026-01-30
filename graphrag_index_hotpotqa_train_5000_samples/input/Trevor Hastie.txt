@@ -1,0 +1,11 @@
+Trevor Hastie
+
+Trevor John Hastie (born 27 June 1953) is an American statistician and computer scientist.
+
+ He is currently serving as the John A. Overdeck Professor of Mathematical Sciences and Professor of Statistics at the Stanford University.
+
+ Hastie is known for his contributions to applied statistics, especially in the field of machine learning, data mining, and bioinformatics.
+
+ He has authored several popular books in statistical learning, including "The Elements of Statistical Learning: Data Mining, Inference, and Prediction".
+
+ Hastie has been listed as an ISI Highly Cited Author in Mathematics by the ISI Web of Knowledge.

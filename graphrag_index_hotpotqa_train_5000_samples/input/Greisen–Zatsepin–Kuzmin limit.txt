@@ -1,0 +1,11 @@
+Greisen–Zatsepin–Kuzmin limit
+
+The Greisen–Zatsepin–Kuzmin limit (GZK limit) is a theoretical upper limit on the energy of cosmic rays (high energy charged particles from space) coming from "distant" sources.
+
+ The limit is , or about 8 joules.
+
+ The limit is set by slowing-interactions of cosmic ray protons with the microwave background radiation over long distances (~160 million light-years).
+
+ The limit is at the same order of magnitude as the upper limit for energy at which cosmic rays have experimentally been detected.
+
+ For example, one extreme-energy cosmic ray has been detected which appeared to possess a record (50 joules) of energy (about the same as the kinetic energy of a 60 mph baseball).

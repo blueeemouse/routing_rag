@@ -1,0 +1,3 @@
+Isomorphism-closed subcategory
+
+In category theory, a branch of mathematics, a subcategory formula_1 of a category formula_2 is said to be isomorphism closed or replete if every formula_2-isomorphism formula_4 with formula_5 belongs to formula_6 This implies that both formula_7 and formula_8 belong to formula_1 as well.

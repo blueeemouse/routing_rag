@@ -1,0 +1,7 @@
+Contactless payment
+
+Contactless payment systems are credit cards and debit cards, key fobs, smart cards, or other devices, including smartphones and other mobile devices, that use radio-frequency identification (RFID) or near field communication (NFC, e.g. Samsung Pay, Apple Pay, Android Pay, or any bank mobile application that support Contactless) for making secure payments.
+
+ The embedded chip and antenna enable consumers to wave their card, fob, or handheld device over a reader at the point of sale terminal.
+
+ Contactless payments are made in close physical proximity, unlike mobile payments which use broad-area cellular or WiFi networks and do not involve close physical proximity.

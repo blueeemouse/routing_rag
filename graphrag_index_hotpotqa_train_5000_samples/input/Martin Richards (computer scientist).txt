@@ -1,0 +1,3 @@
+Martin Richards (computer scientist)
+
+Martin Richards (born 21 July 1940) is a British computer scientist known for his development of the BCPL programming language which is both part of early research into portable software, and the ancestor of the B programming language invented by Ken Thompson in early versions of Unix and which Dennis Ritchie in turn used as the basis of his widely used C programming language.

@@ -1,0 +1,11 @@
+Roku
+
+The Roku Streaming Player, or simply Roku ( ), is a series of digital media player set-top boxes manufactured by Roku, Inc. Roku partners provide over-the-top content in the form of channels.
+
+ The name comes from the Japanese word 六 (roku ) meaning "six" and was named so because it was the sixth company that Anthony Wood (CEO 2002-) started.
+
+ A Roku streaming device gets data (the video stream) via a wired or Wi-Fi connection to an Internet router.
+
+ The data is output via an audio cable, video cable, or HDMI cable.
+
+ The device can be connected to any television set (or other video display device) with appropriate input connections.

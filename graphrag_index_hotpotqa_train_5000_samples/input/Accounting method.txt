@@ -1,0 +1,7 @@
+Accounting method
+
+In the field of analysis of algorithms in computer science, the accounting method is a method of amortized analysis based on accounting.
+
+ The accounting method often gives a more intuitive account of the amortized cost of an operation than either aggregate analysis or the potential method.
+
+ Note, however, that this does not guarantee such analysis will be immediately obvious; often, choosing the correct parameters for the accounting method requires as much knowledge of the problem and the complexity bounds one is attempting to prove as the other two methods.

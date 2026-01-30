@@ -1,0 +1,7 @@
+Silent guitar
+
+A silent guitar is a type of guitar with a solid or chambered body that converts the vibration of the strings into electric current using a piezoelectric pickup.
+
+ The body of the guitar does not amplify the vibration of the strings into audible sound.
+
+ Thanks to this, musicians can practice with headphones without disturbing people around them, or obtain an acoustic tone under heavy amplification without feedback.

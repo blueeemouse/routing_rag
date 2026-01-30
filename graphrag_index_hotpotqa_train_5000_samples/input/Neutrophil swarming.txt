@@ -1,0 +1,5 @@
+Neutrophil swarming
+
+Neutrophil swarming is a specific type of neutrophil migration behaviour characterised by a high coordination between neutrophils, clustering of neutrophils to the inflammation site and signalling to other neutrophils further away.
+
+ This specific type of migration rely on the production and secretion of LTB4 and on the use of integrins for neutrophil to stop at the cluster site.

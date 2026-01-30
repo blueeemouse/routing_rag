@@ -1,0 +1,7 @@
+Qualification Test Guide
+
+A Qualification Test Guide (QTG) is a guide for certifying new flight simulation technology to one of the regulatory levels of the appropriate national or regional regulatory body.
+
+ A QTG provides a list of tests that are necessary to qualify a flight simulator for use.
+
+ Regulatory bodies that utilize QTGs include the Federal Aviation Administration (FAA) in the USA, the National Civil Aviation Agency (ANAC) in Brazil, the European Aviation Safety Agency (EASA) in the European Union and equivalent bodies in other countries.

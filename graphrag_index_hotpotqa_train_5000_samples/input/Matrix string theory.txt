@@ -1,0 +1,11 @@
+Matrix string theory
+
+In physics, matrix string theory is a set of equations that describe superstring theory in a non-perturbative framework.
+
+ Type IIA string theory can be shown to be equivalent to a maximally supersymmetric two-dimensional gauge theory, the gauge group of which is U("N") for a large value of "N".
+
+ This matrix string theory was first proposed by Luboš Motl in 1997 and later independently in a more complete paper by Robbert Dijkgraaf, Erik Verlinde, and Herman Verlinde.
+
+ Another matrix string theory equivalent to Type IIB string theory was constructed in 1996 by Ishibashi, Kawai, Kitazawa and Tsuchiya.
+
+ This version is known as the IKKT matrix model.

@@ -1,0 +1,13 @@
+Magnetic resonance velocimetry
+
+Magnetic resonance velocimetry (MRV) is an experimental method to obtain velocity fields in fluid mechanics.
+
+ MRV is based on the phenomenon of nuclear magnetic resonance and adapts a medical magnetic resonance imaging system for the analysis of technical flows.
+
+ The velocities are usually obtained by phase contrast tomography techniques.
+
+ This means velocities are calculated from phase differences in the image data that has been produced using special gradient techniques.
+
+ MRV can be applied using common medical MRI scanners.
+
+ The term "magnetic resonance velocimetry" became current due to the increasing use of MR technology for the measurement of technical flows in engineering.

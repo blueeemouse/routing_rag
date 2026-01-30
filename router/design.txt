@@ -1,0 +1,28 @@
+   routing_rag/
+   ├── router/
+   │   ├── train_router.py              # 训练入口脚本
+   │   ├── train_router.ps1             # Windows PowerShell训练脚本
+   │   └── trainable_router/
+   │       ├── __init__.py
+   │       ├── config.py                # 配置管理
+   │       ├── factory.py               # 工厂模式（创建模型/训练器/数据集）
+   │       ├── base_model.py            # 模型基类
+   │       ├── base_trainer.py          # 训练器基类
+   │       ├── base_dataset.py          # 数据集基类
+   │       ├── data_utils.py            # 数据预处理工具
+   │       ├── config_example.yaml      # 配置示例
+   │       ├── demo_usage.py            # 使用示例
+   │       ├── evaluate_router.py       # 评估脚本
+   │       ├── models/
+   │       │   ├── __init__.py
+   │       │   └── dc_model.py          # DCRouter模型（双对比学习）
+   │       ├── trainers/
+   │       │   ├── __init__.py
+   │       │   └── dc_trainer.py        # DCRouter训练器
+   │       ├── datasets/
+   │       │   ├── __init__.py
+   │       │   ├── hotpotqa_dataset.py  # HotpotQA数据集
+   │       │   └── llm_judge_dataset.py # LLM评判数据集
+   │       └── routers/
+   │           ├── __init__.py
+   │           └── dc_router.py         # DCRouter推理类

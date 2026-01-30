@@ -1,0 +1,13 @@
+SGML entity
+
+In the Standard Generalized Markup Language (SGML), an entity is a primitive data type, which associates a string with either a unique alias (such as a user-specified name) or an SGML reserved word (such as codice_1).
+
+ Entities are foundational to the organizational structure and definition of SGML documents.
+
+ The SGML specification defines numerous entity types, which are distinguished by keyword qualifiers and context.
+
+ An entity string value may variously consist of plain text, SGML tags, and/or references to previously-defined entities.
+
+ Certain entity types may also invoke external documents.
+
+ Entities are called by reference.

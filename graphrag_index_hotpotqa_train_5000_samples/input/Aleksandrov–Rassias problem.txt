@@ -1,0 +1,9 @@
+Aleksandrov–Rassias problem
+
+The theory of isometries in the framework of Banach spaces has its beginning in a paper by Stanisław Mazur and Stanisław M. Ulam in 1932.
+
+ They proved that each isometry of a normed real linear space onto a normed real linear space is a linear mapping up to translation.
+
+ In 1970, Aleksandr Danilovich Aleksandrov asked whether the existence of a single conservative distance for some mapping implies that it is an isometry.
+
+ Themistocles M. Rassias posed the following problem:

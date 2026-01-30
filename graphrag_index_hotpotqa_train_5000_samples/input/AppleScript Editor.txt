@@ -1,0 +1,15 @@
+AppleScript Editor
+
+AppleScript Editor, formerly and more recently known as Script Editor, is a code editor for the AppleScript scripting language, included in classic Mac OS and macOS.
+
+ AppleScript Editor provides basic debugging capabilities and can save AppleScripts as plain text (.
+
+applescript), as a compiled script (.
+
+scpt), as a script bundle (.
+
+scptd), or as an application (.
+
+app).
+
+ AppleScript Editor also handles script dictionary files, allowing the user to see what scripting classes and commands are available for each scriptable application installed on the computer.

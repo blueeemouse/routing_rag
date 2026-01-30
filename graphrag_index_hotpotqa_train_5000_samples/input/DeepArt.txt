@@ -1,0 +1,11 @@
+DeepArt
+
+DeepArt or DeepArt.io is a website that allows users to create unique artistic images by using an algorithm to redraw one image using the stylistic elements of another image.
+
+ This uses "A Neural Algorithm of Artistic Style" that was developed by several of its creators to separate style elements from a piece of art.
+
+ The tool allows users to create imitation works of art using the style of famous artists.
+
+ The neural algorithm is used by the Deep Art website to create a representation of an image provided by the user by using the 'style' of another image provided by the user.
+
+ A similar program, Prisma, is an iOS and Android app that was based on the open source programming that underlies DeepArt.

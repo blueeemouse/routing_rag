@@ -1,0 +1,21 @@
+Adoption study
+
+Adoption studies are one of the classic tools of behavioral genetics.
+
+ These studies are used to estimate the degree to which a trait varies in response to environmental and genetic variation.
+
+ Adoption studies are typically used together with twin studies when estimating heritability.
+
+ There are two adoption study designs.
+
+ The adoptee's method investigates similarities between the adoptee and their biological and adoptive parents.
+
+ Similarity with the biological parent is expected to be heritable genetic effect, while similarity with the adoptive parent is associated with home-environment, called the shared environmental effect.
+
+ The familial method compares non-biological siblings who are reared in the same household.
+
+ Similarity to non-biological siblings raised in the same household is attributed to shared environment effect, as the siblings are biologically unrelated but share the home environment.
+
+ Variation that cannot be accounted by either genetics or home-environment is typically described as non-shared environment.
+
+ Adoption studies are one of the key tools in behavioral genetics and are typically used in combination with twin studies when making habitability estimates.

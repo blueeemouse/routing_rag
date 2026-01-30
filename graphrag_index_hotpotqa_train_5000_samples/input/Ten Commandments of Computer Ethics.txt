@@ -1,0 +1,9 @@
+Ten Commandments of Computer Ethics
+
+The Ten Commandments of Computer Ethics were created in 1992 by the Computer Ethics Institute.
+
+ The commandments were introduced in the paper "In Pursuit of a 'Ten Commandments' for Computer Ethics" by Ramon C. Barquin as a means to create "a set of standards to guide and instruct people in the ethical use of computers."
+
+ They follow Internet Advisory Board's memo on ethics from 1987.
+
+ The Ten Commandments of Computer Ethics copies the archaic style of the Ten Commandments from the King James Bible.

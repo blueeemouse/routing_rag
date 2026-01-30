@@ -1,0 +1,11 @@
+TV (software)
+
+Apple TV is a video streaming and digital distribution service developed by Apple Inc. exclusive to the namesake Apple TV microconsole and devices running iOS.
+
+ It provides a listing of television shows available on video on demand applications from national broadcast networks.
+
+ It also serves as a media player for television shows and films purchased in the iTunes Store, replacing the "Videos" application on earlier versions of iOS.
+
+ Apple TV was first introduced in the United States as a preinstalled application in tvOS 10.1 and iOS 10.2 on December 12, 2016.
+
+ It was later introduced in Australia and Canada in tvOS 11 and iOS 11, on September 19, 2017.

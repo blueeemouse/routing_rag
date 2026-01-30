@@ -1,0 +1,5 @@
+OpenCola (drink)
+
+OpenCola is a brand of open-source cola, where the instructions for making it are freely available and modifiable.
+
+ Anybody can make the drink, and anyone can modify and improve on the recipe.

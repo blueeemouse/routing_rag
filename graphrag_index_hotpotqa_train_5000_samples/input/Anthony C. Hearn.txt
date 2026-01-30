@@ -1,0 +1,9 @@
+Anthony C. Hearn
+
+Anthony C. Hearn is an Australian-American computer scientist and adjunct staff member at RAND Corporation and at the Institute for Defense Analyses Center for Computing Sciences.
+
+ He is best known for his pioneering contributions in mathematical software development, most notably in developing the computer algebra system REDUCE, which is the oldest such system still in active use.
+
+ He was also one of the founders of the CSNET computer network, for which he shared the Jonathan B. Postel Service Award with Peter J. Denning, David Farber, and Lawrence Landweber in 2009.
+
+ He was elected a Fellow of the Association for Computing Machinery in 2006 "for contributions to computer algebra and symbolic computation."

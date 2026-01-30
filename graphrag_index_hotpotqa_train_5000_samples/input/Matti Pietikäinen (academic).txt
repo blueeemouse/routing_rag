@@ -1,0 +1,9 @@
+Matti Pietikäinen (academic)
+
+Matti Kalevi Pietikäinen is a computer scientist.
+
+ He is currently Professor at the Department of Computer Science and Engineering, University of Oulu, Finland.
+
+ His research interests are in texture-based computer vision, face and activity analysis, and vision-based perceptual interfaces.
+
+ He is Director of the Center for Machine Vision Research, and Scientific Director of Infotech Oulu.

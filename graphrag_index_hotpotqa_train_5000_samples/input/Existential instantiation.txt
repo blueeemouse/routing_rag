@@ -1,0 +1,5 @@
+Existential instantiation
+
+In predicate logic, existential instantiation (also called existential elimination) is a valid rule of inference which says that, given a formula of the form formula_1, one may infer formula_2 for a new constant or variable symbol "c".
+
+ The rule has the restriction that the constant or variable "c" introduced by the rule must be a new term that has not occurred earlier in the proof.

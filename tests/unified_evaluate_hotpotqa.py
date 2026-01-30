@@ -837,14 +837,40 @@ def main():
         print("初始化NaiveRAG...")
         models['naive_rag'] = NaiveRAG()
 
-        print("构建NaiveRAG索引...")
-        success = models['naive_rag'].build_index_from_data(documents)
+        # 处理NaiveRAG索引路径
+        naive_rag_index_loaded = False
+        if args.naive_rag_index_path:
+            print(f"检查NaiveRAG索引路径: {args.naive_rag_index_path}")
+            # 检查路径是否存在且包含索引文件
+            if os.path.exists(args.naive_rag_index_path) and os.listdir(args.naive_rag_index_path):
+                print("尝试加载已存在的NaiveRAG索引...")
+                naive_rag_index_loaded = models['naive_rag'].load_index(args.naive_rag_index_path)
+                if naive_rag_index_loaded:
+                    print("NaiveRAG索引加载成功！")
+                else:
+                    print("NaiveRAG索引加载失败，将重新构建索引...")
+            else:
+                print("NaiveRAG索引路径不存在或为空，将构建新索引并保存...")
 
-        if not success:
-            print("NaiveRAG索引构建失败，退出。")
-            return
+        # 如果未加载索引，构建新索引
+        if not naive_rag_index_loaded:
+            print("构建NaiveRAG索引...")
+            success = models['naive_rag'].build_index_from_data(documents)
 
-        print(f"NaiveRAG索引构建成功，包含 {len(models['naive_rag'].documents)} 个文档")
+            if not success:
+                print("NaiveRAG索引构建失败，退出。")
+                return
+
+            print(f"NaiveRAG索引构建成功，包含 {len(models['naive_rag'].documents)} 个文档")
+
+            # 如果指定了索引路径，保存索引
+            if args.naive_rag_index_path:
+                print(f"保存NaiveRAG索引到: {args.naive_rag_index_path}")
+                save_success = models['naive_rag'].save_index(args.naive_rag_index_path)
+                if save_success:
+                    print("NaiveRAG索引保存成功！")
+                else:
+                    print("警告：NaiveRAG索引保存失败")
 
     # 初始化GraphRAG
     if 'graph_rag' in models_to_eval:

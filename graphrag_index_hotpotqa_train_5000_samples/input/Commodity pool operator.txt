@@ -1,0 +1,13 @@
+Commodity pool operator
+
+A Commodity pool operator (CPO) is an individual or organization that solicits or receives funds to use in the operation of a commodity pool, syndicate, investment trust, or other similar fund, specifically for trading in commodity interests.
+
+ Such interests include commodity futures, swaps, options and/or leverage transactions.
+
+ A commodity pool may refer to funds that trade in commodities and can include hedge funds.
+
+ A CPO may make trading decisions for a fund or the fund can be managed by one or more independent commodity trading advisors.
+
+ The definition of CPO may apply to investment advisors for hedge funds and private funds including mutual funds and exchange-traded funds in certain cases.
+
+ CPOs are generally regulated by the United States federal government through the Commodity Futures Trading Commission and National Futures Association.

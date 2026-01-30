@@ -1,0 +1,9 @@
+OpenStep
+
+OpenStep is an object-oriented application programming interface (API) specification for a legacy object-oriented operating system, with the basic goal of offering a NeXTSTEP-like environment on a non-NeXTSTEP operating system.
+
+ OpenStep was principally developed by NeXT with Sun Microsystems, to allow NeXTSTEP (like) development on Sun's operating systems, specifically Solaris.
+
+ NeXT produced a version of OpenStep for their own Mach-based Unix, known as OPENSTEP (all capitalized), as well as a version that ran on Windows NT.
+
+ The software libraries that shipped with OPENSTEP are a superset of the original OpenStep specification, including many features from the original NeXTSTEP.

@@ -1,0 +1,17 @@
+HAT-P-8b
+
+HAT-P-8b is an extrasolar planet located approximately 750 light years away in the constellation of Pegasus, orbiting the 10th magnitude star GSC 02757-01152.
+
+ This planet was discovered by transit on December 5, 2008.
+
+ Despite the designation as HAT-P-8b, it is the 11th planet discovered by the HATNet Project.
+
+ The mass of the planet is 50% more than Jupiter while the radius is also 50% more than Jupiter.
+
+ The mass of this planet is exact since the inclination of the orbit is known, typical for transiting planets.
+
+ This is a so-called “hot Jupiter” because this Jupiter-like gas giant planet orbits in a really close torch orbit around the star, making this planet extremely hot (in the order of a thousand kelvins).
+
+ The distance from the star is roughly 20 times smaller than that of Earth from the Sun, which places the planet roughly 8 times closer to its star than Mercury is from the Sun.
+
+ The “year” on this planet lasts only 3 days, 1 hour, 49 minutes, and 54 seconds, compared with Earth's 365 days, 6 hours, 9 minutes, and 10 seconds in a sidereal year.

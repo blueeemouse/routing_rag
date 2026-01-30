@@ -1,0 +1,13 @@
+Relational approach to quantum physics
+
+The relational approach to quantum physics is an alternative approach to and interpretation of quantum mechanics.
+
+ It asserts that the physical world can only be studied accurately in terms of "relationships" between systems, as all experimentally verifiable facts about the world result explicitly from interactions (such as the interaction between a light field and a detector).
+
+ According to the relational approach, the assumption that objects possess absolute properties (such as an absolute particle, independent of any detection frame) inevitably leads to ambiguities and paradoxes when these objects are studied closely.
+
+ The approach was adopted, in a time span of 1992-1996, by Q. Zheng, S. Hughes, and T. Kobayashi in the University of Tokyo.
+
+ As early as in 1985, S. Kochen suggested that the paradoxes of quantum physics could be overcome by developing a relational approach, which was needed at one time to solve the paradoxes of relativistic physics of space and time.
+
+ It is also hoped that this entry will serve as a complement to Rovelli’s relational quantum mechanics (RQM).

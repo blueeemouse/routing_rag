@@ -1,0 +1,9 @@
+Pinocchio paradox
+
+The Pinocchio paradox arises when Pinocchio says "My nose grows now" and is a version of the liar paradox.
+
+ The liar paradox is defined in philosophy and logic as the statement "This sentence is false."
+
+ Any attempts to assign a classical binary truth value to this statement lead to a contradiction, or paradox.
+
+ This occurs because if the statement "This sentence is false" is true, then it is false; this would mean that it is technically true, but also that it is false, and so on without end.

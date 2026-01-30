@@ -1,0 +1,9 @@
+Inverse gambler's fallacy
+
+The inverse gambler's fallacy, named by philosopher Ian Hacking, is a formal fallacy of Bayesian inference which is an inverse of the better known gambler's fallacy.
+
+ It is the fallacy of concluding, on the basis of an unlikely outcome of a random process, that the process is likely to have occurred many times before.
+
+ For example, if one observes a pair of fair dice being rolled and turning up double sixes, it is wrong to suppose that this lends any support to the hypothesis that the dice have been rolled many times before.
+
+ We can see this from the Bayesian update rule: letting "U" denote the unlikely outcome of the random process and "M" the proposition that the process has occurred many times before, we have

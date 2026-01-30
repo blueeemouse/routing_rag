@@ -1,0 +1,9 @@
+Social heuristics
+
+Social heuristics as a tool of bounded rationality are thought to guide behavior and decisions in the social environment.
+
+ Social environments tend to be characterised by complexity and uncertainty, and agents with limited informational or cognitive resources may rely on simple rules of thumb to make decisions.
+
+ The class of phenomena described by social heuristics overlap with those typically investigated by social psychology and game theory.
+
+ At the intersection of these fields, social heuristics have been applied to explain cooperation in the prisoner's dilemma, based on the argument that cooperation is typically advantageous in daily life, and therefore people develop a cooperation heuristic that gets applied even to one-shot anonymous interactions (the so-called "social heuristics hypothesis" of human cooperation).

@@ -1,0 +1,7 @@
+Electromagnetic tensor
+
+In electromagnetism, the electromagnetic tensor or electromagnetic field tensor (sometimes called the field strength tensor, Faraday tensor or Maxwell bivector) is a mathematical object that describes the electromagnetic field in spacetime.
+
+ The field tensor was first used after the four-dimensional tensor formulation of special relativity was introduced by Hermann Minkowski.
+
+ The tensor allows related physical laws to be written very concisely.

@@ -1,0 +1,9 @@
+Cardiac magnetic resonance imaging
+
+Cardiovascular magnetic resonance imaging (CMR), sometimes known as cardiac MRI, is a medical imaging technology for the non-invasive assessment of the function and structure of the cardiovascular system.
+
+ It is derived from and based on the same basic principles as magnetic resonance imaging (MRI) but with optimization for use in the cardiovascular system.
+
+ These optimizations are principally in the use of ECG gating and rapid imaging techniques or sequences.
+
+ By combining a variety of such techniques into protocols, key functional and morphological features of the cardiovascular system can be assessed.

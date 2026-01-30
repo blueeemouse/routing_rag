@@ -1,0 +1,5 @@
+Miklós Ajtai
+
+Miklós Ajtai (born 2 July 1946) is a computer scientist at the IBM Almaden Research Center, United States.
+
+ In 2003, he received the Knuth Prize for his numerous contributions to the field, including a classic sorting network algorithm (developed jointly with J. Komlós and Endre Szemerédi), exponential lower bounds, superlinear time-space tradeoffs for branching programs, and other "unique and spectacular" results.

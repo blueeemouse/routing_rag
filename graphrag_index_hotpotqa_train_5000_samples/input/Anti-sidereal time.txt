@@ -1,0 +1,13 @@
+Anti-sidereal time
+
+Anti-sidereal time and extended-sidereal time are artificial time standards used to analyze the daily variation in the number of cosmic rays received on Earth.
+
+ Anti-sidereal time has about 364.25 days per year, one day less than the number of days in a year of solar time, 365.25.
+
+ Thus each anti-sidereal day is longer than a solar day (24 hr) by about four minutes or 24 hr 4 min.
+
+ Extended-sidereal time has about 367.25 days per year, one day more than the number of days in a year of sidereal time, 366.25.
+
+ Thus each extended-sidereal day is shorter than a sidereal day (23 hr 56 min) by about four minutes or 23 hr 52 min.
+
+ All years mentioned have the same length.

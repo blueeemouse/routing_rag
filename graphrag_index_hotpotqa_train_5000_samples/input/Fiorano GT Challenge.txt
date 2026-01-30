@@ -1,0 +1,11 @@
+Fiorano GT Challenge
+
+Fiorano GT Challenge is a steel dueling roller coaster at Ferrari World in Abu Dhabi, United Arab Emirates.
+
+ The roller coaster features two, 1.08 km tracks, each of which has four LSM launches and four magnetic brake sections, immersing passengers into the twisting, head-to-head varying speeds and accelerations of GT racing.
+
+ Power for the ride system is provided via two flywheel motor generator sets, isolating the surge requirements of the launches from the electrical grid.
+
+ The trains' 3 cars have been modeled after the styling of Ferrari F430 Spiders.
+
+<ref name="Ferrari’s 200km/h rollercoaster"> </ref>

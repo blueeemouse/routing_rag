@@ -1,0 +1,5 @@
+Domain-specific learning
+
+Domain-specific learning theories of development hold that we have many independent, specialized knowledge structures, rather than one cohesive knowledge structure.
+
+ Thus, training in one domain may not impact another independent domain.

@@ -1,0 +1,5 @@
+Matt Welsh (computer scientist)
+
+Matthew David "Matt" Welsh is a computer scientist and software engineer at Google.
+
+ He was the Gordon McKay Professor of Computer Science at Harvard University and author of several books about the Linux operating system, several Linux HOWTOs, the LinuxDoc format and articles in the Linux Journal.

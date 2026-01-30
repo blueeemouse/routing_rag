@@ -1,0 +1,7 @@
+Power Mac G4
+
+The Power Mac G4 is a series of personal computers designed, manufactured, and sold by Apple Computer, Inc. from 1999 to 2004 as part of the Power Macintosh line.
+
+ Built around the PowerPC G4 series of microprocessors, the Power Mac G4 was marketed by Apple as the first "personal supercomputers", reaching speeds of 4 to 20 gigaFLOPS.
+
+ This was the first existing Macintosh product to be officially shortened as "Mac", and is the last Mac able to boot into classic Mac OS.

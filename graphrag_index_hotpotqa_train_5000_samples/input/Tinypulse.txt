@@ -1,0 +1,7 @@
+Tinypulse
+
+Tinypulse is a B2B SaaS employee survey product owned and operated by Tinyhr.
+
+ It offers weekly employee happiness surveys.
+
+ The product launched in September 2012

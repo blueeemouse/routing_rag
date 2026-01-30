@@ -1,0 +1,9 @@
+Civil time
+
+In modern usage, civil time refers to statutory time scales designated by civilian authorities, or to local time indicated by clocks.
+
+ Modern civil time is generally standard time in a time zone at a fixed offset from Coordinated Universal Time (UTC) or from Greenwich Mean Time (GMT), possibly adjusted by daylight saving time during part of the year.
+
+ UTC is calculated by reference to atomic clocks, and was adopted in 1972.
+
+ Older systems use telescope observations.

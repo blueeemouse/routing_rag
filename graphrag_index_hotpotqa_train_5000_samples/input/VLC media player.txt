@@ -1,0 +1,7 @@
+VLC media player
+
+VLC media player (commonly known as VLC) is a free and open-source, portable and cross-platform media player and streaming media server written by the VideoLAN project.
+
+ VLC is available for desktop operating systems and mobile platforms, such as Windows 10 Mobile, Windows Phone, Android, Tizen, iPad, iPhone, and iPod Touch.
+
+ VLC is also available on App stores such as Apple's App Store, Google Play store and Microsoft Windows Windows Store.

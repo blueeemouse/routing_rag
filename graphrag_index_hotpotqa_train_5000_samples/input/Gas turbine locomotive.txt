@@ -1,0 +1,9 @@
+Gas turbine locomotive
+
+A Gas turbine locomotive is a locomotive powered by a gas turbine.
+
+ The majority of gas turbine locomotives have had electric transmission but mechanical transmission has also been used, particularly in the early days.
+
+ The advantage of using gas turbines is that they have very high power-to-bulk and power-to-weight ratios.
+
+ The disadvantage is that gas turbines generally have lower thermal efficiency than diesel engines, especially when running at less than full load.

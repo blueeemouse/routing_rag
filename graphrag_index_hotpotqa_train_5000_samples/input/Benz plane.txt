@@ -1,0 +1,5 @@
+Benz plane
+
+In mathematics, a Benz plane is a type of 2-dimensional geometrical structure, named after the German mathematician Walter Benz.
+
+ The term was applied to a group of objects that arise from a common axiomatization of certain structures and split into three families, which were introduced separately: Möbius planes, Laguerre planes, and Minkowski planes.

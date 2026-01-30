@@ -1,0 +1,17 @@
+Exchange (chess)
+
+In the tactics and strategy in the board game of chess, an exchange (exchanging) or trade (trading) of chess pieces is series of closely related moves, typically sequential, in which the two players capture each other's pieces.
+
+ Any types of pieces except the kings may possibly be exchanged, i.e. captured in an exchange, although a king can capture an opponent's piece.
+
+ Either the player of the white or the black pieces may make the first capture of the other player's piece in an exchange, followed by the other player capturing a piece of the first player, often referred to as a "recapture".
+
+ Commonly, the word "exchange" is used when the pieces exchanged are of the same type or of about equal value, which is an "even exchange".
+
+ According to chess tactics, a bishop and a knight are usually of about equal value.
+
+ If the values of the pieces exchanged are not equal, then the player who captures the higher value of piece(s) can be said to be "up the exchange" or "wins the exchange", while the opponent who captures the lower value of piece(s) is "down the exchange" or "loses the exchange".
+
+ Exchanges occur very frequently in chess, in almost every game and usually multiple times per game.
+
+ Exchanges are often related to the tactics or strategy in a chess game, but often simply occur over the course of a game.

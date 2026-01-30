@@ -1,0 +1,9 @@
+Manual memory management
+
+In computer science, manual memory management refers to the usage of manual instructions by the programmer to identify and deallocate unused objects, or garbage.
+
+ Up until the mid-1990s, the majority of programming languages used in industry supported manual memory management, though garbage collection has existed since 1959, when it was introduced with Lisp.
+
+ Today, however, languages with garbage collection such as Java are increasingly popular and the languages Objective-C and Swift provide similar functionality through Automatic Reference Counting.
+
+ The main manually managed languages still in widespread use today are C and C++ – see C dynamic memory allocation.

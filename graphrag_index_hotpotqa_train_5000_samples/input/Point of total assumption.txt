@@ -1,0 +1,9 @@
+Point of total assumption
+
+The point of total assumption (PTA) is a point on the cost line of the profit-cost curve determined by the contract elements associated with a fixed price plus incentive-Firm Target (FPI) contract above which the seller effectively bears all the costs of a cost overrun.
+
+ The seller bears all of the cost risk at PTA and beyond, due to a dollar for dollar decrease in profit beyond the costs at the PTA.
+
+ In addition, once the costs on an FPI contract reach PTA, the maximum amount the buyer will pay is the ceiling price.
+
+ Note, however, that between the cost at PTA and when the cost equals the ceiling price, the seller is still in a profitable position; only after costs exceed the ceiling price is the seller in a loss position.

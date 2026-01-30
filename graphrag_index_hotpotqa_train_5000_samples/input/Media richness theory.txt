@@ -1,0 +1,11 @@
+Media richness theory
+
+Media Richness Theory, sometimes referred to as information richness theory or MRT, is a framework used to describe a communication medium's ability to reproduce the information sent over it.
+
+ It was introduced by Richard L. Daft and Robert H. Lengel in 1986 as an extension of information processing theory.
+
+ MRT is used to rank and evaluate the richness of certain communication media, such as phone calls, video conferencing, and email.
+
+ For example, a phone call cannot reproduce visual social cues such as gestures which makes it a less rich communication media than video conferencing, which affords the transmission of gestures and body language.
+
+ Based on contingency theory and information processing theory, MRT explains that richer, personal communication mediums are generally more effective for communicating of equivocal issues than leaner, less rich media.

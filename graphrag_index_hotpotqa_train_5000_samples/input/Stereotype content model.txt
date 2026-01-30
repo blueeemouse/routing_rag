@@ -1,0 +1,9 @@
+Stereotype content model
+
+The stereotype content model (SCM) is a psychological theory that hypothesizes that stereotypes possess two dimensions: warmth and competence.
+
+ Social groups are perceived as warm if they do not compete with the ingroup for the same resources (e.g., college space) and they are considered competent if they are high in status (e.g., economically or educationally successful).
+
+ Thus, lack of competition predicts perceived warmth and status predicts perceived competence.
+
+ The model was first proposed by social psychologist Susan Fiske and her colleagues Amy Cuddy, Peter Glick and Jun Xu.

@@ -1,0 +1,7 @@
+Wil van der Aalst
+
+Wil M.P. van der Aalst (born 29 January 1966) is a Dutch computer scientist, and professor at the Department of Mathematics & Computer Science of the Eindhoven University of Technology, where he chairs the Architecture of Information Systems group.
+
+ His research and teaching interests include information systems, workflow management, Petri nets, process mining, specification languages, and simulation.
+
+ He is also known for his work on workflow patterns.

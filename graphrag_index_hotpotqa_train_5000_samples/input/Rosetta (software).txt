@@ -1,0 +1,7 @@
+Rosetta (software)
+
+Rosetta was a dynamic binary translator for Mac OS X that allowed many PowerPC applications to run on certain Intel-based Macintosh computers without modification.
+
+ Apple released Rosetta in 2006 when it changed the instruction set architecture of the Macintosh platform from the PowerPC to the Intel processor.
+
+ The name "Rosetta" is a reference to the Rosetta Stone, the discovery that made it possible to comprehend and translate Egyptian hieroglyphs.

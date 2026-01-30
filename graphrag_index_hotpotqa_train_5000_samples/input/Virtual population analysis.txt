@@ -1,0 +1,7 @@
+Virtual population analysis
+
+Virtual population analysis (VPA) is a cohort modeling technique commonly used in fisheries science for reconstructing historical fish numbers at age using information on death of individuals each year.
+
+ This death is usually partitioned into catch by fisheries and natural mortality.
+
+ VPA is virtual in the sense that the population size is not observed or measured directly but is inferred or back-calculated to have been a certain size in the past in order to support the observed fish catches and an assumed death rate owing to non-fishery related causes.

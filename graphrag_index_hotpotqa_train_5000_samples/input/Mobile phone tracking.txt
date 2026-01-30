@@ -1,0 +1,9 @@
+Mobile phone tracking
+
+Mobile phone tracking is the ascertaining of the position or location of a mobile phone, whether stationary or moving.
+
+ Localization may occur either via multilateration of radio signals between (several) cell towers of the network and the phone, or simply via GPS.
+
+ To locate a mobile phone using multilateration of radio signals, it must emit at least the roaming signal to contact the next nearby antenna tower, but the process does not require an active call.
+
+ The Global System for Mobile Communications (GSM) is based on the phone's signal strength to nearby antenna masts.

@@ -1,0 +1,5 @@
+Rube Goldberg Machine Contest
+
+The Rube Goldberg Machine Contest is a contest in which college or high school students build devices to complete a simple task in a minimum of twenty steps in the style of American cartoonist Rube Goldberg.
+
+ Local contests are held throughout the United States, and local winners are eligible to compete in the national contest.

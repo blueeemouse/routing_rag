@@ -1,0 +1,9 @@
+Gilbert Strang
+
+William Gilbert Strang (born November 27, 1934), usually known as simply Gilbert Strang or Gil Strang, is an American mathematician, with contributions to finite element theory, the calculus of variations, wavelet analysis and linear algebra.
+
+ He has made many contributions to mathematics education, including publishing seven mathematics textbooks and one monograph.
+
+ Strang is the MathWorks Professor of Mathematics at the Massachusetts Institute of Technology.
+
+ He teaches Introduction to Linear Algebra and Computational Science and Engineering and his lectures are freely available through MIT OpenCourseWare.

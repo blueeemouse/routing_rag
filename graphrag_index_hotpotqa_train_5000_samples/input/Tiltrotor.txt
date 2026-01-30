@@ -1,0 +1,13 @@
+Tiltrotor
+
+A tiltrotor is an aircraft which generates lift and propulsion by way of one or more powered rotors (sometimes called "proprotors") mounted on rotating engine pods or nacelles usually at the ends of a fixed wing or an engine mounted in the fuselage with drive shafts transferring power to rotor assemblies mounted on the wingtips.
+
+ It combines the vertical lift capability of a helicopter with the speed and range of a conventional fixed-wing aircraft.
+
+ For vertical flight, the rotors are angled so the plane of rotation is horizontal, lifting the way a helicopter rotor does.
+
+ As the aircraft gains speed, the rotors are progressively tilted forward, with the plane of rotation eventually becoming vertical.
+
+ In this mode the wing provides the lift, and the rotor provides thrust as a propeller.
+
+ Since the rotors can be configured to be more efficient for propulsion (e.g. with root-tip twist) and it avoids a helicopter's issues of retreating blade stall, the tiltrotor can achieve higher speeds than helicopters.

@@ -1,0 +1,9 @@
+Id Tech 4
+
+id Tech 4, popularly known as the "Doom 3" engine, is a game engine developed by id Software and first used in the video game "Doom 3".
+
+ The engine was designed by John Carmack.
+
+ Carmack also created previous game engines, such as those for Doom and Quake, which are widely recognized as significant advances in the field.
+
+ This OpenGL-based game engine has also been used in "Quake 4", "Prey", "", "Wolfenstein", and "Brink".

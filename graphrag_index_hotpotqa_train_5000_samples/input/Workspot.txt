@@ -1,0 +1,11 @@
+Workspot
+
+Workspot was the first Linux desktop Web Service, i.e. it provided Open Source personal computing without computer ownership.
+
+ Founded by Greg Bryant, Gal Cohen, Kathy Giori, Curt Brune, Benny Soetarman, Bruce Robertson, and Asao Kamei, in 1999, it was the first application service to make use of Virtual Network Computing.
+
+ Workspot also hosted a free Linux Desktop demo using VNC: 'one-click to Linux' It eventually began to charge for a remote, web-accessible, persistent desktop, and several desktop collaboration features.
+
+ Workspot won "Linux Journal"<nowiki>'</nowiki>s Best Web Application award for 2000.
+
+ Badly hit by the dotcom crash, it ceased activity by 2005.

@@ -1,0 +1,9 @@
+SymPy
+
+SymPy is a Python library for symbolic computation.
+
+ It provides computer algebra capabilities either as a standalone application, as a library to other applications, or live on the web as SymPy Live or SymPy Gamma.
+
+ SymPy is trivial to install and to inspect because it is written entirely in Python with few dependencies.
+
+ This ease of access combined with a simple and extensible code base in a well known language make SymPy a computer algebra system with a relatively low barrier to entry.

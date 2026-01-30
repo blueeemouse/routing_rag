@@ -1,0 +1,11 @@
+Phonemic contrast
+
+Phonemic contrast refers to a minimal phonetic difference, that is, small differences in speech sounds, that makes a difference in how the sound is perceived by listeners, and can therefore lead to different mental lexical entries for words.
+
+ For example, whether a sound is voiced or unvoiced (consider /b/ and /p/ in English) matters for how a sound is perceived in many languages, such that changing this phonetic feature can yield a different word (consider "pat" and "bat" in English); see Phoneme.
+
+ Other examples in English of a phonemic contrast would be the difference between "leak" and "league;" the minimal difference of voicing between [k] and [g] does lead to the two utterances being perceived as different words.
+
+ On the other hand, an example that is not a phonemic contrast in English is the difference between [sit] and [siːt] .
+
+ In this case the minimal difference of vowel length is not a contrast in English and so those two forms would be perceived as different pronunciations of the same word "seat".

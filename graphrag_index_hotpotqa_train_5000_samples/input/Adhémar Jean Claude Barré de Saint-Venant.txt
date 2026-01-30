@@ -1,0 +1,9 @@
+Adhémar Jean Claude Barré de Saint-Venant
+
+Adhémar Jean Claude Barré de Saint-Venant (23 August 1797, Villiers-en-Bière, Seine-et-Marne – 6 January 1886, Saint-Ouen, Loir-et-Cher) was a mechanician and mathematician who contributed to early stress analysis and also developed the unsteady open channel flow shallow water equations, also known as the Saint-Venant equations that are a fundamental set of equations used in modern hydraulic engineering.
+
+ The one-dimensional Saint-Venant equation is a commonly used simplification of the shallow water equations.
+
+ Although his full surname was Barré de Saint-Venant in mathematical literature other than French he is known as Saint-Venant.
+
+ His name is also associated with Saint-Venant's principle of statically equivalent systems of load, Saint-Venant's theorem and for Saint-Venant's compatibility condition, the integrability conditions for a symmetric tensor field to be a strain.

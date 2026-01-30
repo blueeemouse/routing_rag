@@ -1,0 +1,7 @@
+Data General Eclipse
+
+The Data General Eclipse line of computers by Data General were 16-bit minicomputers released in early 1974 and sold until 1988.
+
+ The Eclipse was based on many of the same concepts as the Data General Nova, but included support for virtual memory and multitasking more suitable to the small office than the lab.
+
+ It was also packaged differently for this reason, in a floor-standing case the size of a small refrigerator.

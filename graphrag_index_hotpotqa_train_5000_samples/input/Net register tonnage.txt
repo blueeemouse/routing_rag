@@ -1,0 +1,7 @@
+Net register tonnage
+
+Net register tonnage (NRT, nrt, n.r.t.) is a ship's cargo volume capacity expressed in "register tons", one of which equals to a volume of 100 cuft .
+
+ It is calculated by subtracting non-revenue-earning spaces i.e. spaces not available for carrying cargo, for example engine rooms, fuel tanks and crew quarters, from the ship's gross register tonnage.
+
+ Net register tonnage is not a measure of the weight of the ship or its cargo, and should not be confused with terms such as deadweight tonnage or displacement.

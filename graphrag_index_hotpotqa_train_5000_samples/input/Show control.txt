@@ -1,0 +1,11 @@
+Show control
+
+Show control is the use of automation technology to link together and operate multiple entertainment control systems in a coordinated manner.
+
+ It is distinguished from entertainment control (a term much less common than its specific forms, e.g. lighting control), which coordinates elements within a single entertainment discipline such as lighting, sound, video, rigging or pyrotechnics.
+
+ An example of show control would be linking a video segment with a number of lighting cues, or having a sound track trigger animatronic movements -- or all of these combined.
+
+ Shows with or without live actors almost invariably incorporate entertainment control technology and usually benefit from show control to operate these subsystems simultaneously or independently.
+
+ Shows which are performed once or only a few times are often not considered candidates for show control since considerable preplanning and programming is usually required, but this may change as the technology, ease of operation and programming of show control software and systems matures.

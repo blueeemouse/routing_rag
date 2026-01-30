@@ -1,0 +1,11 @@
+Rocket Lab
+
+Rocket Lab is a US aerospace corporation with a New Zealand subsidiary.
+
+ Rocket Lab's mission is to develop lightweight, cost-effective commercial rocket launch services.
+
+ The Electron Program was founded on the premise that small payloads such as CubeSats require dedicated small launch vehicles and flexibility not currently offered by traditional rocket systems.
+
+ Electron, Rocket Lab's lightweight launch vehicle, is designed to service the small satellite market with dedicated, high-frequency launch opportunities.
+
+ Electron is designed to deliver payloads of 150 kg to a 500 km Sun-synchronous orbit.

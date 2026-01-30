@@ -1,0 +1,7 @@
+Metrebus Card
+
+The Metrebus Card is a contactless smartcard ticketing system for Rome.
+
+ It has stored value on a paper ticket for either 1, 3 or 7 days.
+
+ All three versions of the tickets look the same on the front, but on the back of the ticket the magnetic data printed on the ticket varies depending on which version of the ticket was purchased.

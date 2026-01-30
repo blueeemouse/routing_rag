@@ -1,0 +1,9 @@
+Iris hypothesis
+
+The iris hypothesis is a hypothesis proposed by Richard Lindzen et al. in 2001 that suggested increased sea surface temperature in the tropics would result in reduced cirrus clouds and thus more infrared radiation leakage from Earth's atmosphere.
+
+ His study of observed changes in cloud coverage and modeled effects on infrared radiation released to space as a result supported the hypothesis.
+
+ This suggested infrared radiation leakage was hypothesized to be a negative feedback in which an initial warming would result in an overall cooling of the surface.
+
+ The consensus view is that increased sea surface temperature would result in increased cirrus clouds and reduced infrared radiation leakage and therefore a positive feedback.

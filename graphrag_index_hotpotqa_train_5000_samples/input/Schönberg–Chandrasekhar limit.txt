@@ -1,0 +1,11 @@
+Schönberg–Chandrasekhar limit
+
+In stellar astrophysics, the Schönberg–Chandrasekhar limit is the maximum mass of a non-fusing, isothermal core that can support an enclosing envelope.
+
+ It is expressed as the ratio of the core mass to the total mass of the core and envelope.
+
+ Estimates of the limit depend on the models used and the assumed chemical compositions of the core and envelope; typical values given are from 0.10 to 0.15 (10% to 15% of the total stellar mass).
+
+ This is the maximum to which a helium-filled core can grow, and if this limit is exceeded, as can only happen in massive stars, the core collapses, releasing energy that causes the outer layers of the star to expand to become a red giant.
+
+ It is named after the astrophysicists Subrahmanyan Chandrasekhar and Mario Schönberg, who estimated its value in a 1942 paper.

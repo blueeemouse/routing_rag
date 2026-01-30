@@ -1,0 +1,5 @@
+Stack Soap
+
+Stack Soap is a personal care product developed to solve the issue of soap waste when an old bar of soap wears thin and would otherwise be discarded.
+
+ Stack Soap implements a grooved stack design such as that used with Pringles chips to merge an old, thin bar of soap with a new one.

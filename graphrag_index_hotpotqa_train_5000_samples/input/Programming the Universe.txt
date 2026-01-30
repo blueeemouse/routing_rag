@@ -1,0 +1,7 @@
+Programming the Universe
+
+Programming the Universe: A Quantum Computer Scientist Takes On the Cosmos is a 2006 popular science book by Seth Lloyd, professor of mechanical engineering at the Massachusetts Institute of Technology.
+
+ The book proposes that the universe is a quantum computer, and advances in the understanding of physics may come from viewing entropy as a phenomenon of information, rather than simply thermodynamics.
+
+ Lloyd also postulates that the universe can be fully simulated using a quantum computer; however, in the absence of a theory of quantum gravity, such a simulation is not yet possible.

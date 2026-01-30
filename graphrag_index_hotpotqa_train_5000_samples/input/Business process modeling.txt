@@ -1,0 +1,7 @@
+Business process modeling
+
+Business process modeling (BPM) in systems engineering is the activity of representing processes of an enterprise, so that the current process may be analysed or improved.
+
+ BPM is typically performed by business analysts, who provide expertise in the modeling discipline; by subject matter experts, who have specialized knowledge of the processes being modelled; or more commonly by a team comprising both.
+
+ Alternatively, the process model can be derived directly from events' logs using process mining tools.

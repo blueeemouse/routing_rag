@@ -1,0 +1,5 @@
+MapCore
+
+MapCore is a game development community with origins in "Half-Life" mod production, which since its inception in 1999 has evolved into a thriving forum featuring all flavours of game development including level design, modelling, concept art, and programming.
+
+ With 100+ members part of the professional games industry working for the likes of Blizzard, Crytek, DICE, Gearbox Software, Rockstar Games, and Ubisoft, MapCore offers an opportunity for professionals and amateurs alike to socialise, learn, teach, and find talent.

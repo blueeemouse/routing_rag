@@ -1,0 +1,13 @@
+Source Insight
+
+Source Insight is a source code editor by Source Dynamics.
+
+ Source Insight provides syntax highlighting, code navigation and customizable keyboard shortcuts.
+
+ It bills itself not just as an editor but a tool to understand a large source code base, and for this reason is called "program editor and analyzer."
+
+ It is agile and lightweight providing useful features such as relation, context, and symbol windows.
+
+ It also can display reference trees, class inheritance diagrams, and call trees, as it builds an internal database of symbolic information as it self-parses the source.
+
+ Its greatest benefit is to speedup code comprehension on an unfamiliar project.

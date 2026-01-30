@@ -1,0 +1,15 @@
+Bicarbonate indicator
+
+A bicarbonate indicator (hydrogencarbonate indicator) is a type of pH indicator that is sensitive enough to show a color change as the concentration of carbon dioxide gas in an aqueous solution increases.
+
+ The indicator is used in photosynthesis and respiration experiments to find out whether carbon dioxide is being liberated.
+
+ It is also used to test the carbon dioxide content during gaseous exchange of organisms.
+
+ When the carbon dioxide content is higher than 0.04%, the initial red color changes to yellow as the pH becomes more acidic.
+
+ If the carbon dioxide content is lower than 0.04%, it changes from red to magenta and, in relatively very low carbon dioxide concentrations, to purple.
+
+ Carbon dioxide, even in the concentrations found in exhaled air, will dissolve in the indicator to form carbonic acid, a weak acid, which will lower the pH and give the characteristic colour change.
+
+ A colour change to purple during photosynthesis shows a reduction in the percentage of carbon dioxide and is sometimes inferred as production of oxygen, but there is not actually any direct evidence for it.

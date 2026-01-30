@@ -1,0 +1,13 @@
+Heavens-Above
+
+Heavens-Above is a non-profit website developed and maintained by Chris Peat as "Heavens-Above GmbH".
+
+ The web site is dedicated to helping people observe and track satellites orbiting the Earth without the need for optical equipment such as binoculars or telescopes.
+
+ It provides detailed star charts showing the trajectory of the satellites against the background of the stars as seen during a pass.
+
+ Special attention is paid to the ISS, Iridium flares and other satellites.
+
+ Space shuttle missions were tracked until the program was retired in July 2011.
+
+ The website also offers information on currently visible comets, asteroids, planet details, and other miscellaneous information.

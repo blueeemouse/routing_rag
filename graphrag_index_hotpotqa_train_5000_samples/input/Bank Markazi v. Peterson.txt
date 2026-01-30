@@ -1,0 +1,15 @@
+Bank Markazi v. Peterson
+
+Bank Markazi v. Peterson, 578 U.S. ___ (2016), was a United States Supreme Court case that found that a law which only applied to a specific case, identified by docket number, and eliminated all of the defenses one party had raised does not violate the separation of powers in the United States Constitution between the legislative (Congress) and judicial branches of government.
+
+ The plaintiffs in the trial court, respondents in the Supreme Court, were several parties who had obtained judgments against Iran for its role in supporting state-sponsored terrorism, particularly the 1983 Beirut barracks bombings and 1996 Khobar Towers bombing, and sought execution against a bank account in New York held, through European intermediaries, on behalf of Bank Markazi, the state-owned Central Bank of Iran.
+
+ The initial plaintiffs obtained court orders preventing the transfer of funds from the account in 2008 and initiated their lawsuit in 2010.
+
+ Bank Markazi raised several defenses against the execution against the account, including that the account was not an asset "of" the bank, but rather an asset of its European intermediary, under both New York state property law and §201(a) of the Terrorism Risk Insurance Act.
+
+ In response to concerns that existing laws were insufficient for the account to be used to settle the judgments, Congress included a section within a 2012 bill, codified after enactment as 22 U.S.C. § 8772, that identified the pending lawsuit by docket number, applied only to the assets in the identified case, and essentially abrogated every legal basis available to Bank Markazi to prevent the plaintiffs from executing their claims against the account.
+
+ Bank Markazi then argued that § 8772 was an unconstitutional breach of the separation of power between the legislative and judicial branches of government, because it effectively directed a particular result in a single case without changing the generally applicable law.
+
+ The United States District Court for the Southern District of New York and, on appeal, the United States Court of Appeals for the Second Circuit both upheld the constitutionality of § 8772 and cleared the way for the plaintiffs to execute their judgments against the account, which held about $1.75 billion in cash.

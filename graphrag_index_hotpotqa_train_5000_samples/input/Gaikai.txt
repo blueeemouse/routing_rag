@@ -1,0 +1,13 @@
+Gaikai
+
+Gaikai (外海 , lit.
+
+ "open sea", i.e. an expansive outdoor space) is a company which provides technology for the streaming of high-end video games.
+
+ Founded in 2008, it was acquired by Sony Interactive Entertainment in 2012.
+
+ Its technology has multiple applications, including in-home streaming over a local wired or wireless network (as in Remote Play between the PlayStation 4 and PlayStation Vita), as well as cloud-based gaming where video games are rendered on remote servers and delivered to end users via internet streaming (such as the PlayStation Now game streaming service.)
+
+ As a startup, before its acquisition by Sony, the company announced many partners using the technology from 2010 through 2012 including game publishers, web portals, retailers and consumer electronics manufacturers.
+
+ On July 2, 2012, Sony announced that a formal agreement had been reached to acquire the company for $380 million USD with plans of establishing their own new cloud-based gaming service, as well as integrating streaming technology built by Gaikai into PlayStation products, resulting in PlayStation Now and Remote Play.

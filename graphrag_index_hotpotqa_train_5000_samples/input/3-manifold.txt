@@ -1,0 +1,9 @@
+3-manifold
+
+In mathematics, a 3-manifold is a space that locally looks like Euclidean 3-dimensional space.
+
+ A 3-manifold can be thought of as a possible shape of the universe.
+
+ Just as a sphere looks like a plane to a small enough observer, all 3-manifolds look like our universe does to a small enough observer.
+
+ This is made more precise in the definition below.

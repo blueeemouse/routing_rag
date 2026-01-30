@@ -1,0 +1,7 @@
+Oscillating turret
+
+An oscillating turret is a form of turret for armoured fighting vehicles, both tanks and armoured cars.
+
+ The turret is unusual in being made of two hinged parts.
+
+ Elevation of the gun relies on the upper part of the turret moving relative to the lower part.

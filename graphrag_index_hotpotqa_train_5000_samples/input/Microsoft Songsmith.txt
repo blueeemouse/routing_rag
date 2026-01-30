@@ -1,0 +1,7 @@
+Microsoft Songsmith
+
+Microsoft Research Songsmith is a musical accompaniment application for Microsoft Windows, launched in early 2009.
+
+ Songsmith immediately generates a musical accompaniment after a voice is recorded.
+
+ The user can adjust tempo, genre (such as pop, R&B, hip-hop, rock, jazz, or reggae), and overall mood (e.g. to make it happy, sad, jazzy, etc.).

@@ -1,0 +1,7 @@
+Birth rate
+
+The birth rate (technically, births/population rate) is the total number of live births per 1,000 of a population in a year.
+
+ The rate of births in a population is calculated in several ways: live births from a universal registration system for births, deaths, and marriages; population counts from a census, and estimation through specialized demographic techniques.
+
+ The birth rate (along with mortality and migration rate) are used to calculate population growth.

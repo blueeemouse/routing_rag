@@ -1,0 +1,15 @@
+Statistical hypothesis testing
+
+A statistical hypothesis, sometimes called confirmatory data analysis, is a hypothesis that is testable on the basis of observing a process that is modeled via a set of random variables.
+
+ A statistical hypothesis test is a method of statistical inference.
+
+ Commonly, two statistical data sets are compared, or a data set obtained by sampling is compared against a synthetic data set from an idealized model.
+
+ A hypothesis is proposed for the statistical relationship between the two data sets, and this is compared as an alternative to an idealized null hypothesis that proposes no relationship between two data sets.
+
+ The comparison is deemed "statistically significant" if the relationship between the data sets would be an unlikely realization of the null hypothesis according to a threshold probability—the significance level.
+
+ Hypothesis tests are used in determining what outcomes of a study would lead to a rejection of the null hypothesis for a pre-specified level of significance.
+
+ The process of distinguishing between the null hypothesis and the alternative hypothesis is aided by identifying two conceptual types of errors (type 1 & type 2), and by specifying parametric limits on e.g. how much type 1 error will be permitted.

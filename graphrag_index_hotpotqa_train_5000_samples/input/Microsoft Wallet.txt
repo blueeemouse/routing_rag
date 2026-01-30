@@ -1,0 +1,9 @@
+Microsoft Wallet
+
+Microsoft Wallet is a mobile payment and digital wallet service by Microsoft that lets users make payments and store loyalty cards on certain devices.
+
+ Making payments is currently supported with the Microsoft Lumia 950, Lumia 950 XL, and Lumia 650.
+
+ Microsoft Wallet does not require Microsoft Wallet-specific contactless payment terminals, and can work with existing contactless terminals.
+
+ Similar to Android Pay, Microsoft Wallet utilizes Host card emulation (HCE) for making in-store payments.

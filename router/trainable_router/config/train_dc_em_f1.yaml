@@ -1,0 +1,156 @@
+# DC Router 训练配置
+# 使用 EM:F1 = 0.3:0.7 加权分数进行训练
+
+# ============================================================================
+# 策略扩展说明
+# ============================================================================
+# 要增加新策略时，需要修改以下配置：
+#
+# 1. strategy_names: 添加新策略名称
+# 2. num_strategies: 更新为策略总数
+# 3. top_k / last_k: 根据策略数量调整（原则：top_k + last_k <= num_strategies - 1）
+#
+# 示例：
+#   - 2 策略: top_k=1, last_k=1
+#   - 3 策略: top_k=1, last_k=1 或 top_k=2, last_k=1
+#   - 5 策略: top_k=2, last_k=2
+#
+# ============================================================================
+
+# 模型类型
+model_type: "dc"
+
+# 模型配置
+model:
+  # Backbone 模型
+  # 注意：如果更换 backbone，可能需要调整 hidden_size
+  backbone_name: "sentence-transformers/all-MiniLM-L6-v2"
+  hidden_size: 384
+
+  # === 策略配置（扩展策略时修改这里）===
+  # 当前有 2 个策略（graph_rag 数据待收集）
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+
+  # 相似度计算
+  similarity_function: "cos"  # 余弦相似度
+  temperature: 1.0           # softmax 温度
+
+  # 设备配置
+  device: "cuda"  # cpu 或 cuda
+
+# 训练配置
+training:
+  batch_size: 32
+  learning_rate: 5.0e-5
+  epochs: 10
+  max_length: 512
+
+  # === 对比学习参数（扩展策略时可能需要调整）===
+  # top_k: 前 k 个高分策略作为正样本
+  # last_k: 后 k 个低分策略作为负样本
+  # 原则：top_k + last_k <= num_strategies - 1
+  top_k: 1   # 2个策略时，取 top-1 作为正样本
+  last_k: 1  # 取 last-1 作为负样本
+
+  # === 损失权重配置 ===
+  # sample_llm_loss: 核心，query 与策略的对比损失
+  # sample_sample_loss: 可选，同 cluster 的 query 相似性损失
+  # cluster_loss: 可选，不同 cluster 中心的对比损失
+  sample_llm_loss_weight: 1.0      # 主要损失（必需）
+  sample_sample_loss_weight: 0.1    # 辅助损失（可选，设为 0 可禁用）
+  cluster_loss_weight: 1.0           # 辅助损失（可选，设为 0 可禁用）
+
+  # 训练控制
+  training_steps: 0    # 0 表示使用 epochs
+  eval_steps: 100      # 每 100 步评估一次
+  save_steps: 500      # 每 500 步保存一次
+
+  # === 优化器配置 ===
+  # 参考 LLMRouter: 使用 AdamW 优化器，无特殊参数
+  optimizer_type: "adamw"
+  optimizer_kwargs: {}  # 可自定义优化器参数，如 {"weight_decay": 0.01}
+
+  # === 学习率调度器配置 ===
+  scheduler_type: "linear"  # 可选: linear, cosine, None
+  # 注：LLMRouter 没有显式使用调度器，但我们保留以支持更灵活的训练
+
+  # 梯度裁剪
+  max_grad_norm: 1.0
+
+  # 混合精度训练
+  use_amp: false
+
+  # 随机种子（保证可复现性）
+  seed: 42
+
+# 数据配置
+data:
+  source: "hotpotqa"
+
+  # === 数据路径配置 ===
+  train_path: "HotpotQA_train_data"  # 训练数据目录
+  val_path: ""                       # 验证数据路径（暂无，可留空）
+  test_path: ""                      # 测试数据路径（暂无，可留空）
+
+  # === Cluster 配置 ===
+  # Cluster: 根据问题语义相似性划分的分组
+  # - 同 cluster 的 query 应该有相似的 routing 行为
+  # - 用于辅助对比学习，提高泛化能力
+  # - 使用 K-Means 聚类自动生成
+  num_clusters: 50  # 将训练问题分成 50 个 cluster
+
+  # 数据预处理
+  normalize_scores: true   # 是否归一化分数到 [0, 1]
+  shuffle: true           # 是否打乱训练数据
+
+  # === 评分公式配置 ===
+  # 支持任意指标组合，无需预先定义
+  # 常用示例：
+  #   - 单指标: "em", "f1", "llm_judge", "bert_score"
+  #   - 组合指标: "em * 0.3 + f1 * 0.7"
+  #   - 成本权衡: "em - 0.01 * total_time"
+  score_formula: "em * 0.3 + f1 * 0.7"  # EM:F1 权重 0.3:0.7
+
+# 输出配置
+output_dir: "router_models/train_dc_em_f1"
+logging_dir: "router_models/train_dc_em_f1/logs"
+log_level: "info"
+
+# ============================================================================
+# 损失函数说明
+# ============================================================================
+#
+# 1. Sample-LLM Loss (必需)
+#    - 目的: 让 query embedding 更接近高分策略，更远离低分策略
+#    - 计算位置: dc_model.py 的 compute_sample_llm_loss 方法
+#    - 权重: sample_llm_loss_weight = 1.0
+#
+#    示例: 假设有 no_rag (score=0.3), naive_rag (score=0.8)
+#          loss = -logsigmoid(sim(query, naive_rag) - sim(query, no_rag))
+#          目标: sim(query, naive_rag) > sim(query, no_rag)
+#
+# 2. Sample-Sample Loss (可选)
+#    - 目的: 同一个 cluster 内的 query 应该有相似的表示
+#    - 计算位置: dc_model.py 的 compute_sample_sample_loss 方法
+#    - 权重: sample_sample_loss_weight = 0.1
+#
+#    示例: cluster 0 有 3 个 query: [q1, q2, q3]
+#          loss = -log(exp(sim(q1, q2)) / sum(exp(sim(q1, q_all))))
+#          目标: 同 cluster 的 query embedding 相似
+#
+# 3. Cluster Loss (可选)
+#    - 目的: 不同 cluster 的中心应该尽可能远
+#    - 计算位置: dc_model.py 的 compute_cluster_loss 方法
+#    - 权重: cluster_loss_weight = 1.0
+#
+#    示例: cluster 0 中心 = c0, cluster 1 中心 = c1
+#          loss = -log(sim(c0, c0) / (sim(c0, c0) + sim(c0, c1)))
+#          目标: 不同 cluster 的中心区分度高
+#
+# 总损失:
+#   total_loss = sample_llm_loss * 1.0
+#              + sample_sample_loss * 0.1
+#              + cluster_loss * 1.0
+#
+# ============================================================================

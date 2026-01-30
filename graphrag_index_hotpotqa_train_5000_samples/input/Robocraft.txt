@@ -1,0 +1,17 @@
+Robocraft
+
+Robocraft is an online third-person vehicle combat game set in fictional areas of different planets where players construct robots to fight with others in battles.
+
+ It is full released, and is being developed and published by the indie video game developer Freejam Games based in the United Kingdom.
+
+ The game features contained garages in which players can build various functional vehicles with basic block-based parts (such as cubes and wheels) along with weapons that can be used for combat.
+
+ The initial alpha build was released in March 2013, featuring a single-player building and test mode.
+
+ In April 2013, Freejam Games released multiplayer combat, which is now the core content of the game.
+
+ Content updates and bug fixes for the game are released a few times each month.
+
+ On April 14, 2014, the company revealed that "Robocraft" had gained over 300,000 players in a few months; the game continues to attract many players, notably, international players from non-English speaking countries.
+
+ It is also available as a Steam platform release.

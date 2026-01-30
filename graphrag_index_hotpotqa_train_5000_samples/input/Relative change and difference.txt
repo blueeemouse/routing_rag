@@ -1,0 +1,15 @@
+Relative change and difference
+
+In any quantitative science, the terms relative change and relative difference are used to compare two quantities while taking into account the "sizes" of the things being compared.
+
+ The comparison is expressed as a ratio and is a unitless number.
+
+ By multiplying these ratios by 100 they can be expressed as percentages so the terms percentage change, percent(age) difference, or relative percentage difference are also commonly used.
+
+ The distinction between "change" and "difference" depends on whether or not one of the quantities being compared is considered a "standard" or "reference" or "starting" value.
+
+ When this occurs, the term "relative change" (with respect to the reference value) is used and otherwise the term "relative difference" is preferred.
+
+ Relative difference is often used as a quantitative indicator of quality assurance and quality control for repeated measurements where the outcomes are expected to be the same.
+
+ A special case of percent change (relative change expressed as a percentage) called "percent error" occurs in measuring situations where the reference value is the accepted or actual value (perhaps theoretically determined) and the value being compared to it is experimentally determined (by measurement).

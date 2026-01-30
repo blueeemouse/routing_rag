@@ -1,0 +1,7 @@
+MathWorks
+
+The MathWorks, Inc. (branded as simply MathWorks) is an American privately held corporation that specializes in mathematical computing software.
+
+ Its major products include MATLAB and Simulink, which support data analysis and simulation.
+
+ As of June 2016, it employed over 3,600 people worldwide with 70% located at the company's headquarters in Natick, Massachusetts, United States.

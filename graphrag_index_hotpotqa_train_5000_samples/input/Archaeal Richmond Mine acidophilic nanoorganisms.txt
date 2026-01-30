@@ -1,0 +1,17 @@
+Archaeal Richmond Mine acidophilic nanoorganisms
+
+Archaeal Richmond Mine acidophilic nanoorganisms (ARMAN) were first discovered in an extremely acidic mine located in northern California (Richmond Mine at Iron Mountain) by Brett Baker in Jill Banfield's laboratory at the University of California Berkeley.
+
+ These novel groups of archaea named ARMAN-1, ARMAN-2 ("Candidatus" Micrarchaeum acidiphilum ARMAN-2 ), and ARMAN-3 were missed by previous PCR-based surveys of the mine community because the ARMANs have several mismatches with commonly used PCR primers for 16S rRNA genes.
+
+ Baker "et al." detected them in a later study using shotgun sequencing of the community.
+
+ The three groups were originally thought to represent three unique lineages deeply branched within the Euryarchaeota, a subgroup of the Archaea.
+
+ However, this has been revised, based on more complete archaeal genomic tree, that they belong to a super phylum named DPANN.
+
+ The ARMAN groups now comprise deeply divergent phyla named Micrarchaeota and Parvarchaeota.
+
+ Their 16S rRNA genes differ by as much as 17% between the three groups.
+
+ Prior to their discovery all of the Archaea shown to be associated with Iron Mountain belonged to the order Thermoplasmatales (e.g., "Ferroplasma acidarmanus").

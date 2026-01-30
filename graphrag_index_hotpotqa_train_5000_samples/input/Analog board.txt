@@ -1,0 +1,13 @@
+Analog board
+
+An analog board is a circuit board that contains the majority of analog circuitry in certain Apple Macintosh computers.
+
+ The analog board was one of two circuit boards within many early Macintosh computers, including the Macintosh 128K/512K/Plus, Macintosh SE series, and Macintosh Classic series.
+
+ The analog board contained several capacitors, a battery compartment, and some other analog circuitry.
+
+ Some later all-in-one Macintosh computers also included analog boards, with the most recent being the iMac G3 and eMac.
+
+ In these computers, the analog board functioned as the power supply to other parts within the system, and also functioned to control the CRT display within the computer.
+
+ The other board was the logic board, which contained all of the computer's digital logic circuitry, such as the processor and memory.

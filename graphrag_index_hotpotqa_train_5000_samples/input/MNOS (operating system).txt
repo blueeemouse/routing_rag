@@ -1,0 +1,7 @@
+MNOS (operating system)
+
+MNOS (meaning "MobilNaya Operatsionnaya Sistema" (МобильНая Операционная Система, МНОС), or "Portable Operating System") was a Unix-like operating system developed in the Soviet Union.
+
+ It was derived from Version 6 Unix and consequently heavily modified to incorporate many features of BSD Unix.
+
+ From 1983 until 1986 it enjoyed significant popularity in the USSR and other Eastern Bloc countries, due to its light weight and better performance than that of Version 7 Unix (and later BSD Unix-based) alternatives.
