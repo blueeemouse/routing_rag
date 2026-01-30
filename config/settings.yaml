@@ -233,3 +233,23 @@ graph_rag:
 rag:
   naive_rag_enabled: true
   graph_rag_enabled: true
+
+# ============================================
+# Trainable Router 配置 (可选)
+# ============================================
+# 使用训练好的模型进行路由决策
+# 使用方法：
+# 1. 训练模型: python router/train_router.py --train_data evaluation_results --output_dir router_models
+# 2. 修改router配置使用trainable类型
+trainable_router:
+  # 模型类型: "dc" (对比学习), "knn", "mf" (矩阵分解)
+  model_type: "dc"
+  
+  # 模型路径 (训练后的模型)
+  model_path: "router_models/final"
+  
+  # 策略名称列表
+  strategy_names: ["no_rag", "naive_rag", "graph_rag"]
+  
+  # 批处理大小
+  batch_size: 32

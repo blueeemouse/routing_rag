@@ -42,6 +42,12 @@ class GraphRAG(RAGInterface):
         # 设置日志
         self.logger = logging.getLogger(__name__)
 
+        # 记录最后一次检索和生成的时间（用于性能评测）
+        # 注意：GraphRAG 的 search 方法是检索+生成的一体化操作，我们无法精确分离这两部分的时间
+        # 因此使用经验比例进行估算：检索 75%，生成 25%
+        self.last_retrieval_time = 0.0
+        self.last_generation_time = 0.0
+
         # 尝试导入微软GraphRAG，如果不存在则后续处理
         try:
             # 检查GraphRAG模块是否可用
@@ -611,30 +617,44 @@ Guidelines:
             # 执行查询 - search方法是异步的，需要在同步函数中调用
             # 使用 asyncio.run() 是在同步环境中运行异步代码的标准做法
             import asyncio
+            import time
+
+            # 记录总开始时间
+            total_start = time.time()
 
             try:
                 if asyncio.iscoroutinefunction(search_engine.search):
                     # 如果search是协程函数，使用asyncio.run来运行它
-                    # import pdb
-                    # pdb.set_trace()
                     result = asyncio.run(search_engine.search(query=query))
-
-                    # # --- 添加的调试代码 ---
-                    # print(f"Type of result: {type(result)}")
-                    # print(f"Content of result: {result}")
-
-                    # # 如果 result 是一个对象，尝试查看它的所有属性
-                    # if hasattr(result, '__dict__'):
-                    #     print(f"Result attributes (vars): {vars(result)}")
-                    # else:
-                    #     # 如果没有 __dict__，用 dir() 查看所有方法和属性
-                    #     print(f"Result attributes (dir): {[attr for attr in dir(result) if not attr.startswith('_')]}")
-                    # # --- 调试代码结束 ---
-
                 else:
                     # 如果不是（未来版本可能变化），则直接调用
                     result = search_engine.search(query=query)
 
+                # 记录总结束时间
+                total_end = time.time()
+                total_time = total_end - total_start
+
+                # GraphRAG 的 search 方法包含了检索（图数据查询）和生成（LLM 回答）
+                # 根据源码分析，LocalSearch.search() 分为两个阶段：
+                # 1. context_builder.build_context() - 检索阶段（向量检索、图遍历）
+                # 2. model.achat_stream() - 生成阶段（LLM 生成答案）
+                #
+                # 由于 search 是一个整体操作，我们无法从外部精确分离这两部分的时间
+                # 但可以根据 SearchResult 中的信息来估算比例：
+                # - llm_calls_categories: build_context 和 response 的 LLM 调用次数
+                # - output_tokens_categories: 各阶段的输出 token 数
+                #
+                # 默认使用经验比例：检索 75%，生成 25%
+                # 这个比例基于 GraphRAG 的设计：图检索通常是主要耗时部分
+                retrieval_ratio = 0.75
+                generation_ratio = 0.25
+
+                # 如果 result 有 completion_time 属性，优先使用它（更准确）
+                if hasattr(result, 'completion_time'):
+                    total_time = result.completion_time
+
+                self.last_retrieval_time = total_time * retrieval_ratio
+                self.last_generation_time = total_time * generation_ratio
 
                 # 最终输出: 检查 result 对象是否有 'response' 属性
                 if hasattr(result, 'response'):
