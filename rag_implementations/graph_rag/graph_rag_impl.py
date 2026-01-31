@@ -632,6 +632,23 @@ Guidelines:
 
                 # 记录总结束时间
                 total_end = time.time()
+                print(f"\n{'='*60}")
+                print(f"Query: {query}")
+                print(f"{'='*60}")
+                print(f"Retrieved Context Summary:")
+                print(f"  - Entities: {len(result.context_data.get('entities', []))}")
+                print(f"  - Relationships: {len(result.context_data.get('relationships', []))}")
+                print(f"  - Sources: {len(result.context_data.get('sources', []))}")
+                print(f"\nContext Text (first 2000 chars):")
+                print(result.context_text[:2000] if len(result.context_text) > 2000 else result.context_text)
+                context_text = result.context_text
+                print(f"\nContext Text type: {type(context_text)}")
+                print(f"Context Text length: {len(context_text) if context_text else 0}")
+                print(f"Context Text repr: {repr(context_text[:200]) if context_text else 'None'}")
+                print(f"\n{'='*60}")
+                print(f"Response: {result.response}")
+                print(f"Completion Time: {result.completion_time:.2f}s")
+                print(f"{'='*60}\n")
                 total_time = total_end - total_start
 
                 # GraphRAG 的 search 方法包含了检索（图数据查询）和生成（LLM 回答）
@@ -649,7 +666,7 @@ Guidelines:
                 retrieval_ratio = 0.75
                 generation_ratio = 0.25
 
-                # 如果 result 有 completion_time 属性，优先使用它（更准确）
+                # result有completion_time属性，且根据graphrag源码可知，它表示检索和生成两部分的总的时间
                 if hasattr(result, 'completion_time'):
                     total_time = result.completion_time
 

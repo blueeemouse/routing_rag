@@ -196,6 +196,12 @@ class TrainableRouterConfig:
             score_formula=data_config.get('score_formula', 'em'),
         )
         
+        # 设置日志目录默认值
+        logging_dir = config_dict.get('logging_dir')
+        if logging_dir is None:
+            output_dir = config_dict.get('output_dir', 'router_models')
+            logging_dir = f"{output_dir}/logs"
+        
         return cls(
             model_type=config_dict.get('model_type', 'dc'),
             model=model,
@@ -203,7 +209,7 @@ class TrainableRouterConfig:
             data=data,
             output_dir=config_dict.get('output_dir', 'router_models'),
             save_model_path=config_dict.get('save_model_path'),
-            logging_dir=config_dict.get('logging_dir'),
+            logging_dir=logging_dir,
             log_level=config_dict.get('log_level', 'info'),
             device=config_dict.get('device', 'auto'),
         )

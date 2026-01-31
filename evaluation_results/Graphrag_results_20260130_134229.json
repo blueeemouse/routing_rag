@@ -1,0 +1,373 @@
+{
+  "model_name": "Graphrag",
+  "settings": {
+    "decomposer": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt": "任务：将复杂查询分解为简单子查询\n\n规则：\n1. 如果查询很简单，直接返回原查询\n2. 如果查询复杂，分解为多个子查询\n3. 每行一个子查询\n4. 不要包含任何解释、分析或说明文字\n5. 只输出子查询内容\n\n示例：\n输入：什么是人工智能？它有哪些应用？\n输出：\n什么是人工智能？\n人工智能有哪些应用？\n\n输入：北京是中国的首都吗？\n输出：\n北京是中国的首都吗？\n\n输入：1+1等于几？\n输出：\n1+1等于几？\n\n现在请处理以下查询：\n输入：{query}\n输出：\n"
+    },
+    "router": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt": "任务：确定查询处理策略\n\n可选策略：\n- no_rag: 直接回答，无需检索\n- naive_rag: 使用向量检索\n- graph_rag: 使用图检索\n\n规则：\n1. 简单事实性问题 → no_rag\n2. 需要信息检索的问题 → naive_rag\n3. 复杂关系查询 → graph_rag\n4. 只输出策略名称，不要任何解释\n\n示例：\n查询：1+1等于几？\n策略：no_rag\n\n查询：北京是中国的首都吗？\n策略：no_rag\n\n查询：什么是人工智能？\n策略：naive_rag\n\n查询：张三和李四的关系是什么？\n策略：graph_rag\n\n现在请处理以下查询：\n查询：{sub_query}\n策略：\n"
+    },
+    "no_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt_template": "You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n\nQuestion: {query}\nAnswer:\n"
+    },
+    "naive_rag": {
+      "api_url": "http://127.0.0.1:11434",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "embedding_model": "nomic-embed-text",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "graph_rag": {
+      "api_url": "http://127.0.0.1:11434",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "embedding_model": "nomic-embed-text",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "rag": {
+      "naive_rag_enabled": true,
+      "graph_rag_enabled": true
+    },
+    "trainable_router": {
+      "model_type": "dc",
+      "model_path": "router_models/final",
+      "strategy_names": [
+        "no_rag",
+        "naive_rag",
+        "graph_rag"
+      ],
+      "batch_size": 32
+    }
+  },
+  "results": {
+    "model_name": "Graphrag",
+    "predictions": [
+      {
+        "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+        "gold_answer": [
+          "Major League Soccer"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 115.87118029594421,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are The Datsuns and The Black Crowes both rock bands?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 42.48841905593872,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+        "gold_answer": [
+          "December 31, 2015"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 60.01852822303772,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+        "gold_answer": [
+          "The Social Network"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 51.48555088043213,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+        "gold_answer": [
+          "1522"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 171.85951399803162,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former American football player had a part in the movie \"Gamer?\"",
+        "gold_answer": [
+          "Terry Crews"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 65.42578196525574,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+        "gold_answer": [
+          "Fatih Ozmen"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 105.047438621521,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Cromwell station is located in which Maryland county?",
+        "gold_answer": [
+          "Anne Arundel County"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 82.67876362800598,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+        "gold_answer": [
+          "Podocarpus"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 62.28601264953613,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+        "gold_answer": [
+          "Jay Van Andel"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 57.261803150177,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Were Thomas H. Ince and Joseph McGrath of the same nationality?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 144.7900834083557,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What type of product is the sponsor of the Premiership Rugby Sevens SeriesSeries ? ",
+        "gold_answer": [
+          "pale lager"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 97.09434747695923,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The director of Panic 5 Bravo was born in what year?",
+        "gold_answer": [
+          "1978"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 94.940358877182,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was the gunman of the hostage crisis which Chris Reason was awarded the Graham Perkin Australian Journalist of the Year Award for his coverage of?",
+        "gold_answer": [
+          "Man Haron"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 55.98110246658325,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What country is both Thornton–Cleveleys railway station and Poulton-le-Fylde railway station located?",
+        "gold_answer": [
+          "England"
+        ],
+        "prediction": "执行异步搜索时出错: unhashable type: 'slice'",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 230.03987383842468,
+        "retrieval_time": 0.0,
+        "generation_time": 0.0,
+        "generation_tokens": 0
+      }
+    ],
+    "exact_matches": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "f1_scores": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "precisions": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recalls": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "total_time": 1437.2687585353851,
+    "avg_time": 95.81791723569235,
+    "total_retrieval_time": 0.0,
+    "avg_retrieval_time": 0.0,
+    "total_generation_time": 0.0,
+    "avg_generation_time": 0.0,
+    "total_generation_tokens": 0,
+    "avg_generation_tokens": 0,
+    "errors": [],
+    "avg_em": 0.0,
+    "avg_f1": 0.0,
+    "avg_precision": 0.0,
+    "avg_recall": 0.0,
+    "accuracy": 0.0,
+    "num_errors": 0
+  }
+}

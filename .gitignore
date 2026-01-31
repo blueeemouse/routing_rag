@@ -19,3 +19,8 @@ graphrag_ollama_hotpotqa_1000_test_data/
 graphrag_class_test_data/
 temp_dev_note.txt
 temp_dev_note.md
+
+naive_rag_index_hotpotqa_1000_samples/
+naive_rag_index_hotpotqa_train_5000_samples/
+graphrag_index_hotpotqa_train_5000_samples/
+*.pt

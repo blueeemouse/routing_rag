@@ -1,0 +1,373 @@
+{
+  "model_name": "Graphrag",
+  "settings": {
+    "decomposer": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt": "任务：将复杂查询分解为简单子查询\n\n规则：\n1. 如果查询很简单，直接返回原查询\n2. 如果查询复杂，分解为多个子查询\n3. 每行一个子查询\n4. 不要包含任何解释、分析或说明文字\n5. 只输出子查询内容\n\n示例：\n输入：什么是人工智能？它有哪些应用？\n输出：\n什么是人工智能？\n人工智能有哪些应用？\n\n输入：北京是中国的首都吗？\n输出：\n北京是中国的首都吗？\n\n输入：1+1等于几？\n输出：\n1+1等于几？\n\n现在请处理以下查询：\n输入：{query}\n输出：\n"
+    },
+    "router": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt": "任务：确定查询处理策略\n\n可选策略：\n- no_rag: 直接回答，无需检索\n- naive_rag: 使用向量检索\n- graph_rag: 使用图检索\n\n规则：\n1. 简单事实性问题 → no_rag\n2. 需要信息检索的问题 → naive_rag\n3. 复杂关系查询 → graph_rag\n4. 只输出策略名称，不要任何解释\n\n示例：\n查询：1+1等于几？\n策略：no_rag\n\n查询：北京是中国的首都吗？\n策略：no_rag\n\n查询：什么是人工智能？\n策略：naive_rag\n\n查询：张三和李四的关系是什么？\n策略：graph_rag\n\n现在请处理以下查询：\n查询：{sub_query}\n策略：\n"
+    },
+    "no_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt_template": "You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n\nQuestion: {query}\nAnswer:\n"
+    },
+    "naive_rag": {
+      "api_url": "http://127.0.0.1:11434",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "embedding_model": "nomic-embed-text",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "graph_rag": {
+      "api_url": "http://127.0.0.1:11434",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "embedding_model": "nomic-embed-text",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "rag": {
+      "naive_rag_enabled": true,
+      "graph_rag_enabled": true
+    },
+    "trainable_router": {
+      "model_type": "dc",
+      "model_path": "router_models/final",
+      "strategy_names": [
+        "no_rag",
+        "naive_rag",
+        "graph_rag"
+      ],
+      "batch_size": 32
+    }
+  },
+  "results": {
+    "model_name": "Graphrag",
+    "predictions": [
+      {
+        "question": "Were Scott Derrickson and Ed Wood of the same nationality?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "no",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 70.95094418525696,
+        "retrieval_time": 0.0,
+        "generation_time": 13.746800482273102,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What government position was held by the woman who portrayed Corliss Archer in the film Kiss and Tell?",
+        "gold_answer": [
+          "Chief of Protocol"
+        ],
+        "prediction": "Governor",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 123.40986919403076,
+        "retrieval_time": 0.0,
+        "generation_time": 27.343425273895264,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+        "gold_answer": [
+          "Animorphs"
+        ],
+        "prediction": "Ender's Shadow",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 90.51777648925781,
+        "retrieval_time": 0.0,
+        "generation_time": 19.88453084230423,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 203.8023705482483,
+        "retrieval_time": 0.0,
+        "generation_time": 46.959468364715576,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+        "gold_answer": [
+          "Greenwich Village, New York City"
+        ],
+        "prediction": "New York City",
+        "em": 0.0,
+        "f1": 0.7499999999999999,
+        "precision": 1.0,
+        "recall": 0.6,
+        "total_time": 83.23439145088196,
+        "retrieval_time": 0.0,
+        "generation_time": 17.392658472061157,
+        "generation_tokens": 0
+      },
+      {
+        "question": "2014 S/S is the debut album of a South Korean boy group that was formed by who?",
+        "gold_answer": [
+          "YG Entertainment"
+        ],
+        "prediction": "SM Entertainment",
+        "em": 0.0,
+        "f1": 0.5,
+        "precision": 0.5,
+        "recall": 0.5,
+        "total_time": 115.21076941490173,
+        "retrieval_time": 0.0,
+        "generation_time": 25.228468537330627,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was known by his stage name Aladin and helped organizations improve their performance as a consultant?",
+        "gold_answer": [
+          "Eenasul Fateh"
+        ],
+        "prediction": "Jack Zenger",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 73.9812593460083,
+        "retrieval_time": 0.0,
+        "generation_time": 16.549431145191193,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The arena where the Lewiston Maineiacs played their home games can seat how many people?",
+        "gold_answer": [
+          "3,677 seated"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 107.14530038833618,
+        "retrieval_time": 0.0,
+        "generation_time": 24.823156237602234,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is older, Annie Morton or Terry Richardson?",
+        "gold_answer": [
+          "Terry Richardson"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 192.00227165222168,
+        "retrieval_time": 0.0,
+        "generation_time": 45.93603950738907,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are Local H and For Against both from the United States?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 134.77372121810913,
+        "retrieval_time": 0.0,
+        "generation_time": 31.567308962345123,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the name of the fight song of the university whose main campus is in Lawrence, Kansas and whose branch campuses are in the Kansas City metropolitan area?",
+        "gold_answer": [
+          "Kansas Song"
+        ],
+        "prediction": "Rock Chalk Jayhawk",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 197.70059418678284,
+        "retrieval_time": 0.0,
+        "generation_time": 47.417310774326324,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What screenwriter with credits for \"Evolution\" co-wrote a film starring Nicolas Cage and Téa Leoni?",
+        "gold_answer": [
+          "David Weissman"
+        ],
+        "prediction": "James McAleer",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 54.626118183135986,
+        "retrieval_time": 0.0,
+        "generation_time": 11.68904960155487,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What year did Guns N Roses perform a promo for a movie starring Arnold Schwarzenegger as a former New York Police detective?",
+        "gold_answer": [
+          "1999"
+        ],
+        "prediction": "2003",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 74.33402752876282,
+        "retrieval_time": 0.0,
+        "generation_time": 16.618911743164062,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are Random House Tower and 888 7th Avenue both used for real estate?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 223.91981720924377,
+        "retrieval_time": 0.0,
+        "generation_time": 53.937906324863434,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The football manager who recruited David Beckham managed Manchester United during what timeframe?",
+        "gold_answer": [
+          "from 1986 to 2013"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 118.79078197479248,
+        "retrieval_time": 0.0,
+        "generation_time": 27.526740312576294,
+        "generation_tokens": 0
+      }
+    ],
+    "exact_matches": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "f1_scores": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.7499999999999999,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "precisions": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recalls": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.6,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "total_time": 1864.4000129699707,
+    "avg_time": 124.29333419799805,
+    "total_retrieval_time": 0.0,
+    "avg_retrieval_time": 0.0,
+    "total_generation_time": 426.62120658159256,
+    "avg_generation_time": 28.44141377210617,
+    "total_generation_tokens": 0,
+    "avg_generation_tokens": 0,
+    "errors": [],
+    "avg_em": 0.0,
+    "avg_f1": 0.08333333333333333,
+    "avg_precision": 0.1,
+    "avg_recall": 0.07333333333333333,
+    "accuracy": 0.0,
+    "num_errors": 0
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "training_steps": 10,
+  "epochs": 1,
+  "learning_rate": 5e-05
+}

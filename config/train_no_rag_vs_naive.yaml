@@ -1,0 +1,107 @@
+# No-RAG vs Naive-RAG Router训练配置
+# 这是一个在no_rag和naive_rag之间进行路由选择的2策略模型配置
+
+# 模型类型: dc (Dual Contrastive), knn, mf, rl
+model_type: "dc"
+
+# 模型配置
+model:
+  # Backbone模型名称 (SentenceTransformer)
+  # 推荐使用轻量级模型: sentence-transformers/all-MiniLM-L6-v2
+  backbone_name: "sentence-transformers/all-MiniLM-L6-v2"
+  
+  # 隐藏层大小 (自动从backbone获取，MiniLM-L6-v2为384)
+  hidden_size: 384
+  
+  # 策略名称列表 (仅使用2个策略: no_rag和naive_rag)
+  strategy_names: ["no_rag", "naive_rag"]
+  
+  # 策略数量
+  num_strategies: 2
+  
+  # 相似度计算方式: "cos" (余弦相似度) 或 "dot" (内积)
+  similarity_function: "cos"
+  
+  # 温度参数 (用于softmax)
+  temperature: 1.0
+  
+  # 设备: auto (自动选择), cpu, cuda
+  device: "auto"
+
+# 训练配置
+training:
+  # 批量大小
+  batch_size: 32
+  
+  # 学习率
+  learning_rate: 5.0e-5
+  
+  # 训练轮数
+  epochs: 10
+  
+  # 最大序列长度
+  max_length: 512
+  
+  # 训练步数 (0表示使用epochs)
+  training_steps: 0
+  
+  # 评估步数 (每多少步评估一次)
+  eval_steps: 100
+  
+  # 保存步数 (每多少步保存一次检查点)
+  save_steps: 500
+  
+  # 损失权重
+  sample_llm_loss_weight: 1.0    # Sample-LLM对比损失权重
+  sample_sample_loss_weight: 0.1  # Sample-Sample对比损失权重
+  cluster_loss_weight: 0.5        # Cluster对比损失权重 (降低权重，因为2策略数据可能较少)
+  
+  # Top-K / Last-K (对比学习参数)
+  top_k: 3    # 正样本数量
+  last_k: 3   # 负样本数量
+  
+  # 优化器类型: adamw, adam
+  optimizer_type: "adamw"
+  
+  # 学习率调度器类型: linear, cosine
+  scheduler_type: "linear"
+  
+  # 梯度裁剪 (防止梯度爆炸)
+  max_grad_norm: 1.0
+  
+  # 混合精度训练 (节省显存)
+  use_amp: false
+  
+  # 随机种子
+  seed: 42
+
+# 数据配置
+data:
+  # 数据源类型: "hotpotqa" or "llm_judge"
+  source: "hotpotqa"
+  
+  # 数据路径 (evaluation_results目录下应包含NoRAG和Naiverag的结果文件)
+  train_path: "evaluation_results"
+  val_path: ""      # 验证数据路径 (可选)
+  test_path: ""     # 测试数据路径 (可选)
+  
+  # Cluster数量 (用于聚类对比学习)
+  num_clusters: 30
+  
+  # 是否归一化分数 (推荐true，使不同策略的分数可比较)
+  normalize_scores: true
+  
+  # 是否打乱数据
+  shuffle: true
+  
+  # 评分公式 (支持自定义公式)
+  # 单指标: "em", "f1"
+  # 组合指标: "em * 0.5 + f1 * 0.5"
+  score_formula: "em * 0.5 + f1 * 0.5"
+
+# 输出配置
+output_dir: "router_models/no_rag_vs_naive"
+
+# 日志配置
+logging_dir: "router_models/no_rag_vs_naive/logs"  # 日志文件保存目录
+log_level: "info"   # 日志级别: debug, info, warning, error

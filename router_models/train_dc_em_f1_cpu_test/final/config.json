@@ -1,0 +1,8 @@
+{
+  "strategy_names": [
+    "no_rag",
+    "naive_rag"
+  ],
+  "hidden_size": 384,
+  "num_strategies": 2
+}
