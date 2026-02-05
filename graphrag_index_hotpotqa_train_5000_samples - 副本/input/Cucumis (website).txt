@@ -1,0 +1,7 @@
+Cucumis (website)
+
+Cucumis is a website where translators share their linguistic knowledge and exchange services online.
+
+ One unusual feature of Cucumis is that all translations are peer reviewed and may be edited by other Cucumis translators.
+
+ This provides for high quality translations, and often achieves a target text that is both faithful in meaning to the source text and fully idiomatic in the target language.

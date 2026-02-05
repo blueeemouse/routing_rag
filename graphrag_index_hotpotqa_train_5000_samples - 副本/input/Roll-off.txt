@@ -1,0 +1,7 @@
+Roll-off
+
+Roll-off is the steepness of a transmission function with frequency, particularly in electrical network analysis, and most especially in connection with filter circuits in the transition between a passband and a stopband.
+
+ It is most typically applied to the insertion loss of the network, but can, in principle, be applied to any relevant function of frequency, and any technology, not just electronics.
+
+ It is usual to measure roll-off as a function of logarithmic frequency, consequently, the units of roll-off are either decibels per decade (dB/decade), where a decade is a 10-times increase in frequency, or decibels per octave (dB/8ve), where an octave is 2-times increase in frequency.

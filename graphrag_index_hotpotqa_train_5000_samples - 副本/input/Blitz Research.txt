@@ -1,0 +1,11 @@
+Blitz Research
+
+Blitz Research Ltd is an Auckland, New Zealand based company which currently produces 3 BASIC based programming languages.
+
+ Founded in 2000 by Mark Sibly, the company's first product was the now obsolete Blitz Basic 2D, a PC version of the Amiga Blitz Basic.
+
+ It was released the same year as the company's foundation.
+
+ In 2001, Blitz3D was released.
+
+ This allowed programmers to create 3D games and applications in Blitz Basic using DirectX.

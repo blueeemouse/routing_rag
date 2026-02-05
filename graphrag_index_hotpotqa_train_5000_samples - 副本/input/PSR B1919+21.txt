@@ -1,0 +1,7 @@
+PSR B1919+21
+
+PSR B1919+21 is a pulsar with a period of 1.3373 seconds and a pulse width of 0.04 seconds.
+
+ Discovered by Jocelyn Bell Burnell and Antony Hewish on November 28, 1967, it is the first discovered radio pulsar.
+
+ The power and regularity of the signals were briefly thought to resemble an extraterrestrial beacon, leading the source to be nicknamed LGM-1 (for "little green men").

@@ -1,0 +1,5 @@
+Microchip Technology
+
+Microchip Technology is an American manufacturer of microcontroller, memory and analog semiconductors.
+
+ Its products include microcontrollers (PICmicro, dsPIC / PIC24, PIC32, AVR, AVR32 and SAM), Serial EEPROM devices, Serial SRAM devices, KEELOQ devices, radio frequency (RF) devices, thermal, power and battery management analog devices, as well as linear, interface and mixed signal devices.

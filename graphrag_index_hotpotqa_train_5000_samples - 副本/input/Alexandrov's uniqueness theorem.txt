@@ -1,0 +1,7 @@
+Alexandrov's uniqueness theorem
+
+The Alexandrov uniqueness theorem is a rigidity theorem in mathematics, describing three-dimensional convex polyhedra in terms of the distances between points on their surfaces.
+
+ It implies that convex polyhedra with distinct shapes from each other also have distinct metric spaces of surface distances, and it characterizes the metric spaces that come from the surface distances on polyhedra.
+
+ It is named after Soviet mathematician Aleksandr Danilovich Aleksandrov, who published it in the 1940s.

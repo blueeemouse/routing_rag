@@ -1,0 +1,11 @@
+Waves in plasmas
+
+In plasma physics, waves in plasmas are an interconnected set of particles and fields which propagates in a periodically repeating fashion.
+
+ A plasma is a quasineutral, electrically conductive fluid.
+
+ In the simplest case, it is composed of electrons and a single species of positive ions, but it may also contain multiple ion species including negative ions as well as neutral particles.
+
+ Due to its electrical conductivity, a plasma couples to electric and magnetic fields.
+
+ This complex of particles and fields supports a wide variety of wave phenomena.

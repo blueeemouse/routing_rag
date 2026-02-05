@@ -1,0 +1,3612 @@
+[
+  {
+    "index": 0,
+    "question": "Which magazine was started first Arthur's Magazine or First for Women?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 19,
+    "question": "American politician Joe Heck ran unsuccessfully against Democrat Catherine Cortez Masto, a woman who previously served as the 32nd Attorney General of where?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 27,
+    "question": "Were Pavel Urysohn and Leonid Levin known for the same type of work?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 31,
+    "question": "Who was born first, Pablo Trapero or Aleksander Ford?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 50,
+    "question": "Who is older Glenn Hughes or Ross Lynch?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 72,
+    "question": "El Nuevo Cojo and Golf Magazine are both special interest publications but which one is owned by Time Inc?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 74,
+    "question": "What city are George Washington University Hospital and MedStar Washington Hospital Center located in?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 99,
+    "question": "Is Children's National Medical Center or MedStar Washington Hospital Center the largest private hospital in Washington, D.C.?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 108,
+    "question": "What retailer is the second-largest in the United States and has a commercial featuring the American artist who was 1st runner-up in the 2005 USA Weekend Magazine's songwriting competition?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 118,
+    "question": "What book contains a poem which, along with \"Beowulf\" and the \"Anglo-Saxon Chronicle\", preserves a legendary list of the kings of the Angles?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 142,
+    "question": "he Central Harbourfront is a waterfront site it is the result of Central and Wan Chai Reclamation, and it sits to the east of the International Finance Centre (IFC), a skyscraper and an integrated commercial development on the waterfront of the Central District, of which territory?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.4,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.8
+  },
+  {
+    "index": 151,
+    "question": " Benjamin Halfpenny was a footballer for a club that plays its home matches where?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 158,
+    "question": "Mackenzie Davis appeared in the 2013 Canadian romantic comedy film directed by whom?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 160,
+    "question": "Jane's Addiction and Weeping Willows, play which genre of music?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 194,
+    "question": "Which is currently more valuable, Temagami-Lorrain Mine or Meadowbank Gold Mine?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 218,
+    "question": "Sojourners and KO Magazine share what publication format?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 237,
+    "question": "Thomas Harris is a novelist who is famous for creating which character?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.4,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.8
+  },
+  {
+    "index": 240,
+    "question": "Which director is American, Mark L. Lester or Ken Loach?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 241,
+    "question": "Kerrygold Irish Cream Liqueur is owned by a company that mainly sells what type or product?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 261,
+    "question": "Who completed more books in their lifetime, Anne Frank or John Kennedy Toole?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 277,
+    "question": " Which species, Cardwellia or Ochagavia, is native to South America?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 294,
+    "question": "Is Lysichiton and Ageratum geus in the same family?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 351,
+    "question": "Who directed a 2016 musical filmed in Howth?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 352,
+    "question": "Son of Paleface starred the comedian and vaudevilian of what nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 366,
+    "question": "Which publication is published more often: Modern Drummer or Bookmarks?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 383,
+    "question": "Nakayama Miho no Tokimeki High School included music by the composer best known for the games by what company?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 394,
+    "question": "Which air force base is the headquarters for the Eastern Air Defense Sector and located 12 mi east of Panama City, Florida?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 395,
+    "question": "What vehicle, introduced for model year 2006, does Patrick Carpentier currently drive in the NASCAR Sprint Cup Series?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 397,
+    "question": "Ian Hunter and Stuart Murdoch, have which musical occupation in common?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 408,
+    "question": "Who is older, Vincent Walker or David Usher?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 416,
+    "question": "The university who was led to six national championships by Paul \"Bear\" Bryant, had its first ever Heisman Trophy winner drafted by what NFL team?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 424,
+    "question": "Was Beyond the Gates of Splendor or Jesus Camp released first?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 442,
+    "question": "Are both Nasdaq, Inc. and Citrix Systems catering to the same customer bases?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 484,
+    "question": "Who was born first, Martin Heidegger or Lydia Davis?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 494,
+    "question": "Which 20th Century Fox film cast Zazie Beetz as Domino?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 512,
+    "question": "What occupation was shared by both John Frankenheimer and Tiffanie DeBartolo?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 547,
+    "question": "Mark Rankin and Cedric Bixler-Zavala, band is what type genre?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 571,
+    "question": " Blake Alexander Carrington is a fictional character on the ABC television series \"Dynasty\", created by Richard and Esther Shapiro whose role was portrayed by John Forsythe, and also appeared as a guest on several talk and variety shows and as a panelist on what type of television show?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 576,
+    "question": "What state are both Wizzo and YG based in?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 580,
+    "question": "Are Manettia and Fragaria both edible?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 589,
+    "question": "Who administers the federal law that the California Healthy Families Program implements?",
+    "no_rag_score": 0.18181818181818182,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.36363636363636365,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 592,
+    "question": "A combat flight simulator video game published by Konami and released in 2012 features missions including the attack on this location by the Empire of Japan on December 7, 1941?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 609,
+    "question": "The Warlock in Spite of Himself is a science fantasy novel by American author Christopher Stasheff, published in 1969, the title is a play on the title of which French playwright and actor, known by what stage name?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 628,
+    "question": "In what conference is the University that had a coach born on September 9th, 1960?",
+    "no_rag_score": 0.1111111111111111,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.2222222222222222,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 638,
+    "question": "\"HMS \"Sussex\" was an 80-gun third-rate ship, of the line of the English Royal Navy, for which sovereign state on the island of Great Britain from the 10th century—when it emerged from various Anglo-Saxon kingdoms—until 1707, when it united with Scotland to form the Kingdom of Great Britain?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 656,
+    "question": "Which award did the star of The Nativity Story win at the 2004 Broadcast Film Critics Association Awards?",
+    "no_rag_score": 0.125,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.25,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 672,
+    "question": "Mathilde Ludendorff was the wife of the German General who was victorious at which two battles?",
+    "no_rag_score": 0.11111111111111112,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.22222222222222224,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 699,
+    "question": "Who is an American musician, Peter Chelsom or Billy Bob Thornton?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 700,
+    "question": "Did Terence Davies and Richard Wallace have the same nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 742,
+    "question": "Abraham Roqueñi Iglesias (born April 16, 1978) is a Spanish welterweight kickboxer, he holds notable wins over Andy Souwer, a Dutch welterweight shoot boxer, a two time K-1 World MAX champion, in which years?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 755,
+    "question": "Have James Agee and Nelly Sachs both won a Nobel Prize in Literature?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 758,
+    "question": "What award did a single from the first Foo Fighters album to feature Chris Shiflett win?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.22222222222222224,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.4444444444444445
+  },
+  {
+    "index": 768,
+    "question": "Diane Roark was wrongly suspected of leaking information to a New York Times reporter that has co-written two books about what agency?",
+    "no_rag_score": 0.42857142857142855,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8571428571428571,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 786,
+    "question": "The university where Peter Charanis was the Voorhees Professor of History is in what state?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 847,
+    "question": "Johanna Veenstra (1894–1933) was the first missionary of the Christian Reformed Church (CRC) to go to Nigeria,   was an ocean liner designed by Leonard Peskett and built by Swan, Hunter & Wigham Richardson for the British Cunard Line, on October 2, 1919, she left New York City on the RMS Mauretania, was an ocean liner designed by Leonard Peskett, and built by Swan, Hunter & Wigham Richardson, for which organization?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.4,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.8
+  },
+  {
+    "index": 852,
+    "question": "Are Clarence Brown and Peter Glenville of the same nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 887,
+    "question": "Are Sparta and King Charles both from the same country?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 895,
+    "question": "Highway 42 runs northwest from where Highway 24 crosses the BNSF Railway's Northern Transcon,  a route operated by what Railway?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 966,
+    "question": "Emilio Botin was a banker that ran an institution that merged with what group?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1003,
+    "question": "What type of organism can both Bellis and Syzygium jambos be described as?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1007,
+    "question": "What was the royal title of the man whose German government backed the colonization of Poland by German settlers, one ofthe factors leading to the plight of rural Poland which was the focus of the novel The Outpost?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1008,
+    "question": "A television show originaly aired on December 29, 1996 was written by a graduate of what University?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1012,
+    "question": "Which dog is now extinct, the Tahltan Bear Dog or the Stichelhaar?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1022,
+    "question": "What Milan based company made the tires for the Minardi M190?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.25,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.5
+  },
+  {
+    "index": 1077,
+    "question": "Do both The Life and Times and Beth Orton originate from America?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1081,
+    "question": "Silver City is a band that is an example of which genre, also known as avant-rock?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1090,
+    "question": "What year did Pietro Ferrero introduce his famous hazelnut cocoa product?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1095,
+    "question": "Who has a wider scope of profession, Natalie Merchant or Marian Gold?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1106,
+    "question": "Did the band Saosin form before the band No Devotion?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1117,
+    "question": "Where does Irina Peltsin's character live in the show \"The Sopranos\"?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1158,
+    "question": "Excuse My French was the debut album that features a guest appearance by the American rapper and actor from what Ohio city?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1172,
+    "question": "Are Robin Hobb and Winston Churchill both American writers?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1177,
+    "question": "Who won more competitions in tennis match, Dick Crealy or Mary Pierce?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1183,
+    "question": "Joseph Ward and Michael Tippett are both of what decent?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1209,
+    "question": "Which band was formed earlier, Marilyn Manson or Walk the Moon?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1216,
+    "question": "Hiwassee Dam is the third highest dam in the TVA system, behind the hydroelectric dam in what two North Carolina counties as the highest?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1228,
+    "question": "Afghan Hound and Rhodesian Ridgeback, are a type of which animal?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1231,
+    "question": "What is a unit of measurement used in tabletop role-playing games to quantify a player character's progression through the game , used in the game that revolves around a leader who must lead an army in phalanx formation across a battlefield in real-time against overwhelming enemy forces while freeing and recruiting soldiers along the way?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1251,
+    "question": "Was Syd Barrett or Nate Albert born first?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1258,
+    "question": "What is the book series, written by Cecily von Ziegesar, that the character Eric van der Woodsen appears in?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.25,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.5
+  },
+  {
+    "index": 1263,
+    "question": "In which American space drama film did Clint Eastwood star with the actor who played Bret Maverick in the 1950s western comedy series \"Maverick\"?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1270,
+    "question": "The short story from The Wind’s Twelve Quarters that won the Hugo Award in 1974 was published in what year?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1298,
+    "question": "Who was born first, Pavel Alexandrov or Grigory Margulis?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1326,
+    "question": "Which artist is in more bands, Stacey McClean or Hansi Kürsch?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1327,
+    "question": "Do we know for a fact that Alfred L. Werker directed more films than Jon Jost?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1342,
+    "question": "Consider the eccentric Knoxville businessman with whom George Roby Dempster often staged politcal battles. In what year were they born?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1346,
+    "question": "Are eith Nicotiana or Encyclia genus of pine trees?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1347,
+    "question": "Are both documentary films The One Percent and Air Force, Incorporated from the same country?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1364,
+    "question": "Does the London Avenue Canal or  Riverside Canal run through the 4th ward?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1370,
+    "question": "Julien Duvivier and Andrew Adamson, have which occupation in common?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1373,
+    "question": "Rómulo Gallegos and Louis Bromfield, have a writing related occupation?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1379,
+    "question": "Of the two Universities, University of Wisconsin–Madison or University of Kansas, is located on Mount Oread?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1382,
+    "question": "Which device can air TVPlayer channels for free and allows users to play using a remote?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.14285714285714288,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.28571428571428575
+  },
+  {
+    "index": 1419,
+    "question": "Are University of Minnesota and Baylor College of Medicine located in the same state?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1420,
+    "question": "Which occupation did Gareth Evans and Michael Winner have in common?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 1423,
+    "question": "Which band For Against or Aaroh was formed first ?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1451,
+    "question": "Tibbers Castle is to the southeast of a country house in what parts of Scotland?",
+    "no_rag_score": 0.14285714285714288,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.28571428571428575,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1481,
+    "question": "Who has performed with more band, Trey Anastasio or Sarah Nixey?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1498,
+    "question": "What was the name of the downtown sports stadium that the Minnesota Twins played in beginning in 1982?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.2,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.4
+  },
+  {
+    "index": 1512,
+    "question": "Do Jean-Jacques Beineix and John Ince have the same nationality ?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1520,
+    "question": "Are both Die Macher and Quoridor German board games?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1523,
+    "question": "What did the king of England, Scotland and Ireland create in 1652?",
+    "no_rag_score": 0.14285714285714288,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.28571428571428575,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1549,
+    "question": "Are Shiba Inu and Leonberger both large dog breeds?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1555,
+    "question": "Who was a member of more comedy troupes, Doug Langway or Terry Jones?",
+    "no_rag_score": 0.28571428571428575,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5714285714285715,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1560,
+    "question": "What is is a Japanese collectible card game that embody's the art of applying design and aesthetics to create a game for entertainment or for educational, exercise, or experimental purposes and was published by Konami  ?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1562,
+    "question": "Night Monster is a 1942 American black-and-white horror film featuring Bela Lugosi, he was a Hungarian-American actor, famous for portraying Count Dracula in the film from which year? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1578,
+    "question": "Who was born first, Béla Bartók or Dmitri Shostakovich?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1587,
+    "question": "Which American record label released the single, \"Coffee Shop?\"",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1590,
+    "question": "Were Lee Ji-hye and Shim Eun-jin in the same band?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1601,
+    "question": "One of the natives of Reggiolo was last manager of what German football club?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1627,
+    "question": "Were both Memotech MTX and TEC-1 single-board kit computers?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1652,
+    "question": "The man that hosted the 2012 and 2016 Primetime Emmy Awards started, with the help of two others, what American production company?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1654,
+    "question": "Which director has won an Oscar, Ron Shelton or Ken Mora?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1659,
+    "question": "Which lasted longer, Korean War or Battle of Mindanao? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1672,
+    "question": "In what New York county is a building in the shape of a duck, built by farmer Martin Maurer, located?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1691,
+    "question": "Which movie came out first Snow Dogs or Sacred Planet ?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1704,
+    "question": "What is Trolls (2016 the  computer animated musical comedy by South Korean animator, Yong Duk Jhun about?",
+    "no_rag_score": 0.058823529411764705,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.11764705882352941,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1708,
+    "question": "What Miami Vice actor starred in Revenge of the Stepford Wives?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1722,
+    "question": "Did Kazuo Ishiguro and Yukio Mishima both move from Japan to England?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1723,
+    "question": "This 2004 NCAA Division I-A team played its home games at a sports stadium that opened as a replacement for what?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1728,
+    "question": "Which writer, Jorge Amado or Sarah Caudwell, remains the best known of modern Brazilian writers?",
+    "no_rag_score": 0.28571428571428575,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5714285714285715,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1734,
+    "question": "Craig Serling and Jeff Celentano, are of which nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1736,
+    "question": "Mary Pierce and Shelby Cannon, share which occupation?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1766,
+    "question": "Who has been a member of more bands, Tom Petty or Bobby Gillespie?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1775,
+    "question": "Which magazine has a larger circulation region, Family Life or Newsweek?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1788,
+    "question": "Thomas \"Tom\" Lonie played for which team at the King Power Stadium?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1797,
+    "question": "Who has served in more film related job positions, Kay Pollak or Chester Erskine?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1815,
+    "question": "In which county did the Rob VanAlkemade born?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1822,
+    "question": "Who has written more poems, David Ignatow or Margaret Mead?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1857,
+    "question": "Who has been a member of more bands, Caleb Shomo or John Rzeznik?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1860,
+    "question": "Which dog has more traits, the Norwegian Buhund, or the English Foxhound?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1864,
+    "question": "What is the name of the world's largest people group whose customs and etiquette are the traditioanl behaivors observed while eating in Greater China?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 1877,
+    "question": "Who was Nicholas II of Russia's father?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.14285714285714288,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.28571428571428575
+  },
+  {
+    "index": 1878,
+    "question": "Are Morten Harket and Ian Curtis members of bands which have the same musical style?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1881,
+    "question": "Are Melissa and Darmera vegatables",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1909,
+    "question": "Petit Basset Griffon Vendéen and Toy Trawler Spaniel are both breeds of which animal?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1919,
+    "question": "Which Rihanna album hosted the song c-written by Starrah?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1932,
+    "question": "Kamarinskaya was a folk dance that shares a name with the composer who was the first in his country to be recognized for what type of music?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.125,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.25
+  },
+  {
+    "index": 1944,
+    "question": "Who is an Indian film actor and producer that co-hosted the 57th Filmfare Awards ceremony in 2012?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1948,
+    "question": "Which one of the Charlie Brown's Christmas Tales was produced by Lee Mendelson?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1952,
+    "question": "The 2015 American gothic romance film, Crimson Peak was co-produced by which director who also directed \"Pacific Rim\"?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1961,
+    "question": "Maureen Starky married Ringo Starr in 1965 and would later have an affair with which Beatle band member?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1967,
+    "question": "Ezhou and Quzhou are both cities located in which country?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 1999,
+    "question": "Who is the husband of lady which  Camilla Luddington played her role in the Lifetime TV film?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2007,
+    "question": "Who has more scope of profession,  PJ Harvey or Salt?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2023,
+    "question": "What base is located west of \"Birdshit Island\"?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2053,
+    "question": "What term was coined during World War II for knives in the Victorinox collection?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.4,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.8
+  },
+  {
+    "index": 2054,
+    "question": "Which decision occurred first, \"Everson v. Board of Education\" or \"Rasul v. Bush\"?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.16666666666666669,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.33333333333333337
+  },
+  {
+    "index": 2083,
+    "question": "Masakatsu Ueda is a MMA fighter who is a blue belt under the martial artist who teaches which two disciplines?",
+    "no_rag_score": 0.14285714285714288,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.28571428571428575,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2088,
+    "question": "The Swan of Catania was taught by what Italian composer?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2106,
+    "question": "Are Chilopsis and Austrocedrus both genuses of flowering plants?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2108,
+    "question": "Are both Print and National Journal periodicals?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2127,
+    "question": "Which Infantry Division from world war 2, had a twenty year old lieutenant?",
+    "no_rag_score": 0.05405405405405406,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.10810810810810811,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2129,
+    "question": "Are Just, Melvin: Just Evil and Speaking in Strings both documentaries about musicians?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2131,
+    "question": "Which state is the university, in which Paul Hostetter was the director of the John J. Cali School of Music, located?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2136,
+    "question": "In what region was Eddy Mazzoleni born?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2175,
+    "question": "From which ethnic tribe hail the Catuvellani, a settlement of whose can be found near the city of St Albans in Hertfordshire?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2210,
+    "question": "Edward Sharpe and the Magnetic Zeros and The Script, share which musical genre?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2218,
+    "question": "Were Ronnie Van Zant and Mick Jones both lead singers of a band?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2234,
+    "question": "What locations is the folklore which Huldra belongs to representative of?",
+    "no_rag_score": 0.1111111111111111,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.2222222222222222,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2241,
+    "question": "How long was the battle that Don Chafin was a commander in in 1921?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2255,
+    "question": "DysEnchanted is a short subject about seven storybook characters: Snow White, Goldilocks, Sleeping Beauty, Alice In Wonderland, Dorothy, a European fairy tale young girl and a Big Bad Wolf and which other fairytale character? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2316,
+    "question": "What is the birthdate of this English musician, singer-songwriter, and record producer, who began his career in the early 1970s, and whose seventeenth studio album was All This Useless Beauty?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2331,
+    "question": "Who was born first, Jon Ramer or Karen Armstrong?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2332,
+    "question": "Are Michael Crichton and McG both authors?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2335,
+    "question": "Which Disney Film was released first, Lt. Robin Crusoe, U.S.N. or The Apple Dumpling Gang?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2345,
+    "question": "Ranjhay Hath Gandasa is a comedy film starring which Pakistani-American singer-songwriter",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2347,
+    "question": "Which rock band has more members, Skillet or Portugal. The Man?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2369,
+    "question": "Which canal is the largest and most important drainage canal in the city of New Orleans, the 17th Street Canal or Champlain Canal?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2402,
+    "question": "Were Simone de Beauvoir and Bob Monkhouse both comedians?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2415,
+    "question": "Did the authors Isaac Asimov and Jean Giono write their fictions in a similar setting?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2465,
+    "question": "Batman: Knight Gallery was a comic book that featured art from the artist best known for work on what two other comics?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.04347826086956522,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.08695652173913045
+  },
+  {
+    "index": 2483,
+    "question": "Who won more Pulitzer prizes, Sylvia Plath or Michael Cunningham?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2488,
+    "question": "Hsieh Su-wei and Manuela Maleeva, have which mutual occupation?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2505,
+    "question": "The character Igor Dmitriev played in \"Hamlet\" was summoned by what king to distract the prince from his apparent madness?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2514,
+    "question": "Tevin Sherard Elliot played for a university football team that is a member of which conference ?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2532,
+    "question": "Jeanette Miller is an American character actress who appeared in a Christmas-themed romantic comedy film produced by who?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2545,
+    "question": "Battletoads/Double Dragon is a game that can be played on this company's Game Boy?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2546,
+    "question": "Who appeared in more television shows, Larry Hagman or Nagisa Oshima?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2548,
+    "question": "What were the major dance styles during the era that was roughly from 1600-1750?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2552,
+    "question": "Who was nominated for more Academy Awards, Vittorio De Sica or Robert Altman?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2579,
+    "question": "What position does Tobias Schweinsteiger's brother play for Chicago Fire?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2594,
+    "question": "Who was born first, Claude Debussy or Gian Carlo Menotti?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2599,
+    "question": "Oumar Tchomogo who was born in Cotonou, where is this city located?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2611,
+    "question": "Total: From Joy Division to New Order is a compilation album of material from Joy Division and which English rock band formed in 1980, currently comprising Bernard Sumner, Stephen Morris, Gillian Gilbert, Phil Cunningham and Tom Chapman?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.22222222222222224,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.4444444444444445
+  },
+  {
+    "index": 2631,
+    "question": "Who was born first, Dikran Kelekian or Anna Der-Vartanian",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2635,
+    "question": "Which magazine was founded first, VIVmag or Allure?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2639,
+    "question": "Were both Wang Xiaoshuai and Justin Reardon producers?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2665,
+    "question": "Are both Irving Cummings and Dennis Gansel from America?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2685,
+    "question": "Ohio native William Gladstone Steel helped create Crater Lake National Park, where the lake is most famous for what?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6
+  },
+  {
+    "index": 2698,
+    "question": "What was the name of the opera which You Send Me and Summertime were both songs on the album?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2704,
+    "question": "Were Ideamen and Lit formed in the same states:",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2713,
+    "question": "Which breed was developed first, the Doberman Pinscher or the Old Time Farm Shepherd?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2738,
+    "question": "Which was founded first, The University of Alaska Fairbanks or The University of Alabama?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2746,
+    "question": "Who plays more instruments, Glenn Hughes or Dave Evans?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2774,
+    "question": "Cold North Killers: Canadian Serial Murder includes a serial killer who committed murders in Canada, but was of what nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2777,
+    "question": "In what state did Joan Friedman work as a Jewish Chaplain for six years?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2787,
+    "question": "Dave Foster lived near which singer and guitarist from Nirvana?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2794,
+    "question": "Myles Kennedy and Robert Palmer, share which mutual occupations?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2828,
+    "question": "Do Jonathan Franzen and Heiner Müller have the same nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2840,
+    "question": "Move Under Ground combines the cosmic horror of H.P. Lovecraft's Cthulhu Mythos with the Beat style of an American novelist and poet who was born when?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2842,
+    "question": "When was the actor born who played the founder and leader of the Order of the Phoenix in the last six films of the series?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2871,
+    "question": "Shirley Collado is the president of the college located in what state?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2873,
+    "question": "Are Arthropodium and Peraphyllum in the same family?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2874,
+    "question": "Which is farther north,  Kundol Lake or Śniardwy?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2879,
+    "question": "Are Sophie Ellis-Bextor and Jo Kwon both models?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2893,
+    "question": "Who lived longer, Al-Ghazali or Averroes (Ibn Rushd)?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2896,
+    "question": "What type of group does 1946 National League tie-breaker series and 1946 Brooklyn Dodgers season have in common?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2899,
+    "question": "Who was born first, Sherman Alexie or Adunis?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2906,
+    "question": "Which two major Australian cities would Thora be in between?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.16666666666666666,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.3333333333333333
+  },
+  {
+    "index": 2916,
+    "question": "What animated film, released in 1955, was also parodied in \"The Simpsons\" episode \"Love Sprinfieldian Style\"?",
+    "no_rag_score": 0.125,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.25,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2948,
+    "question": "Which director has produced 34 films since 1983: Spike Lee or Manny Coto?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2961,
+    "question": "Who was born first, Muhammad Iqbal or Ali Qushji?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2968,
+    "question": "Who was the coach for the team that won the 2004 Sugar Bowl?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2972,
+    "question": "Which was founded first, Pomona College or Brown University?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2997,
+    "question": "Although they come from different countries, what genre of music do the bands Freeze the Atlantic and She Wants Revenge play?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 2999,
+    "question": "Do Guy Hamilton and Spike Jonze have the same nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3012,
+    "question": "Which genus has more species, Dacrydium or Tecophilaea?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3049,
+    "question": "Howard University Hospital and MedStar National Rehabilitation Hospital, are both located in which city?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3073,
+    "question": "Where did the league that Michael Anthony Edward Kidd-Gilchrist plays for hold it's 2012 draft?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3084,
+    "question": "When did Losing my religion come out?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.25,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.5
+  },
+  {
+    "index": 3088,
+    "question": "Christopher Kelly is a journalist for which magazine headquartered in Downtown Austin, Texas ?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3112,
+    "question": "Between Cyclamen and Fargesia, which genus to spread to more continents?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3115,
+    "question": "Which mountain is higher Gangkhar Puensum or Jongsong Peak ?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3175,
+    "question": "What German composer wrote a letter in 1770 addressing Lucrezia Aguiari's ability to perform in C sporano acuto?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3204,
+    "question": "Queen of the Netherlands is a Dutch Trailing suction hopper dredger ship, constructed in 1998, the vessel has been used in high-profile salvage and dredging operations including the investigation into which scheduled international passenger flight from New York City, United States, to Geneva, Switzerland, the flight was also a codeshare flight with Delta Air Lines?",
+    "no_rag_score": 0.14285714285714288,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.28571428571428575,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3205,
+    "question": "Legend is a science fiction Western television show starring an American , director, producer, writer, singer, musician, voice artist and stand-up what?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3210,
+    "question": "In which county was Jeremiah Joseph O'Keefe mayor from 1973 to 1981?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3211,
+    "question": "Which band formed first Suede or Hard-Fi ?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3217,
+    "question": "Were Irving Wallace and Muriel Spark writers in the same countries?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3221,
+    "question": "Were Rolf de Heer and Joseph M. Newman of the same nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3245,
+    "question": "Which of these events came first, the release of the movie Toy Story or the death of marathon runner Stylianos Kyriakides?",
+    "no_rag_score": 0.14285714285714288,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.28571428571428575,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3250,
+    "question": "Which New England university has a larger main campus, University of Hartford or University of Massachusetts Amherst?",
+    "no_rag_score": 0.28571428571428575,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5714285714285715,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3273,
+    "question": "Where Harry Beaumont and Theodore Wharton co-stars in a movie?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3274,
+    "question": "What U.S. Route runs through Clay Township down to Jacksonville, Florida?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3290,
+    "question": "Could Ann Beattie and  Edgar Rice Burroughs be dating?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3305,
+    "question": "What team did Darrelle Revis play for, two years after he was drafted?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3317,
+    "question": "La Cenerentola and Doktor Faust, are which type of play?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3322,
+    "question": "Which five uniformed services of the United States are eligible for the National Defense Service Medal?",
+    "no_rag_score": 0.47058823529411764,
+    "naive_rag_score": 0.375,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.9411764705882353,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.75
+  },
+  {
+    "index": 3339,
+    "question": "Between Willow and Darwinia, which genus has more species?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3369,
+    "question": "What is Bern Minster's branch of Protestantism called?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3374,
+    "question": "In what county were The 1981 U.S. Clay Court Championships held?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3385,
+    "question": "When was the Half-Life first-person shooter game released by game development community MapCore? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3388,
+    "question": "What party does the Virginia representative of a narrow pass through the mountains belong to?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3395,
+    "question": "Are Pizza Ranch and Gino's East located in Florida?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3398,
+    "question": "In what year was the head coach of the 2009–10 Oklahoma Sooners men's basketball team born?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3459,
+    "question": "In what year was the book published that first talks about biopower?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3474,
+    "question": "What Hawaiian Navy base contains the Admiral Clarey Bridge?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3487,
+    "question": "Emily Peachey appeared in a 2011 film directed by who?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3490,
+    "question": "Which company specializes in coffee, Microchip Technology or Keurig Green Mountain? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3499,
+    "question": "Who was born first, Xavier Malisse or Gene Mayer?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3529,
+    "question": "What continent has the Kogyae Strict Nature Reserve?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3551,
+    "question": "what is the origin city and state of the singer in which Jorge Salan played lead guitarist for in an European tour?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3553,
+    "question": "Sultans of Swing is a hit song by the British rock band Dire Straits, what is oe of the other hit singles?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3562,
+    "question": " Which musician has been in more bands in his life, Carl Barât or Jesse Michaels?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3572,
+    "question": "What industry does the documentary The Romance of the Far Fur Country focus on, that is also the industry that Hudson's Bay Company operates in?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.25,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.5
+  },
+  {
+    "index": 3592,
+    "question": "Before Dennis Wayne joined Dennis Wayne's Dancers, what city was his ballet company based in?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.4,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.8
+  },
+  {
+    "index": 3613,
+    "question": "Morgan State University and University of Idaho are what types of universities?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.125,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.25
+  },
+  {
+    "index": 3614,
+    "question": "Where was the work Gustave-Hippolyte Roger was a leading tenor in in 1846 first performed?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3648,
+    "question": "What is the birth date of this English scientist, whose laboratory burner design was later perfected by Peter Desaga into the Bunsen burner?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3651,
+    "question": "Who is known for their prolific work in the horror film genre, Valie Export or Gary Sherman?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3691,
+    "question": "What industry did both Byambasuren Davaa and Sylvester Stallone work in?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 3705,
+    "question": "Who has won more awards Ellis Ferreira or Boris Becker",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3714,
+    "question": "Three Nationwide Plaza is a 408 ft(124m) postmodern highrise building located at the address 3 Nationwide Plaza in Downtown Columbus, Nationwide Plaza is the headquarters of Nationwide Mutual Insurance Company, and affiliated companies, are a group of large U.S. insurance and financial services companies based in Columbus in which US state (acronym)?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3720,
+    "question": "Which British commputer scientist developed an algorithm for sorting strings in 1959/1960?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3726,
+    "question": "What is the other name for this athletics track event in which Papa M'Baye N'Diaye competed at the 1964 Summer Olympics and the 1968 Summer Olympics?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.14285714285714288,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.28571428571428575
+  },
+  {
+    "index": 3728,
+    "question": "Roberto Gil Zuarth served as private secretary to which Mexican president who is a member of the PAN party?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.4,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.8
+  },
+  {
+    "index": 3734,
+    "question": "Who was first to win a Grand Slam doubles championship, Heather Watson or Édouard Roger-Vasselin?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3769,
+    "question": "Are Steve Dildarian and Mia Tyler both former advertising copywriters?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3770,
+    "question": "Which artist recorded more tracks, Mark Rankin or Steve Lukather?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3803,
+    "question": "Who was born first, Kenneth Webb or Victor Fleming?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3826,
+    "question": "The TV campaign for the brand No7 uses a tune by a singer born in what city?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3844,
+    "question": "Eddie Cahill is best known for portraying a retired American ice hockey goaltender who was part of the 1980 U.S. hockey team that won the gold medal at the Olympic games that were held where?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3870,
+    "question": "What was this major international multi-sport event, with the opening ceremonies taking place on 27 July, and in which the South African field hockey player Bernadette Coston competed for the outh Africa women's national field hockey team?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.2,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.4
+  },
+  {
+    "index": 3874,
+    "question": "Who has more scope of profession, Géza von Cziffra or Henry Selick?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3884,
+    "question": "What year did Ritesh Sidhwani make his first film under the banner of Excel Entertainment?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3902,
+    "question": "What is the nationality of the writer and director of the film The Tree of Life?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3908,
+    "question": "What club headquarters is located in the city of Lyon, that had a French former footballer who played as a winger or an attacking midfielder pass through the youth training center?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3930,
+    "question": " The Railway Hotel was used in a film about what Cambodian regime?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.25,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.5
+  },
+  {
+    "index": 3952,
+    "question": "Mount Cammerer is a mountain on the northeastern fringe of the Great Smoky Mountains, the Appalachian Trail traverses Cammerer's south slope and a restored fire lookout at the summit offers panoramic views of the eastern Smokies, Cocke County, and which physiographic province of the larger Appalachian Mountains range?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.28571428571428575,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.5714285714285715
+  },
+  {
+    "index": 3970,
+    "question": "Which university is located in more cities, the Massachusetts Institute of Technology or the University of Minnesota?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3976,
+    "question": "Which other other major ocean liner for the British Cunard Line preceded the ocean liner that was featured in a book of photographs by Philip Plisson?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3979,
+    "question": "Are both Karamay and Meihekou transportation hubs?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3981,
+    "question": "Howl-O-Scream is an event that occurs at the largest SeaWorld theme park in which Texas city?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 3996,
+    "question": "Which began their carrer first, Zoltan Korda or Claude Sautet?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4017,
+    "question": "Are Kasabian and Jawbox both from England?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4027,
+    "question": "Even Cowgirls Get the Blues was directed by the painted and photographer of what nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4028,
+    "question": "Are Smyrnium and Nymania both types of plant?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4048,
+    "question": "What award winning game is a reboot of the franchise developed by id Software?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4054,
+    "question": "What is the purpose of the program that distinguishes a senior military college?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4070,
+    "question": "Princess Maria-Olympia is the only daughter of the eldest son and second child of Constantine II, who was the last king of Greece from 1964 until when?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4077,
+    "question": "What is the release date of the film in which Noah Lomax played the character Lewis?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4079,
+    "question": "Which filmmaker was born first, René Clair or Emilio Fernández?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4084,
+    "question": "Rockland Railroad Station has been leased to what Class III freight railroad operating in the U.S. states of Maine and Vermont and the Canadian province of Quebec ",
+    "no_rag_score": 0.37499999999999994,
+    "naive_rag_score": 0.33333333333333326,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.7499999999999999,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666665
+  },
+  {
+    "index": 4101,
+    "question": "What type of music does Big Data and Underworld have in common?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4110,
+    "question": "Which movie, starring Tobin Bell, had a video game released one week prior to its premier?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4115,
+    "question": "Who would be older if they were still alive today, Donald Cammell or Peter Bogdanovich?",
+    "no_rag_score": 0.03125,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.0625,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4131,
+    "question": "Were John Wain and Ödön von Horváth both novelists?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4149,
+    "question": "Do both Gerard Way and Ben Kweller write comic books?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4155,
+    "question": "Jean Epstein and Tim Whelan, are French?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4163,
+    "question": "Which president of Indonesia created a series of extrajudicial government executions between 1983 and 1985?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 4171,
+    "question": "What nationality is Lord William Bentinck?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4175,
+    "question": "Which was founded first, the University of Iowa or the University of Texas at Austin?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4189,
+    "question": "Who was born first, Ken Hughes or Peter Duffell?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4193,
+    "question": "Panda! Go, Panda! was created by one of the co-founders of what film and animation studio?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4201,
+    "question": " Melanie Hamilton Wilkes is a fictional character first appearing in a novel whose story is set during what war?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.2,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.4
+  },
+  {
+    "index": 4224,
+    "question": "Which war that HMS Shannon was in involved France?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4239,
+    "question": "What traditional dance that originated in the Majha area of the Punjab region was pursued by a San Francisco Bay Area dance team? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4248,
+    "question": "Crouch End is a horror story by Stephen King, originally published in \"New Tales of the Cthulhu Mythos\" (1980), it contains distinct references to the horror fiction of which American author who achieved posthumous fame through his influential works of horror fiction?",
+    "no_rag_score": 0.2,
+    "naive_rag_score": 0.16666666666666666,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.4,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.3333333333333333
+  },
+  {
+    "index": 4255,
+    "question": "What country does Macross Frontier and Mai Mai Miracle originate from? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4259,
+    "question": "Monopoly Junior and Codenames, are which specific forms of entertainment?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4293,
+    "question": "Who is the writer of the British television sitcom for which David Jason is best known for his portrayal of Derek \"Del Boy\" Trotter?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4320,
+    "question": "Who was the Vickers .50 originally produced for?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4328,
+    "question": "Which singer is also a DJ, Chris Daughtry or Paul Banks?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4351,
+    "question": "What is the name of one of the native species of buckthorn that is also a powerful plant-based laxative?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4360,
+    "question": "Naomi Yashiro has been working as a cabin crew at an airlaine headquartered where?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.2,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.4
+  },
+  {
+    "index": 4389,
+    "question": " M. Night Shyamalan wrote and directed \"The Visit\" and \"The Village;\" of the two movies, which is more recent?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4412,
+    "question": "MedStar Georgetown University Hospital and Howard University Hospital are both located where?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4432,
+    "question": "Franz Liszt, a prolific 19th-century Hungarian composer, virtuoso pianist, conductor, music teacher, arranger, organist, philanthropist, author, nationalist and a Franciscan tertiary based his play on a work by which Lord?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4438,
+    "question": "In what city did the first UFC pay-per-view shown live on a Friday after UFC 55 take place?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4501,
+    "question": "Which director won more Oscar awards, Jacques Tourneur or Ralph Nelson?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4513,
+    "question": "Monsters, Inc. Mike & Sulley to the Rescue! is based on a movie made by a company that was purchased by Disney for how much?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4516,
+    "question": "Which opera is by Christoph Willibald Gluck, Iphigénie en Tauride or Der Barbier von Bagdad?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4517,
+    "question": "The Wirehaired Pointing Griffon and Giant Schnauzer both were developed in which country?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4531,
+    "question": "The Turn of the Screw includes the English actress who played Mary Crawley on what drama series?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4545,
+    "question": "When did the Basketball Tournament which  Kansas played its final in  1996–97 incept ",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4546,
+    "question": "Are David Vincent and Troy Sanders members of the same band? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4548,
+    "question": " What do Ian Astbury and George Thorogood have in common?",
+    "no_rag_score": 0.14285714285714288,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.28571428571428575,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4550,
+    "question": "Who was born first John Wellborn Root or  Daniel Hudson Burnham? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4551,
+    "question": "Who directed more movies, Vincent Sherman or David Seltzer?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4600,
+    "question": "Who was born first Kenji Mizoguchi or Alain Tanner?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4604,
+    "question": "Lochner v. New York and New York v. Ferber where both handled by who?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4613,
+    "question": "Are Lesquerella and Thujopsis both names of a genus of flowering plants?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4614,
+    "question": "Who was born first Vladimir Voevodsky or Anatoly Maltsev ",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4618,
+    "question": "Are Eugene O'Neill and Russell Edson both illustrators?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4632,
+    "question": "Which song by Desiigner was featured on Kanye West's seventh studio album?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4642,
+    "question": "When Larry Johnson played for the UNLV Runnin' Rebels basketball team, in what state was his home team located?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4652,
+    "question": "Are Conrad Aiken and Mahatma Gandhi both poets?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4658,
+    "question": "Jason Pinkston played his entire football career for an NFL team that plays their home games at what stadium?",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4667,
+    "question": "The WS-15, code name Emei, is a Chinese after burning turbofan engine, a stealth, twinjet, fifth-generation fighter aircraft developed by China's Chengdu Aerospace Corporation for what airforce?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.4000000000000001,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.8000000000000002
+  },
+  {
+    "index": 4689,
+    "question": "Ben Poquette graduated from which university established in 1892?",
+    "no_rag_score": 0.16666666666666666,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.3333333333333333,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4704,
+    "question": "Which musician has been ranked on more lists, Eric Clapton or Ann Wilson?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4708,
+    "question": "Which is farther east, Minneapolis–Saint Paul International Airport or Cheyenne Regional Airport?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4791,
+    "question": "Mario Mazzacurati won the 1936 South African Grand Prix with what type of car that was founded in 1909 in the then German city of Molsheim, Alsace?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.3333333333333333,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.6666666666666666
+  },
+  {
+    "index": 4821,
+    "question": "Does the Inula genus or the Fouquieria genus have more species?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4835,
+    "question": "Who was member of the Hanbali school of jurisprudence founded by Ahmad ibn Hanbal, Ibn Taymiyyah or Ibn Yunus",
+    "no_rag_score": 0.28571428571428575,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5714285714285715,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4845,
+    "question": "Which of the following is a film director known for quota quickies: George King or Jean Genet?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4860,
+    "question": "Was Paul Day in more bands than the number of teams Marcus Cooper played for? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4868,
+    "question": "Which originated first, Basset Bleu de Gascogne or Parson Russell Terrier",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4893,
+    "question": "Which has more films associated with it The Silent World or Zeitgeist",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4902,
+    "question": "What national park contains Geology that shapes the Pacific Northwest region of the United Stated and Canada?",
+    "no_rag_score": 0.28571428571428575,
+    "naive_rag_score": 0.25,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5714285714285715,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.5
+  },
+  {
+    "index": 4913,
+    "question": "Jennifer Lynch and Douglas Sirk, have which mutual occupation?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4922,
+    "question": "Tommy Lee Jones and Marshall Neilan, are of which nationality?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4927,
+    "question": "We are able to see comets through binoculars with the aid of what magnifying devices?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4930,
+    "question": "Are both White Town and Starsailor musical acts with the same number of performers? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4931,
+    "question": "During which war did the commander serve the \"Tropic Lightening\"? ",
+    "no_rag_score": 0.25,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.5,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4937,
+    "question": "Which country is the TV channel that hosted \"Yo,Guillermo\" located in? ",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4946,
+    "question": "Where was the rock band whose song released in June 2001 that topped the Adult 40 for 23 weeks from?",
+    "no_rag_score": 0.4,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.8,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4949,
+    "question": "What type of game are both Total Overdoes and Chili Con Carnage?",
+    "no_rag_score": 0.3333333333333333,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 0.0,
+    "no_rag_f1": 0.6666666666666666,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4975,
+    "question": "Give Me a Home Among the Gumtrees was an entry to replace what song attributed to John Bull?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  },
+  {
+    "index": 4979,
+    "question": "Do the films \"Return to Oz\" and \"Cars 3\" have the same director?",
+    "no_rag_score": 1.0,
+    "naive_rag_score": 0.0,
+    "no_rag_em": 1.0,
+    "no_rag_f1": 1.0,
+    "naive_rag_em": 0.0,
+    "naive_rag_f1": 0.0
+  }
+]

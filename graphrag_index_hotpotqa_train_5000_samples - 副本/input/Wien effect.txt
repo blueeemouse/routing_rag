@@ -1,0 +1,5 @@
+Wien effect
+
+The Wien effect is the experimentally-observed increase in ionic mobility or conductivity of electrolytes at very high gradient of electrical potential.
+
+ A theoretical explanation has been proposed by Lars Onsager.

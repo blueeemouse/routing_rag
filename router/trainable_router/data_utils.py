@@ -180,6 +180,7 @@ class DataAdapter:
     
     def _extract_predictions(self, data: Any) -> List[Dict[str, Any]]:
         """从各种数据格式中提取predictions列表"""
+        # 按照这种方法提取，可以从训练数据里提取出所有训练数据的predictions（是一个大的列表，每个元素是一个query的metadata，字典形式）
         if isinstance(data, list):
             return data
         elif isinstance(data, dict):
@@ -208,6 +209,7 @@ class DataAdapter:
             
         Returns:
             TrainingItem列表
+              - 每个Item是一个字典，包含question字符串以及一个策略名和score的键值对
         """
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"文件不存在: {file_path}")
@@ -216,7 +218,7 @@ class DataAdapter:
             data = json.load(f)
         
         items = []
-        predictions = self._extract_predictions(data)
+        predictions = self._extract_predictions(data)   # 这里是一个大的列表，每个元素是一个字典，包含一个query的metadata
         
         # 自动检测策略名称
         detected_strategy = strategy_name
@@ -238,6 +240,8 @@ class DataAdapter:
                 'total_time': pred.get('total_time', 0.0),
                 'retrieval_time': pred.get('retrieval_time', 0.0),
                 'generation_time': pred.get('generation_time', 0.0),
+                # 计算综合分数（0.5*EM + 0.5*F1）
+                'score': 0.5 * pred.get('em', 0.0) + 0.5 * pred.get('f1', 0.0),
             }
             
             # 检查是否有llm_judge等额外指标
@@ -330,7 +334,7 @@ class DataAdapter:
             if strategy:
                 items = self.from_single_strategy(file_path, strategy)
                 all_items.extend(items)
-        
+        # 我们最终得到的all_items也是一个列表，它是把多个策略下的训练数据的列表给汇总了，每个元素是一个TrainingItem        
         return all_items
     
     def aggregate(self, items: List[TrainingItem]) -> List[TrainingItem]:
@@ -341,7 +345,7 @@ class DataAdapter:
             items: TrainingItem列表
             
         Returns:
-            聚合后的TrainingItem列表
+            聚合后的TrainingItem列表，每个元素都包含一个question以及它在所有策略下的score（用策略：score这样的字典的形式存储）
         """
         # 按question分组
         question_map: Dict[str, TrainingItem] = {}

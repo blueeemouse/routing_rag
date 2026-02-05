@@ -1,0 +1,7 @@
+Nonmetricity tensor
+
+In mathematics, the nonmetricity tensor in differential geometry is the covariant derivative of the metric tensor.
+
+ It is therefore a tensor field of order three.
+
+ It vanishes for the case of Riemannian geometry.

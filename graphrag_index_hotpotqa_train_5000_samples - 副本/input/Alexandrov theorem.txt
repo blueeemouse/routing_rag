@@ -1,0 +1,3 @@
+Alexandrov theorem
+
+In mathematical analysis, the Alexandrov theorem, named after Aleksandr Danilovich Aleksandrov, states that if U is an open subset of R and  "f" : "U" → R   is a convex function, then "f" has a second derivative almost everywhere.

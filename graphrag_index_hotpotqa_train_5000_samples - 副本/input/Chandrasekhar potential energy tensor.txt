@@ -1,0 +1,5 @@
+Chandrasekhar potential energy tensor
+
+In astrophysics, Chandrasekhar potential energy tensor provides the gravitational potential of a body due to its own gravity created by the distribution of matter across the body, named after the Indian American astrophysicist Subrahmanyan Chandrasekhar.
+
+ The Chandrasekhar tensor is a generalization of potential energy in other words, the trace of the Chandrasekhar tensor provides the potential energy of the body.

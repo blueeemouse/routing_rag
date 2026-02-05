@@ -1,0 +1,7 @@
+Relational quantum mechanics
+
+Relational quantum mechanics (RQM) is an interpretation of quantum mechanics which treats the state of a quantum system as being observer-dependent, that is, the state "is" the relation between the observer and the system.
+
+ This interpretation was first delineated by Carlo Rovelli in a 1994 preprint, and has since been expanded upon by a number of theorists.
+
+ It is inspired by the key idea behind special relativity, that the details of an observation depend on the reference frame of the observer, and uses some ideas from Wheeler on quantum information.

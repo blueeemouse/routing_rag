@@ -16,6 +16,8 @@ from .base_dataset import BaseRouterDataset
 class TrainableRouterFactory:
     """可训练路由器工厂"""
     
+    # 这三个注册表是类变量，是所有类实例都可以用的（和实例变量区分开，实例变量是
+    # 每个实例自己的）
     # 模型注册表
     _models: Dict[str, Type[BaseRouterModel]] = {}
     
@@ -25,6 +27,12 @@ class TrainableRouterFactory:
     # 数据集注册表
     _datasets: Dict[str, Type[BaseRouterDataset]] = {}
     
+    # 这下面的三种注册方法，都是同时支持两种注册方式的，一种是装饰器注册，也就是在我们想注册进来的
+    # 类上面加上装饰器；（如@TrainableRouterFactory.register_model('dc')
+    #                     class DCRouterModel(BaseRouterModel):
+    #                         pass
+    # ）另一种就是正常执行命令，例如：TrainableRouterFactory._models['dc'] = DCRouterModel
+    # 本质上第一种方法等价于在类定义之后执行第二种方法
     @classmethod
     def register_model(cls, model_type: str):
         """
@@ -96,7 +104,9 @@ class TrainableRouterFactory:
         Returns:
             训练器实例
         """
-        trainer_type = config.model_type.lower()
+        # trainer_type = config.model_type.lower()
+        print(config.training)
+        trainer_type = config.training.trainer_type.lower()
         
         if trainer_type not in cls._trainers:
             raise ValueError(f"Unknown trainer type: {trainer_type}. Available: {list(cls._trainers.keys())}")

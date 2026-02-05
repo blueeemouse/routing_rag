@@ -1,0 +1,15 @@
+Evolution of a random network
+
+Evolution of a random network is a dynamical process, usually leading to emergence of giant component accompanied with striking consequences on the network topology.
+
+ To quantify this process, there is a need of inspection on how the size of the largest connected cluster within the network, formula_1, varies with formula_2.
+
+ Networks change their topology as they evolve, undergoing phase transitions.
+
+ Phase transitions are generally known from physics, where it occurs as matter changes state according to its thermal energy level, or when ferromagnetic properties emerge in some materials as they are cooling down.
+
+ Such phase transitions take place in matter because it is a network of particles, and as such, rules of network phase transition directly apply to it.
+
+ Phase transitions in networks happen as links are added to a network, meaning that having N nodes, in each time increment, a link is placed between a randomly chosen pair of them.
+
+ The transformation from a set of disconnected nodes to a fully connected network is called the evolution of a network.

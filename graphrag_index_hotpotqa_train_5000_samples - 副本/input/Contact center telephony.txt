@@ -1,0 +1,23 @@
+Contact center telephony
+
+Contact center telephony is a marketing term used to describe the communication and collaboration system used by businesses to either manage high volume of inbound queries or outbound telephone calls keeping their workforce or agents productive and in control to serve or acquire customers.
+
+ This business communication system is an extension of computer telephony integration (CTI).
+
+ The interactions between callers and customer service representatives are supported by the collective system of computers, telephones and the Internet.
+
+ The shift from CTI to contact center telephony is marked by the sheer change in the customer’s behavior when it comes to communication.
+
+ Means customers are no longer confined only to voice-based communication i.e. phone to connect with their customer service departments.
+
+ In addition, they are making use of email, SMS, chat, social media, and other virtual contact channels.
+
+ This is also the reason for the shift in nomenclature from "call centers" to "contact centers", "contact" being a wider term than "call".
+
+ Respecting the trend, contact center owners need to adopt unified communication or multi-channel approach to let customers get in touch with them via their preferred communication mediums, either voice or non-voice (data).
+
+ Cloud-based phone system is a further advancement in the direction as it allows operators to access all the features and benefits of call center telephony over the Web against an affordable & flexible pay-as-you-go subscription model.
+
+ Thus, in-house infrastructure deployment to manage public switched telephone networks, storage, communication applications, and collaboration servers is no more an obligation.
+
+ Neither is the need to invest resources for their upgrade, repair, maintenance and security as cloud vendor would be responsible for the same.

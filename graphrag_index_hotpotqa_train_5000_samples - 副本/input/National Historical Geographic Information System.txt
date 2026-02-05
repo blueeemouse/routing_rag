@@ -1,0 +1,7 @@
+National Historical Geographic Information System
+
+The National Historical Geographic Information System (NHGIS) is a historical GIS project to create and freely disseminate a database incorporating all available aggregate census information for the United States between 1790 and 2010.
+
+ The project has created one of the largest collections in the world of statistical census information, much of which was not previously available to the research community because of legacy data formats and differences between metadata formats.
+
+ The statistical and geographic data are disseminated free of charge through a sophisticated online data access system.

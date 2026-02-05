@@ -1,0 +1,13 @@
+Mathematics of Operations Research
+
+Mathematics of Operations Research is a peer-reviewed scientific journal first published in February 1976.
+
+ It focuses on areas of mathematics relevant to the field of operations research such as continuous optimization, discrete optimization, game theory, machine learning, simulation methodology, and stochastic models.
+
+ The journal is published quarterly by INFORMS (Institute for Operations Research and the Management Sciences), which also publishes other journals including "Operations Research" and "Management Science".
+
+ "Mathematics of Operations Research" is indexed by the "Journal Citation Reports".
+
+ In 2014, it moved to "Issues in Advance", which publishes the articles online as they become available.
+
+ The H-index of the journal is 50.

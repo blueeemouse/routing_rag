@@ -1,0 +1,17 @@
+Bouin solution
+
+Bouin solution is a compound fixative used in histology.
+
+ It is composed of picric acid, acetic acid and formaldehyde in an aqueous solution.
+
+ It is especially good for gastrointestinal tract biopsies because this fixative allows crisper and better nuclear staining than 10% neutral-buffered formalin.
+
+ It is not a good fixative when tissue ultrastructure must be preserved for electron microscopy.
+
+ However, it is a good fixative when tissue structure with a soft and delicate texture must be preserved.
+
+ Formalin-fixed tissue is normally mordanted with Bouin solution for better staining results in the trichrome stains.
+
+ The acetic acid in this fixative lyses red blood cells and dissolves small iron and calcium deposits in tissue.
+
+ A variant in which the acetic acid is replaced with formic acid can be used for both fixation of tissue and decalcification.

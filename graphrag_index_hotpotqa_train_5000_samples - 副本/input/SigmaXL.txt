@@ -1,0 +1,3 @@
+SigmaXL
+
+SigmaXL is a graphical and statistical add-in tool for Microsoft Excel.

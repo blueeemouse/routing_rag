@@ -1,0 +1,11 @@
+Vladimir Mazya
+
+Vladimir Gilelevich Maz'ya (Russian: Владимир Гилелевич Мазья ; born December 31, 1937) (the family name is sometimes transliterated as Mazya, Maz'ja or Mazja) is a Russian-born Swedish mathematician, hailed as "one of the most distinguished analysts of our time" and as "an outstanding mathematician of worldwide reputation", who strongly influenced the development of mathematical analysis and the theory of partial differential equations.
+
+ His early achievements include: his work on Sobolev spaces, in particular the discovery of the equivalence between Sobolev and isoperimetric/isocapacitary inequalities (1960), his counterexamples related to Hilbert's 19th and Hilbert's 20th problem (1968), his solution, together with Yuri Burago, of a problem in harmonic potential theory (1967) posed by , his extension of the Wiener regularity test to p –Laplacian and the proof of its sufficiency for the boundary regularity.
+
+ Maz'ya solved V. Arnol'd's problem for the oblique derivative boundary value problem (1970) and F. John's problem on the oscillations of a fluid in the presence of an immersed body (1977).
+
+ In recent years, he proved a Wiener's type criterion for higher order elliptic equations, together with M. Shubin solved a problem in the spectral theory of the Schrödinger operator formulated by Israel Gelfand in 1953, found necessary and sufficient conditions for the validity of maximum principles for elliptic and parabolic systems of PDEs and introduced the so–called approximate approximations.
+
+ He also contributed to the development of the theory of capacities, nonlinear potential theory, the asymptotic and qualitative theory of arbitrary order elliptic equations, the theory of ill-posed problems, the theory of boundary value problems in domains with piecewise smooth boundary.

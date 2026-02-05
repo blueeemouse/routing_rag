@@ -1,0 +1,13 @@
+LogicTools
+
+LogicTools Inc. provides strategic supply chain optimization software.
+
+ It offers a suite of supply chain planning solutions, including network design and planning, supply chain and inventory planning and optimization solutions, supply chain scheduling applications, distribution and stocking solution, and production sourcing and asset planning solutions.
+
+ It serves consumer packaged goods, distribution, high-tech, manufacturing, process and chemical, and retail industries.
+
+ The company was founded in 1995 and is based in Chicago, Illinois.
+
+ Since April 11, 2007, LogicTools has been a subsidiary of ILOG, which became an IBM company in January 2009.
+
+ On March 31, 2015, LLamasoft acquired the IBM ILOG supply chain applications, which includes IBM ILOG Inventory and Product Flow Analyst, IBM ILOG LogicNet Plus XE, and IBM ILOG Transportation Analyst.

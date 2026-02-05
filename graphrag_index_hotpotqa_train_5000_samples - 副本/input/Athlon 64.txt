@@ -1,0 +1,15 @@
+Athlon 64
+
+The Athlon 64 is an eighth-generation, AMD64-architecture microprocessor produced by AMD, released on September 23, 2003.
+
+ It is the third processor to bear the name "Athlon", and the immediate successor to the Athlon XP.
+
+ The second processor (after the Opteron) to implement AMD64 architecture and the first 64-bit processor targeted at the average consumer, it was AMD's primary consumer microprocessor, and competes primarily with Intel's Pentium 4, especially the "Prescott" and "Cedar Mill" core revisions.
+
+ It is AMD's first K8, eighth-generation processor core for desktop and mobile computers.
+
+ Despite being natively 64-bit, the AMD64 architecture is backward-compatible with 32-bit x86 instructions.
+
+ Athlon 64s have been produced for Socket 754, Socket 939, Socket 940 and Socket AM2.
+
+ The line was succeeded by the dual-core Athlon 64 X2 and Athlon X2 lines.

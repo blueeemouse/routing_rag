@@ -1,0 +1,9 @@
+XBill
+
+XBill is an arcade style game for the X Window System.
+
+ The game features a bespectacled character known as "Bill".
+
+ The goal is to prevent Bill's legions of clones from installing "Wingdows", a virus "cleverly designed to resemble a popular operating system", on a variety of computers running other operating systems.
+
+ It was very popular among Linux gamers at the end of the 1990s, beating out "Quake", though not Quake II, as Linux Journal reader's favourite Linux game in 1999.

@@ -1,0 +1,15 @@
+Seiji Ogawa
+
+Seiji Ogawa (小川 誠二 "Ogawa Seiji", born January 19, 1934) is a Japanese researcher known for discovering the technique that underlies Functional Magnetic Resonance Imaging (fMRI).
+
+ He is regarded as the father of modern functional brain imaging.
+
+ He determined that the changes in blood oxygen levels cause its magnetic resonance imaging properties to change, allowing a map of blood, and hence, functional, activity in the brain to be created.
+
+ This map reflected which neurons of the brain responded with electrochemical signals to mental processes.
+
+ He was the first scientist who demonstrated that the functional brain imaging is depended on the oxygenation status of the blood, the BOLD effect.
+
+ The technique was therefore called Blood oxygenation level-dependent or BOLD contrast.
+
+ Functional MRI (fMRI) has been used to map the visual, auditory and sensory regions and moving toward higher brain functions such as cognitive functions in the brain.

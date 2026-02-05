@@ -1,0 +1,15 @@
+Proximity card
+
+A proximity card or prox card is a "contactless" smart card which can be read without inserting it into a reader device, as required by earlier magnetic stripe cards such as credit cards and "contact" type smart cards.
+
+ The Proximity cards are part of the contactless card technologies.
+
+ Held near an electronic reader for a moment they enable the identification of an encoded number.
+
+ The reader usually produces a beep or other sound to indicate the card has been read.
+
+ Proximity cards typically have a read range up to 50 cm (< 15 inches) which is the main difference with contactless smartcard with 2 to 10 cm (1 to 3 inches) .
+
+ The card can often be left in a wallet or purse , and read by simply holding the wallet or purse near the reader.
+
+ The term "proximity card" refers to the older 125 kHz devices as distinct to the newer 13.56 MHz contactless smartcards. Second generation prox cards works in UHF frequency are in use for mass and distance reading application.

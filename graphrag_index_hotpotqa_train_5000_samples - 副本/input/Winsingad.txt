@@ -1,0 +1,3 @@
+Winsingad
+
+WinSingad is a Microsoft Windows based software for singing training.

@@ -1,0 +1,9 @@
+John Tsotsos
+
+John Tsotsos is a Canadian Computer Scientist whose research focuses on the field of Computer Vision.
+
+ He is best known for his work in visual attention, specifically for establishing the need for visual attention through an argument from computational complexity and subsequently developing a computational framework for neuronal attention known as the Selective Tuning model.
+
+ He is currently the Canada Research Chair in Computer Vision at York University and served as the Director of the Centre for Vision Research at York University from 2000-2006.
+
+ He was elected to the Royal Society of Canada in 2010.

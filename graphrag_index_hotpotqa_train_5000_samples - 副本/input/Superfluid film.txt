@@ -1,0 +1,15 @@
+Superfluid film
+
+Superfluidity and superconductivity are macroscopic manifestations of quantum mechanics.
+
+ There is considerable interest, both theoretical and practical, in these quantum phase transitions.
+
+ There has been a tremendous amount of work done in the field of phase transitions and critical phenomenon in two dimensions.
+
+ Much of the interest in this field is because as the number of dimensions increases, the number of exactly solvable models diminishes drastically.
+
+ In three or more dimensions one must resort to a mean field theory approach.
+
+ The theory of superfluid transitions in two dimensions is known as the Kosterlitz-Thouless (KT) theory.
+
+ The 2D XY model - where the order parameter is characterized by an amplitude and a phase - is the universality class for this transition.

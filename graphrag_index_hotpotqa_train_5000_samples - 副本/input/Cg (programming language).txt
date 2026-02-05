@@ -1,0 +1,11 @@
+Cg (programming language)
+
+Cg (short for C for Graphics) is a high-level shading language developed by Nvidia in close collaboration with Microsoft for programming vertex and pixel shaders.
+
+ Cg is based on the C programming language and although they share the same syntax, some features of C were modified and new data types were added to make Cg more suitable for programming graphics processing units.
+
+ This language is only suitable for GPU programming and is not a general programming language.
+
+ The Cg compiler outputs DirectX or OpenGL shader programs.
+
+ Since 2012, Cg was deprecated, with no additional development or support available.

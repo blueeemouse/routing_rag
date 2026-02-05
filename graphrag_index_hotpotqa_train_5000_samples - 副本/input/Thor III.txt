@@ -1,0 +1,7 @@
+Thor III
+
+The THOR III is man-portable, counter-radio-controlled improvised explosive device (IED) jammer built by Sierra Nevada Corp and employed by the U.S. Army, U.S. Marine Corps, and partnered Afghan National Army soldiers in Afghanistan.
+
+ Sierra Nevada received the initial contract in December 2007.
+
+ This system uses three transceivers mounted on backpacks to jam radio-controlled IEDs; each of the three different transceivers jams a different frequency bandwidth (Low, Mid, and High).

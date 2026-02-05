@@ -1,0 +1,13 @@
+Reynold Xin
+
+Reynold Xin is a computer scientist and engineer specializing in big data, distributed systems, and cloud computing.
+
+ He is a co-founder and Chief Architect of Databricks.
+
+ He is a frequent speaker on the topic of Big Data and open source software at conferences.
+
+ He is best known for his work on Apache Spark, which as of 2016 is the top open-source Big Data project.
+
+ He designed and lead development of the GraphX, Project Tungsten, and Structured Streaming components and he co-designed DataFrames—all of which are part of the core Apache Spark distribution—plus served as the release manager for Spark's 2.0 release.
+
+ s of 2016 he is also the most active contributor to Spark with over 1000 commits.

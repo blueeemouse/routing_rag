@@ -1,0 +1,17 @@
+SystemVerilog DPI
+
+SystemVerilog DPI (Direct Programming Interface) is an interface which can be used to interface SystemVerilog with foreign languages.
+
+ These Foreign languages can be C, C++, SystemC as well as others.
+
+ DPIs consist of two layers: A SystemVerilog Layer and a Foreign language layer.
+
+ Both the layers are isolated from each other.
+
+ Which programming language is actually used as the foreign language is transparent and irrelevant for the System-Verilog side of this interface.
+
+ Neither the SystemVerilog compiler nor the foreign language compiler is required to analyze the source code in the other’s language.
+
+ Different programming languages can be used and supported with the same intact SystemVerilog layer.
+
+ For now, however, SystemVerilog defines a foreign language layer only for the C programming language.

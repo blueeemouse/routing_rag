@@ -1,0 +1,50 @@
+# No-RAG vs Naive-RAG 分类训练配置（5000样本）
+# 使用交叉熵损失
+
+# 模型类型
+model_type: "dc"
+
+# 模型配置
+model:
+  backbone_name: "sentence-transformers/all-MiniLM-L6-v2"
+  hidden_size: 384
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  similarity_function: "cos"
+  temperature: 0.05
+  device: "auto"
+
+# 训练配置
+training:
+  trainer_type: "classification"  # 使用分类训练器
+  learning_rate: 0.0002
+  batch_size: 8
+  epochs: 10
+  training_steps: 0  # 0表示使用epochs动态计算
+  eval_steps: 5
+  save_steps: 10
+  max_grad_norm: 1.0
+  
+  # 对比损失权重（全部设为0，因为我们使用交叉熵）
+  sample_llm_loss_weight: 0.0
+  sample_sample_loss_weight: 0.0
+  cluster_loss_weight: 0.0
+  
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.01
+    
+  scheduler_type: "linear"
+
+# 数据配置
+data:
+  # train_path: "HotpotQA_train_data/label_analysis/all_labels_converted.json"
+  train_path: "HotpotQA_train_data"
+  val_path: "evaluation_results/router_test_labels.json"
+  source: "router_label"
+  num_clusters: 10
+
+# 输出配置
+output_dir: "router_models/no_rag_vs_naive_classification_5000"
+logging_dir: "router_models/no_rag_vs_naive_classification_5000/logs"
+log_level: "info"

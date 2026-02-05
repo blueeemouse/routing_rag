@@ -1,0 +1,9 @@
+Qutebrowser
+
+qutebrowser is a web browser for Linux, Windows, and macOS operating systems with vim-style key bindings and a minimal GUI.
+
+ It is keyboard-driven and is inspired by similar software such as Vimperator and dwb.
+
+ It uses DuckDuckGo as the default search engine.
+
+ Qutebrowser is included in the native repositories of Linux distributions such as Fedora and Arch Linux.

@@ -1,0 +1,5 @@
+Amstrad CP/M Plus character set
+
+The Amstrad CP/M Plus character set (alternatively known as PCW character set or ZX Spectrum +3 character set) refers to a group of 8-bit character sets introduced by Amstrad/Locomotive Software for use in conjunction with their adaptation of Digital Research's CP/M Plus on various Amstrad CPC / Schneider CPC and Amstrad PCW / Schneider Joyce machines.
+
+ The character set was also utilized on the Amstrad ZX Spectrum +3 since 1987.

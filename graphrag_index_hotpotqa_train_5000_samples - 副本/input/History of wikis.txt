@@ -1,0 +1,7 @@
+History of wikis
+
+The history of wikis is generally dated from 1994, when Ward Cunningham gave the name "WikiWikiWeb" to the knowledge base, which ran on his company's website at c2.com, and the wiki software that powered it.
+
+ c2.com thus became the first true wiki, or a website with pages and links that can be easily edited via the browser, with a reliable version history for each page.
+
+ He chose "WikiWikiWeb" as the name based on his memories of the "Wiki Wiki Shuttle" at Honolulu International Airport, and because "wiki" is the Hawaiian word for "quick".

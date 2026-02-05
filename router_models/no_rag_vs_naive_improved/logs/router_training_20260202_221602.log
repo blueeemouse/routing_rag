@@ -1,0 +1,95 @@
+2026-02-02 22:16:02 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:02 | INFO     | router_training | Router 训练开始
+2026-02-02 22:16:02 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:02 | INFO     | router_training | 命令行: router/train_router.py --config config/train_no_rag_vs_naive_improved.yaml
+2026-02-02 22:16:02 | INFO     | router_training | 
+2026-02-02 22:16:02 | INFO     | router_training | 开始时间: 2026-02-02 22:16:02
+2026-02-02 22:16:02 | INFO     | router_training | 
+2026-02-02 22:16:02 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:02 | INFO     | router_training | 环境信息
+2026-02-02 22:16:02 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:02 | INFO     | router_training | Python 版本: 3.10.19 | packaged by conda-forge | (main, Oct 22 2025, 22:23:22) [MSC v.1944 64 bit (AMD64)]
+2026-02-02 22:16:02 | INFO     | router_training | PyTorch 版本: 2.5.0+cu121
+2026-02-02 22:16:02 | INFO     | router_training | CUDA 可用: 是
+2026-02-02 22:16:02 | INFO     | router_training | CUDA 版本: 12.1
+2026-02-02 22:16:02 | INFO     | router_training | GPU 数量: 1
+2026-02-02 22:16:02 | INFO     | router_training |   GPU 0: NVIDIA GeForce RTX 3060 Laptop GPU
+2026-02-02 22:16:02 | INFO     | router_training | 操作系统: Windows 10
+2026-02-02 22:16:02 | INFO     | router_training | Git 分支: dev-train-router
+2026-02-02 22:16:02 | INFO     | router_training | Git Commit: b458450e
+2026-02-02 22:16:02 | INFO     | router_training | 
+2026-02-02 22:16:02 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:02 | INFO     | router_training | 最终参数配置
+2026-02-02 22:16:02 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:02 | INFO     | router_training | 完整配置:
+2026-02-02 22:16:02 | INFO     | router_training |   data:
+2026-02-02 22:16:02 | INFO     | router_training |     normalize_scores: False
+2026-02-02 22:16:02 | INFO     | router_training |     num_clusters: 30
+2026-02-02 22:16:02 | INFO     | router_training |     score_formula: em * 0.5 + f1 * 0.5
+2026-02-02 22:16:02 | INFO     | router_training |     shuffle: True
+2026-02-02 22:16:02 | INFO     | router_training |     source: hotpotqa
+2026-02-02 22:16:02 | INFO     | router_training |     test_path: 
+2026-02-02 22:16:02 | INFO     | router_training |     train_path: HotpotQA_train_data
+2026-02-02 22:16:02 | INFO     | router_training |     val_path: evaluation_results/router_test_labels.json
+2026-02-02 22:16:02 | INFO     | router_training |   device: auto
+2026-02-02 22:16:02 | INFO     | router_training |   log_level: info
+2026-02-02 22:16:02 | INFO     | router_training |   logging_dir: router_models/no_rag_vs_naive_improved/logs
+2026-02-02 22:16:02 | INFO     | router_training |   model:
+2026-02-02 22:16:02 | INFO     | router_training |     backbone_kwargs:
+2026-02-02 22:16:02 | INFO     | router_training |     backbone_name: sentence-transformers/all-MiniLM-L6-v2
+2026-02-02 22:16:02 | INFO     | router_training |     device: cuda
+2026-02-02 22:16:02 | INFO     | router_training |     hidden_size: 384
+2026-02-02 22:16:02 | INFO     | router_training |     num_strategies: 2
+2026-02-02 22:16:02 | INFO     | router_training |     pretrained_model_path:
+2026-02-02 22:16:02 | INFO     | router_training |       None
+2026-02-02 22:16:02 | INFO     | router_training |     similarity_function: cos
+2026-02-02 22:16:02 | INFO     | router_training |     strategy_names: ['no_rag', 'naive_rag']
+2026-02-02 22:16:02 | INFO     | router_training |     temperature: 1.0
+2026-02-02 22:16:02 | INFO     | router_training |   model_type: dc
+2026-02-02 22:16:02 | INFO     | router_training |   output_dir: router_models/no_rag_vs_naive_improved
+2026-02-02 22:16:02 | INFO     | router_training |   save_model_path: router_models/no_rag_vs_naive_improved
+2026-02-02 22:16:02 | INFO     | router_training |   training:
+2026-02-02 22:16:02 | INFO     | router_training |     batch_size: 32
+2026-02-02 22:16:02 | INFO     | router_training |     cluster_loss_weight: 0.1
+2026-02-02 22:16:02 | INFO     | router_training |     epochs: 20
+2026-02-02 22:16:02 | INFO     | router_training |     eval_steps: 10
+2026-02-02 22:16:02 | INFO     | router_training |     last_k: 1
+2026-02-02 22:16:02 | INFO     | router_training |     learning_rate: 5e-05
+2026-02-02 22:16:02 | INFO     | router_training |     max_grad_norm: 1.0
+2026-02-02 22:16:02 | INFO     | router_training |     max_length: 512
+2026-02-02 22:16:02 | INFO     | router_training |     optimizer_kwargs:
+2026-02-02 22:16:02 | INFO     | router_training |     optimizer_type: adamw
+2026-02-02 22:16:02 | INFO     | router_training |     sample_llm_loss_weight: 1.0
+2026-02-02 22:16:02 | INFO     | router_training |     sample_sample_loss_weight: 0.1
+2026-02-02 22:16:02 | INFO     | router_training |     save_steps: 80
+2026-02-02 22:16:02 | INFO     | router_training |     scheduler_type: linear
+2026-02-02 22:16:02 | INFO     | router_training |     seed: 42
+2026-02-02 22:16:02 | INFO     | router_training |     top_k: 1
+2026-02-02 22:16:02 | INFO     | router_training |     training_steps: 0
+2026-02-02 22:16:02 | INFO     | router_training |     use_amp: False
+2026-02-02 22:16:02 | INFO     | router_training | 
+2026-02-02 22:16:02 | INFO     | router_training.train_router | PyTorch 随机种子已设置为: 42
+2026-02-02 22:16:02 | INFO     | router_training.train_router | 自动选择设备: cuda
+2026-02-02 22:16:02 | INFO     | router_training.train_router | 验证参数...
+2026-02-02 22:16:02 | INFO     | router_training.train_router | 参数验证完成
+2026-02-02 22:16:02 | INFO     | router_training.train_router | 加载数据集...
+2026-02-02 22:16:21 | INFO     | router_training.train_router | 检测到路由标签格式，使用RouterLabelDataset
+2026-02-02 22:16:21 | INFO     | router_training.train_router | 验证数据集已加载: evaluation_results/router_test_labels.json
+2026-02-02 22:16:21 | INFO     | router_training.train_router | 创建模型...
+2026-02-02 22:16:23 | INFO     | router_training.train_router | 模型创建成功: dc
+2026-02-02 22:16:23 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:23 | INFO     | router_training | 数据信息
+2026-02-02 22:16:23 | INFO     | router_training | ================================================================================
+2026-02-02 22:16:23 | INFO     | router_training | 训练样本数: 5000
+2026-02-02 22:16:23 | INFO     | router_training | 验证样本数: 1000
+2026-02-02 22:16:23 | INFO     | router_training | 策略覆盖:
+2026-02-02 22:16:23 | INFO     | router_training |   naive_rag: 5000 样本
+2026-02-02 22:16:23 | INFO     | router_training |   no_rag: 5000 样本
+2026-02-02 22:16:23 | INFO     | router_training | 
+2026-02-02 22:16:23 | INFO     | router_training.train_router | 总训练步数: 3140
+2026-02-02 22:16:23 | INFO     | router_training.train_router | 评估间隔: 每 10 步
+2026-02-02 22:16:23 | INFO     | router_training.train_router | 保存间隔: 每 80 步
+2026-02-02 22:16:23 | INFO     | router_training.train_router | TensorBoard 日志目录: router_models/no_rag_vs_naive_improved/tensorboard
+2026-02-02 22:16:23 | INFO     | router_training.train_router | 启动 TensorBoard 命令: tensorboard --logdir router_models/no_rag_vs_naive_improved/tensorboard
+2026-02-02 22:16:23 | INFO     | router_training.train_router | 开始新训练
+2026-02-02 22:16:23 | INFO     | router_training.train_router | 开始训练...

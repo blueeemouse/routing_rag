@@ -1,0 +1,3 @@
+Burstsort
+
+Burstsort and its variants are cache-efficient algorithms for sorting strings and are faster than radix sort for large data sets of common strings, first published in 2003.

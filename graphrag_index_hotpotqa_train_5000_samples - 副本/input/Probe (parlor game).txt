@@ -1,0 +1,13 @@
+Probe (parlor game)
+
+Probe is a parlor game introduced in the 1960s by Parker Brothers.
+
+ It is reminiscent of the simple two-person game Hangman, whose object is to guess a word chosen by another player by revealing specific letters.
+
+ Probe extends the number of players to a maximum of four and introduces additional game elements that increase the levels of both skill and chance.
+
+ Like Hangman, each player has a secret chosen word.
+
+ But unlike Hangman, the game ends when the last word, not the first word, is revealed.
+
+ All players remain in the game until the end.

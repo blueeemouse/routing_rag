@@ -1,0 +1,11 @@
+Far-Play
+
+Far-Play (stylized fAR-Play, from augmented reality) is a software platform developed at the University of Alberta, for creating location-based, scavenger-hunt style games which use the GPS and web-connectivity features of a player's smartphone.
+
+ According to the development team, "our long-term objective is to develop a general framework that supports the implementation of AARGs that are fun to play and also educational".
+
+ It utilizes Layar, an augmented reality smartphone application, QR codes located at particular real-world sites, or a phone's web browser, to facilitate games which require players to be in close physical proximity to predefined "nodes".
+
+ A node, referred to by the developers as a Virtual Point of Interest (vPOI), is a point in space defined by a set of map coordinates; fAR-Play uses the GPS function of a player's smartphone—or, for indoor games, which are not easily tracked by GPS satellites, specially-created QR codes—to confirm that they are adequately near a given node.
+
+ Once a player is within a node's proximity, Layar's various augmented reality features can be utilized to display a range of extra content overlaid upon the physical play-space or launch another application for extra functionality.

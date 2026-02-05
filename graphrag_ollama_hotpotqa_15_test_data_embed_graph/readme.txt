@@ -1,0 +1,1 @@
+这里放15个数据的索引，然后是用我提取的1000条数据的文件（hotpot_dev_distractor_1000_samples.jsonl）。主要是测试一下，看看数据量小一点的情况下会有好转吗……（不过这次把embed_graph打开）

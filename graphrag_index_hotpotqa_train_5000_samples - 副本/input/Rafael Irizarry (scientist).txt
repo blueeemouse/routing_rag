@@ -1,0 +1,5 @@
+Rafael Irizarry (scientist)
+
+Rafael Irizarry is a professor of biostatistics at the Harvard T.H. Chan School of Public Health and professor of biostatistics and computational biology at the Dana–Farber Cancer Institute.
+
+ Irizarry is known as one of the founders of the Bioconductor project.

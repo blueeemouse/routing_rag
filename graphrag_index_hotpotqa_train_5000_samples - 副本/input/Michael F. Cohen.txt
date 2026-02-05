@@ -1,0 +1,9 @@
+Michael F. Cohen
+
+Michael F. Cohen is an American computer scientist and researcher in computer graphics.
+
+ He was a Senior Research Scientist at Microsoft Research for 21 years until he joined Facebook Research in 2015.
+
+ In 1998, he received the ACM SIGGRAPH CG Achievement Award for his work in developing radiosity methods for realistic image synthesis.
+
+ He was elected a Fellow of the Association for Computing Machinery in 2007 for his "contributions to computer graphics and computer vision."

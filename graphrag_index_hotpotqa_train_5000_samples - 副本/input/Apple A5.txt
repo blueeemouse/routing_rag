@@ -1,0 +1,9 @@
+Apple A5
+
+The Apple A5 is a 32-bit system-on-a-chip designed by Apple Inc. and manufactured by Samsung and is the successor to the Apple A4.
+
+ The A5 commercially debuted with the release of Apple's iPad 2 tablet, and also powers the iPhone 4S, iPod Touch fifth generation, Apple TV third generation, and the iPad mini.
+
+ This is consistent with how Apple debuted the A4 chip: first in the original iPad, followed by the iPhone 4, and then the iPod Touch (fourth generation).
+
+ Apple claims that compared to its predecessor, the A4, the A5 CPU "can do twice the work" and the GPU has "up to nine times the graphics performance".

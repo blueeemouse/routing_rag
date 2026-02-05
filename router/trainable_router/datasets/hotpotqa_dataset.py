@@ -161,17 +161,68 @@ class GenericRouterDataset(BaseRouterDataset):
         # 过滤策略覆盖不足的样本
         min_strategies = len(self.strategy_names) - 1  # 允许缺失1个策略
         self.data = [
-            item for item in self.data 
+            item for item in self.data
             if len(item.strategy_scores) >= min_strategies
         ]
-        
+
         # 归一化分数
         if self.config.data.normalize_scores:
             self.data = self.data_adapter.normalize_scores(self.data)
-        
+
+        # 处理tie样本：强制no_rag更高（成本更低）
+        self._handle_tie_samples()
+
         # 添加cluster
         if self.num_clusters > 0:
             self._add_clusters()
+
+    def _handle_tie_samples(self):
+        """
+        处理tie样本（分数相等的样本）
+
+        对于分数相等的样本，强制设置no_rag分数更高
+        因为no_rag成本更低，应该优先选择
+        """
+        tie_count = 0
+
+        # 调试：统计分数差异分布
+        diff_stats = {}
+
+        for item in self.data:
+            # 提取所有策略的score
+            scores = []
+            for strategy in self.strategy_names:
+                metrics = item.strategy_scores.get(strategy, {})
+                score = metrics.get('score', 0.0)
+                scores.append(score)
+
+            # 计算分数差异
+            diff = max(scores) - min(scores)
+
+            # 统计差异范围
+            diff_key = f"{diff:.2f}"
+            diff_stats[diff_key] = diff_stats.get(diff_key, 0) + 1
+
+            # 检查是否所有分数相等（或差异很小）
+            if diff < 0.001:  # 分数相等
+                tie_count += 1
+                # 强制设置no_rag更高
+                for strategy in self.strategy_names:
+                    if strategy == 'no_rag':
+                        item.strategy_scores[strategy]['score'] = 1.0
+                    else:
+                        item.strategy_scores[strategy]['score'] = 0.0
+
+        # 打调试信息
+        print(f"分数差异统计（前20个）:")
+        sorted_diffs = sorted(diff_stats.items(), key=lambda x: float(x[0]), reverse=True)[:20]
+        for diff_key, count in sorted_diffs:
+            print(f"  差异 {diff_key}: {count} 样本")
+
+        if tie_count > 0:
+            print(f"\n处理了 {tie_count} 个tie样本，强制设置为no_rag")
+            tie_percentage = tie_count / len(self.data) * 100
+            print(f"Tie样本占比: {tie_percentage:.2f}%")
     
     def _get_coverage_stats(self) -> Dict[str, int]:
         """获取策略覆盖统计"""

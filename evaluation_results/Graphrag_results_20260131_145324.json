@@ -1,0 +1,1988 @@
+{
+  "model_name": "Graphrag",
+  "settings": {
+    "decomposer": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt": "任务：将复杂查询分解为简单子查询\n\n规则：\n1. 如果查询很简单，直接返回原查询\n2. 如果查询复杂，分解为多个子查询\n3. 每行一个子查询\n4. 不要包含任何解释、分析或说明文字\n5. 只输出子查询内容\n\n示例：\n输入：什么是人工智能？它有哪些应用？\n输出：\n什么是人工智能？\n人工智能有哪些应用？\n\n输入：北京是中国的首都吗？\n输出：\n北京是中国的首都吗？\n\n输入：1+1等于几？\n输出：\n1+1等于几？\n\n现在请处理以下查询：\n输入：{query}\n输出：\n"
+    },
+    "router": {
+      "api_url": "${API_BASE_URL}",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt": "任务：确定查询处理策略\n\n可选策略：\n- no_rag: 直接回答，无需检索\n- naive_rag: 使用向量检索\n- graph_rag: 使用图检索\n\n规则：\n1. 简单事实性问题 → no_rag\n2. 需要信息检索的问题 → naive_rag\n3. 复杂关系查询 → graph_rag\n4. 只输出策略名称，不要任何解释\n\n示例：\n查询：1+1等于几？\n策略：no_rag\n\n查询：北京是中国的首都吗？\n策略：no_rag\n\n查询：什么是人工智能？\n策略：naive_rag\n\n查询：张三和李四的关系是什么？\n策略：graph_rag\n\n现在请处理以下查询：\n查询：{sub_query}\n策略：\n"
+    },
+    "no_rag": {
+      "api_url": "${API_BASE_URL}/chat/completions",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "temperature": 0.0,
+      "prompt_template": "You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n\nQuestion: {query}\nAnswer:\n"
+    },
+    "naive_rag": {
+      "api_url": "http://127.0.0.1:11434",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "embedding_model": "nomic-embed-text",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "graph_rag": {
+      "api_url": "http://127.0.0.1:11434",
+      "api_key": "***FILTERED***",
+      "model": "qwen2.5:3b",
+      "embedding_model": "nomic-embed-text",
+      "chunk_size": 512,
+      "top_k": 5,
+      "temperature": 0.0,
+      "prompt_template": "Context information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\n\nGuidelines:\n1. Provide ONLY the answer, no explanations or reasoning\n2. Keep the answer as short as possible - typically 1-5 words\n3. For yes/no questions, answer only \"yes\" or \"no\"\n4. For dates, use the exact format (e.g., \"December 31, 2015\")\n5. For numbers, provide just the number (e.g., \"1522\")\n6. For names, provide just the name (e.g., \"Terry Crews\")\n7. DO NOT include phrases like \"The answer is\", \"According to\", \"Based on\", etc.\n8. DO NOT add any additional context or information\n9. If the answer is not in the context, say \"I don't know\"\n\nQuery: {query_str}\nAnswer:\n"
+    },
+    "rag": {
+      "naive_rag_enabled": true,
+      "graph_rag_enabled": true
+    },
+    "trainable_router": {
+      "model_type": "dc",
+      "model_path": "router_models/final",
+      "strategy_names": [
+        "no_rag",
+        "naive_rag",
+        "graph_rag"
+      ],
+      "batch_size": 32
+    }
+  },
+  "results": {
+    "model_name": "Graphrag",
+    "predictions": [
+      {
+        "question": "Donnie Smith who plays as a left back for New England Revolution belongs to what league featuring 22 teams?",
+        "gold_answer": [
+          "Major League Soccer"
+        ],
+        "prediction": "Major League Soccer",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 66.94004726409912,
+        "retrieval_time": 0.0,
+        "generation_time": 12.611901938915253,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are The Datsuns and The Black Crowes both rock bands?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "yes",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 113.47688674926758,
+        "retrieval_time": 0.0,
+        "generation_time": 24.900018095970154,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?",
+        "gold_answer": [
+          "December 31, 2015"
+        ],
+        "prediction": "December 20, 2015",
+        "em": 0.0,
+        "f1": 0.6666666666666666,
+        "precision": 0.6666666666666666,
+        "recall": 0.6666666666666666,
+        "total_time": 152.74642252922058,
+        "retrieval_time": 0.0,
+        "generation_time": 34.95317840576172,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Robin R. Bottin is known for his collaboration with an American director and producer who won an Academy Award, Golden Globe and BAFTA award for what movie?",
+        "gold_answer": [
+          "The Social Network"
+        ],
+        "prediction": "Pulp Fiction",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 86.61241030693054,
+        "retrieval_time": 0.0,
+        "generation_time": 18.26601105928421,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many miles does the train, which passes through the Amtrak Jacksonville station and shares the track with the Silver Meteor, run?",
+        "gold_answer": [
+          "1522"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 113.79983758926392,
+        "retrieval_time": 0.0,
+        "generation_time": 25.105588257312775,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former American football player had a part in the movie \"Gamer?\"",
+        "gold_answer": [
+          "Terry Crews"
+        ],
+        "prediction": "Terry Crews",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 78.24863314628601,
+        "retrieval_time": 0.0,
+        "generation_time": 16.23686784505844,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the Chief Executive Officer of the corporation that owns Space Dev?",
+        "gold_answer": [
+          "Fatih Ozmen"
+        ],
+        "prediction": "",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 48.39038276672363,
+        "retrieval_time": 0.0,
+        "generation_time": 8.50824373960495,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Cromwell station is located in which Maryland county?",
+        "gold_answer": [
+          "Anne Arundel County"
+        ],
+        "prediction": "Calvert",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 84.18007493019104,
+        "retrieval_time": 0.0,
+        "generation_time": 16.319960176944733,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which species is the most numerous, Podocarpus or Osmunda? ",
+        "gold_answer": [
+          "Podocarpus"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 114.96883034706116,
+        "retrieval_time": 0.0,
+        "generation_time": 25.35102468729019,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Van Andel Institute was founded in part by what American businessman, who was best known as co-founder of the Amway Corporation?",
+        "gold_answer": [
+          "Jay Van Andel"
+        ],
+        "prediction": "Richard M. DeVos",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 218.18303632736206,
+        "retrieval_time": 0.0,
+        "generation_time": 51.07960766553879,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Were Thomas H. Ince and Joseph McGrath of the same nationality?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 83.36238598823547,
+        "retrieval_time": 0.0,
+        "generation_time": 17.391358256340027,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What type of product is the sponsor of the Premiership Rugby Sevens SeriesSeries ? ",
+        "gold_answer": [
+          "pale lager"
+        ],
+        "prediction": "Sportswear",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 155.81610345840454,
+        "retrieval_time": 0.0,
+        "generation_time": 34.11815536022186,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The director of Panic 5 Bravo was born in what year?",
+        "gold_answer": [
+          "1978"
+        ],
+        "prediction": "",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 146.07656478881836,
+        "retrieval_time": 0.0,
+        "generation_time": 32.875151455402374,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was the gunman of the hostage crisis which Chris Reason was awarded the Graham Perkin Australian Journalist of the Year Award for his coverage of?",
+        "gold_answer": [
+          "Man Haron"
+        ],
+        "prediction": "",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 32.993014097213745,
+        "retrieval_time": 0.0,
+        "generation_time": 3.2136558294296265,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What country is both Thornton–Cleveleys railway station and Poulton-le-Fylde railway station located?",
+        "gold_answer": [
+          "England"
+        ],
+        "prediction": "",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 43.44360589981079,
+        "retrieval_time": 0.0,
+        "generation_time": 5.280422031879425,
+        "generation_tokens": 0
+      },
+      {
+        "question": "When was the Austrian \"Schutzstaffel\" (SS) officer born based on who's life Schapira co-authored a book?",
+        "gold_answer": [
+          "8 April 1912"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 147.2819356918335,
+        "retrieval_time": 0.0,
+        "generation_time": 30.806004106998444,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What Province in Sicily, founded in the eighth century B.C., was the birthplace of the famous historical mathematician Archimedes?",
+        "gold_answer": [
+          "Province of Syracuse"
+        ],
+        "prediction": "Sicilia",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 143.17418336868286,
+        "retrieval_time": 0.0,
+        "generation_time": 32.04155123233795,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was the director behind the Cirque du Soleil show in Las Vegas that was first performed on December 25, 1993?",
+        "gold_answer": [
+          "Franco Dragone"
+        ],
+        "prediction": "John Morayes",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 97.90284371376038,
+        "retrieval_time": 0.0,
+        "generation_time": 20.802977919578552,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which Beatles movie did the John's Children's  studio album Orgasm dub audience screams from?",
+        "gold_answer": [
+          "A Hard Day's Night"
+        ],
+        "prediction": "A Hard Day's Night",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 219.00569820404053,
+        "retrieval_time": 0.0,
+        "generation_time": 51.44632017612457,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Twelfth United States Army Group commander was the first chairman of what?",
+        "gold_answer": [
+          "Joint Chiefs of Staff"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 100.71506643295288,
+        "retrieval_time": 0.0,
+        "generation_time": 21.015699863433838,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What year did the series on CBS, starring the actor who known for his role in \"Rebel Without a Cause,\" air?",
+        "gold_answer": [
+          "1952"
+        ],
+        "prediction": "2017",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 150.0684778690338,
+        "retrieval_time": 0.0,
+        "generation_time": 33.899576246738434,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What defines Downers Grove as a thriller?",
+        "gold_answer": [
+          "by the moods they elicit"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 99.45382571220398,
+        "retrieval_time": 0.0,
+        "generation_time": 20.96240246295929,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many films did the star of Tum Milo Toh Sahi appear in? ",
+        "gold_answer": [
+          "110"
+        ],
+        "prediction": "2",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 153.29630303382874,
+        "retrieval_time": 0.0,
+        "generation_time": 34.573571503162384,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What are caesium-137, radium and uranium-234 examples of?",
+        "gold_answer": [
+          "radionuclides"
+        ],
+        "prediction": "Isotopes",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 149.74746131896973,
+        "retrieval_time": 0.0,
+        "generation_time": 33.98364961147308,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Where is the headquarter of the American multinational chemical corporation who's part is Dow AgroSciences?",
+        "gold_answer": [
+          "Midland, Michigan, United States"
+        ],
+        "prediction": "Wilmington",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 137.81798481941223,
+        "retrieval_time": 0.0,
+        "generation_time": 30.96366959810257,
+        "generation_tokens": 0
+      },
+      {
+        "question": "In which state was both Rex Gene Foods and Foodtown located in?",
+        "gold_answer": [
+          "New Jersey"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 78.32444334030151,
+        "retrieval_time": 0.0,
+        "generation_time": 16.00758409500122,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are Stephen Frears and Jan Švankmajer from the same country?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "No",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 254.094500541687,
+        "retrieval_time": 0.0,
+        "generation_time": 60.21718090772629,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The terminology of algebraic geometry changed drastically with the introduction of the general methods, initiated by a mathematician of what nationality?",
+        "gold_answer": [
+          "German"
+        ],
+        "prediction": "French",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 145.72650575637817,
+        "retrieval_time": 0.0,
+        "generation_time": 32.827917993068695,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which Outer Banks landmark and premiere BBQ restaurant has been featured in the magazine Southern Living?",
+        "gold_answer": [
+          "Pigman's Bar-B-Que"
+        ],
+        "prediction": "The Boiling Crab",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 99.71787285804749,
+        "retrieval_time": 0.0,
+        "generation_time": 21.57420241832733,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former college football quarterback is the nephew Wade Watts?",
+        "gold_answer": [
+          "Julius Caesar \"J. C.\" Watts Jr."
+        ],
+        "prediction": "Terry Crews",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 97.17383527755737,
+        "retrieval_time": 0.0,
+        "generation_time": 20.571086525917053,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Bridge of Spies stars a Soviet intelligence officer with what name?",
+        "gold_answer": [
+          "Rudolf Abel"
+        ],
+        "prediction": "Terry Cole",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 76.39299082756042,
+        "retrieval_time": 0.0,
+        "generation_time": 15.67327344417572,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which band formed earlier, Edward Sharpe and the Magnetic Zeros or Louis XIV?",
+        "gold_answer": [
+          "Louis XIV"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 206.53494501113892,
+        "retrieval_time": 0.0,
+        "generation_time": 48.16561669111252,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which former Republican won the presidential nomination at the 2012 United States Libertarian National Convention? ",
+        "gold_answer": [
+          "Gary Earl Johnson"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 115.4134874343872,
+        "retrieval_time": 0.0,
+        "generation_time": 25.476223409175873,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What was unique about the attraction that was replaced by Monsters, Inc. Laughing Floor on April 2,2007?",
+        "gold_answer": [
+          "the first to utilize Audio-Animatronics"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 143.60860061645508,
+        "retrieval_time": 0.0,
+        "generation_time": 32.42174470424652,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Martin Patterson \"Pat\" Hingle was a close friend of an actor who achieved success in what Western TV series? ",
+        "gold_answer": [
+          "Rawhide"
+        ],
+        "prediction": "The Big Valley",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 120.37141275405884,
+        "retrieval_time": 0.0,
+        "generation_time": 26.547117054462433,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which novel by the author of \"Armada\" will adapted as a feature film by Steven Spielberg?",
+        "gold_answer": [
+          "Ready Player One"
+        ],
+        "prediction": "The Great Gatiss",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 95.95283818244934,
+        "retrieval_time": 0.0,
+        "generation_time": 20.61613619327545,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Currently, which division does the fighter, who lost to Jon Jones in the UFC 140 event, fight in?",
+        "gold_answer": [
+          "middleweight"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 127.708425283432,
+        "retrieval_time": 0.0,
+        "generation_time": 28.81122124195099,
+        "generation_tokens": 0
+      },
+      {
+        "question": "George H. W. Bush,  a resident of West Oaks Subdivision in Houston Texas, became what number President in 1989? ",
+        "gold_answer": [
+          "41st"
+        ],
+        "prediction": "43",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 106.60811352729797,
+        "retrieval_time": 0.0,
+        "generation_time": 22.84211677312851,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the nationality of this actor, film producer and musician who has lived most of his life in Australia and appeared in Romper Stomper alongside Daniel Pollock, Jacqueline McKenzie and Tony Lee?",
+        "gold_answer": [
+          "New Zealand citizen"
+        ],
+        "prediction": "Australian",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 119.20506834983826,
+        "retrieval_time": 0.0,
+        "generation_time": 26.68551194667816,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Curt Menefee is the host of the Fox network's NFL show with co-host Michael Anthony Strahan who spent his entire 15-year career with what team?",
+        "gold_answer": [
+          "New York Giants"
+        ],
+        "prediction": "New York Giants",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 100.31674242019653,
+        "retrieval_time": 0.0,
+        "generation_time": 21.892340660095215,
+        "generation_tokens": 0
+      },
+      {
+        "question": "This singer of A Rather Blustery Day also voiced what hedgehog?",
+        "gold_answer": [
+          "Sonic"
+        ],
+        "prediction": "Tweety",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 125.86438846588135,
+        "retrieval_time": 0.0,
+        "generation_time": 28.218287348747253,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the mother of Mary Robinson in Shakespeare's \"The Winter's Tale\"",
+        "gold_answer": [
+          "Leontes"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 134.98968625068665,
+        "retrieval_time": 0.0,
+        "generation_time": 30.419838309288025,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who is the album \"Look What You Made Me Do\" is on being released through?",
+        "gold_answer": [
+          "Big Machine Records"
+        ],
+        "prediction": "Republic Records",
+        "em": 0.0,
+        "f1": 0.4,
+        "precision": 0.5,
+        "recall": 0.3333333333333333,
+        "total_time": 100.21552681922913,
+        "retrieval_time": 0.0,
+        "generation_time": 21.556368947029114,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What role was played in \"Who Framed Roger Rabbit\" by the actor who played an Addams Family character played by Jackie Coogan in the original television series?",
+        "gold_answer": [
+          "Judge Doom"
+        ],
+        "prediction": "Eisenberg",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 215.75170254707336,
+        "retrieval_time": 0.0,
+        "generation_time": 50.67278856039047,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was born first, Antonin Artaud or  Elizabeth Taylor?",
+        "gold_answer": [
+          "Antonin Artaud"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 57.56484341621399,
+        "retrieval_time": 0.0,
+        "generation_time": 11.34672063589096,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are Columbia University and University of Colorado both private universities? ",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "no",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 164.40995049476624,
+        "retrieval_time": 0.0,
+        "generation_time": 38.013220369815826,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The lead of the CBS series \"I Had Three Wives\" played what role in \"Godspell\"?",
+        "gold_answer": [
+          "Jesus"
+        ],
+        "prediction": "Moses",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 78.48021650314331,
+        "retrieval_time": 0.0,
+        "generation_time": 17.500635027885437,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Did Holland's Magazine and Moondance both begin in 1996?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "no",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 76.27308416366577,
+        "retrieval_time": 0.0,
+        "generation_time": 17.100288212299347,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The Panel with striding lion  was one of many that lined the way north of the gate to the inner city of what location?",
+        "gold_answer": [
+          "Babylon"
+        ],
+        "prediction": "Rome",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 98.27741312980652,
+        "retrieval_time": 0.0,
+        "generation_time": 22.55002075433731,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Zhangye and Nan'an, Fujian are both located where?",
+        "gold_answer": [
+          "People's Republic of China"
+        ],
+        "prediction": "China",
+        "em": 0.0,
+        "f1": 0.4,
+        "precision": 1.0,
+        "recall": 0.25,
+        "total_time": 172.0385022163391,
+        "retrieval_time": 0.0,
+        "generation_time": 41.05741882324219,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The first of the Simon Bloom books was optioned by a company founded in what year?",
+        "gold_answer": [
+          "1912"
+        ],
+        "prediction": "1993",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 65.34091186523438,
+        "retrieval_time": 0.0,
+        "generation_time": 14.293214976787567,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What did Karan Kapoor's maternal grandfather deliver?",
+        "gold_answer": [
+          "Shakespeare performances"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 110.65829658508301,
+        "retrieval_time": 0.0,
+        "generation_time": 25.704359769821167,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the translation of the name of the river on which Widnes is located ?",
+        "gold_answer": [
+          "boundary river"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 97.80684852600098,
+        "retrieval_time": 0.0,
+        "generation_time": 22.198855578899384,
+        "generation_tokens": 0
+      },
+      {
+        "question": "what city will host the event in which marie gisele eleme asse won twoo medals in 2017",
+        "gold_answer": [
+          "Abidjan"
+        ],
+        "prediction": "Abuja",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 123.81850624084473,
+        "retrieval_time": 0.0,
+        "generation_time": 29.081086039543152,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Where is the academy, for which Joseph D. Stewart was appointed Superintendent, located?",
+        "gold_answer": [
+          "Kings Point, New York"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 91.57836079597473,
+        "retrieval_time": 0.0,
+        "generation_time": 20.89928776025772,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Sudha Kheterpal who is  musician best know as the percussionist in Faithless has played with what singer who is recognized at the highest-selling Australian artist of all time by the Australian Recording industry Association?",
+        "gold_answer": [
+          "Kylie Ann Minogue"
+        ],
+        "prediction": "Kylie Minogue",
+        "em": 0.0,
+        "f1": 0.8,
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "total_time": 65.13356947898865,
+        "retrieval_time": 0.0,
+        "generation_time": 14.263216853141785,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was born first Garo Yepremian or Michael Casey ?",
+        "gold_answer": [
+          "\"Garo\" Yepremian"
+        ],
+        "prediction": "Garo Yepremian",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 105.84500169754028,
+        "retrieval_time": 0.0,
+        "generation_time": 24.457865834236145,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who was born first, Ana Kasparian or Andre Agassi?",
+        "gold_answer": [
+          "Andre Kirk Agassi"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 79.47343254089355,
+        "retrieval_time": 0.0,
+        "generation_time": 17.65322893857956,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Is the university that owns WCSU-FM historically black or white?",
+        "gold_answer": [
+          "black"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 241.48357820510864,
+        "retrieval_time": 0.0,
+        "generation_time": 58.47179627418518,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What adorns the archaeological artefact excavated by Thomas Bateman on 3 May 1848?",
+        "gold_answer": [
+          "A simple iron boar crest"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 51.152535915374756,
+        "retrieval_time": 0.0,
+        "generation_time": 10.813147366046906,
+        "generation_tokens": 0
+      },
+      {
+        "question": "How many members were in the South Korean boy group whose first official sub-unit is Bastarz?",
+        "gold_answer": [
+          "seven members"
+        ],
+        "prediction": "13",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 99.7763569355011,
+        "retrieval_time": 0.0,
+        "generation_time": 23.014527797698975,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The fourth episode The Simpsons' seventh season has what kind of theme?",
+        "gold_answer": [
+          "spiritual"
+        ],
+        "prediction": "Mystery",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 116.64508318901062,
+        "retrieval_time": 0.0,
+        "generation_time": 27.0475834608078,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What sport is featured in the film in which Kwon Yu-ri made her film debut ?",
+        "gold_answer": [
+          "swimming"
+        ],
+        "prediction": "Basketball",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 69.6881833076477,
+        "retrieval_time": 0.0,
+        "generation_time": 15.446036398410797,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Between MetroSource and Chicago, which magazine is published more frequently?",
+        "gold_answer": [
+          "Chicago"
+        ],
+        "prediction": "MetroSource",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 148.80280423164368,
+        "retrieval_time": 0.0,
+        "generation_time": 35.23621064424515,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What city does Paul Clyne and David Soares have in common?",
+        "gold_answer": [
+          "New York"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 86.84090256690979,
+        "retrieval_time": 0.0,
+        "generation_time": 19.756645798683167,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Town's first season in their new stadium was under the leadership of an English Football manager who was born when?",
+        "gold_answer": [
+          "1 December 1948"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 128.44720840454102,
+        "retrieval_time": 0.0,
+        "generation_time": 30.15592360496521,
+        "generation_tokens": 0
+      },
+      {
+        "question": "St Dionis Backchurch was rebuilt after a major conflagration that consumed how many parish churches?",
+        "gold_answer": [
+          "87"
+        ],
+        "prediction": "3",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 52.72954869270325,
+        "retrieval_time": 0.0,
+        "generation_time": 11.285947442054749,
+        "generation_tokens": 0
+      },
+      {
+        "question": " The original serialized story of the Bride of Re-Animator film was titled \"Herbert West–Reanimator\" and written by an American author who achieved posthumous fame through his influential works of what?",
+        "gold_answer": [
+          "horror fiction"
+        ],
+        "prediction": "Hypnology",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 125.11730241775513,
+        "retrieval_time": 0.0,
+        "generation_time": 29.28976947069168,
+        "generation_tokens": 0
+      },
+      {
+        "question": "In between Berghuis v. Thompkins and Mississippi University for Women v. Hogan which one was a  case decided 5-4 by the Supreme Court of the United States?",
+        "gold_answer": [
+          "Mississippi University for Women"
+        ],
+        "prediction": "Berghuis v. Thompkins",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 87.3873724937439,
+        "retrieval_time": 0.0,
+        "generation_time": 19.865733861923218,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Were the board games, Clans and Drunter und Drüber, both created by Leo Colovini?",
+        "gold_answer": [
+          "Drunter und Drüber is a multiplayer board game invented by Klaus Teuber"
+        ],
+        "prediction": "no",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 95.90458703041077,
+        "retrieval_time": 0.0,
+        "generation_time": 21.975559175014496,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Kentucky Truck Assembly and Louisville Assembly Plant are two auto factories in the city of Louisville operated by which car maker?",
+        "gold_answer": [
+          "Ford Motor Company"
+        ],
+        "prediction": "Ford",
+        "em": 0.0,
+        "f1": 0.5,
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "total_time": 115.24457859992981,
+        "retrieval_time": 0.0,
+        "generation_time": 26.63819110393524,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Whose father is the name of the son of the chief counsellor to the king in Hamlet taken from?",
+        "gold_answer": [
+          "Odysseus"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 139.67207622528076,
+        "retrieval_time": 0.0,
+        "generation_time": 33.00946182012558,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who directed and wrote the 2016 film featuring the voice of Townsend Coleman?",
+        "gold_answer": [
+          "Garth Jennings"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 91.37031626701355,
+        "retrieval_time": 0.0,
+        "generation_time": 20.51976066827774,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Casey Jr. Splash 'n' Soak Station is an attraction in a city located in which county ?",
+        "gold_answer": [
+          "Orange County"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 88.79594564437866,
+        "retrieval_time": 0.0,
+        "generation_time": 20.252937614917755,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who designed the casino that The Venetian Macao is modeled on?",
+        "gold_answer": [
+          "KlingStubbins"
+        ],
+        "prediction": "César Ritz",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 67.84200239181519,
+        "retrieval_time": 0.0,
+        "generation_time": 15.01675546169281,
+        "generation_tokens": 0
+      },
+      {
+        "question": "This man who was born on April 25th, 1947, was a member of this lower house of the Hawaii State Legislature.",
+        "gold_answer": [
+          "Robert \"Bobby\" Bunda"
+        ],
+        "prediction": "Terry Meehan",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 124.22776055335999,
+        "retrieval_time": 0.0,
+        "generation_time": 29.070651471614838,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Where is the location of Liberty Square park in Disneyland California?",
+        "gold_answer": [
+          "Anaheim"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 93.45361471176147,
+        "retrieval_time": 0.0,
+        "generation_time": 21.380592823028564,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the name of the presidential memorial in Washington, D.C that connects to an artificial island?",
+        "gold_answer": [
+          "Jefferson Memorial"
+        ],
+        "prediction": "Institute Circle",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 162.6340208053589,
+        "retrieval_time": 0.0,
+        "generation_time": 38.51493602991104,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What occupation do Henry Moore and John Wesley have in common?",
+        "gold_answer": [
+          "minister"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 78.21991539001465,
+        "retrieval_time": 0.0,
+        "generation_time": 17.655731976032257,
+        "generation_tokens": 0
+      },
+      {
+        "question": "who was the anthropologist who thought that the plaster casts that were discovered by Paul Freeman were a critical piece of evidence?",
+        "gold_answer": [
+          "Don Jeffrey \"Jeff\" Meldrum (born May 24, 1958) is a Professor of Anatomy and Anthropology"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 90.0317850112915,
+        "retrieval_time": 0.0,
+        "generation_time": 20.308884024620056,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the pioneer who has a park dedicated to him near Lexington, North Carolina famous for?",
+        "gold_answer": [
+          "Wilderness Road"
+        ],
+        "prediction": "Daniel Boone",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 104.44989013671875,
+        "retrieval_time": 0.0,
+        "generation_time": 22.57485795021057,
+        "generation_tokens": 0
+      },
+      {
+        "question": "The 1958 Pro Bowl was played at the California stadium that is the home for which college?",
+        "gold_answer": [
+          "University of Southern California"
+        ],
+        "prediction": "California",
+        "em": 0.0,
+        "f1": 0.4,
+        "precision": 1.0,
+        "recall": 0.25,
+        "total_time": 111.40082597732544,
+        "retrieval_time": 0.0,
+        "generation_time": 24.605911195278168,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What prominent Soviet director worked frequently with Composer Isaak Dunayevsky?",
+        "gold_answer": [
+          "Grigori Vasilyevich Aleksandrov"
+        ],
+        "prediction": "Eugene Kotkin",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 186.62704467773438,
+        "retrieval_time": 0.0,
+        "generation_time": 43.30953764915466,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Nicholas Pinnock stars as Jason Backland in a series direccted by who ?",
+        "gold_answer": [
+          "Hans Rosenfeldt"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 115.63069224357605,
+        "retrieval_time": 0.0,
+        "generation_time": 25.153133273124695,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Name three common things that are used in playing Monopoly and King of Tokyo?",
+        "gold_answer": [
+          "dice, cards, and boards"
+        ],
+        "prediction": "Dice\nProperty cards\nTokens",
+        "em": 0.0,
+        "f1": 0.5,
+        "precision": 0.5,
+        "recall": 0.5,
+        "total_time": 151.87259459495544,
+        "retrieval_time": 0.0,
+        "generation_time": 34.11861610412598,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Charles Hurt is currently the opinion editor of \"The Washington Times\", Fox News contributor, Breitbart News contributor, and editor of which politically conservative American news aggregation website?",
+        "gold_answer": [
+          "Drudge Report"
+        ],
+        "prediction": "RedState.org",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 102.64174246788025,
+        "retrieval_time": 0.0,
+        "generation_time": 22.25298583507538,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Where was one of the runners born who almost broke Craig Virgin's Illinois Boys Cross Country record?",
+        "gold_answer": [
+          "Kaunas, Lithuania"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 132.1207127571106,
+        "retrieval_time": 0.0,
+        "generation_time": 29.626855552196503,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Do Bloody Mary and Sidecar share any ingredients in common?",
+        "gold_answer": [
+          "no"
+        ],
+        "prediction": "yes",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 139.31622004508972,
+        "retrieval_time": 0.0,
+        "generation_time": 32.730987310409546,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Chris Jones is a semi-professional footballer, who played with what goalkeeper for Derby County when he was with Yorkshire?",
+        "gold_answer": [
+          "Scott Paul Carson"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 98.91861367225647,
+        "retrieval_time": 0.0,
+        "generation_time": 22.724434852600098,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which TV series, written by the creators of Robocalypse, is set in Bikini Bottom?",
+        "gold_answer": [
+          "SpongeBob SquarePants"
+        ],
+        "prediction": "SpongeBob SquarePants",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 94.80602216720581,
+        "retrieval_time": 0.0,
+        "generation_time": 21.643029272556305,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Where was Nobel Laureate in Physics know for his contributions with Abdus Salam and Steven Weinberg a professor?",
+        "gold_answer": [
+          "Harvard University"
+        ],
+        "prediction": "Stockholm",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 72.6816759109497,
+        "retrieval_time": 0.0,
+        "generation_time": 16.16952395439148,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Is the U.S. Bank Stadium home to the Minnesota Vikings, open air or fixed-roof?",
+        "gold_answer": [
+          "fixed-roof"
+        ],
+        "prediction": "fixed-roof",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 155.04193425178528,
+        "retrieval_time": 0.0,
+        "generation_time": 36.57297557592392,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Which founding member drew critical acclaim as a bass guitarist with melodic basslines  on Murmur?",
+        "gold_answer": [
+          "Mike\" Mills"
+        ],
+        "prediction": "Steve Howe",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 109.46712493896484,
+        "retrieval_time": 0.0,
+        "generation_time": 25.405841827392578,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who played a more important role in the church George Albert Smith or Wong Jing?",
+        "gold_answer": [
+          "George Albert Smith"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 141.68830800056458,
+        "retrieval_time": 0.0,
+        "generation_time": 33.43558168411255,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Who has won more awards, Dan Schneider or Helen Hunt?",
+        "gold_answer": [
+          "Helen Elizabeth Hunt"
+        ],
+        "prediction": "Helen Hunt",
+        "em": 0.0,
+        "f1": 0.8,
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "total_time": 73.290274143219,
+        "retrieval_time": 0.0,
+        "generation_time": 16.40709263086319,
+        "generation_tokens": 0
+      },
+      {
+        "question": "In which theater did Heidi Brunner, a Swiss opera singer, play the role as Annio? ",
+        "gold_answer": [
+          "Estates Theatre in Prague"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 75.58914303779602,
+        "retrieval_time": 0.0,
+        "generation_time": 16.740260183811188,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What is the nickname of this American retired airline captain celebrated for his water landing with Jeffrey Skiles, after a bird strike and being unable to reach an airport?",
+        "gold_answer": [
+          "Sully"
+        ],
+        "prediction": "Sully",
+        "em": 1.0,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "total_time": 165.04198718070984,
+        "retrieval_time": 0.0,
+        "generation_time": 39.22545862197876,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Are University of Virginia and Massachusetts Institute of Technology in the same country?",
+        "gold_answer": [
+          "yes"
+        ],
+        "prediction": "no",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 151.05611062049866,
+        "retrieval_time": 0.0,
+        "generation_time": 35.72396528720856,
+        "generation_tokens": 0
+      },
+      {
+        "question": "What bird of prey can be found around Brackendale?",
+        "gold_answer": [
+          "The bald eagle"
+        ],
+        "prediction": "I don't know",
+        "em": 0.0,
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "total_time": 81.6274185180664,
+        "retrieval_time": 0.0,
+        "generation_time": 18.410982191562653,
+        "generation_tokens": 0
+      },
+      {
+        "question": "Manchester, New Hampshire is a part of the Northeast megalopolis which included what other major cities?",
+        "gold_answer": [
+          "Boston, Providence, Hartford, New York City, Philadelphia, Wilmington, Baltimore, and Washington, D.C."
+        ],
+        "prediction": "Boston-New York-Washington DC Metro Area",
+        "em": 0.0,
+        "f1": 0.11764705882352941,
+        "precision": 0.2,
+        "recall": 0.08333333333333333,
+        "total_time": 68.65314078330994,
+        "retrieval_time": 0.0,
+        "generation_time": 15.075889647006989,
+        "generation_tokens": 0
+      }
+    ],
+    "exact_matches": [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "f1_scores": [
+      1.0,
+      1.0,
+      0.6666666666666666,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.4,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.4,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.8,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.4,
+      0.0,
+      0.0,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.8,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.11764705882352941
+    ],
+    "precisions": [
+      1.0,
+      1.0,
+      0.6666666666666666,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.5,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.2
+    ],
+    "recalls": [
+      1.0,
+      1.0,
+      0.6666666666666666,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.3333333333333333,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.25,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.6666666666666666,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.3333333333333333,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.25,
+      0.0,
+      0.0,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.6666666666666666,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.08333333333333333
+    ],
+    "total_time": 11475.760995388031,
+    "avg_time": 114.7576099538803,
+    "total_retrieval_time": 0.0,
+    "avg_retrieval_time": 0.0,
+    "total_generation_time": 2580.657249212265,
+    "avg_generation_time": 25.80657249212265,
+    "total_generation_tokens": 0,
+    "avg_generation_tokens": 0,
+    "errors": [],
+    "avg_em": 0.12,
+    "avg_f1": 0.16584313725490196,
+    "avg_precision": 0.18866666666666665,
+    "avg_recall": 0.1575,
+    "accuracy": 0.12,
+    "num_errors": 0
+  }
+}

@@ -1,0 +1,9 @@
+ABEC scale
+
+The ABEC scale is an industry accepted standard for the tolerances of a ball bearing.
+
+ It was developed by the Annular Bearing Engineering Committee (ABEC) of the American Bearing Manufacturers Association (ABMA).
+
+ The ABEC scale is designed to provide bearing manufacturers dimensional specifications that meet the standards of precision bearings in a specified class.
+
+ Manufacturers who produce equipment that require bearings must also know the dimensional tolerances to design parts that will accommodate a bearing.

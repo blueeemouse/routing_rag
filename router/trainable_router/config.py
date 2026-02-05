@@ -87,6 +87,9 @@ class TrainingConfig:
     # 随机种子
     seed: int = 42
 
+    # trainer类型
+    trainer_type: str = "dc"
+
 
 @dataclass
 class DataConfig:
@@ -183,6 +186,7 @@ class TrainableRouterConfig:
             cluster_loss_weight=training_config.get('cluster_loss_weight', 1.0),
             top_k=training_config.get('top_k', 3),
             last_k=training_config.get('last_k', 3),
+            trainer_type=training_config.get('trainer_type', None)
         )
         
         data = DataConfig(

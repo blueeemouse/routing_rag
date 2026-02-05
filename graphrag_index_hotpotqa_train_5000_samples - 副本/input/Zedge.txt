@@ -1,0 +1,11 @@
+Zedge
+
+Zedge is a mobile content discovery platform and community where users can download content to customize their smartphones and other mobile devices.
+
+ The app includes wallpapers, ringtones, alert tones, app icon customization, which is currently in its beta form, and which is only available for Android phones, and games on the Android, iOS and Windows Phone platforms.
+
+ Zedge has more than 170 million installs Android and iOS.
+
+ The app uses a recommendation engine that analyzes anonymized user data in order to create smart suggestions for wallpaper, ringtone, and game downloads.
+
+ IDT Corp. is majority investor in Zedge Holdings, the app's parent company.

@@ -1,0 +1,5 @@
+Manin obstruction
+
+In mathematics, in the field of arithmetic algebraic geometry, the Manin obstruction (named after Yuri Manin) is attached to a variety "X" over a global field, which measures the failure of the Hasse principle for "X".
+
+ If the value of the obstruction is non-trivial, then "X" may have points over all local fields but not over the global field.

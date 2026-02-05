@@ -1,0 +1,9 @@
+Photodetection
+
+In his historic paper entitled "The Quantum Theory of Optical Coherence," Roy J. Glauber set a solid foundation for the quantum electronics/quantum optics enterprise.
+
+ The experimental development of the optical maser and later laser at that time had made the classical concept of optical coherence inadequate.
+
+ Glauber started from the quantum theory of light detection by considering the process of photoionization in which a photodetector is triggered by an ionizing absorption of a photon.
+
+ In the quantum theory of radiation, the electric field operator in the Coulomb gauge may be written as the sum of positive and negative frequency parts

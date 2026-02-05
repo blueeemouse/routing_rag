@@ -1,0 +1,9 @@
+Harmless error
+
+A harmless error is a ruling by a trial judge that, although mistaken, does not meet the burden for a losing party to reverse the original decision of the trier of fact on appeal, or to warrant a new trial.
+
+ Harmless error is easiest to understand in an evidentiary context.
+
+ Evidentiary errors are subject to harmless error analysis, under Federal Rule of Evidence 103(a) ("Error may not be predicated upon a ruling which admits or excludes evidence unless a substantial right of the party is affected.")
+
+ The general burden when arguing that evidence was improperly excluded or included is to show that the proper ruling by the trial judge may have, on the balance of probabilities, resulted in the opposite determination of fact.

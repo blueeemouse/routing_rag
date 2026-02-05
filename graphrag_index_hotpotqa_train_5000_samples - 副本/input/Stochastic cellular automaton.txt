@@ -1,0 +1,5 @@
+Stochastic cellular automaton
+
+Stochastic cellular automata or 'probabilistic cellular automata' (PCA) or 'random cellular automata' or locally interacting Markov chains are an important extension of cellular automaton.
+
+ Cellular automata are a discrete-time dynamical system of interacting entities, whose state is discrete.

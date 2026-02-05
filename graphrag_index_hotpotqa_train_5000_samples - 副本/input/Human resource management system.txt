@@ -1,0 +1,13 @@
+Human resource management system
+
+A Human Resource Management System or HRIS (Human Resource Information System) is a form of HR software that combines a number of systems and processes to ensure the easy management of a business's employees and data.
+
+ Human Resources Software is used by businesses to combine a number of necessary HR functions, such as storing employee data, managing payrolls, recruitment processes, benefits administration and keeping track of attendance records.
+
+ It ensures everyday Human Resources processes are manageable and easy to access.
+
+ It merges human resources as a discipline and, in particular, its basic HR activities and processes with the information technology field, whereas the programming of data processing systems evolved into standardized routines and packages of Enterprise Resource Planning (ERP) software.
+
+ On the whole, these ERP systems have their origin from software that integrates information from different applications into one universal database.
+
+ The linkage of its financial and human resource modules through one database is the most important distinction to the individually and proprietarily developed predecessors, which makes this software application both rigid and flexible.

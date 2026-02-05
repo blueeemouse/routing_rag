@@ -1,0 +1,7 @@
+Kempe's universality theorem
+
+In 1876 Alfred B. Kempe published his article "On a General Method of describing Plane Curves of the nth degree by Linkwork," which showed that for an arbitrary algebraic plane curve a linkage can be constructed that draws the curve.
+
+ This direct connection between linkages and algebraic curves has been named Kempe's universality theorem that any bounded subset of an algebraic curve may be traced out by the motion of one of the joints in a suitably chosen linkage.
+
+ Kempe's proof was flawed and the first complete proof was provided in 2002 based on his ideas.

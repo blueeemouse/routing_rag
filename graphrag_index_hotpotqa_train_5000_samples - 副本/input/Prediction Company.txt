@@ -1,0 +1,13 @@
+Prediction Company
+
+Prediction Company was founded in Santa Fe, New Mexico, USA, in March 1991 by J. Doyne Farmer, Norman Packard and James McGill.
+
+ The company uses forecasting techniques to build black-box trading systems for financial markets, mainly employing statistical learning theory.
+
+ In September 1992, Prediction Company entered into an exclusive contract with O'Connor and Associates, a Chicago derivatives trading house, to provide investment advice and technology.
+
+ Soon after O'Connor merged with Swiss Bank Corporation, which later merged with Union Bank of Switzerland (UBS).
+
+ Prediction Company's contract was renewed multiple times and in 2005 UBS purchased Prediction Company outright.
+
+ After being a wholly owned subsidiary of UBS, Prediction Company was acquired in 2013 by an affiliate of Millennium Partners, L.P.

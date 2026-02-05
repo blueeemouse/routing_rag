@@ -1,0 +1,11 @@
+2R hypothesis
+
+The 2R hypothesis or Ohno's hypothesis, first proposed by Susumu Ohno in 1970, is a hypothesis in genomics and molecular evolution suggesting that the genomes of the early vertebrate lineage underwent two complete genome duplications, and thus modern vertebrate genomes reflect paleopolyploidy.
+
+ The name derives from the "2 rounds" of duplication originally hypothesized by Ohno, but refined in a 1994 version, and the term "2R hypothesis" was probably coined in 1999.
+
+ Variations in the number and timings of genome duplications typically still are referred to as examples of the 2R hypothesis.
+
+ The 2R hypothesis has been the subject of much research and controversy; however, with growing support from genome data, including the human genome, the balance of opinion has shifted strongly in favour of support for the hypothesis.
+
+ According to Hokamp "et al." (2003), the version of the genome duplication hypothesis from which 2R hypothesis takes its name appears in Holland "et al." (1994) and the term was coined in Hughes (1999).

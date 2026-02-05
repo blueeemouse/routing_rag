@@ -1,0 +1,9 @@
+Jim Keller (engineer)
+
+Jim Keller is a microprocessor engineer most well known for his work at AMD and Apple.
+
+ He was the lead architect of the AMD K8 microarchitecture (including the original Athlon 64) and was involved in designing the Athlon (K7) and Apple A4/A5 processors.
+
+ He was also the coauthor of the specifications for the x86-64 instruction set and HyperTransport interconnect.
+
+ From 2012 to 2015, he returned to AMD to work on the AMD K12 and Zen microarchitectures.

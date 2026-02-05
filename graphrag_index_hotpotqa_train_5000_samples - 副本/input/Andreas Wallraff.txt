@@ -1,0 +1,9 @@
+Andreas Wallraff
+
+Andreas Wallraff is a German physicist who conducts research in quantum information processing and quantum optics.
+
+ He has taught as a professor at ETH Zürich in Zürich, Switzerland since 2006.
+
+ He worked as a research scientist with Robert J. Schoelkopf at Yale University from 2002 to 2005, during which time he performed experiments in which the coherent interaction of a single photon with a single quantum electronic circuit was observed for the first time.
+
+ His current work at ETH Zürich focuses on hybrid quantum systems combining superconducting electronic circuits with semiconductor quantum dots and individual Rydberg atoms as well as quantum error correction with superconducting qubits.

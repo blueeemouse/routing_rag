@@ -1,0 +1,9 @@
+Id Tech 6
+
+id Tech 6 is a multiplatform game engine developed by id Software.
+
+ It is the successor to id Tech 5 and was first used to create the 2016 video game "Doom".
+
+ Internally, the development team also used the codename "id Tech 666" to refer to the engine.
+
+ The PC version of the engine is based on OpenGL API and additionally Vulkan API is also supported through patch updates.

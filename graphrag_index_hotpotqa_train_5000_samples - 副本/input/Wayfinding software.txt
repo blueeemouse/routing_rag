@@ -1,0 +1,5 @@
+Wayfinding software
+
+Wayfinding software is a self-service computer program that helps users to find a location, usually used indoors.
+
+ This software is usually installed on interactive kiosks or smartphones.

@@ -1,0 +1,11 @@
+Fractional lambda switching
+
+Fractional lambda switching (FλS) leverages on time-driven switching (TDS) to realize sub-lambda switching in highly scalable dynamic optical networking, which requires minimum (possibly optical) buffers.
+
+ Fractional lambda switching implies switching fractions of optical channels as opposed to whole lambda switching where whole optical channels are the switching unit.
+
+ In this context, TDS has the same general objectives as optical burst switching and optical packet switching: realizing all-optical networks with high wavelength utilization.
+
+ TDS operation is based on time frames (TFs) that can be viewed as virtual containers for multiple IP packets that are switched at every TDS switch based on and coordinated by the UTC (coordinated universal time) signal implementing pipeline forwarding.
+
+ In the context of optical networks, synchronous virtual pipes SVPs typical of pipeline forwarding are called fractional lambda pipes (FλPs).

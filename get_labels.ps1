@@ -1,0 +1,1 @@
+python compute_test_labels.py --eval-base D:\Develop\all_RAG\routing_rag\evaluation_results\HotpotQA_test_data_evaluation

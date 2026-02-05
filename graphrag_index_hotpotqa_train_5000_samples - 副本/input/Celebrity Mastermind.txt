@@ -1,0 +1,7 @@
+Celebrity Mastermind
+
+Celebrity Mastermind is a celebrity version of "Mastermind", a British television quiz show broadcast by BBC television.
+
+ It began in 2002 as a one-off special, expanding to the current arrangement of 10 episodes, broadcast during December and January.
+
+ It is hosted by John Humphrys, who also hosts the main show.

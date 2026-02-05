@@ -1,0 +1,21 @@
+Italian Damone
+
+Italian Damone is a two-player abstract strategy board game from Italy.
+
+ It is a unique draughts (checkers) variant.
+
+ Instead of several undifferentiated pieces as found in most draughts games, Italian Damone has ranked pieces; moreover, there are only eight pieces.
+
+ The pieces are ranked from high to low as Damone, Damas, and Pedine.
+
+ The Damone is sometimes referred to as Imperatore.
+
+ The standard game has 1 Damone, 2 Damas, and 5 Pedines for each player.
+
+ A player's piece can only capture an enemy piece(s) if the enemy piece(s) are the same rank or lower.
+
+ They cannot capture higher ranked pieces.
+
+ Furthermore, the initial positions of the pieces are different from most draughts games, and the movements as well.
+
+ Promotion to higher rank is also a feature in this game.

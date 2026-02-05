@@ -18,6 +18,13 @@ from ..base_trainer import BaseTrainer
 from ..factory import TrainableRouterFactory
 from ..config import TrainableRouterConfig
 
+# TensorBoard 支持
+try:
+    from torch.utils.tensorboard import SummaryWriter
+    TENSORBOARD_AVAILABLE = True
+except ImportError:
+    TENSORBOARD_AVAILABLE = False
+
 
 class DCTrainer(BaseTrainer):
     """DCRouter训练器"""
@@ -25,22 +32,34 @@ class DCTrainer(BaseTrainer):
     def __init__(self, model, config: TrainableRouterConfig, output_dir: str = "outputs"):
         """
         初始化
-        
+
         Args:
             model: DCRouter模型
             config: 配置
             output_dir: 输出目录
         """
         super().__init__(model, config, output_dir)
-        
+
         self.training_config = config.training
         self.data_config = config.data
-        
+
+        # 验证数据加载器
+        self.val_dataloader = None
+
         # 初始化优化器
         self.optimizer = self._init_optimizer()
-        
+
         # 学习率调度器
         self.scheduler = self._init_scheduler()
+
+        # TensorBoard 记录器
+        self.tensorboard_writer = None
+        if TENSORBOARD_AVAILABLE:
+            tensorboard_dir = os.path.join(output_dir, "tensorboard")
+            self.tensorboard_writer = SummaryWriter(tensorboard_dir)
+            print(f"TensorBoard 日志将保存到: {tensorboard_dir}")
+        else:
+            print("TensorBoard 未安装，跳过 TensorBoard 记录")
     
     def _init_optimizer(self) -> torch.optim.Optimizer:
         """初始化优化器"""
@@ -174,7 +193,7 @@ class DCTrainer(BaseTrainer):
         total_loss = 0.0
         num_batches = 0
         
-        pbar = tqdm(dataloader, desc=f"Epoch {self.epoch + 1}")
+        pbar = tqdm(dataloader, desc=f"Epoch {self.epoch + 1}", ascii=True)
         
         for batch in pbar:
             # 如果指定了 max_steps 并且已达到，则提前结束本 epoch
@@ -195,24 +214,54 @@ class DCTrainer(BaseTrainer):
                 )
             
             self.optimizer.step()
-            
+
             if self.scheduler is not None:
                 self.scheduler.step()
-            
+
             self.global_step += 1
             total_loss += loss.item()
             num_batches += 1
-            
+
+            # TensorBoard 记录
+            if self.tensorboard_writer is not None:
+                self.tensorboard_writer.add_scalar('Loss/train', loss.item(), self.global_step)
+                if self.scheduler is not None:
+                    current_lr = self.optimizer.param_groups[0]['lr']
+                    self.tensorboard_writer.add_scalar('LearningRate', current_lr, self.global_step)
+
             # 更新进度条
             pbar.set_postfix({
                 'loss': f'{loss.item():.4f}',
                 'step': self.global_step
             })
-            
+
             # 定期评估
             if self.global_step % self.training_config.eval_steps == 0:
-                val_metrics = self.evaluate(dataloader)
-                print(f"Step {self.global_step}: Val Acc = {val_metrics.get('accuracy', 0):.4f}")
+                # 使用验证数据加载器进行评估，如果没有则跳过
+                if self.val_dataloader is not None:
+                    val_metrics = self.evaluate(self.val_dataloader)
+                    print(f"Step {self.global_step}: Val Acc = {val_metrics.get('accuracy', 0):.4f}")
+
+                # TensorBoard 记录评估指标
+                if self.tensorboard_writer is not None:
+                    self.tensorboard_writer.add_scalar('Accuracy/val', val_metrics.get('accuracy', 0), self.global_step)
+                    self.tensorboard_writer.add_scalar('Loss/val', val_metrics.get('loss', 0), self.global_step)
+
+                    # 记录每个策略的准确率
+                    strategy_acc = val_metrics.get('strategy_accuracy', {})
+                    for strategy, acc in strategy_acc.items():
+                        self.tensorboard_writer.add_scalar(f'Accuracy/val_{strategy}', acc, self.global_step)
+
+                    # 记录路由分布
+                    routing_dist = val_metrics.get('routing_distribution', {})
+                    for strategy, ratio in routing_dist.items():
+                        self.tensorboard_writer.add_scalar(f'RoutingDistribution/val_{strategy}', ratio, self.global_step)
+
+            # 定期保存检查点
+            if self.global_step % self.training_config.save_steps == 0:
+                checkpoint_path = f"{self.output_dir}/checkpoint_step_{self.global_step}"
+                self.save_checkpoint(checkpoint_path)
+                print(f"Step {self.global_step}: Checkpoint saved to {checkpoint_path}")
         
         return {
             'loss': total_loss / num_batches if num_batches > 0 else 0.0
@@ -236,7 +285,7 @@ class DCTrainer(BaseTrainer):
         num_batches = 0
 
         with torch.no_grad():
-            for batch in tqdm(dataloader, desc="Evaluating"):
+            for batch in tqdm(dataloader, desc="Evaluating", ascii=True):
                 scores = batch['scores'].to(self.device)
                 queries = batch.get('queries', [])
 
@@ -247,30 +296,30 @@ class DCTrainer(BaseTrainer):
                     input_ids = batch['input_ids'].to(self.device)
                     attention_mask = batch['attention_mask'].to(self.device)
                     query_emb = self.model.forward(input_ids, attention_mask)
-                
+
                 # 获取策略embedding
                 strategy_emb = self.model.get_strategy_embeddings()
-                
+
                 # 计算相似度
                 similarity = self.model.compute_similarity(query_emb, strategy_emb)
-                
+
                 # 预测
                 predictions = similarity.argmax(dim=-1)
                 labels = scores.argmax(dim=-1)
-                
+
                 all_predictions.extend(predictions.cpu().tolist())
                 all_labels.extend(labels.cpu().tolist())
-                
+
                 # 计算损失
                 loss = self.compute_loss(batch)
                 total_loss += loss.item()
                 num_batches += 1
-        
+
         # 计算准确率
         correct = sum(p == l for p, l in zip(all_predictions, all_labels))
         accuracy = correct / len(all_labels) if len(all_labels) > 0 else 0.0
-        
-        # 计算每个策略的准确率
+
+        # 计算每个策略的准确率（召回率）
         strategy_accuracy = {}
         for i, strategy in enumerate(self.model.strategy_names):
             mask = [l == i for l in all_labels]
@@ -278,13 +327,46 @@ class DCTrainer(BaseTrainer):
                 strategy_correct = sum(p == l for p, l, m in zip(all_predictions, all_labels, mask) if m)
                 strategy_total = sum(mask)
                 strategy_accuracy[strategy] = strategy_correct / strategy_total if strategy_total > 0 else 0.0
-        
-        return {
+
+        # 计算路由分布（预测结果中各策略的比例）
+        routing_distribution = {}
+        for i, strategy in enumerate(self.model.strategy_names):
+            count = all_predictions.count(i)
+            routing_distribution[strategy] = count / len(all_predictions) if len(all_predictions) > 0 else 0.0
+
+        # 计算真实标签分布
+        label_distribution = {}
+        for i, strategy in enumerate(self.model.strategy_names):
+            count = all_labels.count(i)
+            label_distribution[strategy] = count / len(all_labels) if len(all_labels) > 0 else 0.0
+
+        metrics = {
             'accuracy': accuracy,
             'loss': total_loss / num_batches if num_batches > 0 else 0.0,
             'strategy_accuracy': strategy_accuracy,
+            'routing_distribution': routing_distribution,
+            'label_distribution': label_distribution,
             'num_samples': len(all_labels),
         }
+
+        # 打印详细评估信息
+        print(f"\n{'='*80}")
+        print(f"评估结果 (总样本: {len(all_labels)})")
+        print(f"{'='*80}")
+        print(f"  整体准确率: {accuracy:.4f}")
+        print(f"  平均损失: {metrics['loss']:.4f}")
+        print(f"\n  真实标签分布:")
+        for strategy, ratio in label_distribution.items():
+            print(f"    {strategy}: {ratio:.2%}")
+        print(f"\n  预测路由分布:")
+        for strategy, ratio in routing_distribution.items():
+            print(f"    {strategy}: {ratio:.2%}")
+        print(f"\n  各策略召回率:")
+        for strategy, acc in strategy_accuracy.items():
+            print(f"    {strategy}: {acc:.4f}")
+        print(f"{'='*80}\n")
+
+        return metrics
     
     def save_checkpoint(self, path: str):
         """
@@ -342,7 +424,7 @@ class DCTrainer(BaseTrainer):
             path: 保存路径
         """
         self.model.save(path)
-        
+
         # 保存训练配置
         with open(os.path.join(path, 'training_config.json'), 'w') as f:
             json.dump({
@@ -350,6 +432,12 @@ class DCTrainer(BaseTrainer):
                 'epochs': self.epoch + 1,
                 'learning_rate': self.training_config.learning_rate,
             }, f, indent=2)
+
+    def close(self):
+        """关闭资源（如 TensorBoard writer）"""
+        if self.tensorboard_writer is not None:
+            self.tensorboard_writer.close()
+            print("TensorBoard writer 已关闭")
 
 
 # 注册到工厂

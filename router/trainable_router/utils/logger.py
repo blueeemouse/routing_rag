@@ -91,8 +91,8 @@ class TrainingLogger:
         # 记录环境信息
         self._log_environment()
         
-        # 记录参数
-        self._log_parameters(args, config)
+        # 记录最终参数配置
+        self._log_final_parameters(args, config)
         
     def _log_environment(self):
         """记录环境信息"""
@@ -137,24 +137,48 @@ class TrainingLogger:
             
         self.logger.info("")
     
-    def _log_parameters(self, args: Dict[str, Any], config: Any):
-        """记录参数配置"""
+    def _log_final_parameters(self, args: Dict[str, Any], config: Any):
+        """记录最终参数配置（合并后的）"""
         self.logger.info("=" * 80)
-        self.logger.info("训练参数")
+        self.logger.info("最终参数配置")
         self.logger.info("=" * 80)
         
-        # 命令行参数
-        if args:
-            self.logger.info("命令行参数:")
-            for key, value in sorted(args.items()):
+        # 识别命令行覆盖的参数（非None且不是特殊参数）
+        overridden_params = {}
+        for key, value in sorted(args.items()):
+            if value is not None and key not in ['config', 'script_path', 'resume', 'use_amp']:
+                overridden_params[key] = value
+        
+        # 记录命令行覆盖的参数
+        if overridden_params:
+            self.logger.info("命令行覆盖参数:")
+            for key, value in overridden_params.items():
                 self.logger.info(f"  {key}: {value}")
             self.logger.info("")
         
-        # 配置对象
-        if config:
-            self.logger.info("配置详情:")
-            self._log_config_recursive(config, indent=2)
+        # 记录完整配置
+        self.logger.info("完整配置:")
+        self._log_config_recursive(config, indent=2)
+        self.logger.info("")
+    
+    def _log_script_content(self, script_path: str):
+        """记录脚本文件内容"""
+        try:
+            with open(script_path, 'r', encoding='utf-8') as f:
+                script_content = f.read()
+            
+            self.logger.info("=" * 80)
+            self.logger.info(f"PowerShell脚本内容: {script_path}")
+            self.logger.info("=" * 80)
+            
+            # 记录完整脚本内容
+            lines = script_content.split('\n')
+            for i, line in enumerate(lines, 1):
+                self.logger.info(f"{i:4d} | {line}")
+            
             self.logger.info("")
+        except Exception as e:
+            self.logger.warning(f"读取脚本文件失败: {e}")
     
     def _log_config_recursive(self, obj: Any, indent: int = 2):
         """递归记录配置对象"""

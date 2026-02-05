@@ -1,0 +1,11 @@
+Mission Elapsed Time
+
+Mission Elapsed Time (MET) is used by NASA during their space missions, most notably during their Space Shuttle missions.
+
+ Because so much of the mission depends on the time of launch, all events after launch are scheduled on the Mission Elapsed Time.
+
+ This avoids constant rescheduling of events in case the launchtime slips.
+
+ The MET-clock is set to zero at the moment of liftoff and counts forward in normal days, hours, minutes, and seconds.
+
+ For example, 2/03:45:18 MET means it has been 2 days, 3 hours, 45 minutes, and 18 seconds since liftoff.

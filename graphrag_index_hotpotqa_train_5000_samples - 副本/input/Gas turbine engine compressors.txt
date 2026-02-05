@@ -1,0 +1,7 @@
+Gas turbine engine compressors
+
+As the name suggests, gas turbine engine compressors provide the compression part of the gas turbine engine thermodynamic cycle.
+
+ There are three basic categories of gas turbine engine compressor: axial compressor, centrifugal compressor and mixed flow compressor.
+
+ A fourth, unusual, type is the free-piston gas generator, which combines the functions of compressor and combustion chamber in one unit.

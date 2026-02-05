@@ -1,0 +1,7 @@
+Silicon Studio
+
+Silicon Studio is a Japanese computer graphics technology company and video game developer based in Tokyo.
+
+ As a technology company, Silicon Studio has produced several products in the 3D computer graphics field, including middleware software, such as a post-processing visual effects library called YEBIS, as well as general real-time graphics engines and game development engines, such as OROCHI and Mizuchi, a physically based rendering engine.
+
+ As a video game developer, Silicon Studio has worked on different titles for several gaming platforms, most notably, the action-adventure game "3D Dot Game Heroes" on the PlayStation 3, the role-playing video game "Bravely Default" on the Nintendo 3DS, and "Fantasica" on the iOS and Android mobile platforms.

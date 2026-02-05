@@ -1,0 +1,11 @@
+TVPlayer
+
+TVPlayer is a live TV streaming service for users to watch free-to-air channels through their smart devices (Apple TV 4th Generation Only, Amazon Fire TV) desktops, smartphones and tablets.
+
+ The TV service allows television licence holders in the United Kingdom to stream 78 free live television channels, including BBC, ITV, Channel 4, Channel 5, Heart TV, Capital TV and The Box.
+
+ TVPlayer offers a "TVPlayer Plus" branded 'no contract, cancel anytime' monthly or yearly subscription service which allows consumers access to an additional 30 live streaming television channels, including Gold, Cartoon Network, Discovery Channel, Eurosport 1 and Eurosport 2.
+
+ TVPlayer Plus also allows users to catch up on programmes with their 7-day catch up service when using a "Plus" subscription.
+
+ Brazilian Channel Globo is available with an extra subscription.

@@ -1,0 +1,7 @@
+Id Tech
+
+id Tech is a series of separate game engines designed and developed by id Software.
+
+ Prior to the presentation of the id Tech 5-based game "Rage", the engines lacked official designation and as such were simply referred to as the "Doom" and "Quake" engines, from the name of the main game series the engines have been developed for.
+
+ "id Tech" numbers 2, 3, and 4 have been released as free software under the GNU General Public License, along with the source code to "Wolfenstein 3D", "Doom", and "Quake".

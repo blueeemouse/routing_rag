@@ -1,0 +1,9 @@
+City pair
+
+In commercial aviation, a city pair is defined as a pair of departure (origin) and arrival (destination) airport codes on a flight itinerary.
+
+ A given city pair may be a single non-stop flight segment, a direct flight with one or more stops, or an itinerary with connecting flights (multiple segments).
+
+ The city pair, IAD-LHR would consist of flights and/or multi-leg itineraries that originate at Washington-Dulles airport and terminate at London-Heathrow airport.
+
+ The city pair, NYC-TYO would consist of flights and/or multi-leg itineraries that originate at any New York airport (New York-JFK, Newark-Liberty or New York-LaGuardia) and terminate at either Tokyo-Narita or Tokyo-Haneda.

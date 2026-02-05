@@ -1,0 +1,7 @@
+Media Player Classic
+
+Media Player Classic (MPC) is a compact media player for 32-bit and 64-bit Microsoft Windows.
+
+ MPC mimics the look and feel of Windows Media Player 6.4, but provides most options and features available in modern media players.
+
+ It and its forks are standard media players in the K-Lite Codec Pack and the Combined Community Codec Pack.

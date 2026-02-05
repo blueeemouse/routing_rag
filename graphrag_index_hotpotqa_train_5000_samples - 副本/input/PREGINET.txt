@@ -1,0 +1,7 @@
+PREGINET
+
+The Philippine Research, Education, and Government Information Network (PREGINET) is a national research and education network established in the Philippines by the Advanced Science and Technology Institute of the Department of Science and Technology (DOST-ASTI).
+
+ The network provides interconnect between research and higher education institutions in the Philippines, and to other international research networks within the Asia Pacific region.
+
+ PREGINET also manages the PHOpenIX, the only neutral internet exchange in the Philippines, allowing neutral peering between local internet service providers and other commercial institutions.

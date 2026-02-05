@@ -1,0 +1,118 @@
+cache:
+  base_dir: D:\\Develop\\all_RAG\\routing_rag\\graphrag_index_hotpotqa_train_5000_samples\\cache
+  type: file
+chunks:
+  group_by_columns:
+  - id
+  overlap: 50
+  size: 300
+cluster_graph:
+  max_cluster_size: 10
+  use_lcc: true
+community_reports:
+  max_input_length: 2000
+  max_length: 500
+  model_id: default_chat_model
+  #############################
+  # 新增异步配置
+  async_mode: asyncio  # 使用asyncio进行异步处理
+  concurrent_requests: 8  # 社区报告生成的并发数（根据硬件调整）
+  #############################
+embed_graph:
+  # dimensions: 1536
+  dimensions: 768
+  # enabled: true
+  enabled: false  # 启用时，大批量提取context之后，会在finalize_graph阶段遇到ZeroDivisionError: float division by zero错误
+  num_walks: 10
+  walk_length: 40
+embeddings:
+  batch_max_tokens: 8191
+  batch_size: 16
+  # model: text-embedding-ada-002、
+  model: nomic-embed-text
+  model_id: default_embedding_model
+extract_graph:
+  entity_types:
+  - person
+  - organization
+  - event
+  - location
+  - gpe
+  max_gleanings: 1
+  model: default_chat_model
+  prompt: null
+  ##################
+  # 新增并行配置
+  concurrent_requests: 8  # 图提取的并发数
+  batch_size: 10  # 批量处理大小
+  ##################
+global_search:
+  chat_model_id: default_chat_model
+  embedding_model_id: default_embedding_model
+input:
+  base_dir: D:\\Develop\\all_RAG\\routing_rag\\graphrag_index_hotpotqa_train_5000_samples\\input
+  encoding: utf-8
+  file_type: text
+  text_column: text
+  type: file
+local_search:
+  chat_model_id: default_chat_model
+  embedding_model_id: default_embedding_model
+models:
+  # ===== OpenAI 云端配置（已注释） =====
+  # default_chat_model:
+  #   api_base: ${API_BASE_URL}
+  #   api_key: ${GRAPHRAG_API_KEY}
+  #   concurrent_requests: 25
+  #   max_tokens: 4096
+  #   model: gpt-3.5-turbo
+  #   model_provider: openai
+  #   request_timeout: 180.0
+  #   temperature: 0
+  #   type: chat
+  # default_embedding_model:
+  #   api_base: ${API_BASE_URL}
+  #   api_key: ${GRAPHRAG_API_KEY}
+  #   concurrent_requests: 25
+  #   model: text-embedding-ada-002
+  #   model_provider: openai
+  #   request_timeout: 180.0
+  #   type: embedding
+
+  # ===== Ollama 本地配置（当前启用） =====
+  default_chat_model:
+    api_base: http://127.0.0.1:11434/v1
+    api_key: ollama
+    concurrent_requests: 16
+    max_tokens: 4096
+    model: qwen2.5:3b
+    model_provider: openai
+    request_timeout: 1200.0
+    temperature: 0
+    type: chat
+  default_embedding_model:
+    api_base: http://127.0.0.1:11434/v1
+    api_key: ollama
+    concurrent_requests: 16
+    model: nomic-embed-text
+    model_provider: openai
+    request_timeout: 1200.0
+    type: embedding
+output:
+  base_dir: D:\\Develop\\all_RAG\\routing_rag\\graphrag_index_hotpotqa_train_5000_samples\\output
+  type: file
+prune_graph:
+  min_edge_weight_pct: 40.0
+  min_node_degree: 1
+reporting:
+  base_dir: D:\\Develop\\all_RAG\\routing_rag\\graphrag_index_hotpotqa_train_5000_samples\\logs
+  type: file
+root_dir: D:\\Develop\\all_RAG\\routing_rag\\graphrag_index_hotpotqa_train_5000_samples
+snapshots:
+  embeddings: false
+  graphml: false
+  raw_graph: false
+summarize_descriptions:
+  max_input_tokens: 1000
+  max_length: 200
+  model_id: default_chat_model

@@ -80,12 +80,17 @@ class BaseTrainer(ABC):
             val_dataloader: 验证数据加载器
             
         Returns:
-            训练历史
+            训练历史（一个字典，包含训练损失和验证指标）
+            - train_loss: list
+            - val_metrics: list
         """
         history = {
             'train_loss': [],
             'val_metrics': [],
         }
+        
+        # 保存验证数据加载器到实例，以便 train_epoch 中的定期评估使用
+        self.val_dataloader = val_dataloader
         
         epochs = self.config.training.epochs if hasattr(self.config, 'training') else 10
         # 支持通过参数限制最大训练步数（max_steps），用于快速调试

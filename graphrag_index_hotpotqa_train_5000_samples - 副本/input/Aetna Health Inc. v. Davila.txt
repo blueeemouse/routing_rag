@@ -1,0 +1,13 @@
+Aetna Health Inc. v. Davila
+
+Aetna Health Inc. v. Davila, 542 U.S. 200 (2004) , was a United States Supreme Court case in which the Court limited the scope of the Texas Healthcare Liability Act (THCLA).
+
+ The effective result of this decision was that the THCLA, which held Case Management and Utilization Review decisions by Managed Care entities like CIGNA and Aetna to a legal duty of care according to the laws of The State of Texas could not be enforced in the case of Health Benefit plans provided through private employers, because the Texas statute allowed compensatory or punitive damages to redress losses or deter future transgressions, which were not available under ERISA § 1132.
+
+ The ruling still allows the State of Texas to enforce the THCLA in the case of Government-sponsored (Medicare, Medicaid, Federal, State, Municipal Employee, etc., Church-sponsored, or Individual Health Plan Policies (High-deductible individual policies, self-pay, any insurance not subsidised by a Private Employer), which are saved from preemption by ERISA.
+
+ The history that allows these Private and Self-Pay Insurance to be saved dates to the "Interstate Commerce" power that was given the federal Government by the Supreme Court.
+
+ ERISA, enacted in 1974, relied on the "Interstate Commerce" rule to allow federal jurisdiction over private employers, based on the need of private employers to follow a single set of paperwork and rules for pensions and other employee benefit plans where employers had employees in multiple states.
+
+ Except for private employer plans, insurance can be regulated by the individual states, and Managed Care entities making medical decisions can be held accountable for those decisions if negligence is involved, as allowed by the Texas Healthcare Liability Act.

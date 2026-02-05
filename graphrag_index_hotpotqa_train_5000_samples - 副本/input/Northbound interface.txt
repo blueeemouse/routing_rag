@@ -1,0 +1,7 @@
+Northbound interface
+
+In computer networking and computer architecture, a northbound interface of a component is an interface that conceptualizes the lower level details (e.g., data or functions) used by, or in, the component.
+
+ A northbound interface is used to interface with higher level layers using the southbound interface of the higher level component(s).
+
+ In architectural overviews, the northbound interface is normally drawn at the top of the component it is defined in, hence the name northbound interface.

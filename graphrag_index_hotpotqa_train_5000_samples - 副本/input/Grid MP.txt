@@ -1,0 +1,5 @@
+Grid MP
+
+Grid MP is a commercial distributed computing software package developed and sold by Univa (formerly known as United Devices), a privately held company based primarily in Austin, Texas.
+
+ It was formerly known as the MetaProcessor prior to the release of version 4.0, however the letters "MP" in "Grid MP" do not officially stand for anything.

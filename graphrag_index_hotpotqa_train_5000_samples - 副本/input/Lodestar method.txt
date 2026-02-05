@@ -1,0 +1,7 @@
+Lodestar method
+
+In the legal realm, the "lodestar method" refers to a method of computing attorney's fees whereby a trial court must multiply the number of hours reasonably spent by trial counsel by a reasonable hourly rate.
+
+ This figure can then be adjusted upward or downward for certain factors known as multipliers, such as contingency and the quality of the work performed, to arrive at a final fee.
+
+ Under the lodestar method, the most heavily weighted multipliers are the time and labor required.

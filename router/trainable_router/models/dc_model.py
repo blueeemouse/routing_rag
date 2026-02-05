@@ -17,7 +17,9 @@ from ..config import ModelConfig
 
 
 class DCRouterModel(BaseRouterModel):
-    """DCRouter模型"""
+    """DCRouter模型
+    包含一个query encoder以及候选策略的可学习的embedding，路由方式是用query经过编码的embedding与候选策略的embedding进行相似度计算，取得相似度最高的策略作为路由结果
+    """
     
     def __init__(self, config: ModelConfig, **kwargs):
         """
@@ -62,6 +64,7 @@ class DCRouterModel(BaseRouterModel):
                 self.tokenizer = AutoTokenizer.from_pretrained(backbone_name)
                 self.backbone = AutoModel.from_pretrained(backbone_name)
                 self.use_sentence_transformer = False
+                print('DCRouterModel uses transformers AutoModel')     # 目前用的是这个
                 if hasattr(self.backbone, 'config'):
                     self.hidden_size = self.backbone.config.hidden_size
             except Exception:
@@ -71,6 +74,7 @@ class DCRouterModel(BaseRouterModel):
                     self.backbone = SentenceTransformer(backbone_name)
                     self.use_sentence_transformer = True
                     self.hidden_size = self.backbone.get_sentence_embedding_dimension()
+                    print('use sentence-transformers')
                 except ImportError:
                     raise ImportError("请安装 sentence-transformers 或 transformers: pip install sentence-transformers transformers")
         
@@ -79,6 +83,7 @@ class DCRouterModel(BaseRouterModel):
                 from transformers import AutoModel
                 self.backbone = AutoModel.from_pretrained(backbone_name)
                 self.use_sentence_transformer = False
+                print('use transformers AutoModel')
                 # 获取隐藏层大小
                 if hasattr(self.backbone, 'config'):
                     self.hidden_size = self.backbone.config.hidden_size
@@ -92,6 +97,7 @@ class DCRouterModel(BaseRouterModel):
                 self.backbone = SentenceTransformer('all-MiniLM-L6-v2')
                 self.use_sentence_transformer = True
                 self.hidden_size = self.backbone.get_sentence_embedding_dimension()
+                print('use sentence-transformers')
             except ImportError:
                 raise ImportError("请安装sentence-transformers: pip install sentence-transformers")
     
@@ -190,7 +196,7 @@ class DCRouterModel(BaseRouterModel):
     
     def forward(self, input_ids: torch.Tensor, attention_mask: torch.Tensor) -> torch.Tensor:
         """
-        前向传播
+        前向传播，完成对query的编码，返回query embedding
         
         Args:
             input_ids: token ids, shape: (batch_size, seq_len)
@@ -257,12 +263,19 @@ class DCRouterModel(BaseRouterModel):
         Returns:
             损失值
         """
-        # 获取正样本和负样本索引
+        # 获取正样本索引
         top_index_true, _ = index_true.sort(dim=-1, descending=True)
         positive_indices = top_index_true[:, :top_k]  # (batch_size, top_k)
         
-        last_index_true, _ = index_true.topk(k=last_k, largest=False)
-        negative_indices = last_index_true  # (batch_size, last_k)
+        # 获取负样本索引
+        # 即使last_k=0，也要自动获取分数最低的策略作为负样本，防止塌缩
+        if last_k > 0:
+            last_index_true, _ = index_true.topk(k=last_k, largest=False)
+            negative_indices = last_index_true  # (batch_size, last_k)
+        else:
+            # 自动获取最后1个（分数最低）作为负样本
+            last_index_true, _ = index_true.topk(k=1, largest=False)
+            negative_indices = last_index_true  # (batch_size, 1)
         
         # 计算损失
         loss = torch.tensor(0.0, device=self.device)
@@ -272,15 +285,16 @@ class DCRouterModel(BaseRouterModel):
             for pos_idx in positive_indices[i]:
                 pos_score = similarity[i, pos_idx]
                 
-                # 正样本对负样本的损失
-                for neg_idx in negative_indices[i]:
-                    neg_score = similarity[i, neg_idx]
-                    # log-sigmoid损失
-                    loss += torch.nn.functional.logsigmoid(pos_score - neg_score)
-                    sample_count += 1
+                if negative_indices is not None and negative_indices.size(1) > 0:
+                    # 正样本对负样本的损失
+                    for neg_idx in negative_indices[i]:
+                        neg_score = similarity[i, neg_idx]
+                        # log-sigmoid损失：鼓励pos_score > neg_score
+                        loss += -torch.nn.functional.logsigmoid(pos_score - neg_score)
+                        sample_count += 1
         
         if sample_count > 0:
-            loss = -loss / sample_count
+            loss = loss / sample_count
         
         return loss
     
@@ -303,6 +317,8 @@ class DCRouterModel(BaseRouterModel):
         """
         # Normalize embeddings
         query_embs = torch.nn.functional.normalize(query_embs, dim=1)
+
+        cluster_ids = cluster_ids.to(query_embs.device)
         
         # 计算相似度矩阵
         sim_matrix = query_embs @ query_embs.T  # (batch_size, batch_size)
@@ -312,8 +328,8 @@ class DCRouterModel(BaseRouterModel):
         temp = 0.07
         
         for i in range(sim_matrix.size(0)):
-            # 正样本：同一cluster的其他样本
-            positive_mask = (cluster_ids == cluster_ids[i]) & (torch.arange(sim_matrix.size(0)) != i)
+            # 正样本：同一cluster的其他样本（不包括自己）
+            positive_mask = (cluster_ids == cluster_ids[i]) & (torch.arange(sim_matrix.size(0), device=sim_matrix.device) != i)
             if not positive_mask.any():
                 continue
             
@@ -326,7 +342,7 @@ class DCRouterModel(BaseRouterModel):
             neg_sim = torch.exp(sim_matrix[i][negative_mask] / temp).sum()
             
             # NCE损失
-            loss += -torch.log(pos_sim / (pos_sim + neg_sim) + 1e-8)
+            loss += -torch.log(pos_sim / (pos_sim + neg_sim) + 1e-8).sum()
         
         return loss
     
@@ -461,6 +477,7 @@ class DCRouterModel(BaseRouterModel):
             self.load_state_dict(model_state['state_dict'])
 
 
-# 注册到工厂
+# 注册到工厂（这里给同一个模型注册两个名字，倒也不怎么影响使用吧……可以认为兼容性比较好）
+# 此时我们只要导入了这个类，就会完成注册
 TrainableRouterFactory.register_model('dc')(DCRouterModel)
 TrainableRouterFactory.register_model('dcrouter')(DCRouterModel)

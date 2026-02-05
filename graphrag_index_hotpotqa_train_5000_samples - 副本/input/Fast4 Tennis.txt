@@ -1,0 +1,3 @@
+Fast4 Tennis
+
+Fast4 Tennis is a format for playing a tennis match, initiated by Tennis Australia, which leads to a shorter match, having fewer sets and varied rules compared to the traditional rules of tennis.

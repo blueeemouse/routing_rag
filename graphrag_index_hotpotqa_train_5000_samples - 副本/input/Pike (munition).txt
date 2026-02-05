@@ -1,0 +1,21 @@
+Pike (munition)
+
+The Pike is a precision-guided munition (PGM) designed by Raytheon.
+
+ It is a 40 mm guided munition that can be fired from the barrel of an Heckler & Koch M320 Grenade Launcher Module and Enhanced Grenade Launching Module (EGLM) like a standard 40mm grenade, but is powered by a rocket motor to propel it 2,000 m to give infantrymen extended-range precision capabilities unlike anything before in a hand-held weapon.
+
+ The weapon uses a digital, semi-active laser seeker to guide itself to within 5 meters of the target; it can operate in a two-man shooter/spotter team or by the grenadier alone lazing after firing, as it can fly for 15 seconds before homing in.
+
+ When fired, Pike has a small propellant to "kick" it 2.5 - out of the tube before the nearly smokeless motor ignites, and range is dependent on firing angle.
+
+ The munition is effective against fixed and slow-moving mid-range targets, using a 6/10 lb blast fragmentation warhead with a 10-meter lethality radius.
+
+ Raytheon developed the weapon for three years in collaboration with Nammo Talley, which developed the warhead and propulsion system.
+
+ The Pike is intended to be more accurate with a longer range than rocket propelled grenades (RPGs) and standard grenades, while being far lighter and more cost-effective than current infantry guided weapons like the FGM-148 Javelin.
+
+ Further improvements could include different fuses, multiple-round simultaneous programming and targeting with data-link capabilities, and platform integration onto small boats, vehicles, and small unmanned aerial vehicles (UAVs).
+
+ Pike weighs 1.7 lb and is 16.8 in long, too long to fit in the breech of the M203 grenade launcher.
+
+ At AUSA 2015, Raytheon revealed they had performed two successful test firings of the Pike.

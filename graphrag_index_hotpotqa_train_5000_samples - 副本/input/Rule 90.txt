@@ -1,0 +1,9 @@
+Rule 90
+
+In the mathematical study of cellular automata, Rule 90 is an elementary cellular automaton based on the exclusive or function.
+
+ It consists of a one-dimensional array of cells, each of which can hold either a 0 or a 1 value.
+
+ In each time step all values are simultaneously replaced by the exclusive or of their two neighboring values.
+
+ call it "the simplest non-trivial cellular automaton", and it is described extensively in Stephen Wolfram's 2002 book "A New Kind of Science".

@@ -1,0 +1,7 @@
+Wehnelt cylinder
+
+A Wehnelt cylinder (also known as "Wehnelt cap", "grid cap" or simply "Wehnelt") is an electrode in the electron gun assembly of some thermionic devices, used for focusing and control of the electron beam.
+
+ It is named after Arthur Rudolph Berthold Wehnelt, a German physicist, who invented it during the years 1902 and 1903.
+
+ Wehnelt cylinders are found in the electron guns of cathode ray tubes and electron microscopes, and in other applications where a thin, well-focused electron beam is required.

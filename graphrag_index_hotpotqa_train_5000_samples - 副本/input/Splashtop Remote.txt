@@ -1,0 +1,7 @@
+Splashtop Remote
+
+Splashtop Remote remote-desktop software allows users to connect to and control computers from various devices, such as a personal computer, iPad, iPhone, or Android device.
+
+ Unlike products using the Remote Desktop Protocol, Splashtop Remote uses a proprietary protocol capable of delivering real-time video and audio to the remote user at 60+ frames per seconds and low latency.
+
+ Splashtop has over 30 million users, and many device makers such as Acer, Asus, Dell, Epson, HP, Lenovo, Panasonic, Sharp, Sony, Toshiba, and others are bundling Splashtop with their devices.

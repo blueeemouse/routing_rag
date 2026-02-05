@@ -1,0 +1,10 @@
+{
+  "total_samples": 5000,
+  "no_rag_count": 361,
+  "naive_rag_count": 2090,
+  "tie_count": 2549,
+  "no_rag_percentage": 7.22,
+  "naive_rag_percentage": 41.8,
+  "tie_percentage": 50.980000000000004,
+  "score_formula": "0.5 * EM + 0.5 * F1"
+}

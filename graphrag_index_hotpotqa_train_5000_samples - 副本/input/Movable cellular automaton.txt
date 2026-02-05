@@ -1,0 +1,13 @@
+Movable cellular automaton
+
+The Movable cellular automaton (MCA) method is a method in computational solid mechanics based on the discrete concept.
+
+ It provides advantages both of classical cellular automaton and discrete element methods.
+
+ Important advantage of the МСА method is a possibility of direct simulation of materials fracture including damage generation, crack propagation, fragmentation and mass mixing.
+
+ It is difficult to simulate these processes by means of continuum mechanics methods (For example: finite element method, finite difference method, etc.), so some new concepts like peridynamics are required.
+
+ Discrete element method is very effective to simulate granular materials, but mutual forces among movable cellular automata provides simulating solids behavior.
+
+ If size of automaton will be close to zero then MCA behavior becomes like classical continuum mechanics methods.

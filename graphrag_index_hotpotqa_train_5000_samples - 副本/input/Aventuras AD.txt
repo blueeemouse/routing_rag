@@ -1,0 +1,9 @@
+Aventuras AD
+
+Aventuras AD was a videogame Spanish producer, one of the most popular in Spain during the Golden Era of Spanish Software in the 1980s, specialized in text adventure games.
+
+ It was created as a seal split from Dinamic Software in 1987 ("AD" comes from "Aventuras Dinamic", the name they had when they were part from Dinamic from 1985 to 1987).
+
+ They popularized the genre of "aventura conversacional" (a Spanish word for text adventures that have static graphics, which in English is part of the primitive graphic adventures), and they would release games until 1992, when they, like the rest of the Spanish companies of the time, had to close on bankruptcy, unable to switch in time to 16 bit development.
+
+ They would release their titles mainly for ZX Spectrum, Amstrad CPC, Commodore 64, MSX, IBM PC, Amstrad PCW, and in the last years also Atari ST and Commodore Amiga.

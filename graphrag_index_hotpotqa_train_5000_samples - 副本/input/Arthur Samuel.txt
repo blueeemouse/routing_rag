@@ -1,0 +1,9 @@
+Arthur Samuel
+
+Arthur Lee Samuel (December 5, 1901 – July 29, 1990) was an American pioneer in the field of computer gaming and artificial intelligence.
+
+ He coined the term "machine learning" in 1959.
+
+ The Samuel Checkers-playing Program appears to be the world's first self-learning program, and as such a very early demonstration of the fundamental concept of artificial intelligence (AI).
+
+ He was also a senior member in TeX community who devoted much time giving personal attention to the needs of users and wrote an early TeX manual in 1983.

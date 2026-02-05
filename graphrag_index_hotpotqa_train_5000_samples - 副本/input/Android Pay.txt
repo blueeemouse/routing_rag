@@ -1,0 +1,11 @@
+Android Pay
+
+Android Pay is a digital wallet platform developed by Google to power in-app and tap-to-pay purchases on mobile devices, enabling users to make payments with Android phones, tablets or watches.
+
+ Android Pay uses near field communication (NFC) to transmit card information facilitating funds transfer to the retailer.
+
+ It replaces the credit or debit card chip and PIN or magnetic stripe transaction at point-of-sale terminals by allowing the user to upload these in the Android Pay wallet.
+
+ It is similar to contactless payments already used in many countries, with the addition of two-factor authentication.
+
+ The service lets Android devices wirelessly communicate with point of sale systems using a near field communication (NFC) antenna, host-based card emulation (HCE), and Android's security.

@@ -1,0 +1,3 @@
+Stern–Volmer relationship
+
+The Stern–Volmer relationship, named after Otto Stern and Max Volmer, allows us to explore the kinetics of a photophysical "intermolecular" deactivation process.

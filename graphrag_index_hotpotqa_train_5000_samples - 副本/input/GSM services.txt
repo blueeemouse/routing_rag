@@ -1,0 +1,9 @@
+GSM services
+
+Global System for Mobile Communications (GSM) services are a standard collection of applications and features available to mobile phone subscribers all over the world.
+
+ The GSM standards are defined by the 3GPP collaboration and implemented in hardware and software by equipment manufacturers and mobile phone operators.
+
+ The common standard makes it possible to use the same phones with different companies' services, or even roam into different countries.
+
+ GSM is the world's most dominant mobile phone standard.

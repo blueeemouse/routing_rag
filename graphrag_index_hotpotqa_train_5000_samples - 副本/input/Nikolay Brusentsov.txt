@@ -1,0 +1,3 @@
+Nikolay Brusentsov
+
+Nikolay Petrovich Brusentsov (Russian: Никола́й Петро́вич Брусенцо́в ; 7 February 1925 in Kamenskoe, Ukrainian SSR – 4 December 2014) was a Russian computer scientist, most famous for having built a (balanced) ternary computer, Setun, together with Sergei Sobolev in 1958.

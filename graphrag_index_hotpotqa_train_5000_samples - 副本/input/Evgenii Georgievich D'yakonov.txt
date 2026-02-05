@@ -1,0 +1,11 @@
+Evgenii Georgievich D'yakonov
+
+D'yakonov was a Ph.D. student of Sergei Sobolev.
+
+ He worked at the Moscow State University.
+
+ He authored over hundred papers and several books.
+
+ D'yakonov was recognized for his pioneering work in the 60s–80s on efficient spectrally equivalent preconditioning for linear systems and eigenvalue problems.
+
+ In the last decade, strengthened Sobolev spaces became D'yakonov's main topic of research, e.g., (D'yakonov, 2004).

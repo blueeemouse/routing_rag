@@ -1,0 +1,11 @@
+Difference set
+
+In combinatorics, a formula_1 difference set is a subset formula_2 of size formula_3 of a group formula_4 of order formula_5 such that every nonidentity element of formula_4 can be expressed as a product formula_7 of elements of formula_2 in exactly formula_9 ways.
+
+ A difference set formula_2 is said to be "cyclic", "abelian", "non-abelian", etc., if the group formula_4 has the corresponding property.
+
+ A difference set with formula_12 is sometimes called "planar" or "simple".
+
+ If formula_4 is an abelian group written in additive notation, the defining condition is that every nonzero element of formula_4 can be written as a "difference" of elements of formula_2 in exactly formula_9 ways.
+
+ The term "difference set" arises in this way.

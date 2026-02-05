@@ -1,0 +1,9 @@
+WhosHere
+
+WhosHere is a social proximity networking app created by WhosHere founders Bryant Harris and Stephen Smith launched in July 2008.
+
+ WhosHere utilizes GPS location capabilities combined with a social networking platform that allows users to interact with other people based on compatible geographical location.
+
+ The app allows users to find other users with similar interests and connect with them real-time via free text, image messages and free VoIP calls without disclosing any personal information.
+
+ It runs on Apple iOS devices including iPhone, iPod touch and iPad.

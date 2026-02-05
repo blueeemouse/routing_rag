@@ -430,15 +430,16 @@ def load_and_filter_settings(settings_path: str) -> Dict[str, Any]:
     return filter_sensitive(filtered_settings)
 
 
-def save_results(results: Dict[str, Any], output_dir: str, timestamp: str, settings_config: Dict[str, Any] = None):
+def save_results(results: Dict[str, Any], output_dir: str, timestamp: str, settings_config: Dict[str, Any] = None, args: argparse.Namespace = None):
     """
-    保存评测结果到JSON文件（包含配置信息）
+    保存评测结果到JSON文件（包含配置信息、命令行参数等）
 
     Args:
         results: 评测结果字典
         output_dir: 输出目录
         timestamp: 时间戳（用于文件名）
         settings_config: 配置信息（可选）
+        args: 命令行参数（可选）
     """
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, f"{results['model_name']}_results_{timestamp}.json")
@@ -446,9 +447,25 @@ def save_results(results: Dict[str, Any], output_dir: str, timestamp: str, setti
     # 准备保存的数据
     save_data = {
         'model_name': results['model_name'],
-        'settings': settings_config,  # 添加配置信息
+        'settings': settings_config,  # 配置信息
+        'arguments': {},  # 命令行参数
         'results': results
     }
+
+    # 添加命令行参数
+    if args:
+        save_data['arguments'] = {
+            'models': args.models,
+            'num_samples': args.num_samples,
+            'hotpotqa_file': args.hotpotqa_file,
+            'output_dir': args.output_dir,
+            'settings_file': args.settings_file,
+            'graphrag_work_dir': args.graphrag_work_dir,
+            'graphrag_config_file': args.graphrag_config_file,
+            'skip_graphrag_index': args.skip_graphrag_index,
+            'delay': args.delay,
+            'naive_rag_index_path': args.naive_rag_index_path
+        }
 
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(save_data, f, ensure_ascii=False, indent=2)
@@ -456,7 +473,7 @@ def save_results(results: Dict[str, Any], output_dir: str, timestamp: str, setti
     print(f"结果已保存到: {output_file}")
 
 
-def save_comparison(results_list: List[Dict[str, Any]], output_dir: str, timestamp: str):
+def save_comparison(results_list: List[Dict[str, Any]], output_dir: str, timestamp: str, args: argparse.Namespace = None):
     """
     保存对比结果
 
@@ -464,6 +481,7 @@ def save_comparison(results_list: List[Dict[str, Any]], output_dir: str, timesta
         results_list: 评测结果列表
         output_dir: 输出目录
         timestamp: 时间戳
+        args: 命令行参数（可选）
     """
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, f"comparison_results_{timestamp}.json")
@@ -471,8 +489,24 @@ def save_comparison(results_list: List[Dict[str, Any]], output_dir: str, timesta
     comparison = {
         'timestamp': timestamp,
         'models': results_list,
+        'arguments': {},  # 命令行参数
         'summary': {}
     }
+
+    # 添加命令行参数
+    if args:
+        comparison['arguments'] = {
+            'models': args.models,
+            'num_samples': args.num_samples,
+            'hotpotqa_file': args.hotpotqa_file,
+            'output_dir': args.output_dir,
+            'settings_file': args.settings_file,
+            'graphrag_work_dir': args.graphrag_work_dir,
+            'graphrag_config_file': args.graphrag_config_file,
+            'skip_graphrag_index': args.skip_graphrag_index,
+            'delay': args.delay,
+            'naive_rag_index_path': args.naive_rag_index_path
+        }
 
     # 计算对比摘要
     if len(results_list) >= 2:
@@ -684,6 +718,41 @@ Answer:"""
     print(f"配置文件已创建: {config_file}")
 
 
+def save_run_config(args: argparse.Namespace, graphrag_work_dir: str):
+    """
+    保存运行配置到 graphrag_work_dir（包括命令行参数和设置）
+
+    Args:
+        args: 命令行参数
+        graphrag_work_dir: GraphRAG工作目录
+    """
+    os.makedirs(graphrag_work_dir, exist_ok=True)
+    config_file = os.path.join(graphrag_work_dir, 'run_config.json')
+
+    # 准备保存的数据
+    save_data = {
+        'timestamp': time.strftime("%Y%m%d_%H%M%S"),
+        'command_line_args': {
+            'models': args.models,
+            'num_samples': args.num_samples,
+            'hotpotqa_file': args.hotpotqa_file,
+            'output_dir': args.output_dir,
+            'settings_file': args.settings_file,
+            'graphrag_work_dir': args.graphrag_work_dir,
+            'graphrag_config_file': args.graphrag_config_file,
+            'skip_graphrag_index': args.skip_graphrag_index,
+            'delay': args.delay,
+            'naive_rag_index_path': args.naive_rag_index_path
+        },
+        'description': '此文件记录了评估运行的参数配置'
+    }
+
+    with open(config_file, 'w', encoding='utf-8') as f:
+        json.dump(save_data, f, ensure_ascii=False, indent=2)
+
+    print(f"运行配置已保存到: {config_file}")
+
+
 def main():
     """主评测流程"""
     # 解析命令行参数
@@ -888,6 +957,10 @@ def main():
         if not os.path.exists(entities_path) and not args.skip_graphrag_index:
             print("\nGraphRAG索引尚未构建，开始准备数据...")
 
+            # 保存运行配置（只在构建索引时保存）
+            print("保存运行配置到GraphRAG工作目录...")
+            save_run_config(args, args.graphrag_work_dir)
+
             # 准备数据
             input_dir = os.path.join(args.graphrag_work_dir, "input")
             prepare_hotpotqa_data_for_graphrag(args.hotpotqa_file, input_dir, args.num_samples)
@@ -972,7 +1045,7 @@ def main():
         )
 
         print_evaluation_results(results)
-        save_results(results, args.output_dir, timestamp, filtered_settings)
+        save_results(results, args.output_dir, timestamp, filtered_settings, args)
         results_list.append(results)
 
     # 4. 对比结果
@@ -981,7 +1054,7 @@ def main():
         print("步骤4: 对比结果")
         print("="*80)
         compare_results(results_list)
-        save_comparison(results_list, args.output_dir, timestamp)
+        save_comparison(results_list, args.output_dir, timestamp, args)
 
     # 5. 完成
     print("\n" + "="*80)

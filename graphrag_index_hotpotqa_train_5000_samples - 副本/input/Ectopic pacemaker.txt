@@ -1,0 +1,15 @@
+Ectopic pacemaker
+
+An ectopic pacemaker or ectopic focus is an excitable group of cells that causes a premature heart beat outside the normally functioning SA node of the heart.
+
+ It is thus a cardiac pacemaker that is ectopic, producing an ectopic beat.
+
+ Acute occurrence is usually non-life-threatening, but chronic occurrence can progress into tachycardia, bradycardia or ventricular fibrillation.
+
+ In a normal heart beat rhythm, the SA node usually suppresses the ectopic pacemaker activity due to the higher impulse rate of the SA node.
+
+ However, in the instance of either a malfunctioning SA node or an ectopic focus bearing an intrinsic rate superior to SA node rate, ectopic pacemaker activity may take over the natural heart rhythm.
+
+ This phenomenon (an intrinsically slower pacemaker activity being unmasked by failure of faster pacemaker tissue 'upstream') is called an escape rhythm, the lower rhythm having escaped from the dominance of the upper rhythm.
+
+ As a rule, premature ectopic beats (i.e. with a shorter than the prevailing preceding R-R' interval) indicate increased myocyte or conducting tissue excitability, whereas late ectopic beats (i.e. with a prolonged preceding R-R' interval) indicate proximal pacemaker or conduction failure with an escape 'ectopic' beat.

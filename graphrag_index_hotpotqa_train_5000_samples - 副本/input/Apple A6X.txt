@@ -1,0 +1,7 @@
+Apple A6X
+
+The Apple A6X is a 32-bit system-on-a-chip (SoC) designed by Apple Inc., introduced at the launch of the fourth generation iPad on October 23, 2012.
+
+ It is a high-performance variant of the Apple A6.
+
+ Apple claims the A6X has twice the CPU performance and up to twice the graphics performance of its predecessor, the Apple A5X.

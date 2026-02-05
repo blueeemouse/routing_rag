@@ -1,0 +1,5 @@
+Supply chain network
+
+A Supply Chain Network (SCN) is an evolution of the basic supply chain.
+
+ Due to rapid technological advancement, organisations with a basic supply chain can develop this chain into a more complex structure involving a higher level of interdependence and connectivity between more organisations, this constitutes a supply chain network.

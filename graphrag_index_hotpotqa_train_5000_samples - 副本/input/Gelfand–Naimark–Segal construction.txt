@@ -1,0 +1,7 @@
+Gelfand–Naimark–Segal construction
+
+In functional analysis, a discipline within mathematics, given a C*-algebra "A", the Gelfand–Naimark–Segal construction establishes a correspondence between cyclic *-representations of "A" and certain linear functionals on "A" (called "states").
+
+ The correspondence is shown by an explicit construction of the *-representation from the state.
+
+ It is named for Israel Gelfand, Mark Naimark, and Irving Segal.

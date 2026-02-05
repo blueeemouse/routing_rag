@@ -1,0 +1,16 @@
+{
+  "timestamp": "20260201_162104",
+  "command_line_args": {
+    "models": "graph_rag",
+    "num_samples": 15,
+    "hotpotqa_file": "D:\\Develop\\all_RAG\\routing_rag\\HotpotQA\\hotpot_dev_distractor_1000_samples.jsonl",
+    "output_dir": "D:\\Develop\\all_RAG\\routing_rag\\evaluation_results",
+    "settings_file": "D:\\Develop\\all_RAG\\routing_rag\\config\\settings.yaml",
+    "graphrag_work_dir": "D:\\Develop\\all_RAG\\routing_rag\\graphrag_ollama_hotpotqa_15_test_data_embed_graph",
+    "graphrag_config_file": "D:\\Develop\\all_RAG\\routing_rag\\graphrag_ollama_hotpotqa_15_test_data_embed_graph\\graphrag_hotpotqa_config.yml",
+    "skip_graphrag_index": false,
+    "delay": 2.5,
+    "naive_rag_index_path": null
+  },
+  "description": "此文件记录了评估运行的参数配置"
+}

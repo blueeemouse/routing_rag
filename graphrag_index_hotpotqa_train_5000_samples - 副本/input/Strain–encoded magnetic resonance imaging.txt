@@ -1,0 +1,7 @@
+Strain–encoded magnetic resonance imaging
+
+Strain–encoded magnetic resonance imaging (SENC-MRI) is a magnetic resonance imaging a technique for imaging the strain of deforming tissue.
+
+ It is undergoing testing to diagnose some heart diseases, particularly congenital right ventricle dysfunctions, which are difficult to diagnose.
+
+ It is an improvement on magnetic resonance elastography in that it has a faster imaging time, and less post-processing time, to turn the acquired data into a useful image.

@@ -1,0 +1,7 @@
+SlickEdit
+
+SlickEdit, previously known as Visual SlickEdit, is a cross-platform commercial source code editor and Integrated Development Environment developed by SlickEdit, Inc.
+
+ SlickEdit supports Integrated Debuggers for GNU C/C++, Java, WinDbg, Clang C/C++ LLDB, Groovy, Google Go, Python, Perl, Ruby, PHP, Xcode, and Android JVM/NDK.
+
+ Some of SlickEdit's other notable features include built in beautifiers that can beautify code as you type, code navigation, context tagging (also known as Intelligent code completion), symbol references, third party tool integration, DiffZilla (a file differencing tool), syntax highlighting, and over 13 keyboard emulations.

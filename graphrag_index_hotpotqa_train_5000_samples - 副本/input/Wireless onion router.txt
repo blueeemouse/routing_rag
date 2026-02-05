@@ -1,0 +1,9 @@
+Wireless onion router
+
+A wireless onion router is a router that uses Tor to connect securely to a network.
+
+ The onion router allows the user to connect to the internet anonymously creating an anonymous connection.
+
+ Tor works using an overlaid network which is free throughout the world, this overlay network is created by using numerous relay points created using volunteer which helps the user hide personal information behind layers of encrypted data like layers of an onion.
+
+ Routers are being created using Raspberry Pi adding a wireless module or using its own inbuilt wireless module in the later versions.

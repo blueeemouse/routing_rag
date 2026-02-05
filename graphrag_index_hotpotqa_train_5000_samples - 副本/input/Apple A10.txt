@@ -1,0 +1,9 @@
+Apple A10
+
+The Apple A10 Fusion is a 64-bit ARM-based system on a chip (SoC), designed by Apple Inc. and manufactured by TSMC.
+
+ It first appeared in the iPhone 7 and 7 Plus which were introduced on September 7, 2016.
+
+ The A10 is the first Apple-designed quad-core SoC, with two high-performance cores and two energy-efficient cores.
+
+ Apple states that it has 40% greater CPU performance and 50% greater graphics performance compared to its predecessor, the Apple A9.

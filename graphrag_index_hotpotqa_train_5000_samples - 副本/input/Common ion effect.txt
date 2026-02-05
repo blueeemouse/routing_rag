@@ -1,0 +1,9 @@
+Common ion effect
+
+The common ion effect is responsible for the reduction in the solubility of an ionic precipitate when a soluble compound containing one of the ions of the precipitate is added to the solution in equilibrium with the precipitate.
+
+ It states that if the concentration of any one of the ions is increased, then, according to Le Chatelier's principle, some of the ions in excess should be removed from solution, by combining with the oppositely charged ions.
+
+ Some of the salt will be precipitated until the ion product is equal to the solubility product.
+
+ In short, the common ion effect is the suppression of the degree of dissociation of a weak electrolyte containing a common ion.

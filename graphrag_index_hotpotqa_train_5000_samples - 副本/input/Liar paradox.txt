@@ -1,0 +1,11 @@
+Liar paradox
+
+In philosophy and logic, the classical liar paradox or liar's paradox is the statement of a liar who states that they are lying: for instance, declaring that "I am lying" or "everything I say is false".
+
+ If they are indeed lying, they are telling the truth, which means they are lying.
+
+ In "this sentence is a lie" the paradox is strengthened in order to make it amenable to more rigorous logical analysis.
+
+ It is still generally called the "liar paradox" although abstraction is made precisely from the liar himself.
+
+ Trying to assign to this statement, the strengthened liar, a classical binary truth value leads to a contradiction.

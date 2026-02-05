@@ -1,0 +1,5 @@
+Silverman's game
+
+In game theory, Silverman's game is a two-person zero sum game played on the unit square.
+
+ It is named for mathematician David Silverman.

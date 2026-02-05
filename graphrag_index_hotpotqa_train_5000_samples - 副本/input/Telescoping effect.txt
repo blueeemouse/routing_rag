@@ -1,0 +1,15 @@
+Telescoping effect
+
+In cognitive psychology, the telescoping effect (or telescoping bias) refers to the temporal displacement of an event whereby people perceive recent events as being more remote than they are and distant events as being more recent than they are.
+
+ The former is known as backward telescoping or time expansion, and the latter as is known as forward telescoping.
+
+ Three years is approximately the time frame in which events switch from being displaced backward in time to forward in time, with events occurring three years in the past being equally likely to be reported with forward telescoping bias as with backward telescoping bias.
+
+ Although telescoping occurs in both the forward and backward directions, in general the effect is to increase the number of events reported too recently.
+
+ This net effect in the forward direction is because of forces that impair memory, such as lack of salience, also impair time perception.
+
+ Telescoping leads to an over reporting of the frequency of events.
+
+ This over reporting is because participants include events beyond the period, either events that are too recent for the target time period (backward telescoping) or events that are too old for the target time period (forward telescoping).

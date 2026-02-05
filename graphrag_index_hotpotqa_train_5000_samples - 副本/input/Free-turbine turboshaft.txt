@@ -1,0 +1,5 @@
+Free-turbine turboshaft
+
+A free-turbine turboshaft is a form of turboshaft or turboprop gas turbine engine where the power is extracted from the exhaust stream of a gas turbine by a separate turbine, downstream of the gas turbine and is not connected to the gas turbine (the exhaust airflow is what spins the turbine that is connected to the shaft hence the term "free").
+
+ This is opposed to the power being extracted from the power spool via a gear box.

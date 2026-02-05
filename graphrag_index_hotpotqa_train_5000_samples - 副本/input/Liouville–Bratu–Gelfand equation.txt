@@ -1,0 +1,5 @@
+Liouville–Bratu–Gelfand equation
+
+In mathematics, Liouville–Bratu–Gelfand equation or Lioville's equation is a non-linear eigenvalue Poisson equation, named after the mathematicians Joseph Liouville, G. Bratu and Israel Gelfand.
+
+ The equation reads

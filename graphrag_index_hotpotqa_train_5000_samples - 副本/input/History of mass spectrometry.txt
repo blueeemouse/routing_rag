@@ -1,0 +1,9 @@
+History of mass spectrometry
+
+The history of mass spectrometry has its roots in physical and chemical studies regarding the nature of matter.
+
+ The study of gas discharges in the mid 19th century led to the discovery of anode and cathode rays, which turned out to be positive ions and electrons. Improved capabilities in the separation of these positive ions enabled the discovery of stable isotopes of the elements.
+
+ The first such discovery was with the element neon, which was shown by mass spectrometry to have at least two stable isotopes: Ne (neon with 10 protons and 10 neutrons) and Ne (neon with 10 protons and 12 neutrons).
+
+ Mass spectrometers were used in the Manhattan Project for the separation of isotopes of uranium necessary to create the atomic bomb.

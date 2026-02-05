@@ -26,7 +26,7 @@ model:
   temperature: 1.0
   
   # 设备: auto (自动选择), cpu, cuda
-  device: "auto"
+  device: "cuda"
 
 # 训练配置
 training:
@@ -37,28 +37,29 @@ training:
   learning_rate: 5.0e-5
   
   # 训练轮数
-  epochs: 10
-  
+  epochs: 20
+
   # 最大序列长度
   max_length: 512
-  
+
   # 训练步数 (0表示使用epochs)
   training_steps: 0
-  
+
   # 评估步数 (每多少步评估一次)
   eval_steps: 100
-  
-  # 保存步数 (每多少步保存一次检查点)
-  save_steps: 500
+
+  # 保存步数 (每多少步保存一次检查点，约160步为一个epoch)
+  save_steps: 160
   
   # 损失权重
   sample_llm_loss_weight: 1.0    # Sample-LLM对比损失权重
-  sample_sample_loss_weight: 0.1  # Sample-Sample对比损失权重
-  cluster_loss_weight: 0.5        # Cluster对比损失权重 (降低权重，因为2策略数据可能较少)
+  sample_sample_loss_weight: 0.0  # Sample-Sample对比损失权重 (2策略时建议禁用)
+  cluster_loss_weight: 0.0        # Cluster对比损失权重 (2策略时建议禁用)
   
   # Top-K / Last-K (对比学习参数)
-  top_k: 3    # 正样本数量
-  last_k: 3   # 负样本数量
+  # 注意: 对于2个策略，top_k和last_k最大为1
+  top_k: 1    # 正样本数量 (不超过策略数)
+  last_k: 1   # 负样本数量 (不超过策略数-1)
   
   # 优化器类型: adamw, adam
   optimizer_type: "adamw"
@@ -79,10 +80,10 @@ training:
 data:
   # 数据源类型: "hotpotqa" or "llm_judge"
   source: "hotpotqa"
-  
-  # 数据路径 (evaluation_results目录下应包含NoRAG和Naiverag的结果文件)
-  train_path: "evaluation_results"
-  val_path: ""      # 验证数据路径 (可选)
+
+  # 数据路径 (使用单独的策略结果文件，便于扩展到多策略)
+  train_path: "HotpotQA_train_data"
+  val_path: ""      # 验证数据路径 (可选，暂不使用)
   test_path: ""     # 测试数据路径 (可选)
   
   # Cluster数量 (用于聚类对比学习)

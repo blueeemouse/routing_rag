@@ -1,0 +1,5 @@
+Ghana Interbank Payment and Settlement Systems
+
+The Ghana Interbank Payment and Settlement Systems (GhIPSS) is the Government of Ghana agency responsible for the interconnecting banks that operate in Ghana.
+
+ One of the aims of GhIPSS is to link all automated teller machines and E-zwich point of sales terminal for cross usage.

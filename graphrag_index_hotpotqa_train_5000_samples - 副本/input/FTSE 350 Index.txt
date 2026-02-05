@@ -1,0 +1,9 @@
+FTSE 350 Index
+
+The FTSE 350 Index index is a market capitalization weighted stock market index incorporating the largest 350 companies by capitalization which have their primary listing on the London Stock Exchange.
+
+ It is a combination of the FTSE 100 Index of the largest 100 companies and the FTSE 250 Index of the next largest 250.
+
+ The index is maintained by FTSE Russell, a subsidiary of the London Stock Exchange Group.
+
+ See the articles about those indices for lists of the constituents of the FTSE 350.

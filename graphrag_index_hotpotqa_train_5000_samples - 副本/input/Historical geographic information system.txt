@@ -1,0 +1,5 @@
+Historical geographic information system
+
+A historical geographic information system (also written as historical GIS or HGIS) is a geographic information system that may display, store and analyze data of past geographies and track changes in time.
+
+ It can be regarded as a subfield of historical geography and geographic information science.

@@ -1,0 +1,17 @@
+PicDial
+
+PicDial is a mobile service created by IQzone Inc. and based in Scottsdale, Arizona, United States.
+
+ PicDial provides users with the ability to automatically see their friends' Facebook and MySpace profile pictures and status messages as Full Screen Caller ID on their mobile phone.
+
+ The software automatically keeps contacts social networking information current, allowing the most recent profile pictures and status messages to be displayed on incoming and outgoing calls or texts.
+
+ The PicDial application provides users with a "Favorites Screen," a visual grid that allows users to call or text by selecting a friends social networking profile picture.
+
+ This Mobile social address book platform allows users to link multiple social networks.
+
+ The application also enables users to determine which picture will display when a call or text is made to a PicDial friend, giving the user control over the picture seen by friends.
+
+ This defined picture can either be taken from the users camera on the phone, or pulled from their profile pictures on Facebook or MySpace.
+
+ When a user changes their picture (and status message), this new image will be updated to their friends' phones.

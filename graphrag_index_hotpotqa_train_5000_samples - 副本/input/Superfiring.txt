@@ -1,0 +1,5 @@
+Superfiring
+
+The idea of superfiring armament is to locate two (or more) turrets in a line, one behind the other, but with the second turret located above ("super") the one in front so that the second turret could fire over the first.
+
+ This configuration meant that both forward or aft turrets could fire at any target within their sector, even when the target was in the same vertical plane as the turrets.

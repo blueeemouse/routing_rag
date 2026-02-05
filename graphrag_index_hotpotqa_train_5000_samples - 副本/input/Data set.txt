@@ -1,0 +1,15 @@
+Data set
+
+A data set (or dataset, although this spelling is not present in many contemporary dictionaries like Merriam-Webster) is a collection of data.
+
+ Most commonly a data set corresponds to the contents of a single database table, or a single statistical data matrix, where every column of the table represents a particular variable, and each row corresponds to a given member of the data set in question.
+
+ The data set lists values for each of the variables, such as height and weight of an object, for each member of the data set.
+
+ Each value is known as a datum.
+
+ The data set may comprise data for one or more members, corresponding to the number of rows.
+
+ The term data set may also be used more loosely, to refer to the data in a collection of closely related tables, corresponding to a particular experiment or event.
+
+ An example of this type is the data sets collected by space agencies performing experiments with instruments aboard space probes. Data sets that are so large that traditional data processing applications are inadequate to deal with them are known as big data.

@@ -1,0 +1,9 @@
+Born–von Karman boundary condition
+
+Born–von Karman boundary conditions are periodic boundary conditions which impose the restriction that a wave function must be periodic on a certain Bravais lattice.
+
+ (Named after Max Born and Theodore von Kármán).
+
+ This condition is often applied in solid state physics to model an ideal crystal.
+
+ Born and von Karman

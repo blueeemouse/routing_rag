@@ -1,0 +1,7 @@
+Remote sensing atmospheric boundary layer
+
+Remote sensing of the planetary boundary layer refers to the utilization of ground based, flight based, or satellite based remote sensing instruments to measure properties of the planetary boundary layer including boundary layer height, aerosols and clouds.
+
+ Satellite remote sensing of the atmosphere has the advantage of being able to provide global coverage of atmospheric planetary boundary layer properties while simultaneously providing relatively high temporal sampling rates.
+
+ Advancements in satellite remote sensing have provided greater vertical resolution which enables higher accuracy for planetary boundary layer measurements.

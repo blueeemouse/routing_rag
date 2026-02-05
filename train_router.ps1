@@ -14,7 +14,8 @@ param(
     [int]$SaveSteps = 500,
     [int]$Seed = 42,
     [string]$Config = "",
-    [string]$Resume = ""
+    [string]$Resume = "",
+    [switch]$QuickTest = $false  # 快速测试模式（只跑几个iter）
 )
 
 # 显示参数
@@ -52,8 +53,19 @@ if ($Resume -ne "") {
     $command += " --resume $Resume"
 }
 
+# 添加脚本路径参数（用于记录脚本内容到日志）
+$scriptPath = $MyInvocation.MyCommand.Path
+$command += " --script_path `"$scriptPath`""
+
+# 快速测试模式
+if ($QuickTest) {
+    $command += " --max_steps 10"  # 只跑10个step
+    Write-Host "`n快速测试模式（10 steps）..." -ForegroundColor Yellow
+} else {
+    Write-Host "`n开始训练..." -ForegroundColor Green
+}
+
 # 执行训练
-Write-Host "`n开始训练..." -ForegroundColor Green
 Invoke-Expression $command
 
 Write-Host "`n训练完成!" -ForegroundColor Green

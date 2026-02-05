@@ -1,0 +1,5 @@
+AirPair
+
+AirPair is a service and eponymous company that connects people who need help with programming issues (usually, programmers at small technology companies or at finance companies that use technology products) and people who can help them.
+
+ Unlike services such as oDesk and Elance, AirPair is not a service for outsourcing programming tasks, but rather a service that facilitates one-off knowledge transfers from people with highly specialized knowledge of particular technology stacks or programming issues to people who are in need of specialized help.

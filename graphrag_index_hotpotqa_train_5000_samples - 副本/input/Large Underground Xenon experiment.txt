@@ -1,0 +1,7 @@
+Large Underground Xenon experiment
+
+The Large Underground Xenon experiment (LUX) aims to directly detect weakly interacting massive particle (WIMP) dark matter interactions with ordinary matter on Earth.
+
+ Despite the wealth of (gravitational) evidence supporting the existence of non-baryonic dark matter in the Universe, dark matter particles in our galaxy have never been directly detected in an experiment.
+
+ LUX utilizes a 370 kg liquid xenon detection mass in a time-projection chamber (TPC) to identify individual particle interactions, searching for faint dark matter interactions with unprecedented sensitivity.

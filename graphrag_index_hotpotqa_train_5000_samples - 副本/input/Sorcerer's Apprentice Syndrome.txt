@@ -1,0 +1,5 @@
+Sorcerer's Apprentice Syndrome
+
+Sorcerer's Apprentice Syndrome (SAS) is a network protocol flaw in the original versions of TFTP.
+
+ It was named after Goethe's poem "Der Zauberlehrling" (popularized by the "Sorcerer's Apprentice" segment of the animated film "Fantasia"), because the details of its operation closely resemble the disaster that befalls the sorcerer's apprentice: the problem resulted in an ever-growing replication of every packet in the transfer.
