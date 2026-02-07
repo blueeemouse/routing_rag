@@ -71,6 +71,27 @@ class BaseTrainer(ABC):
         """
         pass
     
+    def _get_training_batches(self, dataloader):
+        """
+        根据配置返回训练batch生成器
+        
+        Args:
+            dataloader: 数据加载器
+            
+        Returns:
+            训练batch生成器
+        """
+        if hasattr(self.config, 'training') and getattr(self.config.training, 'overfit_single_batch', False):
+            # 过拟合模式：重复使用第一个batch指定次数
+            first_batch = next(iter(dataloader))
+            steps = getattr(self.config.training, 'fast_dev_steps', 100)
+            for _ in range(steps):
+                yield first_batch
+        else:
+            # 正常训练模式
+            for batch in dataloader:
+                yield batch
+    
     def train(self, train_dataloader, val_dataloader=None, **kwargs) -> Dict[str, Any]:
         """
         训练主循环

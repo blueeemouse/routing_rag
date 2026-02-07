@@ -89,6 +89,10 @@ class TrainingConfig:
 
     # trainer类型
     trainer_type: str = "dc"
+    
+    # Debug配置 - 新增字段
+    overfit_single_batch: bool = False  # 是否过拟合单个batch
+    fast_dev_steps: int = 100  # 快速开发模式下的训练步数
 
 
 @dataclass
@@ -119,6 +123,7 @@ class DataConfig:
     score_formula: str = "em"
 
 
+# 这是总的配置类
 @dataclass
 class TrainableRouterConfig:
     """可训练路由器主配置"""
@@ -186,7 +191,9 @@ class TrainableRouterConfig:
             cluster_loss_weight=training_config.get('cluster_loss_weight', 1.0),
             top_k=training_config.get('top_k', 3),
             last_k=training_config.get('last_k', 3),
-            trainer_type=training_config.get('trainer_type', None)
+            trainer_type=training_config.get('trainer_type', 'dc'),
+            overfit_single_batch=training_config.get('overfit_single_batch', False),
+            fast_dev_steps=training_config.get('fast_dev_steps', 100)
         )
         
         data = DataConfig(
@@ -245,6 +252,8 @@ class TrainableRouterConfig:
                 'sample_llm_loss_weight': self.training.sample_llm_loss_weight,
                 'sample_sample_loss_weight': self.training.sample_sample_loss_weight,
                 'cluster_loss_weight': self.training.cluster_loss_weight,
+                'overfit_single_batch': self.training.overfit_single_batch,
+                'fast_dev_steps': self.training.fast_dev_steps,
             },
             'data': {
                 'source': self.data.source,

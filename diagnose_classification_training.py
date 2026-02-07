@@ -84,13 +84,6 @@ def diagnose_model(model, dataloader, device):
     # 前向传播
     model.eval()
     with torch.no_grad():
-        # if hasattr(model, 'use_sentence_transformer') and model.use_sentence_transformer:
-        #     queries = batch['queries']
-        #     query_emb = model.encode(queries)
-        # else:
-        #     input_ids = batch['input_ids'].to(device)
-        #     attention_mask = batch['attention_mask'].to(device)
-        #     query_emb = model.forward(input_ids, attention_mask)
         print('queries:', batch['queries'])
         queries = batch['queries']
         query_emb = model.encode(queries).to(device)
@@ -158,13 +151,6 @@ def check_gradient_flow(model, dataloader, device):
     print('batch:', batch)
     
     # 前向传播
-    # if hasattr(model, 'use_sentence_transformer') and model.use_sentence_transformer:
-    #     queries = batch['queries']
-    #     query_emb = model.encode(queries)
-    # else:
-    #     input_ids = batch['input_ids'].to(device)
-    #     attention_mask = batch['attention_mask'].to(device)
-    #     query_emb = model.forward(input_ids, attention_mask)
     queries = batch['queries']
     query_emb = model.encode(queries)
 

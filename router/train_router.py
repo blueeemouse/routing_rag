@@ -11,7 +11,10 @@ import os
 import sys
 import argparse
 import yaml
+import json
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, Any
 
 import torch
 from torch.utils.data import DataLoader
@@ -67,6 +70,13 @@ def parse_args():
     parser.add_argument('--use_amp', action='store_true', help='使用混合精度训练')
     parser.add_argument('--max_steps', type=int, default=None, help='训练的最大step数（0表示不限制）')
     
+    # 模型参数
+    parser.add_argument('--temperature', type=float, default=None, help='温度参数')
+    
+    # Debug配置
+    parser.add_argument('--overfit_single_batch', action='store_true', help='过拟合单个batch')
+    parser.add_argument('--fast_dev_steps', type=int, default=None, help='快速开发模式下的训练步数')
+    
     # 继续训练
     parser.add_argument('--resume', type=str, default='', help='从检查点恢复训练')
     
@@ -107,6 +117,8 @@ def create_config_from_args(args) -> TrainableRouterConfig:
     if args.device is not None:
         config.model.device = args.device
         config.device = args.device
+    if args.temperature is not None:
+        config.model.temperature = args.temperature
     
     # 训练配置
     if args.batch_size is not None:
@@ -136,6 +148,14 @@ def create_config_from_args(args) -> TrainableRouterConfig:
     if args.max_steps is not None:
         config.training.max_steps = args.max_steps
     
+    # Debug配置
+    # 如果启用overfit_single_batch，则会对同一个batch反复进行训练
+    if args.overfit_single_batch:
+        config.training.overfit_single_batch = args.overfit_single_batch
+    # fast_dev_steps控制的是，在overfit_single_batch模式下，每个epoch训练的步数（所以即使是过拟合模式下，epoch数还是照常）
+    if args.fast_dev_steps is not None:
+        config.training.fast_dev_steps = args.fast_dev_steps
+    
     # 数据配置
     if args.data_source is not None:
         config.data.source = args.data_source
@@ -159,6 +179,113 @@ def create_config_from_args(args) -> TrainableRouterConfig:
     return config
 
 
+def config_to_dict(config: Any) -> Dict:
+    """
+    将config对象递归转换为字典（只保留基本数据类型）
+    
+    Args:
+        config: 配置对象
+        
+    Returns:
+        包含所有配置信息的字典
+    """
+    result = {}
+    
+    if hasattr(config, '__dict__'):
+        for key, value in config.__dict__.items():
+            if key.startswith('_'):
+                continue
+            
+            if isinstance(value, (str, int, float, bool)):
+                result[key] = value
+            elif isinstance(value, (list, tuple)):
+                processed_list = []
+                for item in value:
+                    if isinstance(item, (str, int, float, bool)):
+                        processed_list.append(item)
+                    elif hasattr(item, '__dict__'):
+                        processed_list.append(config_to_dict(item))
+                    else:
+                        processed_list.append(str(item))
+                result[key] = processed_list
+            elif isinstance(value, dict):
+                processed_dict = {}
+                for k, v in value.items():
+                    if isinstance(v, (str, int, float, bool)):
+                        processed_dict[k] = v
+                    elif hasattr(v, '__dict__'):
+                        processed_dict[k] = config_to_dict(v)
+                    else:
+                        processed_dict[k] = str(v)
+                result[key] = processed_dict
+            elif hasattr(value, '__dict__'):
+                result[key] = config_to_dict(value)
+            else:
+                result[key] = str(value)
+    
+    return result
+
+
+def save_config_to_json(config: TrainableRouterConfig, output_dir: str) -> str:
+    """
+    保存完整config为JSON文件
+    
+    Args:
+        config: 配置对象
+        output_dir: 输出目录
+        
+    Returns:
+        保存的文件路径
+    """
+    # 转换为字典
+    config_dict = config_to_dict(config)
+    
+    # 创建输出目录
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    # 保存到文件
+    hparams_path = output_path / "hparams.json"
+    with open(hparams_path, 'w', encoding='utf-8') as f:
+        json.dump(config_dict, f, indent=2, ensure_ascii=False)
+    
+    return str(hparams_path)
+
+
+def generate_exp_name(config: TrainableRouterConfig) -> str:
+    """
+    根据配置自动生成实验名称
+    
+    规则：exp_<mode>_<temp>_<backbone>_<trainer_type>_<timestamp>
+    示例：exp_norm_t0.05_minilm_classification_0207_1230
+    """
+    parts = ["exp"]
+    
+    # 1. 模式
+    mode = "overfit" if config.training.overfit_single_batch else "norm"
+    if config.training.fast_dev_steps:
+        mode += f"_dev{config.training.fast_dev_steps}"
+    parts.append(mode)
+    
+    # 2. 温度
+    temp = config.model.temperature
+    parts.append(f"t{temp}")
+    
+    # 3. Backbone（取最后一部分）
+    backbone = config.model.backbone_name.split('/')[-1]
+    parts.append(backbone)
+    
+    # 4. Trainer类型
+    trainer_type = config.training.trainer_type
+    parts.append(trainer_type)
+    
+    # 5. 时间戳
+    timestamp = datetime.now().strftime("%m%d_%H%M")
+    parts.append(timestamp)
+    
+    return "_".join(parts)
+
+
 def main():
     """主函数"""
     args = parse_args()
@@ -175,6 +302,12 @@ def main():
     # 加载配置（智能合并：命令行参数覆盖配置文件）
     config = create_config_from_args(args)
     
+    # 【新增】自动生成实验输出目录
+    if not args.output_dir:
+        exp_name = generate_exp_name(config)
+        args.output_dir = f"router_models/experiments/{exp_name}"
+        config.output_dir = args.output_dir
+    
     # 初始化日志系统 (必须在加载配置之后)
     logger = setup_logging(
         log_dir=config.logging_dir or f"{config.output_dir}/logs",
@@ -184,6 +317,10 @@ def main():
     
     # 记录训练开始信息
     logger.log_training_start(command, vars(args), config)
+    
+    # 保存完整配置到JSON
+    hparams_path = save_config_to_json(config, config.output_dir)
+    logger_instance.info(f"完整配置已保存到: {hparams_path}")
 
     # 设置随机种子
     seed = config.training.seed
@@ -256,14 +393,11 @@ def main():
     else:
         logger_instance.info("未提供验证数据集，将跳过验证")
 
-    # 先创建模型，以便 collate_fn 能根据 model.use_sentence_transformer 做出一致判断
+    # 先创建模型，以便 collate_fn 能根据模型属性做出一致判断
     logger_instance.info("创建模型...")
     # 根据config里的model_type参数创建router模型
     model = TrainableRouterFactory.create_model(config)
     logger_instance.info(f"模型创建成功: {config.model_type}")
-
-    # 根据模型属性判断是否使用 sentence-transformer
-    use_sentence_transformer = getattr(model, 'use_sentence_transformer', False)
 
     # 将 model 的 tokenizer 传递给数据集（如果有的话），以便 dataset 能生成 input_ids
     if hasattr(model, 'tokenizer') and model.tokenizer is not None:
@@ -280,23 +414,22 @@ def main():
             'cluster_ids': torch.tensor([item['cluster_id'] for item in x], dtype=torch.long),
             'queries': [item['queries'] for item in x],
         }
-        # 只有在使用非 SentenceTransformer 时才添加分词数据
-        if not use_sentence_transformer:
-            if 'input_ids' in x[0]:
-                # 数据已经分词好（如 GenericRouterDataset）
-                batch_data['input_ids'] = torch.stack([item['input_ids'] for item in x])
-                batch_data['attention_mask'] = torch.stack([item['attention_mask'] for item in x])
-            elif hasattr(model, 'tokenizer') and model.tokenizer is not None:
-                # 数据没有分词（如 RouterLabelDataset），需要实时分词
-                encoded = model.tokenizer(
-                    [item['queries'] for item in x],
-                    padding=True,
-                    truncation=True,
-                    max_length=config.training.max_length,
-                    return_tensors='pt'
-                )
-                batch_data['input_ids'] = encoded['input_ids']
-                batch_data['attention_mask'] = encoded['attention_mask']
+        # 统一使用transformers方式，始终添加分词数据
+        if 'input_ids' in x[0]:
+            # 数据已经分词好（如 GenericRouterDataset）
+            batch_data['input_ids'] = torch.stack([item['input_ids'] for item in x])
+            batch_data['attention_mask'] = torch.stack([item['attention_mask'] for item in x])
+        elif hasattr(model, 'tokenizer') and model.tokenizer is not None:
+            # 数据没有分词（如 RouterLabelDataset），需要实时分词
+            encoded = model.tokenizer(
+                [item['queries'] for item in x],
+                padding=True,
+                truncation=True,
+                max_length=config.training.max_length,
+                return_tensors='pt'
+            )
+            batch_data['input_ids'] = encoded['input_ids']
+            batch_data['attention_mask'] = encoded['attention_mask']
         return batch_data
 
     # 创建数据加载器

@@ -11,14 +11,14 @@ model:
   strategy_names: ["no_rag", "naive_rag"]
   num_strategies: 2
   similarity_function: "cos"
-  temperature: 0.05
+  temperature: 0.5
   device: "auto"
 
 # 训练配置
 training:
   trainer_type: "classification"  # 使用分类训练器
   learning_rate: 0.0002
-  batch_size: 8
+  batch_size: 16
   epochs: 10
   training_steps: 0  # 0表示使用epochs动态计算
   eval_steps: 5
@@ -45,6 +45,6 @@ data:
   num_clusters: 10
 
 # 输出配置
-output_dir: "router_models/no_rag_vs_naive_classification_5000"
-logging_dir: "router_models/no_rag_vs_naive_classification_5000/logs"
+# output_dir: "router_models/no_rag_vs_naive_classification_5000"
+# logging_dir: "router_models/no_rag_vs_naive_classification_5000/logs"
 log_level: "info"

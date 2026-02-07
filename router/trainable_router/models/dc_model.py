@@ -50,56 +50,20 @@ class DCRouterModel(BaseRouterModel):
     
     def _init_backbone(self, backbone_name: str, **kwargs):
         """
-        初始化backbone encoder
+        简化backbone初始化，统一使用transformers库
         
         Args:
             backbone_name: backbone名称
             **kwargs: 额外参数
         """
-        # 支持多种backbone
-        if 'sentence-transformers' in backbone_name or 'all-MiniLM' in backbone_name:
-            # 优先尝试使用 transformers 的 AutoModel + AutoTokenizer，以便 encoder 可训练
-            try:
-                from transformers import AutoModel, AutoTokenizer
-                self.tokenizer = AutoTokenizer.from_pretrained(backbone_name)
-                self.backbone = AutoModel.from_pretrained(backbone_name)
-                self.use_sentence_transformer = False
-                print('DCRouterModel uses transformers AutoModel')     # 目前用的是这个
-                if hasattr(self.backbone, 'config'):
-                    self.hidden_size = self.backbone.config.hidden_size
-            except Exception:
-                # 回退到 sentence-transformers（兼容旧逻辑，但通常用于推理）
-                try:
-                    from sentence_transformers import SentenceTransformer
-                    self.backbone = SentenceTransformer(backbone_name)
-                    self.use_sentence_transformer = True
-                    self.hidden_size = self.backbone.get_sentence_embedding_dimension()
-                    print('use sentence-transformers')
-                except ImportError:
-                    raise ImportError("请安装 sentence-transformers 或 transformers: pip install sentence-transformers transformers")
-        
-        elif 'deberta' in backbone_name.lower() or 'mdeberta' in backbone_name.lower():
-            try:
-                from transformers import AutoModel
-                self.backbone = AutoModel.from_pretrained(backbone_name)
-                self.use_sentence_transformer = False
-                print('use transformers AutoModel')
-                # 获取隐藏层大小
-                if hasattr(self.backbone, 'config'):
-                    self.hidden_size = self.backbone.config.hidden_size
-            except ImportError:
-                raise ImportError("请安装transformers: pip install transformers")
-        
-        else:
-            # 默认使用sentence-transformers
-            try:
-                from sentence_transformers import SentenceTransformer
-                self.backbone = SentenceTransformer('all-MiniLM-L6-v2')
-                self.use_sentence_transformer = True
-                self.hidden_size = self.backbone.get_sentence_embedding_dimension()
-                print('use sentence-transformers')
-            except ImportError:
-                raise ImportError("请安装sentence-transformers: pip install sentence-transformers")
+        try:
+            from transformers import AutoModel, AutoTokenizer
+            self.tokenizer = AutoTokenizer.from_pretrained(backbone_name)
+            self.backbone = AutoModel.from_pretrained(backbone_name)
+            self.hidden_size = self.backbone.config.hidden_size
+            print(f'DCRouterModel使用transformers加载: {backbone_name}')
+        except Exception as e:
+            raise ImportError(f"无法加载模型 {backbone_name}: {e}")
     
     def _init_weights(self):
         """初始化权重"""
@@ -108,7 +72,7 @@ class DCRouterModel(BaseRouterModel):
     
     def encode(self, queries: List[str]) -> torch.Tensor:
         """
-        编码query列表为embedding
+        编码query列表为embedding，统一使用transformers方式
         
         Args:
             queries: query字符串列表
@@ -116,13 +80,7 @@ class DCRouterModel(BaseRouterModel):
         Returns:
             shape: (batch_size, hidden_size)
         """
-        # 返回可导的 embeddings（允许梯度回传到 backbone）
-        if self.use_sentence_transformer:
-            # 兼容旧的 sentence-transformers（通常为回退情况）
-            embeddings = self.backbone.encode(queries, convert_to_tensor=True)
-            return embeddings.to(self.device)
-
-        # 使用 transformers 的 AutoModel，并做 masked mean pooling
+        # 统一使用 transformers 的 AutoModel，并做 masked mean pooling
         inputs = self.tokenize(queries)
         # 将 inputs 移动到设备
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
@@ -205,9 +163,7 @@ class DCRouterModel(BaseRouterModel):
         Returns:
             query embeddings, shape: (batch_size, hidden_size)
         """
-        if self.use_sentence_transformer:
-            # SentenceTransformer需要字符串输入
-            raise ValueError("SentenceTransformer backbone需要使用encode方法")
+        
 
         outputs = self.backbone(input_ids=input_ids, attention_mask=attention_mask)
         last_hidden = outputs.last_hidden_state

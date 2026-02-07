@@ -135,14 +135,13 @@ class DCTrainer(BaseTrainer):
             cluster_ids = cluster_ids.to(self.device)
 
         # 前向传播
-        if hasattr(self.model, 'use_sentence_transformer') and self.model.use_sentence_transformer:
-            # 使用sentence-transformers编码
-            queries = batch['queries']
-            query_emb = self.model.encode(queries)
-        else:
-            input_ids = batch['input_ids'].to(self.device)
-            attention_mask = batch['attention_mask'].to(self.device)
-            query_emb = self.model.forward(input_ids, attention_mask)
+        # 前向传播 - 统一使用transformers方式
+        input_ids = batch['input_ids'].to(self.device)
+        attention_mask = batch['attention_mask'].to(self.device)
+        query_emb = self.model.forward(input_ids, attention_mask)
+        print('#'*60)
+        print('using transformers forward method in training')
+        print('#'*60)
         
         # 获取策略embedding
         strategy_emb = self.model.get_strategy_embeddings()
@@ -193,7 +192,10 @@ class DCTrainer(BaseTrainer):
         total_loss = 0.0
         num_batches = 0
         
-        pbar = tqdm(dataloader, desc=f"Epoch {self.epoch + 1}", ascii=True)
+        # 使用基类的数据生成器，支持overfit模式
+        batch_generator = self._get_training_batches(dataloader)
+        
+        pbar = tqdm(batch_generator, desc=f"Epoch {self.epoch + 1}", ascii=True)
         
         for batch in pbar:
             # 如果指定了 max_steps 并且已达到，则提前结束本 epoch
@@ -289,13 +291,10 @@ class DCTrainer(BaseTrainer):
                 scores = batch['scores'].to(self.device)
                 queries = batch.get('queries', [])
 
-                # 前向传播
-                if hasattr(self.model, 'use_sentence_transformer') and self.model.use_sentence_transformer:
-                    query_emb = self.model.encode(queries)
-                else:
-                    input_ids = batch['input_ids'].to(self.device)
-                    attention_mask = batch['attention_mask'].to(self.device)
-                    query_emb = self.model.forward(input_ids, attention_mask)
+                # 前向传播 - 统一使用transformers方式
+                input_ids = batch['input_ids'].to(self.device)
+                attention_mask = batch['attention_mask'].to(self.device)
+                query_emb = self.model.forward(input_ids, attention_mask)
 
                 # 获取策略embedding
                 strategy_emb = self.model.get_strategy_embeddings()
