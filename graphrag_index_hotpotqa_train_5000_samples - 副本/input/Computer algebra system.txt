@@ -1,5 +1,0 @@
-Computer algebra system
-
-A computer algebra system (CAS) is any mathematical software with the ability to manipulate mathematical expressions in a way similar to the traditional manual computations of mathematicians and scientists.
-
- The development of the computer algebra systems in the second half of the 20th century is part of the discipline of "computer algebra" or "symbolic computation", which has spurred work in algorithms over mathematical objects such as polynomials.

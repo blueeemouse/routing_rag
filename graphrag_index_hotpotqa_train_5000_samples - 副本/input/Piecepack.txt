@@ -1,7 +1,0 @@
-Piecepack
-
-Piecepack is a public-domain game system that can be used to play a wide variety of board games, much as a standard deck of cards can be used to play thousands of card games ("A game system is a set of components that function together in multiple games").
-
- Piecepack has been used by dozens of different game designers to create over 150 different board games and is available from many different manufacturers.
-
- It was created by James Kyle in 2001.

@@ -1,3 +1,0 @@
-MPLAB devices
-
-The MPLAB series of devices are programmers and debuggers for Microchip PIC and dsPIC microcontrollers, developed by Microchip Technology.

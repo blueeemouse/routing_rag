@@ -1,5 +1,0 @@
-Yuri Manin
-
-Yuri Ivanovitch Manin (Russian: Ю́рий Ива́нович Ма́нин ; born 1937) is a Soviet/Russian/German mathematician, known for work in algebraic geometry and diophantine geometry, and many expository works ranging from mathematical logic to theoretical physics.
-
- Moreover, Manin was one of the first to propose the idea of a quantum computer in 1980 with his book "Computable and Uncomputable".

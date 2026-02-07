@@ -1,7 +1,0 @@
-Classic Mac OS
-
-The "Classic" Mac OS is a graphical user interface-based operating system developed by Apple Inc. for its Macintosh family of personal computers from 1984 until 2001, the original member of the series of Macintosh operating systems.
-
- The Macintosh platform, which was introduced in the classic Mac OS, is credited with having popularized the early GUI concept.
-
- Mac OS was preinstalled on every Macintosh computer that was made during the era it was developed; it was also sold separately in retail stores.

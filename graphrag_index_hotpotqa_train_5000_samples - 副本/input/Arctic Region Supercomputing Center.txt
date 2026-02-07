@@ -1,7 +1,0 @@
-Arctic Region Supercomputing Center
-
-The Arctic Region Supercomputing Center (ARSC) was from 1993 to 2015 a research facility organized under the University of Alaska Fairbanks.
-
- Located on the University of Alaska Fairbanks (UAF) campus, the Arctic Region Supercomputing Center (ARSC) offered high-performance computing (HPC) and mass storage to the UAF and State of Alaska research communities.
-
- Funding for ARSC operations was primarily supplied by UAF, with augmentation through external grants and contracts from various sources such as the National Science Foundation and Lockheed Martin (through the Department of Defense High Performance Computing Modernization Program.)

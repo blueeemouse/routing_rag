@@ -1,5 +1,0 @@
-TextMate
-
-TextMate is a general-purpose GUI text editor for Mac OS X created by Allan Odgaard.
-
- TextMate features declarative customizations, tabs for open documents, recordable macros, folding sections, snippets, shell integration, and an extensible bundle system.

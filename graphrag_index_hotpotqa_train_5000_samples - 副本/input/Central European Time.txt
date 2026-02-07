@@ -1,7 +1,0 @@
-Central European Time
-
-Central European Time (CET), used in most parts of Europe and a few North African countries, is a standard time which is 1 hour ahead of Coordinated Universal Time (UTC).
-
- The time offset from UTC can be written as .
-
- The same standard time, , is also known as Middle European Time (MET, German: ) and under other names like Berlin Time, Romance Standard Time (RST), Paris Time or Rome Time.

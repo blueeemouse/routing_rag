@@ -1,9 +1,0 @@
-Collapsar
-
-Collapsar is the shortened form to describe a collapsed star.
-
- When an old star no longer has enough fuel for significant fusion reactions there can be three possible outcomes depending on the star's mass.
-
- If the star’s mass is less than 1.4 solar masses, known as the Chandrasekhar limit, it will stabilize and shrink, becoming a white dwarf.
-
- Above the said limit the star will either become a neutron star or a black hole.

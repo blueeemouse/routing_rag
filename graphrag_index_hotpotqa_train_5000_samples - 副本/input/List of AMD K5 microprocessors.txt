@@ -1,5 +1,0 @@
-List of AMD K5 microprocessors
-
-The AMD K5 microprocessor is a Pentium-class 32-bit CPU manufactured by American company Advanced Micro Devices (AMD), and targeted at the consumer market.
-
- It was the first x86 processor designed by AMD from the ground up, and not licensed or reverse-engineered as previous generations of x86 processors produced by AMD.

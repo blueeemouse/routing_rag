@@ -1,7 +1,0 @@
-Risch algorithm
-
-In symbolic computation (or computer algebra), at the intersection of mathematics and computer science, the Risch algorithm is an algorithm for indefinite integration.
-
- It is used in some computer algebra systems to find antiderivatives.
-
- It is named after the American mathematician Robert Henry Risch, a specialist in computer algebra who developed it in 1968.

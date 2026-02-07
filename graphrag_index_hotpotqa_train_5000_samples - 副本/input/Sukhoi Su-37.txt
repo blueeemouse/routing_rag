@@ -1,7 +1,0 @@
-Sukhoi Su-37
-
-The Sukhoi Su-37 (NATO reporting name: Flanker-F) is an experimental single-seat, supermaneuverable multirole jet fighter, designed by Sukhoi.
-
- A further development of the original Su-27 "Flanker", it was modified from the first-generation Su-35 (formerly "T10M") prototypes.
-
- The Su-37 features an upgraded avionic suite and fire-control system but its most notable additions are the thrust vectoring nozzles; only one prototype was converted.

@@ -1,7 +1,0 @@
-Rosetta Stone (software)
-
-Rosetta Stone Language Learning is proprietary computer-assisted language learning (CALL) software published by Rosetta Stone Inc.
-
- The software uses images, text, and sound to teach words and grammar by spaced repetition, without translation.
-
- Rosetta Stone calls its approach Dynamic Immersion (a term which has been trademarked).

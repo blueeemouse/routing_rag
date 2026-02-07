@@ -1,5 +1,0 @@
-Block cellular automaton
-
-A block cellular automaton or partitioning cellular automaton is a special kind of cellular automaton in which the lattice of cells is divided into non-overlapping blocks (with different partitions at different time steps) and the transition rule is applied to a whole block at a time rather than a single cell.
-
- Block cellular automata are useful for simulations of physical quantities, because it is straightforward to choose transition rules that obey physical constraints such as reversibility and conservation laws.

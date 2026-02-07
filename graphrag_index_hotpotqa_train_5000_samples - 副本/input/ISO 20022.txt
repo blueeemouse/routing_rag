@@ -1,7 +1,0 @@
-ISO 20022
-
-ISO 20022 is an ISO standard for electronic data interchange between financial institutions.
-
- It describes a metadata repository containing descriptions of messages and business processes, and a maintenance process for the repository content.
-
- The standard covers financial information transferred between financial institutions that includes payment transactions, securities trading and settlement information, credit and debit card transactions and other financial information.

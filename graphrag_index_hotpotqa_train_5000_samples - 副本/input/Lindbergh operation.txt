@@ -1,9 +1,0 @@
-Lindbergh operation
-
-The Lindbergh operation was a complete tele-surgical operation carried out by a team of French surgeons located in New York on a patient in Strasbourg, France (over a distance of several thousand miles) using telecommunications solutions based on high-speed services and sophisticated Zeus surgical robot.
-
- The operation was performed successfully on September 7, 2001 by Professor Jacques Marescaux and his team from the IRCAD (Institute for Research into Cancer of the Digestive System).
-
- This was the first time in medical history that a technical solution proved capable of reducing the time delay inherent to long distance transmissions sufficiently to make this type of procedure possible.
-
- The name was derived from that of American aviator Charles Lindbergh, because he was the first person to fly solo across the Atlantic Ocean.

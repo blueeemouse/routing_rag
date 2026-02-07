@@ -1,5 +1,0 @@
-NumXL
-
-Numerical Analysis for Excel (NumXL) is an econometrics and time series analysis add-in for Microsoft Excel.
-
- Developed by Spider Financial, NumXL provides a wide variety of statistical and time series analysis techniques, including linear and nonlinear time series modeling, statistical tests and others.

@@ -1,7 +1,0 @@
-Hewitt–Savage zero–one law
-
-The Hewitt–Savage zero–one law is a theorem in probability theory, similar to Kolmogorov's zero–one law and the Borel–Cantelli lemma, that specifies that a certain type of event will either almost surely happen or almost surely not happen.
-
- It is sometimes known as the Hewitt–Savage law for symmetric events.
-
- It is named after Edwin Hewitt and Leonard Jimmie Savage.

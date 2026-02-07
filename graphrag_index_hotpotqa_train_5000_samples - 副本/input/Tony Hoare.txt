@@ -1,7 +1,0 @@
-Tony Hoare
-
-Sir Charles Antony Richard Hoare FRS FREng (born 11 January 1934), commonly known as Tony Hoare or C. A. R. Hoare, is a British computer scientist.
-
- He developed the sorting algorithm quicksort in 1959/1960.
-
- He also developed Hoare logic for verifying program correctness, and the formal language communicating sequential processes (CSP) to specify the interactions of concurrent processes (including the dining philosophers problem) and the inspiration for the occam programming language.

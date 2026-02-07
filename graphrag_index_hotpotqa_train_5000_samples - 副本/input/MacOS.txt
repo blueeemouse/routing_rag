@@ -1,7 +1,0 @@
-MacOS
-
-macOS (pronounced ; previously Mac OS X and later OS X) is the current series of Unix-based graphical operating systems developed and marketed by Apple Inc. designed to run on Apple's Macintosh computers ("Macs").
-
- It has been preinstalled on all Macs since 2002.
-
- Within the market of desktop, laptop and home computers, and by web usage, it is the second most widely used desktop OS after Microsoft Windows.

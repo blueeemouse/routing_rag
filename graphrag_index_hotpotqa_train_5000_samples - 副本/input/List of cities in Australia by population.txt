@@ -1,7 +1,0 @@
-List of cities in Australia by population
-
-This list of Australian cities by population provides rankings of Australian cities according to various systems defined by the Australian Bureau of Statistics.
-
- Firstly, they are ranked by Greater Capital City Statistical Area (for capital cities excluding Canberra) and Significant Urban Area (for other cities not otherwise included in a Greater Capital City Statistical Area).
-
- In separate tables, they are then also ranked by Significant Urban Area (all cities) and by Local Government Area (known internationally as 'cities proper').

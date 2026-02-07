@@ -1,7 +1,0 @@
-Greenwich Mean Time
-
-Greenwich Mean Time (GMT) is the mean solar time at the Royal Observatory in Greenwich, London.
-
- GMT was formerly used as the international civil time standard, now superseded in that function by Coordinated Universal Time (UTC).
-
- Today GMT is considered equivalent to UTC for UK civil purposes (but this is not formalised) and for navigation is considered equivalent to UT1 (the modern form of mean solar time at 0° longitude); these two meanings can differ by up to 0.9 s. Consequently, the term GMT should not be used for precise purposes.

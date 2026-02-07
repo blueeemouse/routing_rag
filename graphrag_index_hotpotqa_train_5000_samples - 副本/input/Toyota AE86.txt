@@ -1,7 +1,0 @@
-Toyota AE86
-
-The AE86 generation of the Toyota Corolla Levin and Toyota Sprinter Trueno is a small, lightweight coupe or hatchback introduced by Toyota in 1983 as part of the fifth generation Toyota Corolla lineup.
-
- For the purpose of brevity, the insider-chassis code of "AE86" depicts the 1600 cc RWD model from the range.
-
- In classic Toyota code, the "A" represents the engine that came in the car (4A series), "E" represents the Corolla, "8" represents the fifth generation (E80 series) and "6" represents the variation within this generation.

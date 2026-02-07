@@ -1,9 +1,0 @@
-Atelocyanobacterium thalassa
-
-"Candidatus" Atelocyanobacterium thalassa (previously cyanobacterium UCYN-A,) is a species of cyanobacteria commonly found throughout the world's oceans.
-
- Unlike many other cyanobacteria, "A. thalassa" lacks the ability to perform photosynthesis.
-
- Instead, it is found in a symbiotic relationship with photosynthetic algae.
-
- "A. thalassa" fixes nitrogen for the algae, while the algae provides carbon for "A. thalassa" through photosynthesis.

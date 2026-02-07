@@ -1,7 +1,0 @@
-Line graph
-
-In the mathematical discipline of graph theory, the line graph of an undirected graph "G" is another graph "L"("G") that represents the adjacencies between edges of "G".
-
- The name line graph comes from a paper by although both and used the construction before this.
-
- Other terms used for the line graph include the covering graph, the derivative, the edge-to-vertex dual, the conjugate, the representative graph, and the ϑ-obrazom, as well as the edge graph, the interchange graph, the adjoint graph, and the derived graph.

@@ -1,7 +1,0 @@
-DuckDuckGo
-
-DuckDuckGo (DDG) is an Internet search engine that emphasizes protecting searchers' privacy and avoiding the filter bubble of personalized search results.
-
- DuckDuckGo distinguishes itself from other search engines by not profiling its users and by deliberately showing all users the same search results for a given search term.
-
- DuckDuckGo emphasizes returning the best results, rather than the most results, and generates those results from over 400 individual sources, including key crowdsourced sites such as Wikipedia, and other search engines like Bing, Yahoo!, Yandex, and Yummly.

@@ -1,5 +1,0 @@
-Arnold (software)
-
-Arnold is an unbiased, physically based, ray tracing 3D rendering application created by the company Solid Angle.
-
- Notable films that have used Arnold include "Monster House", "Cloudy with a Chance of Meatballs", "Alice in Wonderland", "Thor", "", "", "The Avengers", "Red Tails", "", "Space Pirate Captain Harlock", "Elysium", "Pacific Rim" and "Gravity".

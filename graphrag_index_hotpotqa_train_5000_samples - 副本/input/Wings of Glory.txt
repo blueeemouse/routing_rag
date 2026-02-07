@@ -1,5 +1,0 @@
-Wings of Glory
-
-Wings of Glory is a World War I combat flight simulator video game for MS-DOS, developed by Origin Systems and published by Electronic Arts in 1994.
-
- The game uses Origin's RealSpace engine, which was first used in their earlier flight simulator "Strike Commander".

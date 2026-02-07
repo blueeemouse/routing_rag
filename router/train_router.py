@@ -309,8 +309,15 @@ def main():
         config.output_dir = args.output_dir
     
     # 初始化日志系统 (必须在加载配置之后)
+    if args.output_dir:
+        # 命令行指定了output_dir，强制使用output_dir/logs
+        log_dir = f"{config.output_dir}/logs"
+    else:
+        # 命令行未指定，优先用yaml的logging_dir，否则fallback到output_dir/logs
+        log_dir = config.logging_dir or f"{config.output_dir}/logs"
+
     logger = setup_logging(
-        log_dir=config.logging_dir or f"{config.output_dir}/logs",
+        log_dir=log_dir,
         log_level=config.log_level
     )
     logger_instance = logger.get_logger("train_router")

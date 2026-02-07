@@ -1,7 +1,0 @@
-Sixteen-segment display
-
-A sixteen-segment display (SISD) is a type of display based on 16 segments that can be turned on or off according to the graphic pattern to be produced.
-
- It is an extension of the more common seven-segment display, adding four diagonal and two vertical segments and splitting the three horizontal segments in half.
-
- Other variants include the fourteen-segment display which does not split the top or bottom horizontal segments, and the twenty two-segment display that allows lower-case characters with descenders.

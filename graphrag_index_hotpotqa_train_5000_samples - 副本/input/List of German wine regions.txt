@@ -1,7 +1,0 @@
-List of German wine regions
-
-German wine regions are classified according to the quality category that the wine falls into - "Tafelwein, Landwein, Qualitätswein bestimmter Anbaugebiete" (QbA) and "Prädikatswein".
-
- The wine regions allowed to produce QbA and Prädikatswein are further subdivided into four categories, in descending order of size - "Anbaugebiet" (a major wine region), "Bereich" (a district within the wine region), "Großlage" (a collection of vineyards within a district) and "Einzellage" (a single vineyard).
-
- A small number "Einzellagen" do not belong to a "Großlage" and are called "großlagenfrei", but all belong to a Bereich and Anbaugebiet.

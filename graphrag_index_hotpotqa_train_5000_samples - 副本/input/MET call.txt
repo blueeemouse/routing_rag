@@ -1,9 +1,0 @@
-MET call
-
-The MET call (Medical Emergency Team) was designed at the Liverpool Hospital, Sydney, Australia in 1990 and has continued to develop and spread around the Western world as part of a Rapid Response System.
-
- The MET call is a hospital based system, designed for a nurse (or other staff member) to alert and call other staff for help when a patients vital signs have fallen outside set criteria.
-
- These criteria were designed around studies suggesting that certain vital sign ranges and symptoms occur before poor patient conditions which may lead to death (For example, Chest pain, a raise in heart rate and an elevated blood pressure may indicate the patient may be about to have a heart attack).
-
- In the original model, the criteria also include "and any patient you are seriously worried about", although this is not included in all hospitals despite some observational trials showing it is the most commonly used calling criteria in hospitals that use it.

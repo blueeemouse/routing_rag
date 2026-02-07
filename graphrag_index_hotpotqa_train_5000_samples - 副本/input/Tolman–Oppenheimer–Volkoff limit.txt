@@ -1,7 +1,0 @@
-Tolman–Oppenheimer–Volkoff limit
-
-The Tolman–Oppenheimer–Volkoff limit (or TOV limit) (also referred to as the Landau–Oppenheimer–Volkoff limit (or LOV limit)) is an upper bound to the mass of stars composed of neutron-degenerate matter (i.e. neutron stars).
-
- The TOV limit is analogous to the Chandrasekhar limit for white dwarf stars.
-
- It is approximately 1.5 to 3.0 solar masses, corresponding to an original stellar mass of 15 to 20 solar masses.

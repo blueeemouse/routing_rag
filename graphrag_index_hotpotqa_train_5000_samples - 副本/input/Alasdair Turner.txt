@@ -1,9 +1,0 @@
-Alasdair Turner
-
-(19 October 1969 – 6 October 2011) was a British-born scientist, who played a major role in the VR Centre for the Built Environment and the Space group at the University College London.
-
- His contribution had a great impact on the development of space syntax theory.
-
- This goes in parallel to his research into introducing a dynamic agent model that derives aggregate spatial analysis from the visual affordances of the built environment.
-
- Based on the principles of Turner's theory on Embodied space, his agent model proves to correlate well with natural movement behavior in architectural and urban environments.

@@ -1,7 +1,0 @@
-Phase contrast magnetic resonance imaging
-
-Phase contrast magnetic resonance imaging (PC-MRI) is a specific type of magnetic resonance imaging used primarily to determine flow velocities.
-
- PC-MRI can be considered a method of Magnetic Resonance Velocimetry.
-
- Since modern PC-MRI is typically time-resolved, it can also be referred to as 4D imaging (three spatial dimensions plus time).

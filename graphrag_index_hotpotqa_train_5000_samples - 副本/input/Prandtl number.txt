@@ -1,5 +1,0 @@
-Prandtl number
-
-The Prandtl number (Pr) or Prandtl group is a dimensionless number, named after the German physicist Ludwig Prandtl, defined as the ratio of momentum diffusivity to thermal diffusivity.
-
- That is, the Prandtl number is given as:

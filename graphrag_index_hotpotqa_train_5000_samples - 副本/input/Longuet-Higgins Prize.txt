@@ -1,7 +1,0 @@
-Longuet-Higgins Prize
-
-The Longuet-Higgins Prize is an award given annually by the Technical Committee on Pattern Analysis and Machine Intelligence of the IEEE Computer Society at the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), for 'Fundamental contributions in Computer Vision'.
-
- The award recognizes CVPR papers from ten years ago that have made a significant impact on computer vision research.
-
- The award is named after theoretical chemist and cognitive scientist H. Christopher Longuet-Higgins.

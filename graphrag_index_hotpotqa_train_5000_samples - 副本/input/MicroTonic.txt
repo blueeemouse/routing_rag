@@ -1,7 +1,0 @@
-MicroTonic
-
-SonicCharge µTonic ("MicroTonic") is a pattern based drum-machine plug-in featuring 100% synthetic drum sounds.
-
- MicroTonic was created by software developer Magnus Lidström and is the first product launched under the Sonic Charge brand.
-
- Magnus is mostly recognized for his work with Propellerhead Software where he was the brain behind the synthesizer Malström which was introduced in the 2.0 release of Reason.

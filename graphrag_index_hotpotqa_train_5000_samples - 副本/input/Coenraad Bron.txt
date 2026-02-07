@@ -1,7 +1,0 @@
-Coenraad Bron
-
-Coenraad Bron (2 August 1937 – 15 August 2006) was a Dutch computer scientist.
-
- He worked with Edsger W. Dijkstra on the THE multiprogramming system.
-
- Together with Joep Kerbosch he invented the Bron–Kerbosch algorithm for the clique problem.

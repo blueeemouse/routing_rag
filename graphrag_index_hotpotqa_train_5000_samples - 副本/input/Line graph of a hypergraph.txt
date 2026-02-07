@@ -1,7 +1,0 @@
-Line graph of a hypergraph
-
-The line graph of a hypergraph is the graph whose vertex set is the set of the hyperedges of the hypergraph, with two hyperedges adjacent when they have a nonempty intersection.
-
- In other words, the line graph of a hypergraph is the intersection graph of a family of finite sets.
-
- It is a generalization of the line graph of a graph.

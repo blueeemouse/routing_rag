@@ -1,7 +1,0 @@
-City Circle tram
-
-The City Circle is a zero-fare tram running around the Melbourne City Centre in Australia.
-
- Aimed mainly at tourists, the route passes many Melbourne attractions while running along the city centre's outermost thoroughfares, as well as the developing Docklands waterfront precinct.
-
- It operates in both clockwise and anti-clockwise direction.

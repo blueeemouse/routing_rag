@@ -1,7 +1,0 @@
-Analyse-it
-
-Analyse-it is a statistical analysis add-in for Microsoft Excel.
-
- Analyse-it is the successor to Astute, developed in 1992 for Excel 4 and the first statistical analysis add-in for Microsoft Excel.
-
- Analyse-it provides a range of standard parametric and non-parametric procedures, including Descriptive statistics, ANOVA, Mann–Whitney, Wilcoxon, chi-square, correlation, linear regression, logistic regression, polynomial regression and advanced model fitting, principal component analysis, and factor analysis.

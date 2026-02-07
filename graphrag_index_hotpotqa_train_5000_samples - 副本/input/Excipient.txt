@@ -1,7 +1,0 @@
-Excipient
-
-An excipient is a substance formulated alongside the active ingredient of a medication, included for the purpose of long-term stabilization, bulking up solid formulations that contain potent active ingredients in small amounts (thus often referred to as "bulking agents", "fillers", or "diluents"), or to confer a therapeutic enhancement on the active ingredient in the final dosage form, such as facilitating drug absorption, reducing viscosity, or enhancing solubility.
-
- Excipients can also be useful in the manufacturing process, to aid in the handling of the active substance concerned such as by facilitating powder flowability or non-stick properties, in addition to aiding "in vitro" stability such as prevention of denaturation or aggregation over the expected shelf life.
-
- The selection of appropriate excipients also depends upon the route of administration and the dosage form, as well as the active ingredient and other factors.

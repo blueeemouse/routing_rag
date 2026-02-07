@@ -1,7 +1,0 @@
-MTA Maryland bus service
-
-The Maryland Transit Administration provides the primary public bus service for the Baltimore Metropolitan Area and commuter bus service in other parts of the state of Maryland.
-
- There are currently 76 bus routes, which include 43 LocalLink routes, 12 High Frequency CityLink Routes routes, 11 express bus routes (which operate from various suburbs to downtown Baltimore), 19 commuter bus routes, and 5 Intercounty Connector or "ICC" routes (which operate from various locations mainly in central Maryland to Washington D.C. or various Metrorail stations).
-
- The local and commuter bus routes operate in conjunction with one subway line, three light rail lines, MARC train service, and various connections to other transit agencies.

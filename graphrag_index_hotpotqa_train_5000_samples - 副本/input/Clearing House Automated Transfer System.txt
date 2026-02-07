@@ -1,9 +1,0 @@
-Clearing House Automated Transfer System
-
-The Clearing House Automated Transfer System, or CHATS, is a Real Time Gross Settlement (RTGS) system for the transfer of funds in Hong Kong.
-
- It is operated by Hong Kong Interbank Clearing Limited, a private company jointly owned by the Hong Kong Monetary Authority (HKMA) and the Hong Kong Association of Banks.
-
- Transactions in four currency denominations may be settled using CHATS: Hong Kong dollar, renminbi, euro, and US dollar.
-
- In 2005, the value of Hong Kong dollar CHATS transactions averaged HK$467 billion per day, which amounted to a third of Hong Kong's annual Gross Domestic Product (GDP); the total value of transactions that year was 84 times the GDP of Hong Kong.

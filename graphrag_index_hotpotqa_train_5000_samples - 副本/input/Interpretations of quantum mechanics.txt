@@ -1,7 +1,0 @@
-Interpretations of quantum mechanics
-
-An interpretation of quantum mechanics is a set of statements which attempt to explain how quantum mechanics informs our understanding of nature.
-
- Although quantum mechanics has held up to rigorous and thorough experimental testing, many of these experiments are open to different interpretations.
-
- There exist a number of contending schools of thought, differing over whether quantum mechanics can be understood to be deterministic, which elements of quantum mechanics can be considered "real", and other matters.

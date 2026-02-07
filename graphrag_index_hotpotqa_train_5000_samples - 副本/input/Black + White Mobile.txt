@@ -1,9 +1,0 @@
-Black + White Mobile
-
-Black+White is a New Zealand mobile virtual network operator which uses Vodafone New Zealand's GSM (and UMTS networks, where available).
-
- Their handsets are compatible with the Vodafone network and some may also be compatible with Spark's network.
-
- The handsets are similar to Vodafone's handset range but are sold at different prices.
-
- Although they operate on Vodafone's network, Black+White use their own mobile numbers with the 028 prefix at the beginning of the mobile number.

@@ -1,5 +1,0 @@
-ACTH stimulation test
-
-The ACTH test (also called the cosyntropin, tetracosactide, or Synacthen test) is a medical test usually ordered and interpreted by endocrinologists to assess the functioning of the adrenal glands stress response by measuring the adrenal response to adrenocorticotropic hormone (ACTH; corticotropin) or another corticotropic agent such as tetracosactide (cosyntropin, tetracosactrin; Synacthen) or alsactide (Synchrodyn).
-
- ACTH is a hormone produced in the anterior pituitary gland that stimulates the adrenal glands to release cortisol, dehydroepiandrosterone (DHEA), dehydroepiandrosterone sulfate (DHEA-S), and aldosterone.

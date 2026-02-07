@@ -1,7 +1,0 @@
-Lustre (file system)
-
-Lustre is a type of parallel distributed file system, generally used for large-scale cluster computing.
-
- The name Lustre is a portmanteau word derived from Linux and cluster.
-
- Lustre file system software is available under the GNU General Public License (version 2 only) and provides high performance file systems for computer clusters ranging in size from small workgroup clusters to large-scale, multi-site clusters.

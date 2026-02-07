@@ -1,7 +1,0 @@
-Voice portal
-
-Voice portals are the voice equivalent of web portals, giving access to information through spoken commands and voice responses.
-
- Ideally a voice portal could be an access point for any type of information, services, or transactions found on the Internet.
-
- Common uses include movie time listings and stock trading.

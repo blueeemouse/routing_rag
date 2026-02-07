@@ -1,7 +1,0 @@
-Aerodynamics
-
-Aerodynamics, from Greek ἀήρ "aer" (air) + δυναμική (dynamics), the study of the motion of air, particularly its interaction with a solid object, such as an airplane wing.
-
- Aerodynamics is a sub-field of fluid dynamics and gas dynamics, and many aspects of aerodynamics theory are common to these fields.
-
- The term "aerodynamics" is often used synonymously with gas dynamics, the difference being that "gas dynamics" applies to the study of the motion of all gases, and is not limited to air.

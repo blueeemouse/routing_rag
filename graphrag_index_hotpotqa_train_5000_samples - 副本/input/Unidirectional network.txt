@@ -1,7 +1,0 @@
-Unidirectional network
-
-A unidirectional network (also referred to as a unidirectional security gateway or data diode) is a network appliance or device allowing data to travel only in one direction, used in guaranteeing information security.
-
- They are most commonly found in high security environments such as defense, where they serve as connections between two or more networks of differing security classifications - also known as a "cross domain solution."
-
- This technology is also found at the industrial control level for such facilities as nuclear power plants, electric power generation/distribution, oil and gas production, water/wastewater, and manufacturing.

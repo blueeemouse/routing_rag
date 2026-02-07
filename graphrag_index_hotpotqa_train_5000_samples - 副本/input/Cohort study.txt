@@ -1,5 +1,0 @@
-Cohort study
-
-A cohort study is a particular form of longitudinal study (panel study) that sample a cohort (a group of people who share a defining characteristic, typically who experienced a common event in a selected period, such as birth or graduation), performing a cross-section at intervals through time.
-
- A cohort study is a panel study, but a panel study is not always a cohort study as individuals in a panel study do not always share a common characteristic.

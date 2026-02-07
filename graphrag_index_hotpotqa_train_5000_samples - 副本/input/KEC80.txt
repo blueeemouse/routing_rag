@@ -1,7 +1,0 @@
-KEC80
-
-KEC80 is a NOAA Weather Radio station that serves the Atlanta metro area with 500 watts effective radiated power on 162.550 MHz.
-
- Its radio transmitter is located east of the city atop Stone Mountain, with its radio antenna on the short tower owned by Georgia Public Broadcasting for transmitting WGTV TV 8, within state-owned Stone Mountain Park.
-
- It is programmed from the National Weather Service forecast office at Falcon Field airport in Peachtree City, which was originally at Hartsfield International Airport (now Hartsfield-Jackson) in Atlanta.

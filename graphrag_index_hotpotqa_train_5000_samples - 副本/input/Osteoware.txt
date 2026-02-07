@@ -1,9 +1,0 @@
-Osteoware
-
-Osteoware is a free data recording software for human skeletal material that is managed through the Smithsonian Museum of Natural History.
-
- It is used by biological anthropologists to, in a standardized and consistent way, document data relevant to research and forensic applications of human skeletal remains.
-
- It has influenced other skeletal recording software, and has been successfully used at the Smithsonian for collecting data relevant to biological anthropology.
-
- Osteoware is the only free, individual-use software for the collection of data on skeletal material in anthropology.

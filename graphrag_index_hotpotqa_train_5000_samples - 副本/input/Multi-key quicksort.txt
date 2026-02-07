@@ -1,7 +1,0 @@
-Multi-key quicksort
-
-Multi-key quicksort, also known as three-way radix quicksort, is an algorithm for sorting strings.
-
- This hybrid of quicksort and radix sort was originally suggested by P. Shackleton, as reported in one of C.A.R. Hoare's seminal papers on quicksort; its modern incarnation was developed by Jon Bentley and Robert Sedgewick in the mid-1990s.
-
- The algorithm is designed to exploit the property that in many problems, strings tend to have shared prefixes.

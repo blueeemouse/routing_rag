@@ -1,7 +1,0 @@
-Prime brokerage
-
-Prime brokerage is the generic name for a bundled package of services offered by investment banks and securities firms to hedge funds which need the ability to borrow securities and cash in order to be able to invest on a netted basis and achieve an absolute return.
-
- The prime broker provides a centralized securities clearing facility for the hedge fund so the hedge fund's collateral requirements are netted across all deals handled by the prime broker.
-
- These two features are advantageous to their clients.

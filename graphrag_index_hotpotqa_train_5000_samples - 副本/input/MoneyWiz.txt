@@ -1,9 +1,0 @@
-MoneyWiz
-
-MoneyWiz is a money management application that runs on Microsoft Windows, Google's Android, and Apple platforms including iOS and macOS.
-
- MoneyWiz is developed by SilverWiz and is the top selling personal finance app outside of the United States as well as a "Top 10 Finance App" on the U.S. App Store.
-
- MoneyWiz has received awards and recognition which include being named the "Best Finance App" out of the "Top 500 Must Have Apps" by The Telegraph.
-
- It was named a Sleek Personal Finance App by Macworld and rated as one of the "Top 5 Best New Year's Resolution Apps" for iPhone and iPad in 2012.

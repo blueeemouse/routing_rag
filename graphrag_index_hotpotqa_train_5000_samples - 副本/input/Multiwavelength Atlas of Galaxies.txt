@@ -1,5 +1,0 @@
-Multiwavelength Atlas of Galaxies
-
-The Multiwavelength Atlas of Galaxies is a textbook and atlas of 35 well studied galaxies (including our Galaxy) authored by Glen Mackie of the Centre for Astrophysics & Supercomputing, Swinburne University of Technology.
-
- It was originally published in 2011 by Cambridge University Press.

@@ -1,5 +1,0 @@
-Donald Shell
-
-Donald L. Shell (March 1, 1924 – November 2, 2015) was an American computer scientist who designed the Shell sort sorting algorithm.
-
- He acquired his Ph.D. in Mathematics from the University of Cincinnati in 1959, and published the shell sort algorithm in the Communications of the ACM in July that same year.

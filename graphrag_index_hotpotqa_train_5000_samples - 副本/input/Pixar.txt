@@ -1,9 +1,0 @@
-Pixar
-
-Pixar ( ), also referred to as Pixar Animation Studios, is an American computer animation film studio based in Emeryville, California that is a subsidiary of The Walt Disney Company.
-
- Pixar began in 1979 as the Graphics Group, part of the Lucasfilm computer division, before its spin-out as a corporation in 1986, with funding by Apple Inc. co-founder Steve Jobs, who became the majority shareholder.
-
- Disney purchased Pixar in 2006 at a valuation of $7.4 billion, a transaction that resulted in Jobs becoming Disney's largest single shareholder at the time.
-
- Pixar is best known for CGI-animated feature films created with RenderMan, Pixar's own implementation of the industry-standard RenderMan image-rendering application programming interface, used to generate high-quality images.

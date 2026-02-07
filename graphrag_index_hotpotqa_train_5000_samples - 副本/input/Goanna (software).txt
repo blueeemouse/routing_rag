@@ -1,5 +1,0 @@
-Goanna (software)
-
-Goanna as an independent fork of Gecko was first released in January 2016 as part of Pale Moon 26.0.
-
- The project's founder and lead developer, M.C. Straver, had both technical and legal motives to do this in the context of Pale Moon's increasing divergence from Firefox.

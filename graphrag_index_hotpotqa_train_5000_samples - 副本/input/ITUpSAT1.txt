@@ -1,9 +1,0 @@
-ITUpSAT1
-
-ITUpSAT1, short for Istanbul Technical University picoSatellite-1) is a single CubeSat built by the Faculty of Aeronautics and Astronautics at the Istanbul Technical University.
-
- It was launched on September 23, 2009 atop a PSLV-C14 satellite launch vehicle from Satish Dhawan Space Centre, Sriharikota, Andhra Pradesh in India, and became the first Turkish university satellite to orbit the Earth.
-
- It was expected to have a minimum of six-month life term, but it is still functioning for over two years.
-
- It is a picosatellite with side lengths of 10 cm and a mass of 0.990 kg .

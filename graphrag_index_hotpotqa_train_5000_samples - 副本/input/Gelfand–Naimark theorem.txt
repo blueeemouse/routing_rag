@@ -1,5 +1,0 @@
-Gelfand–Naimark theorem
-
-In mathematics, the Gelfand–Naimark theorem states that an arbitrary C*-algebra "A" is isometrically *-isomorphic to a C*-algebra of bounded operators on a Hilbert space.
-
- This result was proven by Israel Gelfand and Mark Naimark in 1943 and was a significant point in the development of the theory of C*-algebras since it established the possibility of considering a C*-algebra as an abstract algebraic entity without reference to particular realizations as an operator algebra.

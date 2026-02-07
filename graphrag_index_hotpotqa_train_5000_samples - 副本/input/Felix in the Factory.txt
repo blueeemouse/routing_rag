@@ -1,9 +1,0 @@
-Felix in the Factory
-
-Felix in the Factory is a platform game for home computers published by Micro Power (a.k.a. Program Power).
-
- The game was first released in 1982 for the BBC Micro.
-
- It was ported to the Acorn Electron (1983), Commodore 64 (1984) and Memotech MTX (1984).
-
- It is the first in a trilogy of Micro Power games featuring the factory worker Felix and was followed by "Felix and the Fruit Monsters" (a Pac-Man style overhead maze game) and another factory-based platformer, "Felix meets the Evil Weevils".

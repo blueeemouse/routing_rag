@@ -1,7 +1,0 @@
-Fast low angle shot magnetic resonance imaging
-
-Fast low angle shot magnetic resonance imaging (FLASH MRI) is a particular sequence of magnetic resonance imaging.
-
- It is a gradient echo sequence which combines a low-flip angle radio-frequency excitation of the nuclear magnetic resonance signal (recorded as a spatially encoded gradient echo) with a rapid repetition time.
-
- It is the generic form of steady-state free precession imaging.

@@ -1,5 +1,0 @@
-Dynamic strain aging
-
-Although sometimes dynamic strain aging is used interchangeably with the Portevin–Le Chatelier effect (or serrated yielding), dynamic strain aging refers specifically to the microscopic mechanism that induces the Portevin–Le Chatelier effect.
-
- This strengthening mechanism is related to solid-solution strengthening and has been observed in a variety of fcc and bcc substitutional and interstitial alloys, metalloids like silicon, and ordered intermetallics within specific ranges of temperature and strain rate.

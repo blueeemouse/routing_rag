@@ -1,5 +1,0 @@
-Electrostatic levitation
-
-Electrostatic levitation is the process of using an electric field to levitate a charged object and counteract the effects of gravity.
-
- It was used, for instance, in Robert Millikan's oil drop experiment and is used to suspend the gyroscopes in Gravity Probe B during launch.

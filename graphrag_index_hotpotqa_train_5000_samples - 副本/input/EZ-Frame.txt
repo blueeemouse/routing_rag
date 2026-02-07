@@ -1,5 +1,0 @@
-EZ-Frame
-
-EZ-Frame is a test automation framework package developed by Tech Mahindra to provide End-to-end test automation support, simulate real time live action scenarios and crashes happen in live telecom network.
-
- This is used by multiple telecom product manufacturers and service providers across the globe.

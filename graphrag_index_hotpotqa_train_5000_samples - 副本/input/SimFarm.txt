@@ -1,5 +1,0 @@
-SimFarm
-
-SimFarm: SimCity's Country Cousin, developed by Maxis in 1993, is a computer game in which players build and manage a virtual farm.
-
- It was released in 1993 as a spin-off of "SimCity".

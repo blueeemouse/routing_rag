@@ -1,7 +1,0 @@
-Final Cut Pro
-
-Final Cut Pro is a series of non-linear video editing software programs first developed by Macromedia Inc. and later Apple Inc. The most recent version, Final Cut Pro X 10.3, runs on Intel-based Mac computers powered by OS X El Capitan or later.
-
- The software allows users to log and transfer video onto a hard drive (internal or external), where it can be edited, processed, and output to a wide variety of formats.
-
- The fully rewritten Final Cut Pro X was introduced by Apple in 2011, with the last version of the legacy Final Cut Pro being version 7.0.3.

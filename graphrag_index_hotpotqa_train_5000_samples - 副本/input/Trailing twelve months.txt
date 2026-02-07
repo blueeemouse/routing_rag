@@ -1,9 +1,0 @@
-Trailing twelve months
-
-Trailing Twelve Months (TTM) is a measurement of a company's financial health used in finance.
-
- It is measured by using the income statements from a company's reports (such as interim, quarterly or annual reports), to calculate the income for the twelve-month period immediately prior to the date of the report.
-
- This figure is calculated by analysts because quarterly and interim reports often show only income from the preceding 3, 6 or 9 months, not a full year.
-
- Because it does not represent a full year, this data can be skewed by seasonal trading patterns, such as higher sales over Christmas, giving a less accurate picture of a company's fiscal health.

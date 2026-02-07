@@ -1,9 +1,0 @@
-Tandem Van de Graaff
-
-The Tandem Van de Graaff is an electrostatic accelerator facility at Brookhaven National Laboratory.
-
- It was built in 1970, and was, at the time, the world's largest electrostatic accelerator facility.
-
- It can provide researchers with beams of more than 40 different types of ions that have been completely stripped of their electrons, ranging from hydrogen to iron.
-
- The facility consists of two 15 million volt electrostatic accelerators, each about 24 meters long.

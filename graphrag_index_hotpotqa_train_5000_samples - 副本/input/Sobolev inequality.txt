@@ -1,7 +1,0 @@
-Sobolev inequality
-
-In mathematics, there is in mathematical analysis a class of Sobolev inequalities, relating norms including those of Sobolev spaces.
-
- These are used to prove the Sobolev embedding theorem, giving inclusions between certain Sobolev spaces, and the Rellich–Kondrachov theorem showing that under slightly stronger conditions some Sobolev spaces are compactly embedded in others.
-
- They are named after Sergei Lvovich Sobolev.

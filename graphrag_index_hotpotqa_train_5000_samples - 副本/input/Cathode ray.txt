@@ -1,7 +1,0 @@
-Cathode ray
-
-Cathode rays (also called an electron beam or e-beam) are streams of electrons observed in vacuum tubes.
-
- If an evacuated glass tube is equipped with two electrodes and a voltage is applied, the glass behind of the positive electrode is observed to glow, due to electrons emitted from and traveling away from the cathode (the electrode connected to the negative terminal of the voltage supply).
-
- They were first observed in 1869 by German physicist Johann Wilhelm Hittorf, and were named in 1876 by Eugen Goldstein "Kathodenstrahlen", or cathode rays.

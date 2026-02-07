@@ -1,7 +1,0 @@
-Marshall Plan (software)
-
-The Marshall Plan software is a novel writing software to assist in the technical aspects of novel writing.
-
- The software automatically plots a novel based on literary agent Evan Marshall's novel writing system in his three book series, "The Marshall Plan for Novel Writing: A 16-Step Program Guaranteed to Take You From Idea to Completed Manuscript," "The Marshall Plan Workbook," and "The Marshall Plan for Getting Your Novel Published."
-
- Marshall Plan software is published by Evan Marshall and Martha Jewett, literary agent and consultant.

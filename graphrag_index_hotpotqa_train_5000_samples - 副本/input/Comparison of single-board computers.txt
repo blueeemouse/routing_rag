@@ -1,3 +1,0 @@
-Comparison of single-board computers
-
-Comparison of single-board computers excluding Single-board microcontrollers.

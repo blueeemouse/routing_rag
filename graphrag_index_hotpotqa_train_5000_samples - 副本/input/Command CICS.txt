@@ -1,7 +1,0 @@
-Command CICS
-
-Command CICS or Command-CICS is a software product that allows organizations to migrate from "Macro level" CICS to "Command level" CICS without any re-programming so that companies could migrate to later versions of CICS that did not support macro level application programs.
-
- The later versions of CICS offered many advantages over previous versions yet tens of thousands of application programs were effectively locked out of the new version unless they were prepared to operate two completely different versions of CICS on the same Operating Systems, creating both operational and maintenance problems.
-
- Two different, simultaneous, CICS Licenses were also required.

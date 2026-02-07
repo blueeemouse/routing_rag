@@ -1,5 +1,0 @@
-Swedish ethyl acetate method
-
-The Swedish ethyl acetate method (SweEt) is a method for chemical analysis of pesticide residues in food using ethyl acetate as an extraction medium followed by analysis with liquid chromatography-tandem mass spectrometry (LC-MS/MS) and gas chromatography-tandem mass spectrometry (GC-MS/MS).
-
- It was developed by the Swedish National Food Agency (National Reference Laboratory for pesticide analysis) for quantitative analysis of over 500 pesticides in fruits, vegetables, cereals and products of animal origin.

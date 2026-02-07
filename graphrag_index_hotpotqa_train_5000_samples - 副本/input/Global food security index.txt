@@ -1,7 +1,0 @@
-Global food security index
-
-The global food security index consists of a set of indices from 105 countries.
-
- It measures food security across most of the countries of the world.
-
- Countries that score top rating are the United States, Denmark, Norway and France.

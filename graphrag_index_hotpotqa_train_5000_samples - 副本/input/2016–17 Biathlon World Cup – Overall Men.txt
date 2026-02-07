@@ -1,7 +1,0 @@
-2016–17 Biathlon World Cup – Overall Men
-
-For each event, a first place gives 60 points, a 2nd place 54 pts, a 3rd place 48 pts, a 4th place 43 pts, a fifth place 40 pts, a 6th place 38 pts, 7th 36 pts 8th 34 points, 9th 32 points, 10th 31 points, then linearly decreasing by one point down to the 40th place.
-
- Equal placings (ties) give an equal number of points.
-
- The sum of all WC points of the season, minus the points from 2 events in which the biathlete got the worst scores, gives the biathlete's total WC score.

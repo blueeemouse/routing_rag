@@ -1,7 +1,0 @@
-Shared Zone
-
-A shared zone is an implementation of a living street in Australia and New Zealand, where pedestrians, cyclists and motorised traffic share the same road space.
-
- Special rules and speed limits apply for shared zones.
-
- Shared zones are related, but not automatically the same as shared space, which is a somewhat wider concept including elements such as urban design.

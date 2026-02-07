@@ -1,9 +1,0 @@
-Concrete plant
-
-A concrete plant, also known as a batch plant or batching plant or a concrete batching plant, is equipment that combines various ingredients to form concrete.
-
- Some of these inputs include water, air, admixtures, sand, aggregate (rocks, gravel, etc.), fly ash, silica fume, slag, and cement.
-
- There are two main types of concrete plants: "Dry mix" plants and "Wet mix" plants, and also plants that contain both a transit mix side and a central mix side while utilizing common material storage points.
-
- A concrete plant can have a variety of parts and accessories, including: mixers (either "tilt drum" or "horizontal" or in some cases both), cement batchers, aggregate batchers, conveyors, radial stackers, aggregate bins, cement bins, heaters, chillers, cement silos, batch plant controls, and dust collectors.

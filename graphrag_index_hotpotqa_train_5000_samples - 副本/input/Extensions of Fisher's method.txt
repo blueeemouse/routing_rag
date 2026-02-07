@@ -1,5 +1,0 @@
-Extensions of Fisher's method
-
-In statistics, extensions of Fisher's method are a group of approaches that allow approximately valid statistical inferences to be made when the assumptions required for the direct application of Fisher's method are not valid.
-
- Fisher's method is a way of combining the information in the p-values from different statistical tests so as to form a single overall test: this method requires that the individual test statistics (or, more immediately, their resulting p-values) should be statistically independent.

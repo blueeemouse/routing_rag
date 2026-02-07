@@ -1,7 +1,0 @@
-Output contract
-
-An output contract is an agreement in which a producer agrees to sell his or her entire production to the buyer, who in turn agrees to purchase the entire output.
-
- Example: an almond grower enters into an "output contract" with an almond packer: thus the producer has a "home" for output of nuts, and the packer of nuts is happy to try the particular product.
-
- The converse of this situation is a requirements contract, under which a seller agrees to supply the buyer with as much of a good or service as the buyer wants, in exchange for the buyer's agreement not to buy that good or service elsewhere.

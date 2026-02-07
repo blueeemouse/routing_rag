@@ -1,9 +1,0 @@
-Middlebox
-
-A middlebox or network appliance is a computer networking device that transforms, inspects, filters, or otherwise manipulates traffic for purposes other than packet forwarding.
-
- Common examples of middleboxes include firewalls, which filter unwanted or malicious traffic, and network address translators, which modify packets' source and destination addresses.
-
- Dedicated middlebox hardware is widely deployed in enterprise networks to improve network security and performance, however, even home network routers often have integrated firewall, NAT, or other middlebox functionality.
-
- The widespread deployment of middleboxes and other network appliances has resulted in some challenges and criticism due to poor interaction with higher layer protocols.

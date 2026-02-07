@@ -1,7 +1,0 @@
-Imagination Creator
-
-Creator is a family of single-board computers developed by Imagination Technologies to promote educational research and software development based on the MIPS architecture.
-
- The first board in the platform, the Creator Ci20, was released in August 2014.
-
- A second development kit called Creator Ci40 was introduced through a Kickstarter campaign in November 2015.

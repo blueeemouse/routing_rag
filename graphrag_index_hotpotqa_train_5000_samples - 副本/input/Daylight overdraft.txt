@@ -1,5 +1,0 @@
-Daylight overdraft
-
-In the United States, the daylight overdraft (also called "intraday overdraft") is a system in which “allows qualifying banks to overdraw on their Federal Reserve accounts in order to make payments via Fedwire.
-
- Banks can acquire overdrafts throughout the day to make payments, but must ensure that their accounts are not in a negative position at the end of the day.”

@@ -1,9 +1,0 @@
-Packet Assembler/Disassembler
-
-A packet assembler/disassembler, abbreviated PAD is a communications device which provides multiple asynchronous terminal connectivity to an X.25 (packet-switching) network or host computer.
-
- It collects data from a group of terminals and places the data into X.25 packets (assembly).
-
- A PAD also does the reverse, it takes data packets from packet-switching network or host computer and returns them into a character stream that can be sent to the terminals (disassembly).
-
- A Frame Relay Assembler/Disassembler (FRAD) is a similar device for accessing Frame Relay networks.

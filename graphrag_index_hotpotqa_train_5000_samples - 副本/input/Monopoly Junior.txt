@@ -1,5 +1,0 @@
-Monopoly Junior
-
-Monopoly Junior is a simplified version of the board game Monopoly, designed for young children.
-
- It has a rectangular board that is smaller than the standard game and rather than using street names it is based on a city's amusements (a zoo, a video game arcade, a pizzeria, etc.) to make the game more child-friendly.

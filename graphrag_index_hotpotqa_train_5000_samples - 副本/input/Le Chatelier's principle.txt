@@ -1,7 +1,0 @@
-Le Chatelier's principle
-
-, Le Chatelier's principle (pronounced ), also called Chatelier's principle or "The Equilibrium Law", can be used to predict the effect of a change in conditions on a chemical equilibrium.
-
- The principle is named after Henry Louis Le Chatelier and sometimes Karl Ferdinand Braun who discovered it independently.
-
- It can be stated as:

@@ -1,7 +1,0 @@
-Power Macintosh 9500
-
-The Power Macintosh 9500 (sold as Power Macintosh 9515 in Europe and Asia) is a personal computer designed, manufactured and sold by Apple Computer as part of the Power Macintosh line from May 1995 until February 1997.
-
- It is powered by a PowerPC 604 processor, a second-generation PowerPC chip which was faster than the PowerPC 601 chip used in the Power Macintosh 8100.
-
- The 180MP and 200 MHz models, introduced August 1996, use the enhanced PowerPC 604e processor.

@@ -1,9 +1,0 @@
-Von Karman Gas Dynamics Facility
-
-The von Karman Gas Dynamics Facility at Arnold Engineering Development Complex, Arnold Air Force Base, Tennessee, provide aerothermal ground test simulations of hypersonic flight over a wide range of velocities and pressure altitudes.
-
- The facility consists of three Hypersonic wind tunnels: Tunnel A, B, and C.
-
- The wind tunnels can be run for several hours at a time thanks to a 92,500 horsepower air compressor plant system.
-
- The test unit is owned by the United States Air Force and operated by Aerospace Testing Alliance.

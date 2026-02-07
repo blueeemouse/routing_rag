@@ -1,3 +1,0 @@
-Gelfand–Mazur theorem
-
-In operator theory, the Gelfand–Mazur theorem is a theorem named after Israel Gelfand and Stanisław Mazur which states that a Banach algebra with unit over the complex numbers in which every nonzero element is invertible is isometrically isomorphic to the complex numbers, i. e., the only complex Banach algebra that is a division algebra is the complex numbers C.

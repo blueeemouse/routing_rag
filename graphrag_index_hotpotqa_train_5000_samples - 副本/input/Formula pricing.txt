@@ -1,5 +1,0 @@
-Formula pricing
-
-In commodities transactions, formula pricing is an arrangement where a buyer and seller agree in advance on the price to be paid for a product delivered in the future, based upon a pre-determined calculation.
-
- For example, a packer might agree to pay a hog producer the average cash market price on the day the hogs will be delivered, plus a 2-cent per-pound premium.

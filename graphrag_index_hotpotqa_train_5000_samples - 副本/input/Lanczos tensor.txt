@@ -1,7 +1,0 @@
-Lanczos tensor
-
-The Lanczos tensor or Lanczos potential is a rank 3 tensor in general relativity that generates the Weyl tensor.
-
- It was first introduced by Cornelius Lanczos in 1949.
-
- The theoretical importance of the Lanczos tensor is that it serves as the gauge field for the gravitational field in the same way that, by analogy, the electromagnetic four-potential generates the electromagnetic field.

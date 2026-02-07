@@ -1,9 +1,0 @@
-ECTS grading scale
-
-The ECTS grading scale is a grading system defined in the European Credit Transfer and Accumulation System (ECTS) framework by the European Commission.
-
- Since many grading systems co-exist in Europe and, considering that interpretation of grades varies considerably from one country to another, if not from one institution to another, the ECTS grading scale has been developed to provide a common measure and facilitate the transfer of students and their grades between European higher education institutions, by allowing national and local grading systems to be interchangeable.
-
- Grades are reported on a carefully calibrated and uniform A-to-F scale combined with keywords and short qualitative definitions.
-
- Each institution makes its own decision on how to apply the ECTS grading scale to its system.

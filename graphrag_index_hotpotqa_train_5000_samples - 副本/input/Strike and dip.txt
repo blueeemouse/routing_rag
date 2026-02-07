@@ -1,9 +1,0 @@
-Strike and dip
-
-Strike and dip refer to the orientation or "attitude" of a geologic feature.
-
- The "strike line" of a bed, fault, or other planar feature, is a line representing the intersection of that feature with a horizontal plane.
-
- On a geologic map, this is represented with a short straight line segment oriented parallel to the strike line.
-
- "Strike" (or strike angle) can be given as either a quadrant compass bearing of the strike line (N25°E for example) or in terms of east or west of true north or south, a single three digit number representing the azimuth, where the lower number is usually given (where the example of N25°E would simply be 025), or the azimuth number followed by the degree sign (example of N25°E would be 025°).

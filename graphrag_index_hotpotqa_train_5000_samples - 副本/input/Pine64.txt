@@ -1,9 +1,0 @@
-Pine64
-
-Pine64 is a family of single-board computers and the name of the company that produces them.
-
- Their first single-board computer, the Pine A64, was designed to compete with the Raspberry Pi in both power and price.
-
- Its name descends from the constant variables pi and Euler's constant.
-
- The A64 was first funded through a Kickstarter crowdfunding drive in December 2015, where the company raised over $1.4 million.

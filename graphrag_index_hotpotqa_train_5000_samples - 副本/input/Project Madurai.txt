@@ -1,9 +1,0 @@
-Project Madurai
-
-Project Madurai (மதுரை தமிழ் இலக்கிய மின்தொகுப்புத் திட்டம்) is an open and voluntary initiative to publish free versions of ancient Tamil literature on the Internet.
-
- Texts are published in both TSCII (Tamil Script Code for Information Interchange), since its launch in 1998 and Unicode formats from 2004.
-
- The project was led by Dr. K. Kalyanasundaram, Lausanne, Switzerland (Project Leader) and Dr. P. Kumar Mallikarjunan, Blacksburg, Va, USA (Dy.
-
- Project Leader).

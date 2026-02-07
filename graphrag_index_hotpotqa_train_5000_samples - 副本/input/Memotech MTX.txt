@@ -1,5 +1,0 @@
-Memotech MTX
-
-The Memotech MTX500, MTX512 and RS128 were a series of Zilog Z80A processor-based home computers released by Memotech in 1983 and 1984.
-
- They were technically similar to MSX computers, but were not compatible.

@@ -1,5 +1,0 @@
-Volta potential
-
-The Volta potential (also called Volta potential difference, contact potential difference, outer potential difference, Δψ, or "delta psi") in electrochemistry, is the electrostatic potential difference between two metals (or one metal and one electrolyte) that are in contact and are in thermodynamic equilibrium.
-
- Specifically, it is the potential difference between a point close to the surface of the first metal, and a point close to the surface of the second metal (or electrolyte).

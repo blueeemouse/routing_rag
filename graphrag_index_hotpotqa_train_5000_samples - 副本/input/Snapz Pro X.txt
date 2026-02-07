@@ -1,9 +1,0 @@
-Snapz Pro X
-
-Snapz Pro X is a utility program for macOS developed by Ambrosia Software.
-
- It is designed to record movie-like screenshots of a computer monitor doing various actions, such as a user moving their mouse across the screen, clicking on desktop icons, typing text, et cetera.
-
- It has been used commercially in the production of books, such as O'Reilly Media's series, "The Missing Manual," and others.
-
- The program was also used by South Park to create the Make Love, Not Warcraft episode.

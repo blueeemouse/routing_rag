@@ -1,5 +1,0 @@
-Zero to One
-
-Zero to One: Notes on Startups, or How to Build the Future is a 2014 book (release date September 16, 2014) by venture capitalist, PayPal co-founder, and early Facebook investor Peter Thiel along with Blake Masters.
-
- It is a condensed and updated version of a highly popular set of online notes taken by Masters for the CS183 class on startups taught by Thiel at Stanford University in Spring 2012.

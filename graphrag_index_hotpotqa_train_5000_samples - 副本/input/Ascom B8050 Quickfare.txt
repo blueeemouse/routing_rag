@@ -1,7 +1,0 @@
-Ascom B8050 Quickfare
-
-Ascom B8050, usually known by the name QuickFare, is an early example of a passenger-operated railway ticket issuing system, consisting of a series of broadly identical machines installed at British railway stations from 1989 onwards.
-
- The machines allow passengers to buy the most popular types of ticket themselves, without having to go to a booking office, and are therefore useful at unstaffed, partly staffed or busy stations.
-
- All QuickFare machines have now been replaced by more modern technology.

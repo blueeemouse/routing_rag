@@ -1,9 +1,0 @@
-Z22 (computer)
-
-The Z22 was the seventh computer model Konrad Zuse developed (the first six being the Z1, Z2, Z3, Z4, Z5 and Z11, respectively).
-
- One of the early commercial computers, the Z22's design was finished about 1955.
-
- The major version jump from Z11 to Z22 was due to the use of vacuum tubes, as opposed to the electromechanical systems used in earlier models.
-
- The first machines built were shipped to Berlin and Aachen.

@@ -1,7 +1,0 @@
-Hex Combat
-
-Hex Combat is a hex-based strategy wargame system by Sabertooth Games and its associated collectible miniatures game (CMG) themed on "The Lord of the Rings".
-
- Like the popular CMG "HeroClix", "Hex Combat" miniatures are cast in soft plastic and sold pre-painted.
-
- They also have statistics printed directly on the base as well as sliders (older versions) or dials (newer versions) that allow players to keep track of the state of each individual game unit without the need for pencil and paper.

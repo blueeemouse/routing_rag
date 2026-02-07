@@ -1,7 +1,0 @@
-Symbolic simulation
-
-In computer science, a simulation is a computation of the execution of some appropriately modelled state-transition system.
-
- Typically this process models the complete state of the system at individual points in a discrete linear time frame, computing each state sequentially from its predecessor.
-
- Models for computer programs or VLSI logic designs can be very easily simulated, as they often have an operational semantics which can be used directly for simulation.

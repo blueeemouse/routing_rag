@@ -1,9 +1,0 @@
-Ammonium perchlorate composite propellant
-
-Ammonium perchlorate composite propellant (APCP) is a modern solid-fuel rocket used in rocket vehicles.
-
- It differs from many traditional solid rocket propellants such as black powder or zinc-sulfur, not only in chemical composition and overall performance, but also by the nature of how it is processed.
-
- APCP is cast into shape, as opposed to powder pressing as with black powder.
-
- This provides manufacturing regularity and repeatability, which are necessary requirements for use in the aerospace industry.

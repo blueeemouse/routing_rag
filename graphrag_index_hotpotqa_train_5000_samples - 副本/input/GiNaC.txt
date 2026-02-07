@@ -1,7 +1,0 @@
-GiNaC
-
-GiNaC is a free computer algebra system released under the GNU General Public License.
-
- The name is a recursive acronym for "GiNaC is Not a CAS" (Computer Algebra System).
-
- This is similar to the GNU acronym "GNU is not Unix".

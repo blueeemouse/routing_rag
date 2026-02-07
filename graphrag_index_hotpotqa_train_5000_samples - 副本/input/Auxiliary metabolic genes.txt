@@ -1,9 +1,0 @@
-Auxiliary metabolic genes
-
-Auxiliary metabolic genes (AMGs) are found in many bacteriophages but originated in bacterial cells.
-
- AMGs modulate host cell metabolism during infection so that the phage can replicate more efficiently.
-
- For instance, bacteriophages that infect the abundant marine cyanobacteria "Synechococcus" and "Prochlorococcus" (cyanophages) carry AMGs that have been acquired from their immediate host as well as more distantly-related bacteria.
-
- Cyanophage AMGs support a variety of functions including photosynthesis, carbon metabolism, nucleic acid synthesis and metabolism.

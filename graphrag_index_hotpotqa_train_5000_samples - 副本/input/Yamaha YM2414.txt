@@ -1,7 +1,0 @@
-Yamaha YM2414
-
-The YM2414, a.k.a. OPZ, is an eight-channel sound chip developed by Yamaha.
-
- It was used in many mid-market phase/frequency modulation-based synthesizers, including Yamaha's TX81Z (the first product to feature it, and was named after), DX11, YS200 family, the Korg Z3 guitar synthesizer, and many other devices.
-
- A successor was released as the upgraded OPZII/YM2424, used only in the Yamaha V50.

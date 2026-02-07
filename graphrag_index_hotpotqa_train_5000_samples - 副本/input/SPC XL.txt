@@ -1,7 +1,0 @@
-SPC XL
-
-SPC XL is a statistical add-in for Microsoft Excel.
-
- SPC XL is a replacement for SPC KISS which was released in 1993 making it one of the oldest statistical addons to Excel.
-
- SPC XL provides statistical analysis including Control chart, Process capability, Histogram, Pareto chart, and ANOVA Gage R&R.

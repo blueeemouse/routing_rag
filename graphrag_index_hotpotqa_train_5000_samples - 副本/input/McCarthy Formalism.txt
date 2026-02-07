@@ -1,5 +1,0 @@
-McCarthy Formalism
-
-In computer science and recursion theory the McCarthy Formalism (1963) of computer scientist John McCarthy clarifies the notion of recursive functions by use of the IF-THEN-ELSE construction common to computer science, together with four of the operators of primitive recursive functions: zero, successor, equality of numbers and composition.
-
- The conditional operator replaces both primitive recursion and the mu-operator.

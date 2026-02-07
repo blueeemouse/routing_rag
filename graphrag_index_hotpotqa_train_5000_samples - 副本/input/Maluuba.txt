@@ -1,9 +1,0 @@
-Maluuba
-
-Maluuba is a Canadian artificial intelligence company conducting research in deep and reinforcement learning.
-
- The company vision is to solve fundamental problems in language understanding with a goal towards solving artificial general intelligence.
-
- This technology will allow machines to understand and answer questions about written documents, and have natural conversations with users.
-
- In late March 2016, the company made headlines by demonstrating a machine reading system capable of answering arbitrary questions about J.K Rowling’s "Harry Potter and the Philosopher’s Stone".

@@ -1,7 +1,0 @@
-Sharp PC-E220
-
-The Sharp PC-E220 was a 1991 pocket computer from Sharp Corporation featuring 32 kB RAM, 128 kB ROM and a 3.072 MHz CMOS-SC7852 CPU which was Z80A compatible.
-
- The display was able to display 4 lines x 24 characters/144 x 32 pixels.
-
- Programming languages were BASIC and Z80-Assembler.

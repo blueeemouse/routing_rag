@@ -1,9 +1,0 @@
-Security visualisation
-
-Security Visualisation is a subject that broadly covers the aspect of Big Data, Visualisation, human perception and Security.
-
- Each day, we are collecting more and more data in the form log files and it is often meaningless if the data is not analyzed thoroughly.
-
- Big Data mining techniques like Map Reduce help narrow down the search for meaning in vast data.
-
- Data visualisation is a data analytics technique, which is used to engage the human brain into finding patterns in data.

@@ -1,7 +1,0 @@
-CASPA
-
-CASPA or the Centralized Application Service for Physician Assistants is an application service for graduate-level PA programs.
-
- Similar to the Common Application used by some undergraduate institutions and the American Medical College Application Service used by medical schools, CASPA allows students to submit one application to multiple schools.
-
- The CASPA application platform is a service offered by the Physician Assistant Education Association (PAEA).

@@ -1,9 +1,0 @@
-Matthew Butterick
-
-Matthew Butterick is an American typographer, lawyer, writer, and computer programmer.
-
- He received the 2012 Golden Pen Award from the Legal Writing Institute for his book "Typography for Lawyers", which started as a website in 2008 based on his experience as a practicing attorney.
-
- He has worked for The Font Bureau and founded his own website design company, Atomic Vision (purchased by Red Hat in 1999).
-
- Expanding "Typography for Lawyers", Butterick published "Practical Typography" as a "web-based book" in July 2013.

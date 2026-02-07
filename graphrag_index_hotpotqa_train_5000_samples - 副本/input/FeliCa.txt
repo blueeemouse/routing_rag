@@ -1,7 +1,0 @@
-FeliCa
-
-FeliCa is a contactless RFID smart card system from Sony in Japan, primarily used in electronic money cards.
-
- The name stands for "Felicity Card".
-
- First utilized in the Octopus card system in Hong Kong, the technology is used in a variety of cards also in countries such as Singapore, Japan and the United States.

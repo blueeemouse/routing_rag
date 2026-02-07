@@ -1,7 +1,0 @@
-Usage share of desktop operating systems
-
-The usage share of desktop operating systems is the percentage of the operating systems (OS) used in computers (approximately market share) with so-called (retronym) desktop operating system, that also run on e.g. laptops. Originally the only computers running those operating systems, where desktop computers, while with the introduction of so-called new class of mobile operating systems, desktop got to be the part of the name of the former class of OSes.
-
- The computers running these OSes have the desktop metaphor style of GUI, unlike the mobile OSes.
-
- See also usage share of operating systems for breakdown of the share of desktop, mobile (and other styles of) operating systems, separately, and share of those all operating systems as part of across classes.

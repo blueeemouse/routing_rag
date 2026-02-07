@@ -1,7 +1,0 @@
-Edsger W. Dijkstra
-
-Edsger Wybe Dijkstra (] ; 11 May 1930 – 6 August 2002) was a Dutch computer scientist and an early pioneer in many research areas of computing science who held the Schlumberger Centennial Chair in Computer Sciences at the University of Texas at Austin from 1984 until his retirement in 1999.
-
- A theoretical physicist by training, he worked as a programmer at the Mathematisch Centrum (Amsterdam) from 1952 to 1962.
-
- He was a professor of mathematics at the Eindhoven University of Technology (1962–1984) and a research fellow at the Burroughs Corporation (1973–1984).

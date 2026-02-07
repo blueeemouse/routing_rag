@@ -1,9 +1,0 @@
-Long War (mod)
-
-Long War is a fan-made partial conversion mod for the turn-based tactics video game "" and its expansion, "".
-
- It was first released in early 2013, and it exited beta at the end of 2015.
-
- Almost every aspect of the original game is altered, creating a longer, more complex campaign that presents players with more strategic choices and customization options.
-
- "Long War" adds a significant number of new soldier classes, abilities, weapons, armors, and usable items, and also introduces new features, including soldier fatigue and improvements to alien units over the course of the game.

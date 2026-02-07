@@ -1,7 +1,0 @@
-Rdio
-
-Rdio was an online music streaming service that offered ad-supported free streaming and ad-free subscription streaming services in 85 countries.
-
- It was available as a website and via app for Android, BlackBerry, iOS, and Windows Phone mobile devices, which could stream music from Rdio's servers or download music for offline playback; there were also clients for the Roku and Sonos systems.
-
- The web-based service also offered a native desktop client application for OS X and Windows, as well as a Windows Store application.

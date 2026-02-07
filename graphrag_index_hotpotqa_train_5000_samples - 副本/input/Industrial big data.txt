@@ -1,7 +1,0 @@
-Industrial big data
-
-Industrial big data refers to a large amount of diversified time series generated at a high speed by industrial equipment, known as the Internet of thingsThe term emerged in 2012 along with the concept of "Industry 4.0”, and refers to big data”, popular in information technology marketing, in that data created by industrial equipment might hold more potential business values.
-
- Industrial big data takes advantage of industrial Internet technology.
-
- It uses raw data to support management decision making, so to reduce costs in maintenance and improve customer service.

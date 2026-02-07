@@ -1,5 +1,0 @@
-List of smart cards
-
-Some widely used contactless smart cards include Sydney's Opal Card, London's Oyster card, Hong Kong's Octopus card, Stockholm's Access card, Japan's Suica and Pasmo cards, Manila's Beep cards, ETC Card], Paris' Calypso/Navigo, the Dutch OV-Chipkaart, Toronto's Presto card and Lisbon's LisboaViva card, which predate the ISO/IEC 14443 standard.
-
- The following tables list smart cards used for public transport and other electronic purse applications.

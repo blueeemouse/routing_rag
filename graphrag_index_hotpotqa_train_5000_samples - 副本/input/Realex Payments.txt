@@ -1,5 +1,0 @@
-Realex Payments
-
-Realex Payments is a European payment service provider and a division of Global Payments Inc. with offices in Dublin and London.
-
- The company provides a broad range of payment gateway services and processes transactions in excess of €35 billion per annum on behalf of more than 14,000 clients including Virgin Atlantic Airways, Vodafone Ireland, the AA, AXA Insurance, Paddy Power and Aer Lingus.

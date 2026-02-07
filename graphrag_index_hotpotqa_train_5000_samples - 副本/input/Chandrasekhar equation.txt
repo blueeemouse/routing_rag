@@ -1,5 +1,0 @@
-Chandrasekhar equation
-
-In astrophysics, the Chandrasekhar equation is a dimensionless form of the Poisson equation for the density distribution of a spherically symmetric isothermal gas sphere subjected to its own gravitaional force, named after the Indian American astrophysicist Subrahmanyan Chandrasekhar.
-
- The equation reads

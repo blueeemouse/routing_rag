@@ -1,7 +1,0 @@
-Plant functional type
-
-Plant functional types (PFTs) is a system used by climatologists to classify plants according to their physical, phylogenetic and phenological characteristics as part of an overall effort to develop a vegetation model for use in land use studies and climate models. PFTs provide a finer level of modeling than biomes, which represent gross areas such as desert, savannah, deciduous forest.
-
- In creating a PFT model, areas as small as 1 km are modeled by defining the predominant plant type for that area, interpreted from satellite data or other means.
-
- For each plant functional type, a number of key parameters are defined, such as fecundity, competitiveness, resorption (rate at which plant decays and returns nutrients to the soil after death), etc.; the value of each parameter is determined or inferred from observable characteristics such as plant height, leaf area, etc.

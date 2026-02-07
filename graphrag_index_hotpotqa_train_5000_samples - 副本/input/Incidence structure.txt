@@ -1,7 +1,0 @@
-Incidence structure
-
-In mathematics, an abstract system consisting of two types of objects and a single relationship between these types of objects is called an incidence structure.
-
- Consider the points and lines of the Euclidean plane as the two types of objects and ignore all the properties of this geometry except for the relation of which points are on which lines for all points and lines.
-
- What is left is the incidence structure of the Euclidean plane.

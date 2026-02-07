@@ -1,7 +1,0 @@
-Process capability index
-
-In process improvement efforts, the process capability index or process capability ratio is a statistical measure of process capability: the ability of a process to produce output within specification limits.
-
- The concept of process capability only holds meaning for processes that are in a state of statistical control.
-
- Process capability indices measure how much "natural variation" a process experiences relative to its specification limits and allows different processes to be compared with respect to how well an organization controls them.

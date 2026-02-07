@@ -1,7 +1,0 @@
-CEREC
-
-CEREC or Cerec (Chairside Economical Restoration of Esthetic Ceramics, or CEramic REConstruction) is a method of CAD/CAM dentistry developed by W. Mörmann and M. Brandestini at the University of Zurich in 1980 for creating dental restorations. Using CAD/CAM (computer-aided design and computer-aided manufacturing), this process allows dentists to construct, produce, and insert individual ceramic restorations directly at the point of treatment (chairside) in a single appointment, rather than over multiple appointments with lab side working between.
-
- The first applications were successfully carried out on patients in 1985.
-
- The Cerec name is also a brand name of the Sirona companies (as of 2016 Dentsply Sirona) (Sirona Australia, Sirona Germany, Sirona USA, and others), because Sirona grew out of the exclusive licensing of the system by Siemens.

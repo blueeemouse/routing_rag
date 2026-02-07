@@ -1,9 +1,0 @@
-Cardmobili
-
-CardMobili is a European-based mobile application development company founded in 2009.
-
- The primary application of the company, also named CardMobili, provides a platform for managing customer loyalty programs via mobile phones.
-
- The application provides for digitizing and storing loyalty and membership cards, allowing their barcodes to be scanned directly from the device screen.
-
- It supports Android, iPhone, BlackBerry, Windows Phone 7, Windows Mobile, Nokia, Vodafone, and other brands.

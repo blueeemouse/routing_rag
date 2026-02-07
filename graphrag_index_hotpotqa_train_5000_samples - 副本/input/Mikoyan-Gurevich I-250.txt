@@ -1,7 +1,0 @@
-Mikoyan-Gurevich I-250
-
-The Mikoyan-Gurevich I-250 (Samolet N) was a Soviet fighter aircraft developed as part of a crash program in 1944 to develop a high-performance fighter to counter German turbojet-powered aircraft such as the Messerschmitt Me-262.
-
- The Mikoyan-Gurevich design bureau decided to focus on a design that used something more mature than the jet engine, which was still at an experimental stage in the Soviet Union, and chose a mixed-power solution with the VRDK ("Vozdushno-Reaktivny Dvigatel Kompressornyi" – air reaction compressor jet) motorjet powered by the Klimov VK-107 V12 engine.
-
- While quite successful when it worked, with a maximum speed of 820 km/h being reached during trials, production problems with the VRDK fatally delayed the program and it was canceled in 1948 as obsolete.

@@ -1,7 +1,0 @@
-Grenz rays
-
-Grenz rays are part of the electromagnetic spectrum comprising low energy (ultrasoft) X-rays.
-
- These were first investigated by Gustav Bucky in 1923 using a cathode vacuum tube with a lithium borate glass window, which he labeled Grenz rays as he believed that the biological effects resembled those of UV light and traditional X-rays and hence were on the border between the two ("Grenz" = border in German).
-
- These rays are also known as Bucky rays.

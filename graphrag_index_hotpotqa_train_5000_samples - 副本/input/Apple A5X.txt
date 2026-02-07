@@ -1,7 +1,0 @@
-Apple A5X
-
-The Apple A5X is a 32-bit system-on-a-chip (SoC) designed by Apple Inc., introduced at the launch of the third generation iPad on March 7, 2012.
-
- It is a high performance variant of the Apple A5; Apple claims it has twice the graphics performance of the A5.
-
- It was superseded in the iPhone 5 and 5C by the A6 chip and the fourth generation iPad by the A6X chip.

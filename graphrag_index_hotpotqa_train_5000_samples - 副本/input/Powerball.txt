@@ -1,9 +1,0 @@
-Powerball
-
-Powerball is an American lottery game offered by 44 states, the District of Columbia, Puerto Rico and the US Virgin Islands.
-
- It is coordinated by the Multi-State Lottery Association (MUSL), a nonprofit organization formed by an agreement with US lotteries.
-
- Powerball's minimum advertised jackpot is $40 million (annuity); Powerball's annuity is paid in 30 graduated installments or winners may choose a lump sum payment instead.
-
- One lump sum payment will be less than the total of the 30 annual payments because of the time value of money.

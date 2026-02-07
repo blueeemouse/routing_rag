@@ -1,5 +1,0 @@
-Corporate taxonomy
-
-Corporate taxonomy is the hierarchical classification of entities of interest of an enterprise, organization or administration, used to classify documents, digital assets and other information.
-
- Taxonomies can cover virtually any type of physical or conceptual entities (products, processes, knowledge fields, human groups, etc.) at any level of granularity.

@@ -1,5 +1,0 @@
-Portevin–Le Chatelier effect
-
-The Portevin–Le Chatelier effect (PLC) describes a serrated stress-strain curve or jerky flow, which some materials exhibit as they undergo plastic deformation, specifically inhomogeneous deformation.
-
- This effect has been long associated with dynamic strain aging or the competition between diffusing solutes pinning dislocations and dislocation breaking free of this stoppage.

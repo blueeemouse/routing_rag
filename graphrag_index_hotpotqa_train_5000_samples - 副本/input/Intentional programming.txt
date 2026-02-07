@@ -1,7 +1,0 @@
-Intentional programming
-
-In computer programming, Intentional Programming is a programming paradigm developed by Charles Simonyi that encodes in software source code the precise "intention" which programmers (or users) have in mind when conceiving their work.
-
- By using the appropriate level of abstraction at which the programmer is thinking, creating and maintaining computer programs become easier.
-
- By separating the concerns for intentions and how they are being operated upon, the software becomes more modular and allows for more reusable software code.

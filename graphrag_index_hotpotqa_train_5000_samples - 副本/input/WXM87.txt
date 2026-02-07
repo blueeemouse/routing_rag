@@ -1,9 +1,0 @@
-WXM87
-
-WXM87 is a NOAA Weather Radio station that serves portions of northeast Colorado, southwest Nebraska, and northwest Kansas.
-
- It broadcasts on NOAA Weather Radio channel 4, or 162.475 Megahertz.
-
- It is programmed from the National Weather Service forecast office in Goodland, Kansas with its transmitter located in Wray, Colorado.
-
- It broadcasts weather and hazard information for the following counties: Cheyenne County, Kansas, Dundy County, Nebraska, and Yuma County, Colorado.

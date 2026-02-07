@@ -1,5 +1,0 @@
-Yacas
-
-Yacas is a general-purpose computer algebra system.
-
- The name is an acronym for "Yet Another Computer Algebra System".

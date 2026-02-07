@@ -1,9 +1,0 @@
-Journal of Applied Crystallography
-
-The "Journal of Applied Crystallography" is a peer-reviewed scientific journal published by Wiley-Blackwell on behalf of the International Union of Crystallography.
-
- It was established in 1968 and covers the application of crystallography and crystallographic techniques.
-
- The "Journal of Applied Crystallography" publishes articles on the crystallographic methods that are used to study crystalline and non-crystalline matter with neutrons, X-rays and electrons, their application in condensed matter research, materials science and the life sciences, and their use in identifying phase transformations and structural changes of defects, structure-property relationships, interfaces and surfaces etc.
-
- The journal also covers developments in crystallographic instrumentation and apparatus, theory and interpretation and numerical analysis and other related subjects, together with information on crystallographic computer programs.

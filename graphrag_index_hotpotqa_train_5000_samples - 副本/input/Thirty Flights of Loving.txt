@@ -1,9 +1,0 @@
-Thirty Flights of Loving
-
-Thirty Flights of Loving is a first-person adventure video game developed by Brendon Chung's indie video game studio, Blendo Games.
-
- It was released in August 2012 for Microsoft Windows, and in November 2012 for OS X.
-
- The game employs a modified version of id Software's 1997-era id Tech 2 engine—originally used for "Quake 2"—and incorporates music composed by Idle Thumbs member Chris Remo.
-
- It follows three people as they prepare for an alcohol heist and the aftermath of the operation.

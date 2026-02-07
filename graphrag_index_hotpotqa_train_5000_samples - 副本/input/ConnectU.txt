@@ -1,7 +1,0 @@
-ConnectU
-
-ConnectU (originally HarvardConnection) was a social networking website launched on May 21, 2004, that was founded by Harvard students Cameron Winklevoss, Tyler Winklevoss, and Divya Narendra in December 2002.
-
- Users could add people as friends, send them messages, and update their personal profiles to notify friends about themselves.
-
- Users were placed in networks based upon the domain name associated with the email address they used for registration.

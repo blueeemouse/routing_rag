@@ -1,9 +1,0 @@
-Power Macintosh 6100
-
-The Power Macintosh 6100 is a personal computer designed, manufactured and sold by Apple Computer from March 1994 to March 1996 as part of the Power Macintosh line.
-
- It is first computer to use the new PowerPC processor created by IBM and Motorola.
-
- The low-profile ("pizza box") case was inherited from the Centris/Quadra 610 and 660AV models, and replaced the Macintosh Quadra series that used the Motorola 68040 processor, Apple's previous high end workstation line.
-
- It was the earliest Macintosh model able to run Mac OS 9.

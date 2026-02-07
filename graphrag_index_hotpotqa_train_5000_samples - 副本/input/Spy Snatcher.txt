@@ -1,8 +1,0 @@
-Spy Snatcher
-
-Spy Snatcher is a floppy disk-based text adventure released by Topologika Software in 1991 .
-
- It was the last professional text adventure to be released on the BBC Micro and Acorn Electron.
-
- It was also released for ZX Spectrum (+3 disk only), RISC OS, PC, Amstrad CPC, Amstrad PCW, Atari ST and Nimbus.
-

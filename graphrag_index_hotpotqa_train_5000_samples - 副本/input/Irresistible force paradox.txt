@@ -1,9 +1,0 @@
-Irresistible force paradox
-
-The irresistible force paradox, also called the unstoppable force paradox, shield and spear paradox, is a classic paradox formulated as "What happens when an unstoppable force meets an immovable object?"
-
- This paradox is much like the omnipotence paradox, which is a simple demonstration that challenges omnipotence.
-
- The immovable object and the irresistible force are both implicitly assumed to be indestructible, or else the question would have a trivial resolution.
-
- Furthermore, it is assumed that they are two separate entities

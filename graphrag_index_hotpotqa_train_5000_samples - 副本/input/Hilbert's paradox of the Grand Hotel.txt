@@ -1,7 +1,0 @@
-Hilbert's paradox of the Grand Hotel
-
-Hilbert's paradox of the Grand Hotel, or simply Hilbert's Hotel, is a thought experiment which illustrates a counterintuitive property of infinite sets.
-
- It is demonstrated that a fully occupied hotel with infinitely many rooms may still accommodate additional guests, even infinitely many of them, and that this process may be repeated infinitely often.
-
- The idea was introduced by David Hilbert in a 1924 lecture "Über das Unendliche" reprinted in and was popularized through George Gamow's 1947 book "One Two Three... Infinity".

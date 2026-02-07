@@ -1,7 +1,0 @@
-Computer module
-
-A computer module is a selection of independent electronic circuits packaged onto a circuit board to provide a basic function within a computer.
-
- An example might be an inverter or flip-flop, which would require two or more transistors and a small number of additional supporting devices.
-
- Modules would be inserted into a chassis and then wired together to produce a larger logic unit, like an adder.

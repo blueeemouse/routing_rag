@@ -1,9 +1,0 @@
-SimCraft
-
-SimCraft is a privately held company headquartered just outside Atlanta, Georgia and is in the business of motion simulation.
-
- The company offers a range of products in the category of full motion simulation that provide a tactile true motion experience for Motorsport Simulation (sometimes referred to as simracing) and flight simulation.
-
- The company's core innovation and technology is the simulation of vehicle (motorsport & aviation based) movement through proprietary physics based software interfaces and a patent pending hardware architecture based on Center of Mass principles of motion.
-
- The company's product applications range principally by variation in chassis design and material and are found in usage from military training/research, professional training, to individual simulation and gaming enthusiast entertainment.

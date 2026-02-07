@@ -1,9 +1,0 @@
-Apple A4
-
-The Apple A4 is a 32-bit package on package (PoP) system-on-a-chip (SoC) designed by Apple Inc. and manufactured by Samsung.
-
- It combines an ARM Cortex-A8 CPU with a PowerVR GPU, and emphasizes power efficiency.
-
- The chip commercially debuted with the release of Apple's iPad tablet; followed shortly by the iPhone 4 smartphone, the iPod Touch (4th generation), and the Apple TV (2nd generation).
-
- It was superseded by the Apple A5 processor used in the iPad 2 released the following year, which was then subsequently replaced by the Apple A5X processor in the iPad (3rd generation).

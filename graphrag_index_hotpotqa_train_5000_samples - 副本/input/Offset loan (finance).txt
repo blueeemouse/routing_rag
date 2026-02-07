@@ -1,7 +1,0 @@
-Offset loan (finance)
-
-An offset loan is a type of lending arrangement, usually for a mortgage, in which a borrower also maintains a savings account with the lender.
-
- Instead of receiving interest on the savings account, the interest payment due on the loan is calculated only on the net balance of the loan less the savings account.
-
- The regular payment is calculated on the full amount of the loan, however, so making regular payments will pay off the loan faster than a standard loan with the same interest rate, amount, and periodic payment.

@@ -1,5 +1,0 @@
-San Andreas Fault Observatory at Depth
-
-The San Andreas Fault Observatory at Depth (SAFOD) is a research project aimed at collecting geological data about the San Andreas Fault for the purpose of predicting and analyzing future earthquakes. Located near the town of Parkfield, Monterey County, California, where quakes of Magnitude 2 frequently occur, the project has installed geophone sensors and GPS clocks in a 3-kilometer borehole that cuts directly through the fault.
-
- This data, along with samples collected during drilling, could shed new light on geochemical and mechanical properties around the fault zone.

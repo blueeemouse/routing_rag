@@ -1,9 +1,0 @@
-Sea Jet
-
-Sea Jet, or Advanced Electric Ship Demonstrator (AESD), is a naval testbed funded by the U.S. Navy's Office of Naval Research.
-
- The 133 ft vessel is operated out of the Carderock Division's Acoustic Research Detachment in Bayview, Idaho.
-
- "Sea Jet" was operated on Lake Pend Oreille, where she was used for test and demonstration of various technologies.
-
- Among the first technologies tested was an underwater discharge water jet from Rolls-Royce Naval Marine, Inc., called AWJ-21, a propulsion concept with the goals of providing increased propulsive efficiency, reduced acoustic signature, and improved maneuverability over previous Destroyer Class combatants.

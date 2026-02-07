@@ -1,9 +1,0 @@
-Doom engine
-
-id Tech, also known as id Tech 1 or the "Doom" engine, is the game engine that powers the id Software games "Doom" and "".
-
- It is also used in "Heretic", "", "Strife: Quest for the Sigil", "Hacx: Twitch 'n Kill", "Freedoom", and other games produced by licensees.
-
- It was created by John Carmack, with auxiliary functions written by Mike Abrash, John Romero, Dave Taylor, and Paul Radek.
-
- Originally developed on NeXT computers, it was ported to DOS for "Doom"<nowiki>'</nowiki>s initial release and was later ported to several game consoles and operating systems.

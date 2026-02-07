@@ -1,5 +1,0 @@
-Tailplane
-
-A tailplane, also known as a horizontal stabiliser, is a small lifting surface located on the tail (empennage) behind the main lifting surfaces of a fixed-wing aircraft as well as other non-fixed-wing aircraft such as helicopters and gyroplanes. Not all fixed-wing aircraft have tailplanes.
-
- Canards, tailless and flying wing aircraft have no separate tailplane, while in v-tail aircraft the vertical stabilizer, rudder, and the tail-plane and elevator are combined to form two diagonal surfaces in a V layout.

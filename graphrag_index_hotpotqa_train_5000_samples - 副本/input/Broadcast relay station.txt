@@ -1,9 +1,0 @@
-Broadcast relay station
-
-A broadcast relay station, satellite station, relay transmitter, broadcast translator (U.S.), rebroadcaster (Canada) or repeater (two-way radio), Complementary station (Mexico), is a broadcast transmitter which repeats or transponds the signal of another radio station or television station, usually to an area not covered by the signal of the originating station.
-
- They may serve, for example, to expand the broadcast range of a television or radio station beyond the primary signal's coverage area, or to improve service in a part of the main coverage area which receives a poor signal due to geographic constraints.
-
- These transmitters may be (but are not usually) used to create a single-frequency network.
-
- They may also be used by a radio station on either AM or FM to establish a presence on the other band.

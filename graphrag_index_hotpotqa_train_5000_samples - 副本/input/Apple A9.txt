@@ -1,7 +1,0 @@
-Apple A9
-
-The Apple A9 is a 64-bit ARM-based system-on-chip (SoC), designed by Apple Inc.
-
- Manufactured for Apple by both TSMC and Samsung, it first appeared in the iPhone 6S and 6S Plus which were introduced on September 9, 2015.
-
- Apple stated that it had 70% more CPU performance and 90% more graphics performance compared to its predecessor, the Apple A8, and was one of the most powerful and energy-efficient mobile chips on the market then along with the Samsung Exynos 8890 and Qualcomm Snapdragon 820.

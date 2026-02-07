@@ -1,9 +1,0 @@
-NEdit
-
-NEdit, the Nirvana editor, is a text editor and source code editor for the X Window System.
-
- It has an interface similar to text editors on Microsoft Windows and Macintosh, rather than to older UNIX editors like Emacs.
-
- It was initially developed by Mark Edel for Fermilab and released under a very restrictive licence, but today it is distributed under the less restrictive GNU General Public License (plus Motif clause ¹), and developed as an independent open source project by a team of developers.
-
- Nedit was also distributed with the IRIX operating system.

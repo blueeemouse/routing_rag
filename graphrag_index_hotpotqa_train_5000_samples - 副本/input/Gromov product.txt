@@ -1,5 +1,0 @@
-Gromov product
-
-In mathematics, the Gromov product is a concept in the theory of metric spaces named after the mathematician Mikhail Gromov.
-
- The Gromov product can also be used to define "δ"-hyperbolic metric spaces in the sense of Gromov.

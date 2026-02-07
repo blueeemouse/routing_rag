@@ -1,5 +1,0 @@
-Convenience translation
-
-A convenience translation is either when an entity displays its financial statements or other financial information in a currency that is different from either its functional currency or its presentation currency simply by translating all amounts at end-of-period exchange rates.
-
- A result of making a convenience translation is that the resulting financial information does not comply with all Generally Accepted Accounting Principles.

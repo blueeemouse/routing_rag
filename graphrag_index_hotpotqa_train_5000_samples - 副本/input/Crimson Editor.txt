@@ -1,7 +1,0 @@
-Crimson Editor
-
-Crimson Editor is a freeware text editor for Microsoft Windows.
-
- It is typically used as a source code editor and HTML editor.
-
- The author was Ingyu Kang.

@@ -1,3 +1,0 @@
-DUT1
-
-The time correction DUT1 (sometimes also written DUT) is the difference between Universal Time (UT1), which is defined by Earth's rotation, and Coordinated Universal Time (UTC), which is defined by a network of precision atomic clocks.

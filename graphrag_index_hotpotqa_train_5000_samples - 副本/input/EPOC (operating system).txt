@@ -1,7 +1,0 @@
-EPOC (operating system)
-
-EPOC is a discontinued family of graphical operating systems developed by Psion for portable devices, primarily PDAs.
-
- EPOC came from epoch, the beginning of an era, but was backfitted by the engineers to "Electronic Piece Of Cheese".
-
- It was succeeded by Symbian in 1998.

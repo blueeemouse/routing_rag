@@ -1,7 +1,0 @@
-List of Nobel laureates by university affiliation
-
-This list of Nobel laureates by university affiliation shows the university affiliations of winners of the Nobel Prize and the Nobel Memorial Prize in Economic Sciences since 1901 (total 881 individual laureates).
-
- Although this list does not include organizations which were awarded the Nobel prize or any individuals in those organizations, a person who received the Nobel prize while working at a research organization formally affiliated with or operated by a university is counted as an affiliate of that university.
-
- Universities are listed in descending order according to the number of affiliates, while only the top 50 universities are shown explicitly with their ranking.
