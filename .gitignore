@@ -24,3 +24,4 @@ naive_rag_index_hotpotqa_1000_samples/
 naive_rag_index_hotpotqa_train_5000_samples/
 graphrag_index_hotpotqa_train_5000_samples/
 *.pt
+router_models/
