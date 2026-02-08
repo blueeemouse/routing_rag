@@ -440,13 +440,13 @@ def main():
     else:
         logger_instance.info("未提供验证数据集，将跳过验证")
 
-    # 先创建模型，以便 collate_fn 能根据模型属性做出一致判断
+    # 先创建模型，以便collate_fn能根据模型属性做出一致判断
     logger_instance.info("创建模型...")
     # 根据config里的model_type参数创建router模型
     model = TrainableRouterFactory.create_model(config)
     logger_instance.info(f"模型创建成功: {config.model_type}")
 
-    # 将 model 的 tokenizer 传递给数据集（如果有的话），以便 dataset 能生成 input_ids
+    # 将model的tokenizer传递给数据集（如果有的话），以便dataset能生成input_ids
     if hasattr(model, 'tokenizer') and model.tokenizer is not None:
         train_dataset.tokenizer = model.tokenizer
         if val_dataset:
@@ -454,7 +454,7 @@ def main():
 
     
 
-    # 创建 collate_fn
+    # 创建collate_fn
     def collate_fn(x):
         batch_data = {
             'scores': torch.tensor([item['scores'] for item in x], dtype=torch.float32),
@@ -516,7 +516,7 @@ def main():
         logger_instance.info(f"保存间隔: 每 {config.training.save_steps} 步")
     
     # 创建训练器
-    trainer = TrainableRouterFactory.create_trainer(model, config, config.output_dir)
+    trainer = TrainableRouterFactory.create_trainer(model, config, config.output_dir, logger=logger_instance)
     print('trainer:', trainer)
     # TensorBoard 信息
     tensorboard_dir = f"{config.output_dir}/tensorboard"

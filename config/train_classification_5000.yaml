@@ -21,8 +21,8 @@ training:
   batch_size: 16
   epochs: 10
   training_steps: 0  # 0表示使用epochs动态计算
-  eval_steps: 5
-  save_steps: 10
+  eval_steps: 30
+  save_steps: 30
   max_grad_norm: 1.0
   
   # 对比损失权重（全部设为0，因为我们使用交叉熵）
@@ -42,7 +42,7 @@ data:
   train_path: "HotpotQA_train_data"
   val_path: "evaluation_results/router_test_labels.json"
   source: "router_label"
-  num_clusters: 10
+  # num_clusters: 10  # 交叉熵损失用不到这个参数
 
 # 输出配置
 # output_dir: "router_models/no_rag_vs_naive_classification_5000"

@@ -92,26 +92,27 @@ class TrainableRouterFactory:
         return cls._models[model_type](config.model, **kwargs)
     
     @classmethod
-    def create_trainer(cls, model: BaseRouterModel, config: TrainableRouterConfig, output_dir: str = "outputs") -> BaseTrainer:
+    def create_trainer(cls, model: BaseRouterModel, config: TrainableRouterConfig, output_dir: str = "outputs", logger=None) -> BaseTrainer:
         """
         创建训练器
-        
+
         Args:
             model: 模型
             config: 配置
             output_dir: 输出目录
-            
+            logger: (可选) 标准 logging.Logger 对象
+
         Returns:
             训练器实例
         """
         # trainer_type = config.model_type.lower()
         print(config.training)
         trainer_type = config.training.trainer_type.lower()
-        
+
         if trainer_type not in cls._trainers:
             raise ValueError(f"Unknown trainer type: {trainer_type}. Available: {list(cls._trainers.keys())}")
-        
-        return cls._trainers[trainer_type](model, config, output_dir)
+
+        return cls._trainers[trainer_type](model, config, output_dir, logger=logger)
     
     @classmethod
     def create_dataset(cls, config: TrainableRouterConfig, tokenizer=None, split: str = "train") -> BaseRouterDataset:

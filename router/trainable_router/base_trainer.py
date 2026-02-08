@@ -13,21 +13,25 @@ from tqdm import tqdm
 class BaseTrainer(ABC):
     """训练器基类"""
     
-    def __init__(self, model, config, output_dir: str = "outputs"):
+    def __init__(self, model, config, output_dir: str = "outputs", logger=None):
         """
         初始化
-        
+
         Args:
             model: 模型
             config: 配置
             output_dir: 输出目录
+            logger: (可选) 标准 logging.Logger 对象
         """
         self.model = model
         self.config = config
         self.output_dir = output_dir
         self.global_step = 0
         self.epoch = 0
-        
+
+        # 【新增】存储 logger（可能为None）
+        self.logger = logger
+
         # 设置设备
         self.device = torch.device(config.device if hasattr(config, 'device') and config.device != 'auto' else 'cpu')
         self.model.to(self.device)

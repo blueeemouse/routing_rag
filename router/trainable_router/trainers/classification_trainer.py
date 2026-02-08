@@ -28,7 +28,7 @@ except ImportError:
 class ClassificationTrainer(BaseTrainer):
     """分类训练器"""
     
-    def __init__(self, model, config: TrainableRouterConfig, output_dir: str = "outputs"):
+    def __init__(self, model, config: TrainableRouterConfig, output_dir: str = "outputs", logger=None):
         """
         初始化
 
@@ -36,8 +36,9 @@ class ClassificationTrainer(BaseTrainer):
             model: DCRouter模型
             config: 配置
             output_dir: 输出目录
+            logger: (可选) 标准 logging.Logger 对象
         """
-        super().__init__(model, config, output_dir)
+        super().__init__(model, config, output_dir, logger)
 
         self.training_config = config.training
         self.data_config = config.data
@@ -69,6 +70,12 @@ class ClassificationTrainer(BaseTrainer):
         self.class_weights = getattr(self.training_config, 'class_weights', None)
         if self.class_weights:
             print(f"【Config】使用类别权重: {self.class_weights}")
+
+        # 【新增】跟踪最佳性能
+        self.best_train_loss = float('inf')
+        self.best_train_step = 0
+        self.best_val_accuracy = 0.0
+        self.best_val_step = 0
     
     def _init_optimizer(self) -> torch.optim.Optimizer:
         """初始化优化器"""
@@ -214,9 +221,20 @@ class ClassificationTrainer(BaseTrainer):
         loss = loss_fn(logits, labels)
 
 
-        # 添加这行打印
-        if self.global_step % 10 == 0:  # 每10步打印一次
-            print(f"Step {self.global_step}: Loss = {loss:.6f}, Logits range = [{logits.min():.4f}, {logits.max():.4f}]")
+
+
+        # 按eval_steps间隔记录训练loss（同时输出到控制台和文件）
+        if self.global_step % self.training_config.eval_steps == 0:
+            loss_str = f"Step {self.global_step}: Loss = {loss:.6f}, Logits range = [{logits.min():.4f}, {logits.max():.4f}]"
+            if self.logger:
+                self.logger.info(loss_str)
+
+            # 【新增】跟踪最佳train loss
+            if loss < self.best_train_loss:
+                self.best_train_loss = float(loss)
+                self.best_train_step = self.global_step
+                if self.logger:
+                    self.logger.info(f"🏆 新的最佳Train Loss！Step={self.global_step}, Loss={loss:.6f}")
         
         # 【关键点2】不改返回值！但把logits存到self里
         # 使用detach()是为了切断计算图，省显存，且不影响loss反向传播
@@ -296,7 +314,17 @@ class ClassificationTrainer(BaseTrainer):
                 # 使用验证数据加载器进行评估，如果没有则跳过
                 if self.val_dataloader is not None:
                     val_metrics = self.evaluate(self.val_dataloader)
-                    print(f"Step {self.global_step}: Val Acc = {val_metrics.get('accuracy', 0):.4f}")
+                    val_acc = val_metrics.get('accuracy', 0)
+                    val_loss = val_metrics.get('loss', 0)
+                    if self.logger:
+                        self.logger.info(f"评估 (Step {self.global_step}): Acc={val_acc:.4f}, Loss={val_loss:.4f}")
+
+                    # 【新增】跟踪最佳val性能
+                    if val_acc > self.best_val_accuracy:
+                        self.best_val_accuracy = val_acc
+                        self.best_val_step = self.global_step
+                        if self.logger:
+                            self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
 
                 # TensorBoard 记录评估指标
                 if self.tensorboard_writer is not None:
@@ -606,11 +634,17 @@ class ClassificationTrainer(BaseTrainer):
         
         # 保存训练配置
         with open(os.path.join(path, 'training_config.json'), 'w') as f:
-            json.dump({
+            training_info = {
                 'training_steps': self.global_step,
                 'epochs': self.epoch + 1,
                 'learning_rate': self.training_config.learning_rate,
-            }, f, indent=2)
+                # 【新增】最佳性能信息
+                'best_val_accuracy': round(self.best_val_accuracy, 4),
+                'best_val_step': self.best_val_step,
+                'best_train_loss': round(self.best_train_loss, 6),
+                'best_train_step': self.best_train_step,
+            }
+            json.dump(training_info, f, indent=2)
     
     def close(self):
         """关闭资源"""
