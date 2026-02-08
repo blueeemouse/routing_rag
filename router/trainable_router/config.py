@@ -93,6 +93,11 @@ class TrainingConfig:
     # Debug配置 - 新增字段
     overfit_single_batch: bool = False  # 是否过拟合单个batch
     fast_dev_steps: int = 100  # 快速开发模式下的训练步数
+    
+    # 【新增】类别权重（字典形式）
+    # 格式：{"no_rag": 3.0, "naive_rag": 1.0, "graphrag": 2.0}
+    # 未指定的策略默认权重为1.0
+    class_weights: Optional[Dict[str, float]] = None
 
 
 @dataclass

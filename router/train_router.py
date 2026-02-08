@@ -60,6 +60,8 @@ def parse_args():
     parser.add_argument('--sample_llm_loss_weight', type=float, default=None, help='Sample-LLM损失权重')
     parser.add_argument('--cluster_loss_weight', type=float, default=None, help='Cluster损失权重')
     parser.add_argument('--num_clusters', type=int, default=None, help='Cluster数量')
+    parser.add_argument('--class_weights', type=str, default=None,
+                        help='类别权重，格式: "no_rag=3.0,naive_rag=1.0"')
     
     # 输出配置
     parser.add_argument('--output_dir', type=str, default=None, help='输出目录')
@@ -143,6 +145,13 @@ def create_config_from_args(args) -> TrainableRouterConfig:
         config.training.sample_llm_loss_weight = args.sample_llm_loss_weight
     if args.cluster_loss_weight is not None:
         config.training.cluster_loss_weight = args.cluster_loss_weight
+    
+    # 【新增】处理类别权重
+    if args.class_weights is not None:
+        strategy_names = config.model.strategy_names
+        weights = parse_class_weights(args.class_weights, strategy_names)
+        config.training.class_weights = weights
+    
     if args.use_amp:
         config.training.use_amp = args.use_amp
     if args.max_steps is not None:
@@ -177,6 +186,37 @@ def create_config_from_args(args) -> TrainableRouterConfig:
         config.save_model_path = config.output_dir
     
     return config
+
+
+def parse_class_weights(weights_str: str, strategy_names: list) -> dict:
+    """
+    解析类别权重字符串
+    
+    Args:
+        weights_str: 权重字符串，如 "no_rag=3.0,naive_rag=1.0"
+        strategy_names: 策略名称列表，如 ["no_rag", "naive_rag"]
+        
+    Returns:
+        权重字典，未指定的策略默认权重为1.0
+    """
+    if not weights_str:
+        return {name: 1.0 for name in strategy_names}
+    
+    weights = {}
+    pairs = weights_str.split(',')
+    for pair in pairs:
+        if '=' in pair:
+            strategy, weight = pair.split('=', 1)
+            strategy = strategy.strip()
+            weight = float(weight.strip())
+            weights[strategy] = weight
+    
+    # 为未指定的策略设置默认权重1.0
+    for name in strategy_names:
+        if name not in weights:
+            weights[name] = 1.0
+    
+    return weights
 
 
 def config_to_dict(config: Any) -> Dict:

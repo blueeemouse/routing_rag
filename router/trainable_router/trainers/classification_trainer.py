@@ -64,13 +64,11 @@ class ClassificationTrainer(BaseTrainer):
         self.monitor_accuracy = os.getenv("MONITOR_ACC", "false").lower() == "true"
         # 这个用来监控router接收到的tensor，确认不是全0/全1这种诡异的值
         self.debug_mode = os.getenv("DEBUG_ROUTER", "false").lower() == "true"
-
-        # 【新增】读取是否使用加权Loss的开关
-        self.use_weighted_loss = os.getenv("USE_WEIGHTED_LOSS", "false").lower() == "true"
         
-        # 如果开启加权，打印提示
-        if self.use_weighted_loss:
-            print("【Config】已启用加权交叉熵损失 (USE_WEIGHTED_LOSS=true)")
+        # 【新增】读取类别权重配置
+        self.class_weights = getattr(self.training_config, 'class_weights', None)
+        if self.class_weights:
+            print(f"【Config】使用类别权重: {self.class_weights}")
     
     def _init_optimizer(self) -> torch.optim.Optimizer:
         """初始化优化器"""
@@ -198,29 +196,23 @@ class ClassificationTrainer(BaseTrainer):
         labels = torch.where(is_tie, torch.tensor(no_rag_idx, device=self.device), labels)
         
         # 计算交叉熵损失
-        # loss_fn = torch.nn.CrossEntropyLoss() # 原来仅用普通交叉熵损失
-        # 【修改点】根据开关选择Loss函数
-        if self.use_weighted_loss:
-            # 创建权重张量
-            num_strategies = len(self.model.strategy_names) # strategy_names就是个列表，里面是所有候选策略的名称
-            pos_weight = torch.ones(num_strategies).to(self.device)
-            
-            # 核心修正：给 no_rag (索引0) 更高的权重
-            # 因为你之前的 log 显示模型总是漏掉 no_rag（召回率 0.36），说明它倾向于把 no_rag 判成 naive_rag
-            # 加大 Class 0 的权重，可以惩罚这种"误判"
-            pos_weight[no_rag_idx] = 3.0  # 可以尝试 2.0, 3.0, 5.0
-            pos_weight[naive_rag_idx] = 1.0
-            
-            loss_fn = torch.nn.CrossEntropyLoss(weight=pos_weight)
+        # 构建权重向量
+        num_strategies = len(self.model.strategy_names)
+        pos_weight = torch.ones(num_strategies).to(self.device)
+        
+        # 从config获取权重（复用上面已经构建的strategy_to_idx）
+        if self.class_weights:
+            for strategy_name, weight in self.class_weights.items():
+                if strategy_name in strategy_to_idx:
+                    idx = strategy_to_idx[strategy_name]
+                    pos_weight[idx] = weight
             
             if self.debug_mode:
-                # self.debug_logger.info(f"Using Weighted Loss: no_rag_weight={pos_weight[no_rag_idx].item()}, naive_rag_weight={pos_weight[naive_rag_idx].item()}")
-                print(f"Using Weighted Loss: no_rag_weight={pos_weight[no_rag_idx].item()}, naive_rag_weight={pos_weight[naive_rag_idx].item()}")
-        else:
-            # 标准的交叉熵
-            loss_fn = torch.nn.CrossEntropyLoss()
-
+                print(f"Using Weighted Loss: {self.class_weights}")
+        
+        loss_fn = torch.nn.CrossEntropyLoss(weight=pos_weight)
         loss = loss_fn(logits, labels)
+
 
         # 添加这行打印
         if self.global_step % 10 == 0:  # 每10步打印一次
