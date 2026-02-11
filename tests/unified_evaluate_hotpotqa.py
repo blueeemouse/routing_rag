@@ -952,9 +952,9 @@ def main():
 
         # 检查GraphRAG索引
         output_dir = os.path.join(args.graphrag_work_dir, "output")
-        entities_path = os.path.join(output_dir, "entities.parquet")
+        # entities_path = os.path.join(output_dir, "entities.parquet")
 
-        if not os.path.exists(entities_path) and not args.skip_graphrag_index:
+        if not args.skip_graphrag_index:
             print("\nGraphRAG索引尚未构建，开始准备数据...")
 
             # 保存运行配置（只在构建索引时保存）

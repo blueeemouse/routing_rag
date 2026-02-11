@@ -76,6 +76,12 @@ class ClassificationTrainer(BaseTrainer):
         self.best_train_step = 0
         self.best_val_accuracy = 0.0
         self.best_val_step = 0
+
+        # 【新增】记录最佳checkpoint路径（用于清理旧的最佳）
+        self.best_val_checkpoint_path = None
+
+        # 【新增】记录保存步数计数（用于减少清理频率）
+        self.save_step_counter = 0
     
     def _init_optimizer(self) -> torch.optim.Optimizer:
         """初始化优化器"""
@@ -251,7 +257,7 @@ class ClassificationTrainer(BaseTrainer):
     
     def train_epoch(self, dataloader: DataLoader, max_steps: Optional[int] = None) -> Dict[str, float]:
         """
-        训练一个epoch
+        训练一个epoch（计算梯度、更新参数、定期评估、定期保存）
         
         Args:
             dataloader: 数据加载器
@@ -344,144 +350,31 @@ class ClassificationTrainer(BaseTrainer):
             # 定期保存检查点
             if self.global_step % self.training_config.save_steps == 0:
                 checkpoint_path = f"{self.output_dir}/checkpoint_step_{self.global_step}"
+
+                # 【新增】在save前判断并删除旧的最佳checkpoint
+                # 只有在eval step时才检查是否为最佳val checkpoint
+                if self.global_step % self.training_config.eval_steps == 0:
+                    if val_acc > self.best_val_accuracy:
+                        # 删除旧的最佳val checkpoint
+                        if self.best_val_checkpoint_path:
+                            self._delete_checkpoint(self.best_val_checkpoint_path)
+                        self.best_val_checkpoint_path = checkpoint_path
+
+                # 保存checkpoint
                 self.save_checkpoint(checkpoint_path)
-                print(f"Step {self.global_step}: Checkpoint saved to {checkpoint_path}")
+
+                # 【新增】每5次保存才清理一次（减少I/O）
+                self.save_step_counter += 1
+                if self.save_step_counter % 5 == 0:
+                    self._cleanup_old_checkpoints(keep_recent=3)
+
+                if self.logger:
+                    self.logger.info(f"Step {self.global_step}: Checkpoint saved to {checkpoint_path}")
         
         return {
             'loss': total_loss / num_batches if num_batches > 0 else 0.0
         }
-    
-    # def train_epoch(self, dataloader: DataLoader, max_steps: Optional[int] = None) -> Dict[str, float]:
-    #     """
-    #     训练一个epoch（只用一个batch来过拟合测试）
-        
-    #     Args:
-    #         dataloader: 数据加载器
-            
-    #     Returns:
-    #         训练指标（一个字典）
-    #     """
-    #     self.model.train()
-    #     total_loss = 0.0
-    #     num_batches = 0
-        
-    #     # 只取第一个batch用于过拟合测试
-    #     first_batch = None
-    #     for batch in dataloader:
-    #         first_batch = batch
-    #         break
-        
-    #     if first_batch is None:
-    #         return {'loss': 0.0}
-        
-    #     # 打印batch信息
-    #     print(f"\n{'='*80}")
-    #     print(f"使用过拟合模式：只用一个batch，大小 = {len(first_batch['queries'])}")
-    #     print(f"Batch questions: {first_batch['queries'][:3]}...")  # 打印前3个问题
-    #     print("Batch scores shape:", first_batch['scores'].shape)
-    #     # print(f"Batch scores shape: {torch.stack(first_batch['scores']).shape}")
-    #     print(f"{'='*80}\n")
-        
-    #     # 训练多个steps（相当于多个epoch但用同一个batch）
-    #     num_overfit_steps = 100  # 训练100步来尝试过拟合
-    #     pbar = tqdm(range(num_overfit_steps), desc=f"Epoch {self.epoch + 1} (Overfit)", ascii=True)
-        
-    #     for step in pbar:
-    #         batch = first_batch  # 始终使用第一个batch
-    #         # 如果指定了 max_steps 并且已达到，则提前结束本 epoch
-    #         # if max_steps is not None and self.global_step >= max_steps:
-    #         #     break
-                
-    #         # 计算损失
-    #         loss = self.compute_loss(batch)
-            
-    #         # 反向传播
-    #         self.optimizer.zero_grad()
-    #         loss.backward()
-            
-    #         # 梯度裁剪
-    #         if self.training_config.max_grad_norm > 0:
-    #             torch.nn.utils.clip_grad_norm_(
-    #                 self.model.parameters(), 
-    #                 self.training_config.max_grad_norm
-    #             )
-            
-    #         self.optimizer.step()
 
-    #         # 【关键点3】从这里"偷"出 logits 来算准确率
-    #         if self.monitor_accuracy:
-    #             # 验证一下是否存在（防御性编程）
-    #             if hasattr(self, '_last_logits'):
-    #                 preds = torch.argmax(self._last_logits, dim=-1)
-    #                 correct = (preds == self._last_labels).sum().item()
-    #                 acc = correct / len(self._last_labels)
-                    
-    #                 # 打印或者用 logger 记录
-    #                 print(f"Step {step}: Acc/Train={acc:.4f}")
-
-    #         if self.scheduler is not None:
-    #             self.scheduler.step()
-
-    #         self.global_step += 1
-    #         total_loss += loss.item()
-    #         num_batches += 1
-
-    #         # TensorBoard 记录
-    #         if self.tensorboard_writer is not None:
-    #             self.tensorboard_writer.add_scalar('Loss/train', loss.item(), self.global_step)
-    #             if self.scheduler is not None:
-    #                 current_lr = self.optimizer.param_groups[0]['lr']
-    #                 self.tensorboard_writer.add_scalar('LearningRate', current_lr, self.global_step)
-
-    #         # 更新进度条
-    #         pbar.set_postfix({
-    #             'loss': f'{loss.item():.4f}',
-    #             'step': self.global_step
-    #         })
-
-    #         # if step % 10 == 0:
-    #         #     print(f"\nStep {step}:")
-    #         #     print(f"  Loss: {loss.item():.6f}")
-    #         #     print(f"  Logits range: [{logits.min():.4f}, {logits.max():.4f}]")
-    #         #     predictions = logits.argmax(dim=-1)
-    #         #     labels = batch['scores'].to(self.device).argmax(dim=-1)
-    #         #     accuracy = (predictions == labels).float().mean()
-    #         #     print(f"  Accuracy: {accuracy:.4f}")
-    #         #     print(f"  Predictions: {predictions[:8].tolist()}")
-    #         #     print(f"  Labels: {labels[:8].tolist()}")
-    #         #     print(f"  Same? {torch.equal(predictions, labels)}")
-
-    #         # 定期评估
-    #         if self.global_step % self.training_config.eval_steps == 0:
-    #             # 使用验证数据加载器进行评估，如果没有则跳过
-    #             if self.val_dataloader is not None:
-    #                 val_metrics = self.evaluate(self.val_dataloader)
-    #                 print(f"Step {self.global_step}: Val Acc = {val_metrics.get('accuracy', 0):.4f}")
-
-    #             # TensorBoard 记录评估指标
-    #             if self.tensorboard_writer is not None:
-    #                 self.tensorboard_writer.add_scalar('Accuracy/val', val_metrics.get('accuracy', 0), self.global_step)
-    #                 self.tensorboard_writer.add_scalar('Loss/val', val_metrics.get('loss', 0), self.global_step)
-
-    #                 # 记录每个策略的准确率
-    #                 strategy_acc = val_metrics.get('strategy_accuracy', {})
-    #                 for strategy, acc in strategy_acc.items():
-    #                     self.tensorboard_writer.add_scalar(f'Accuracy/val_{strategy}', acc, self.global_step)
-
-    #                 # 记录路由分布
-    #                 routing_dist = val_metrics.get('routing_distribution', {})
-    #                 for strategy, ratio in routing_dist.items():
-    #                     self.tensorboard_writer.add_scalar(f'RoutingDistribution/val_{strategy}', ratio, self.global_step)
-
-    #         # 定期保存检查点
-    #         if self.global_step % self.training_config.save_steps == 0:
-    #             checkpoint_path = f"{self.output_dir}/checkpoint_step_{self.global_step}"
-    #             self.save_checkpoint(checkpoint_path)
-    #             print(f"Step {self.global_step}: Checkpoint saved to {checkpoint_path}")
-        
-    #     return {
-    #         'loss': total_loss / num_batches if num_batches > 0 else 0.0
-    #     }
 
 
     def evaluate(self, dataloader: DataLoader) -> Dict[str, float]:
@@ -614,6 +507,75 @@ class ClassificationTrainer(BaseTrainer):
         }
         with open(os.path.join(path, 'train_state.json'), 'w') as f:
             json.dump(state, f, indent=2)
+
+    def _delete_checkpoint(self, path: str):
+        """
+        删除checkpoint
+
+        Args:
+            path: checkpoint路径
+        """
+        import shutil
+        try:
+            if os.path.exists(path):
+                shutil.rmtree(path)
+                # 不记录删除日志（删除次数太多，日志冗余）
+        except Exception as e:
+            # 只记录失败
+            if self.logger:
+                self.logger.warning(f"删除checkpoint失败: {path}, 错误: {e}")
+
+    def _cleanup_old_checkpoints(self, keep_recent: int = 3):
+        """
+        清理旧checkpoint（保留最近N个 + 最佳val）
+
+        Args:
+            keep_recent: 保留最近多少个checkpoint
+        """
+        import shutil
+
+        # 获取所有checkpoint目录
+        checkpoints = []
+        try:
+            for item in os.listdir(self.output_dir):
+                if item.startswith('checkpoint_step_'):
+                    step = int(item.split('_')[-1])
+                    checkpoints.append({
+                        'path': os.path.join(self.output_dir, item),
+                        'step': step
+                    })
+        except Exception as e:
+            if self.logger:
+                self.logger.warning(f"扫描checkpoint目录失败: {e}")
+            return
+
+        # 按step排序
+        checkpoints.sort(key=lambda x: x['step'])
+
+        # 标记要保留的checkpoint
+        to_keep = set()
+
+        # 1. 最佳val checkpoint
+        if self.best_val_checkpoint_path:
+            to_keep.add(self.best_val_checkpoint_path)
+
+        # 2. 最近N个checkpoint
+        recent_paths = [c['path'] for c in checkpoints[-keep_recent:]]
+        for path in recent_paths:
+            to_keep.add(path)
+
+        # 删除其他checkpoint
+        deleted_count = 0
+        for ckpt in checkpoints:
+            if ckpt['path'] not in to_keep:
+                self._delete_checkpoint(ckpt['path'])
+                deleted_count += 1
+
+        # 只在清理日志
+        if deleted_count > 0 and self.logger:
+            self.logger.info(f"清理checkpoint: 保留最近{keep_recent}个 + 最佳val，删除{deleted_count}个旧checkpoint")
+
+
     
     def load_checkpoint(self, path: str):
         """加载检查点"""

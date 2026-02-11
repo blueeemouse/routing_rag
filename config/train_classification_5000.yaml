@@ -21,8 +21,8 @@ training:
   batch_size: 16
   epochs: 10
   training_steps: 0  # 0表示使用epochs动态计算
-  eval_steps: 30
-  save_steps: 30
+  eval_steps: 150
+  save_steps: 150
   max_grad_norm: 1.0
   
   # 对比损失权重（全部设为0，因为我们使用交叉熵）

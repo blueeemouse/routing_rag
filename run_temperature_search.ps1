@@ -16,7 +16,7 @@
     # "--train_data", "data/train_router_labels.jsonl",
     # "--val_data", "evaluation_results/router_test_labels.jsonl",
     # "--overfit_single_batch",
-    # "--fast_dev_steps", "10"
+    # "--fast_dev_steps", "1"
 )
 
 # Output Directory
