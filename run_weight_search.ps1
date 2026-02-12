@@ -2,30 +2,22 @@
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
-# Temperature Search Script
-# Tests different temperature parameters while keeping others fixed
+# Weight Search Script
+# Tests different class weights while keeping temperature fixed at best value
 
-# Define Parameters
- $Temperatures = @(0.05, 0.1, 0.2, 0.5, 1.0, 1.5, 2.0)
- $FixedWeight = "no_rag=1.0,naive_rag=1.0"
- $Backbone = "sentence-transformers/all-MiniLM-L6-v2"
+# Configuration
+$Temperature = 0.5  # Best temperature from previous search
+$Backbone = "sentence-transformers/all-MiniLM-L6-v2"
 
-# Base Arguments
- $BaseArgs = @(
-    # "--model_type", "classification",
-    "--config", "config/train_classification_5000.yaml"
-    # "--train_data", "data/train_router_labels.jsonl",
-    # "--val_data", "evaluation_results/router_test_labels.jsonl",
-    # "--overfit_single_batch",
-    # "--fast_dev_steps", "1"
-)
+# Weight search space: fixed naive_rag=1.0, vary no_rag
+# Range: 0.5-3.0 with finer granularity around 1.0-3.0
+$NoRagWeights = @(0.5, 0.7, 0.9, 1.0, 1.2, 1.5, 1.8, 2.0, 2.5, 3.0)
 
 # Output Directory
- $ExperimentsRoot = "router_models/temperature_search"
- $LogFile = "$ExperimentsRoot/temperature_search_log.txt"
+$ExperimentsRoot = "router_models/weight_search"
+$LogFile = "$ExperimentsRoot/weight_search_log.txt"
 
 # Helper Functions
-
 function Log-Message {
     param([string]$message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -34,16 +26,14 @@ function Log-Message {
 }
 
 # Main Execution
-
 Write-Host "========================================" -ForegroundColor Green
-Write-Host "Temperature Search Script" -ForegroundColor Green
+Write-Host "Weight Search Script" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
 Write-Host ""
-
-Write-Host "Debugging Config:" -ForegroundColor Yellow
-Write-Host "  Temperatures: $($Temperatures -join ', ')"
-Write-Host "  Fixed Weight: $FixedWeight (Fixed)"
-Write-Host "  Backbone: $Backbone (Fixed)"
+Write-Host "Config:" -ForegroundColor Yellow
+Write-Host "  Temperature: $Temperature (fixed)" -ForegroundColor Yellow
+Write-Host "  Backbone: $Backbone" -ForegroundColor Yellow
+Write-Host "  Weight Search: no_rag varied, naive_rag=1.0 (fixed)" -ForegroundColor Yellow
 Write-Host "  Output Dir: $ExperimentsRoot" -ForegroundColor Yellow
 Write-Host ""
 
@@ -57,56 +47,51 @@ if (Test-Path $LogFile) {
     Clear-Content $LogFile
 }
 
-Log-Message "Temperature Search Config:"
-Log-Message " Temperatures: $($Temperatures -join ', ')"
-Log-Message " Fixed Weight: $FixedWeight (Fixed)"
-Log-Message "  Backbone: $Backbone (Fixed)"
+Log-Message "Weight Search Config:"
+Log-Message "  Temperature: $Temperature (fixed)"
+Log-Message "  Backbone: $Backbone"
+Log-Message "  Weight combinations: $($NoRagWeights.Count) experiments"
 Log-Message "  Output Dir: $ExperimentsRoot"
-Log-Message "  Log File: $LogFile"
 
 # Init Statistics
- $TotalExperiments = $Temperatures.Count
- $CompletedExperiments = 0
- $FailedExperiments = 0
- $StartTime = Get-Date
+$TotalExperiments = $NoRagWeights.Count
+$CompletedExperiments = 0
+$FailedExperiments = 0
+$StartTime = Get-Date
 
 Write-Host "Preparing to run $TotalExperiments experiments..." -ForegroundColor Yellow
 Write-Host ""
 
 # Experiment Loop
-foreach ($temp in $Temperatures) {
+foreach ($noRagWeight in $NoRagWeights) {
+    $weightStr = "no_rag=$noRagWeight,naive_rag=1.0"
+    
     # Generate Output Directory Name
-    $output_dir = "$ExperimentsRoot/temp_$temp"
-
-    # $PythonExe = "C:\Users\lanhz\miniconda3\envs\ant-graphrag-dev\python.exe"
-
-    # Construct Full Command（使用数组方式避免PowerShell解析错误）
+    $output_dir = "$ExperimentsRoot/weight_no${noRagWeight}_naive1.0"
+    
+    # Build parameters
     $params = @(
         "router/train_router.py"
-        $($BaseArgs -split ' ')
+        "--config", "config/train_classification_5000.yaml"
         "--backbone", $Backbone
-        "--temperature", $temp
-        "--class_weights", $FixedWeight
+        "--temperature", $Temperature
+        "--class_weights", $weightStr
         "--output_dir", $output_dir
     )
-    $command = "python $($params -join ' ')"
-
+    
     # Show Current Experiment Info
-    $progress = "[{0}/{1}] Temperature = {2}" -f ($CompletedExperiments + 1), $TotalExperiments, $temp
+    $progress = "[{0}/{1}] no_rag={2}, naive_rag=1.0" -f ($CompletedExperiments + $FailedExperiments + 1), $TotalExperiments, $noRagWeight
     Write-Host $progress -ForegroundColor Cyan
-
+    
     # Log Execution
-    Log-Message "Starting: Temp=$temp"
-    Log-Message "Command: $command"
-
+    Log-Message "Starting: no_rag=$noRagWeight, naive_rag=1.0"
+    Log-Message "Command: python $($params -join ' ')"
+    
     # Execute Training
-    # 【关键修改】获取脚本所在目录，并设置为工作目录
-    # $MyInvocation.MyCommand.Path 指向 ps1 文件本身，Split-Path -Parent 就是其所在目录
     $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-
     $exitCode = 0
+    
     try {
-        # Use Invoke-Expression to get correct exit code
         $command = "python `"$($params -join '" "')`""
         Invoke-Expression $command
         $exitCode = $LASTEXITCODE
@@ -118,29 +103,29 @@ foreach ($temp in $Temperatures) {
         $exitCode = -1
         Log-Message " [ERROR] Execution Failed: $_"
     }
-
+    
     # Check Results
     if ($exitCode -eq 0) {
         $CompletedExperiments++
-        Log-Message " [OK] Experiment Finished: Temp=$temp"
+        Log-Message " [OK] Experiment Finished: no_rag=$noRagWeight"
     }
     else {
         $FailedExperiments++
-        Log-Message " [FAIL] Experiment Failed: Temp=$temp (Exit Code: $exitCode)"
+        Log-Message " [FAIL] Experiment Failed: no_rag=$noRagWeight (Exit Code: $exitCode)"
     }
-
+    
     Log-Message ""
 }
 
 # Summary
- $EndTime = Get-Date
- $Duration = $EndTime - $StartTime
+$EndTime = Get-Date
+$Duration = $EndTime - $StartTime
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Green
-Write-Host "Temperature Search Complete" -ForegroundColor Green
+Write-Host "Weight Search Complete" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
-# Log-Host "Summary:"
+
 Log-Message "  Total Experiments: $TotalExperiments"
 Log-Message "  Success: $CompletedExperiments"
 Log-Message "  Failed: $FailedExperiments"

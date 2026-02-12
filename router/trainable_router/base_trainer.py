@@ -137,9 +137,6 @@ class BaseTrainer(ABC):
             if val_dataloader is not None:
                 val_metrics = self.evaluate(val_dataloader)
                 history['val_metrics'].append(val_metrics)
-            
-            # 保存检查点
-            self.save_checkpoint(f"{self.output_dir}/checkpoint_epoch_{epoch}")
 
             # 如果设置了 max_steps 且已达到或超过该步数，提前结束训练
             if max_steps is not None and self.global_step >= max_steps:

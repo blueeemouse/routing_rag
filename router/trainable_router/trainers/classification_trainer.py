@@ -325,12 +325,9 @@ class ClassificationTrainer(BaseTrainer):
                     if self.logger:
                         self.logger.info(f"评估 (Step {self.global_step}): Acc={val_acc:.4f}, Loss={val_loss:.4f}")
 
-                    # 【新增】跟踪最佳val性能
-                    if val_acc > self.best_val_accuracy:
-                        self.best_val_accuracy = val_acc
-                        self.best_val_step = self.global_step
-                        if self.logger:
-                            self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
+                    # 【新增】记录最佳val性能（延迟更新，在save块中更新）
+                    # 只记录是否是新的最佳，不立即更新self.best_val_accuracy
+                    is_new_best_val = val_acc > self.best_val_accuracy
 
                 # TensorBoard 记录评估指标
                 if self.tensorboard_writer is not None:
@@ -354,11 +351,16 @@ class ClassificationTrainer(BaseTrainer):
                 # 【新增】在save前判断并删除旧的最佳checkpoint
                 # 只有在eval step时才检查是否为最佳val checkpoint
                 if self.global_step % self.training_config.eval_steps == 0:
-                    if val_acc > self.best_val_accuracy:
+                    if is_new_best_val:
                         # 删除旧的最佳val checkpoint
                         if self.best_val_checkpoint_path:
                             self._delete_checkpoint(self.best_val_checkpoint_path)
                         self.best_val_checkpoint_path = checkpoint_path
+                        # 【延迟更新】在这里更新best_val，确保同一个step的判断正确
+                        self.best_val_accuracy = val_acc
+                        self.best_val_step = self.global_step
+                        if self.logger:
+                            self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
 
                 # 保存checkpoint
                 self.save_checkpoint(checkpoint_path)
