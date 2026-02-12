@@ -18,6 +18,8 @@ from typing import Dict, Any
 
 import torch
 from torch.utils.data import DataLoader
+import random
+import numpy as np
 
 # 添加项目根目录到路径
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -25,6 +27,17 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from trainable_router.config import TrainableRouterConfig
 from trainable_router.factory import TrainableRouterFactory
 from trainable_router.utils.logger import setup_logging, get_logger
+
+
+def set_seed(seed=42):
+    """设置所有随机种子以确保可复现性"""
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
 
 def parse_args():
@@ -328,6 +341,9 @@ def generate_exp_name(config: TrainableRouterConfig) -> str:
 
 def main():
     """主函数"""
+    # 设置随机种子以确保可复现性
+    set_seed(42)
+    
     args = parse_args()
     
     # 记录完整命令行

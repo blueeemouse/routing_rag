@@ -77,8 +77,7 @@ class ClassificationTrainer(BaseTrainer):
         self.best_val_accuracy = 0.0
         self.best_val_step = 0
 
-        # 【新增】记录最佳checkpoint路径（用于清理旧的最佳）
-        self.best_val_checkpoint_path = None
+        # 【新增】记录最佳val的step（用于清理时保留）
 
         # 【新增】记录保存步数计数（用于减少清理频率）
         self.save_step_counter = 0
@@ -348,14 +347,10 @@ class ClassificationTrainer(BaseTrainer):
             if self.global_step % self.training_config.save_steps == 0:
                 checkpoint_path = f"{self.output_dir}/checkpoint_step_{self.global_step}"
 
-                # 【新增】在save前判断并删除旧的最佳checkpoint
+                # 【新增】在save前判断是否为最佳val checkpoint
                 # 只有在eval step时才检查是否为最佳val checkpoint
                 if self.global_step % self.training_config.eval_steps == 0:
                     if is_new_best_val:
-                        # 删除旧的最佳val checkpoint
-                        if self.best_val_checkpoint_path:
-                            self._delete_checkpoint(self.best_val_checkpoint_path)
-                        self.best_val_checkpoint_path = checkpoint_path
                         # 【延迟更新】在这里更新best_val，确保同一个step的判断正确
                         self.best_val_accuracy = val_acc
                         self.best_val_step = self.global_step
@@ -554,28 +549,28 @@ class ClassificationTrainer(BaseTrainer):
         # 按step排序
         checkpoints.sort(key=lambda x: x['step'])
 
-        # 标记要保留的checkpoint
-        to_keep = set()
+        # 标记要保留的checkpoint（使用step比较，避免路径格式问题）
+        to_keep_steps = set()
 
         # 1. 最佳val checkpoint
-        if self.best_val_checkpoint_path:
-            to_keep.add(self.best_val_checkpoint_path)
+        if self.best_val_step > 0:
+            to_keep_steps.add(self.best_val_step)
 
         # 2. 最近N个checkpoint
-        recent_paths = [c['path'] for c in checkpoints[-keep_recent:]]
-        for path in recent_paths:
-            to_keep.add(path)
+        recent_steps = [c['step'] for c in checkpoints[-keep_recent:]]
+        for step in recent_steps:
+            to_keep_steps.add(step)
 
         # 删除其他checkpoint
         deleted_count = 0
         for ckpt in checkpoints:
-            if ckpt['path'] not in to_keep:
+            if ckpt['step'] not in to_keep_steps:
                 self._delete_checkpoint(ckpt['path'])
                 deleted_count += 1
 
         # 只在清理日志
         if deleted_count > 0 and self.logger:
-            self.logger.info(f"清理checkpoint: 保留最近{keep_recent}个 + 最佳val，删除{deleted_count}个旧checkpoint")
+            self.logger.info(f"清理checkpoint: 保留最近{keep_recent}个 + 最佳val(step={self.best_val_step})，删除{deleted_count}个旧checkpoint")
 
 
     
