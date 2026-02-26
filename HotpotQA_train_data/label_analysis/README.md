@@ -44,12 +44,12 @@
 所有分析结果保存在 `label_analysis/` 目录：
 
 - `label_distribution_summary.json` - 统计摘要
-- `no_rag_queries.json` - 361条应该routing到NoRAG的查询
-- `naive_rag_queries.json` - 2090条应该routing到NaiveRAG的查询
+- `no_rag_queries.json` - 361条应该routing到NoRAG的查询（排除tie样本）
+- `naive_rag_queries.json` - 2090条应该routing到NaiveRAG的查询（排除tie样本）
 - `tie_queries.json` - 2549条分数相等的查询（进一步分为都答对和都答错）
 - `all_labels.json` - 完整的5000条标签分配
-
-## 示例分析
+- `all_labels_no_tie.json` - 去掉tie样本的数据（仅含NaiveRAG和NoRAG）
+- `all_labels_no_tie_sampled1000.json` - 去掉tie样本的数据（仅含NaiveRAG和NoRAG）里抽样的1000条（保持NoRAG和NaiveRAG的比例。用于快速训练搜参）
 
 ### 两者都答对的例子（11.48%）
 ```

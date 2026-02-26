@@ -92,6 +92,9 @@ def parse_args():
     parser.add_argument('--overfit_single_batch', action='store_true', help='过拟合单个batch')
     parser.add_argument('--fast_dev_steps', type=int, default=None, help='快速开发模式下的训练步数')
     
+    # 正则化配置
+    parser.add_argument('--weight_decay', type=float, default=None, help='权重衰减（L2正则化）')
+    
     # 继续训练
     parser.add_argument('--resume', type=str, default='', help='从检查点恢复训练')
     
@@ -169,6 +172,10 @@ def create_config_from_args(args) -> TrainableRouterConfig:
         config.training.use_amp = args.use_amp
     if args.max_steps is not None:
         config.training.max_steps = args.max_steps
+    
+    # 【新增】处理weight_decay
+    if args.weight_decay is not None:
+        config.training.optimizer_kwargs['weight_decay'] = args.weight_decay
     
     # Debug配置
     # 如果启用overfit_single_batch，则会对同一个batch反复进行训练
@@ -440,6 +447,8 @@ def main():
         from trainable_router.datasets.hotpotqa_dataset import GenericRouterDataset
         train_dataset = GenericRouterDataset(config)
     train_dataset.load_data(config.data.train_path)
+
+    print('length of train_dataset:', len(train_dataset))
 
     val_dataset = None
     if config.data.val_path:
