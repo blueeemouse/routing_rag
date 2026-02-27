@@ -1,0 +1,49 @@
+================================================================================
+Balanced Dataset Info
+================================================================================
+
+Created: 2026-02-27 02:33:07
+
+================================================================================
+Data Source
+================================================================================
+
+Source file: all_labels_no_tie.json
+  - No tie samples
+  - Original distribution: no_rag=361, naive_rag=2090 (ratio 1:5.79)
+
+================================================================================
+Sampling Strategy
+================================================================================
+
+Total samples: 1000
+Class ratio: 1:1 (balanced)
+
+no_rag (500 samples):
+  - Original: 361 samples (all kept)
+  - Oversampled: 139 samples (random duplication)
+  - Method: Random selection from original samples
+
+naive_rag (500 samples):
+  - Original: 2090 samples
+  - Undersampled: 500 samples (random selection)
+
+Random seed: 42 (for reproducibility)
+
+================================================================================
+Usage Suggestions
+================================================================================
+
+Training params:
+  - class_weights: no_rag=1.0, naive_rag=1.0 (no weighting needed)
+  - Other params: Can transfer from previous search (lr=7e-5, wd=10, temp=0.5)
+  - Note: May need to re-search weight_decay for balanced data
+
+================================================================================
+File Locations
+================================================================================
+
+Data file: balanced_1000_samples.json
+Training script: scripts/train_balanced_1000.ps1
+
+================================================================================

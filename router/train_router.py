@@ -512,6 +512,8 @@ def main():
         num_workers=0,
         collate_fn=collate_fn
     )
+    # 是默认的true
+    # print('train loader is shuffle?: ', config.data.shuffle)
 
     val_loader = None
     if val_dataset:
