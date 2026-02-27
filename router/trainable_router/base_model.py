@@ -24,56 +24,7 @@ class BaseRouterModel(nn.Module, ABC):
         self.config = config
         self.device = torch.device(config.device if config.device != 'auto' else 'cpu')
     
-    @abstractmethod
-    def encode(self, queries: List[str]) -> torch.Tensor:
-        """
-        编码query列表为embedding
-        
-        Args:
-            queries: query字符串列表
-            
-        Returns:
-            shape: (batch_size, hidden_size)
-        """
-        pass
-    
-    @abstractmethod
-    def get_strategy_embeddings(self) -> torch.Tensor:
-        """
-        获取策略embedding
-        
-        Returns:
-            shape: (num_strategies, hidden_size)
-        """
-        pass
-    
-    @abstractmethod
-    def compute_similarity(self, query_emb: torch.Tensor, strategy_embs: torch.Tensor) -> torch.Tensor:
-        """
-        计算query和策略embedding之间的相似度
-        
-        Args:
-            query_emb: query embedding, shape: (batch_size, hidden_size)
-            strategy_embs: 策略embeddings, shape: (num_strategies, hidden_size)
-            
-        Returns:
-            shape: (batch_size, num_strategies)
-        """
-        pass
-    
-    @abstractmethod
-    def forward(self, input_ids: torch.Tensor, attention_mask: torch.Tensor) -> torch.Tensor:
-        """
-        前向传播
-        
-        Args:
-            input_ids: token ids, shape: (batch_size, seq_len)
-            attention_mask: 注意力掩码, shape: (batch_size, seq_len)
-            
-        Returns:
-            query embeddings, shape: (batch_size, hidden_size)
-        """
-        pass
+    # ========== 必须实现的抽象方法 ==========
     
     @abstractmethod
     def route(self, queries: List[str]) -> List[str]:
@@ -107,3 +58,72 @@ class BaseRouterModel(nn.Module, ABC):
             path: 模型路径
         """
         pass
+    
+    # ========== 可选方法（提供默认实现）==========
+    
+    def encode(self, queries: List[str]) -> torch.Tensor:
+        """
+        编码query列表为embedding（可选）
+        
+        仅适用于基于相似度的路由模型（如DCRouterModel）
+        
+        Args:
+            queries: query字符串列表
+            
+        Returns:
+            shape: (batch_size, hidden_size)
+            
+        Raises:
+            NotImplementedError: 如果模型不支持此方法
+        """
+        raise NotImplementedError("此模型不支持encode方法")
+    
+    def get_strategy_embeddings(self) -> Optional[torch.Tensor]:
+        """
+        获取策略embedding（可选）
+        
+        仅适用于基于相似度的路由模型（如DCRouterModel）
+        
+        Returns:
+            shape: (num_strategies, hidden_size) 或 None
+        """
+        return None
+    
+    def compute_similarity(self, query_emb: torch.Tensor, strategy_embs: torch.Tensor) -> torch.Tensor:
+        """
+        计算query和策略embedding之间的相似度（可选）
+        
+        仅适用于基于相似度的路由模型（如DCRouterModel）
+        
+        Args:
+            query_emb: query embedding, shape: (batch_size, hidden_size)
+            strategy_embs: 策略embeddings, shape: (num_strategies, hidden_size)
+            
+        Returns:
+            shape: (batch_size, num_strategies)
+            
+        Raises:
+            NotImplementedError: 如果模型不支持此方法
+        """
+        raise NotImplementedError("此模型不支持相似度计算")
+    
+    def forward(self, input_ids: torch.Tensor, attention_mask: torch.Tensor, **kwargs) -> torch.Tensor:
+        """
+        前向传播（可选）
+        
+        注意：不同模型的forward签名可能不同
+        - DCRouterModel: forward(input_ids, attention_mask) -> query_emb
+        - FeatureFusedRouterModel: forward(input_ids, attention_mask, queries) -> logits
+        
+        Args:
+            input_ids: token ids, shape: (batch_size, seq_len)
+            attention_mask: 注意力掩码, shape: (batch_size, seq_len)
+            **kwargs: 额外参数（如queries）
+            
+        Returns:
+            根据模型类型不同，返回query embedding或logits
+            
+        Raises:
+            NotImplementedError: 如果模型不支持此方法
+        """
+        raise NotImplementedError("此模型不支持forward方法")
