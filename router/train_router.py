@@ -439,7 +439,8 @@ def main():
 
     if ('router_test_labels' in config.data.train_path or 
         'router_labels' in config.data.train_path or
-        'all_labels' in config.data.train_path):
+        'all_labels' in config.data.train_path or
+        'curriculum_stage2' in config.data.train_path):
         logger_instance.info("检测到路由标签格式，使用RouterLabelDataset")
         from trainable_router.datasets.router_label_dataset import RouterLabelDataset
         train_dataset = RouterLabelDataset(config)

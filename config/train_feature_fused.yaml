@@ -1,0 +1,51 @@
+# Feature-Fused Router Training Config
+# 特征融合路由器训练配置（语义向量 + 63维手工特征）
+
+# 模型类型
+model_type: "feature_fused"
+
+# 模型配置
+model:
+  backbone_name: "BAAI/bge-base-en-v1.5"
+  hidden_size: 768  # BGE-base的维度
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  temperature: 0.5
+  device: "auto"
+  
+  # 手工特征配置
+  use_spacy: true  # 使用spaCy进行依存分析和NER
+  spacy_model: "en_core_web_sm"
+  feature_normalize: true  # 对特征进行归一化
+  use_projection: true  # 使用投影层（融合特征降维到hidden_size）
+
+# 训练配置
+training:
+  trainer_type: "feature_fused"  # 使用特征融合训练器
+  learning_rate: 0.00007  # 7e-5
+  batch_size: 32
+  epochs: 10
+  training_steps: 0  # 0表示使用epochs动态计算
+  eval_steps: 50
+  save_steps: 50
+  max_grad_norm: 1.0
+  
+  # 损失配置（交叉熵损失）
+  # class_weights会在训练脚本中根据数据集平衡性设置
+  
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.01
+    
+  scheduler_type: "linear"
+
+# 数据配置
+data:
+  train_path: "HotpotQA_train_data/label_analysis/balanced_samples/all_labels_balanced_1000.json"
+  val_path: "evaluation_results/router_test_labels.json"
+  source: "router_label"
+  shuffle: true
+
+# 输出配置
+# output_dir会在训练脚本中动态生成
+log_level: "info"

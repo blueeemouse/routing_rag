@@ -43,13 +43,27 @@
 
 所有分析结果保存在 `label_analysis/` 目录：
 
+### 原始数据
 - `label_distribution_summary.json` - 统计摘要
 - `no_rag_queries.json` - 361条应该routing到NoRAG的查询（排除tie样本）
 - `naive_rag_queries.json` - 2090条应该routing到NaiveRAG的查询（排除tie样本）
 - `tie_queries.json` - 2549条分数相等的查询（进一步分为都答对和都答错）
-- `all_labels.json` - 完整的5000条标签分配
-- `all_labels_no_tie.json` - 去掉tie样本的数据（仅含NaiveRAG和NoRAG）
-- `all_labels_no_tie_sampled1000.json` - 去掉tie样本的数据（仅含NaiveRAG和NoRAG）里抽样的1000条（保持NoRAG和NaiveRAG的比例。用于快速训练搜参）
+- `all_labels.json` - 完整的5000条标签分配（原始格式，含 `label` 字段，值为 `tie`/`naive_rag`/`no_rag`）
+
+### RouterLabelDataset 兼容格式
+以下文件格式为 `{"samples": [...]}`，包含 `optimal_strategy` 字段，可直接用于训练：
+
+| 文件 | 条数 | 说明 |
+|------|------|------|
+| `all_labels_no_tie.json` | ~2451 | 非 tie 样本（仅含明确最优策略的样本） |
+| `all_labels_converted.json` | ~2451 | 同上，RouterLabelDataset 格式 |
+| `all_labels_with_tie_converted.json` | 5000 | 全部样本，tie 标签转换为 no_rag（效率优先） |
+| `all_labels_no_tie_sampled1000.json` | 1000 | 非 tie 样本抽样，用于快速训练搜参 |
+
+### 标签转换规则（tie 处理）
+- `all_labels_with_tie_converted.json` 将 tie 样本转为 no_rag，遵循效率优先原则：
+  - 当两个策略性能相同时，优先选择更快的方法（no_rag）
+- 最终分布：no_rag=2910 (361+2549), naive_rag=2090
 
 ### 两者都答对的例子（11.48%）
 ```

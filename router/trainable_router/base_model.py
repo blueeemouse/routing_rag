@@ -22,7 +22,12 @@ class BaseRouterModel(nn.Module, ABC):
         """
         super().__init__()
         self.config = config
-        self.device = torch.device(config.device if config.device != 'auto' else 'cpu')
+        
+        # 处理设备配置
+        if config.device == 'auto':
+            self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        else:
+            self.device = torch.device(config.device)
     
     # ========== 必须实现的抽象方法 ==========
     

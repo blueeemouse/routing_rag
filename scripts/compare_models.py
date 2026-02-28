@@ -40,7 +40,12 @@ def set_seed(seed=42):
 
 
 def load_model(model_path, device='cuda'):
-    """加载模型"""
+    """加载模型
+    
+    Returns:
+        model: 加载的模型
+        config: 配置对象（包含 model_type 字段）
+    """
     print(f"加载模型: {model_path}")
     
     # 加载 hparams.json 获取完整配置
@@ -59,6 +64,9 @@ def load_model(model_path, device='cuda'):
     # 使用工厂创建模型
     model = TrainableRouterFactory.create_model(config)
     model.to(device)
+    
+    # 更新模型内部的 device 属性（确保手工特征等能正确移动到 GPU）
+    model.device = torch.device(device)
     
     # 加载权重
     checkpoint = torch.load(os.path.join(model_path, 'model.pt'), map_location=device, weights_only=False)
@@ -99,8 +107,13 @@ def compute_model_l2_norm_from_params(model):
     return total_norm
 
 
-def evaluate_model(model, dataloader, device='cuda'):
-    """评估模型，返回 loss、accuracy 和预测结果"""
+def evaluate_model(model, dataloader, device='cuda', model_type='dc'):
+    """评估模型，返回 loss、accuracy 和预测结果
+    
+    支持两种模型类型：
+    1. dc (DCRouterModel): 基于相似度计算，forward(input_ids, attention_mask) -> embedding
+    2. feature_fused (FeatureFusedRouterModel): 基于分类器，forward(input_ids, attention_mask, queries) -> logits
+    """
     model.eval()
     
     all_predictions = []
@@ -108,51 +121,54 @@ def evaluate_model(model, dataloader, device='cuda'):
     total_loss = 0.0
     num_samples = 0
     
-    # 获取策略embedding
     strategy_names = model.strategy_names
+    is_similarity_based = (model_type == 'dc')
+    
+    print(f"  模型类型: {model_type} ({'相似度计算' if is_similarity_based else '直接分类'})")
     
     with torch.no_grad():
         for batch in tqdm(dataloader, desc="Evaluating"):
-            # 获取数据
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
             scores = batch.get('scores', None)
+            queries = batch.get('queries', None)
+            
             if scores is not None:
                 scores = scores.to(device)
-                # 从 scores 获取 labels (argmax)
                 labels = scores.argmax(dim=-1)
             else:
-                # 如果没有 scores，无法计算 loss 和 accuracy
                 labels = None
             
-            # 前向传播
-            query_emb = model.forward(input_ids, attention_mask)
-            strategy_emb = model.get_strategy_embeddings()
+            # 根据模型类型选择前向传播方式
+            if is_similarity_based:
+                # DCRouterModel: 基于相似度
+                query_emb = model.forward(input_ids, attention_mask)
+                strategy_emb = model.get_strategy_embeddings()
+                logits = model.compute_similarity(query_emb, strategy_emb)
+                
+                temperature = model.temperature
+                if temperature > 0:
+                    logits = logits / temperature
+            else:
+                # FeatureFusedRouterModel: 直接分类
+                if queries is None:
+                    raise ValueError("FeatureFusedRouterModel 需要 queries 参数")
+                logits = model.forward(input_ids, attention_mask, queries)
             
-            # 计算相似度
-            similarity = model.compute_similarity(query_emb, strategy_emb)
-            
-            # 应用温度
-            temperature = model.temperature
-            if temperature > 0:
-                similarity = similarity / temperature
-            
-            # 计算 loss（如果提供 scores）
+            # 计算 loss
             if scores is not None:
                 loss_fn = nn.CrossEntropyLoss(reduction='mean')
-                loss = loss_fn(similarity, labels)
+                loss = loss_fn(logits, labels)
                 total_loss += loss.item() * input_ids.size(0)
             
             # 预测
-            predictions = similarity.argmax(dim=-1)
+            predictions = logits.argmax(dim=-1)
             
-            # 收集结果
             all_predictions.extend(predictions.cpu().numpy())
             if labels is not None:
                 all_labels.extend(labels.cpu().numpy())
             num_samples += input_ids.size(0)
     
-    # 计算准确率
     all_predictions = np.array(all_predictions)
     all_labels = np.array(all_labels)
     accuracy = (all_predictions == all_labels).mean()
@@ -236,6 +252,7 @@ def main():
     # 先加载第一个模型来获取配置
     print("\n加载第一个模型配置...")
     model1, config = load_model(args.model1, device)
+    model_type1 = config.model_type
     
     # 设置分词器 - 使用模型自带的 tokenizer
     tokenizer = model1.tokenizer if hasattr(model1, 'tokenizer') and model1.tokenizer else None
@@ -300,13 +317,14 @@ def main():
     # 加载第二个模型
     print("\n" + "=" * 60)
     model2, config2 = load_model(args.model2, device)
+    model_type2 = config2.model_type
     
     # 策略名称
     strategy_names = config.model.strategy_names
     print(f"策略名称: {strategy_names}")
     
     # 评估函数
-    def evaluate_single_model(model, name, loader, split_name):
+    def evaluate_single_model(model, name, loader, split_name, model_type):
         print(f"\n{'=' * 60}")
         print(f"评估 {name} ({split_name})")
         print("=" * 60)
@@ -316,7 +334,7 @@ def main():
         print(f"模型参数 L2 范数: {l2_norm:.4f}")
         
         # 评估
-        results = evaluate_model(model, loader, device)
+        results = evaluate_model(model, loader, device, model_type)
         
         print(f"\n{split_name} Loss: {results['loss']:.4f}")
         print(f"{split_name} Accuracy: {results['accuracy']:.4f}")
@@ -332,18 +350,18 @@ def main():
     print("模型 1: weight_decay = 0.01")
     print("=" * 80)
     
-    train_results_1, l2_1 = evaluate_single_model(model1, "Model 1 (wd=0.01)", train_loader, "训练集")
+    train_results_1, l2_1 = evaluate_single_model(model1, "Model 1 (wd=0.01)", train_loader, "训练集", model_type1)
     if val_loader:
-        val_results_1, _ = evaluate_single_model(model1, "Model 1 (wd=0.01)", val_loader, "验证集")
+        val_results_1, _ = evaluate_single_model(model1, "Model 1 (wd=0.01)", val_loader, "验证集", model_type1)
     
     # 评估 Model 2 (weight_decay=10)
     print("\n" + "=" * 80)
     print("模型 2: weight_decay = 10.0")
     print("=" * 80)
     
-    train_results_2, l2_2 = evaluate_single_model(model2, "Model 2 (wd=10)", train_loader, "训练集")
+    train_results_2, l2_2 = evaluate_single_model(model2, "Model 2 (wd=10)", train_loader, "训练集", model_type2)
     if val_loader:
-        val_results_2, _ = evaluate_single_model(model2, "Model 2 (wd=10)", val_loader, "验证集")
+        val_results_2, _ = evaluate_single_model(model2, "Model 2 (wd=10)", val_loader, "验证集", model_type2)
     
     # 对比总结
     print("\n" + "=" * 80)

@@ -38,9 +38,11 @@ from .datasets.hotpotqa_dataset import GenericRouterDataset, RouterDataLoader
 
 # 模型
 from .models.dc_model import DCRouterModel
+from .models.feature_fused_model import FeatureFusedRouterModel
 
 # 训练器
 from .trainers.dc_trainer import DCTrainer
+from .trainers.feature_fused_trainer import FeatureFusedTrainer
 
 # 路由器
 from .routers.dc_router import DCRouter
@@ -72,9 +74,11 @@ __all__ = [
     
     # 模型
     'DCRouterModel',
+    'FeatureFusedRouterModel',
     
     # 训练器
     'DCTrainer',
+    'FeatureFusedTrainer',
     
     # 路由器
     'DCRouter',

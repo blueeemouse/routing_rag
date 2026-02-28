@@ -1,0 +1,1 @@
+这里放的是HotpotQA的原始的数据，用来建立rag（naive_rag，graphrag）的索引的

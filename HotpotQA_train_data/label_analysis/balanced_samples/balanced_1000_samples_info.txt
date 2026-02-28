@@ -45,5 +45,5 @@ File Locations
 
 Data file: balanced_1000_samples.json
 Training script: scripts/train_balanced_1000.ps1
-
+Sampling scrips: scripts/create_balanced_1000.py
 ================================================================================

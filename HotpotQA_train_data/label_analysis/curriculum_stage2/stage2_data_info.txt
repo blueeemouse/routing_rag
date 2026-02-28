@@ -1,0 +1,79 @@
+================================================================================
+Curriculum Learning Stage 2 Dataset Info
+================================================================================
+
+Created: 2026-02-28 16:00:55
+
+================================================================================
+Purpose
+================================================================================
+
+This dataset is designed for Curriculum Learning Stage 2:
+  - Stage 1: Train on balanced non-tie samples (all_labels_balanced_1000.json)
+             Learn to distinguish when one strategy is clearly better
+  - Stage 2: Continue training on mixed samples (this file)
+             Learn to apply efficiency prior for tie cases
+
+Key Concept - Efficiency Prior:
+  When no_rag and naive_rag have equal performance, prefer no_rag because:
+  - No retrieval overhead (faster)
+  - No retrieval noise (cleaner context)
+  - Lower cost (no embedding/search)
+
+================================================================================
+Dataset Composition
+================================================================================
+
+Total samples: 3000
+Ratio: Non-tie : Tie = 2 : 1 (2000 : 1000)
+
+Non-tie samples (2000 total):
+  - Source: all_labels_no_tie.json
+  - no_rag: 1000 samples
+    * Original: 361 samples (all kept)
+    * Oversampled: 639 samples (random duplication)
+  - naive_rag: 1000 samples
+    * Original: 2090 samples
+    * Undersampled: 1000 samples (random selection)
+
+Tie samples (1000 total):
+  - Source: tie_queries.json (total 2549 available)
+  - Sampled: 1000 samples (random selection)
+  - Label: ALL labeled as no_rag (efficiency prior)
+  - Note: Original tie samples have equal scores, we teach model to prefer faster method
+
+================================================================================
+Label Distribution
+================================================================================
+
+Final labels:
+  - no_rag: 2000 (1000 tie + 1000 non-tie)
+  - naive_rag: 1000 (non-tie only)
+
+Note: The label distribution is intentionally imbalanced (2:1) because:
+  1. We want to reinforce the efficiency prior
+  2. Tie cases should always route to no_rag
+
+================================================================================
+Training Recommendations
+================================================================================
+
+1. Load Stage 1 best model as starting point
+2. Use lower learning rate (e.g., 1e-5 or 2e-5)
+3. Consider class weights if needed:
+   - no_rag: 1.0
+   - naive_rag: 2.0 (to balance the 2:1 label ratio)
+4. Monitor validation accuracy on both tie and non-tie samples
+
+================================================================================
+File Locations
+================================================================================
+
+Dataset file: curriculum_stage2_mixed_3000.json
+Source files:
+  - tie_queries.json
+  - all_labels_no_tie.json
+Related:
+  - Stage 1 data: balanced_samples/all_labels_balanced_1000.json
+
+================================================================================
