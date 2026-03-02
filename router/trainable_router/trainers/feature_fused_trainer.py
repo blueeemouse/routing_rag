@@ -323,7 +323,7 @@ class FeatureFusedTrainer(BaseTrainer):
                 # 定期清理旧checkpoint
                 self.save_step_counter += 1
                 if self.save_step_counter % 5 == 0:
-                    self._cleanup_old_checkpoints(keep_recent=3)
+                    self._cleanup_old_checkpoints()
 
                 if self.logger:
                     self.logger.info(f"Step {self.global_step}: Checkpoint saved to {checkpoint_path}")
@@ -459,8 +459,14 @@ class FeatureFusedTrainer(BaseTrainer):
             if self.logger:
                 self.logger.warning(f"删除checkpoint失败: {path}, 错误: {e}")
 
-    def _cleanup_old_checkpoints(self, keep_recent: int = 3):
-        """清理旧checkpoint"""
+    def _cleanup_old_checkpoints(self):
+        """
+        清理旧checkpoint，只保留 best_val 和 best_train_loss 对应的 checkpoint
+        
+        保留的checkpoint：
+        - best_val_step: 最佳验证准确率对应的checkpoint
+        - best_train_step: 最低训练损失对应的checkpoint
+        """
         import shutil
 
         checkpoints = []
@@ -477,18 +483,16 @@ class FeatureFusedTrainer(BaseTrainer):
                 self.logger.warning(f"扫描checkpoint目录失败: {e}")
             return
 
-        checkpoints.sort(key=lambda x: x['step'])
+        if not checkpoints:
+            return
 
         to_keep_steps = set()
 
-        # 最佳val checkpoint
+        # 只保留最佳checkpoint
         if self.best_val_step > 0:
             to_keep_steps.add(self.best_val_step)
-
-        # 最近N个checkpoint
-        recent_steps = [c['step'] for c in checkpoints[-keep_recent:]]
-        for step in recent_steps:
-            to_keep_steps.add(step)
+        if self.best_train_step > 0:
+            to_keep_steps.add(self.best_train_step)
 
         # 删除其他checkpoint
         deleted_count = 0
@@ -498,7 +502,12 @@ class FeatureFusedTrainer(BaseTrainer):
                 deleted_count += 1
 
         if deleted_count > 0 and self.logger:
-            self.logger.info(f"清理checkpoint: 保留最近{keep_recent}个 + 最佳val(step={self.best_val_step})，删除{deleted_count}个旧checkpoint")
+            kept_info = []
+            if self.best_val_step > 0:
+                kept_info.append(f"best_val(step={self.best_val_step}, acc={self.best_val_accuracy:.4f})")
+            if self.best_train_step > 0:
+                kept_info.append(f"best_train(step={self.best_train_step}, loss={self.best_train_loss:.6f})")
+            self.logger.info(f"清理checkpoint: 只保留最佳模型 ({', '.join(kept_info)})，删除 {deleted_count} 个其他checkpoint")
     
     def load_checkpoint(self, path: str):
         """加载检查点"""

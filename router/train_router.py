@@ -563,6 +563,11 @@ def main():
     max_steps = args.max_steps if args.max_steps and args.max_steps > 0 else None
     history = trainer.train(train_loader, val_loader, max_steps=max_steps)
     
+    # 训练结束后清理checkpoint，只保留 best_val 和 best_train_loss
+    if hasattr(trainer, '_cleanup_old_checkpoints'):
+        logger_instance.info("清理checkpoint，只保留最佳模型...")
+        trainer._cleanup_old_checkpoints()
+    
     # 保存最终模型
     final_model_path = f"{config.output_dir}/final"
     logger_instance.info(f"保存最终模型到: {final_model_path}")
