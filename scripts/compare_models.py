@@ -345,29 +345,29 @@ def main():
         
         return results, l2_norm
     
-    # 评估 Model 1 (weight_decay=0.01)
+    # 评估 Model 1
     print("\n" + "=" * 80)
-    print("模型 1: weight_decay = 0.01")
+    print("模型 1")
     print("=" * 80)
     
-    train_results_1, l2_1 = evaluate_single_model(model1, "Model 1 (wd=0.01)", train_loader, "训练集", model_type1)
+    train_results_1, l2_1 = evaluate_single_model(model1, "Model 1", train_loader, "训练集", model_type1)
     if val_loader:
-        val_results_1, _ = evaluate_single_model(model1, "Model 1 (wd=0.01)", val_loader, "验证集", model_type1)
+        val_results_1, _ = evaluate_single_model(model1, "Model 1", val_loader, "验证集", model_type1)
     
-    # 评估 Model 2 (weight_decay=10)
+    # 评估 Model 2
     print("\n" + "=" * 80)
-    print("模型 2: weight_decay = 10.0")
+    print("模型 2")
     print("=" * 80)
     
-    train_results_2, l2_2 = evaluate_single_model(model2, "Model 2 (wd=10)", train_loader, "训练集", model_type2)
+    train_results_2, l2_2 = evaluate_single_model(model2, "Model 2", train_loader, "训练集", model_type2)
     if val_loader:
-        val_results_2, _ = evaluate_single_model(model2, "Model 2 (wd=10)", val_loader, "验证集", model_type2)
+        val_results_2, _ = evaluate_single_model(model2, "Model 2", val_loader, "验证集", model_type2)
     
     # 对比总结
     print("\n" + "=" * 80)
     print("对比总结")
     print("=" * 80)
-    print(f"\n{'指标':<20} {'wd=0.01':<15} {'wd=10.0':<15} {'差异':<15}")
+    print(f"\n{'指标':<20} {'Model 1':<15} {'Model 2':<15} {'差异':<15}")
     print("-" * 60)
     print(f"{'训练集 Loss':<20} {train_results_1['loss']:<15.4f} {train_results_2['loss']:<15.4f} {train_results_2['loss']-train_results_1['loss']:<15.4f}")
     print(f"{'训练集 Acc':<20} {train_results_1['accuracy']:<15.4f} {train_results_2['accuracy']:<15.4f} {train_results_2['accuracy']-train_results_1['accuracy']:<15.4f}")
@@ -379,14 +379,14 @@ def main():
     
     print("\n分析:")
     if l2_1 > l2_2:
-        print(f"  - wd=0.01 的参数范数更大 ({l2_1:.4f} vs {l2_2:.4f})")
+        print(f"  - Model 1 的参数范数更大 ({l2_1:.4f} vs {l2_2:.4f})")
     else:
-        print(f"  - wd=10.0 的参数范数更大 ({l2_2:.4f} vs {l2_1:.4f})")
+        print(f"  - Model 2 的参数范数更大 ({l2_2:.4f} vs {l2_1:.4f})")
     
     if train_results_1['accuracy'] > train_results_2['accuracy']:
-        print(f"  - wd=0.01 在训练集上准确率更高")
+        print(f"  - Model 1 在训练集上准确率更高")
     else:
-        print(f"  - wd=10.0 在训练集上准确率更高")
+        print(f"  - Model 2 在训练集上准确率更高")
 
 
 if __name__ == '__main__':
