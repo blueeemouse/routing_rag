@@ -159,6 +159,21 @@
 
 - **目的**: 验证GraphRAG类能不能正常传入context参数（用于指定配置文件路径和向量存储参数）
 
+### Router 模型测试
+
+#### test_feature_fused_model.py
+
+- **目的**: 测试 FeatureFusedRouterModel 特征融合路由模型
+- **测试内容**:
+  - 模型创建和初始化（使用 all-MiniLM-L6-v2 作为 backbone）
+  - 前向传播功能
+  - 预测功能（route 方法）
+  - 模型保存和加载
+- **依赖**:
+  - router/trainable_router/models/feature_fused_model.py
+  - router/trainable_router/config.py
+- **说明**: 使用临时目录保存测试模型，运行后自动清理
+
 ### 其它部分
 
 #### test_decomposer.py

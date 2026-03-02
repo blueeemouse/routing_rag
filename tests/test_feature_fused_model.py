@@ -1,12 +1,26 @@
 """
 测试FeatureFusedRouterModel
+
+运行方式：
+    cd routing_rag
+    python tests/test_feature_fused_model.py
+
+测试内容：
+    - 模型创建和初始化
+    - 前向传播
+    - 预测功能
+    - 保存和加载
+
+注意：测试使用临时目录，运行后会自动清理
 """
 
 import sys
 import os
+import tempfile
+import shutil
 
 # 添加项目根目录到路径
-project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 
 import torch
@@ -72,29 +86,34 @@ def test_feature_fused_model():
     routes = model.route(test_queries)
     print(f"  Predicted routes: {routes}")
     
-    # 测试保存和加载
+    # 测试保存和加载（使用临时目录）
     print("\n4. 测试保存和加载...")
-    test_save_path = "router_models/test_feature_fused"
-    model.save(test_save_path)
-    print(f"  模型已保存到: {test_save_path}")
-    
-    # 加载模型
-    model2 = FeatureFusedRouterModel(
-        config,
-        use_spacy=False,
-        feature_normalize=True,
-        use_projection=True
-    )
-    model2.load(test_save_path)
-    print(f"  模型已加载")
-    
-    # 验证加载后的预测
-    routes2 = model2.route(test_queries)
-    print(f"  加载后预测结果: {routes2}")
-    
-    print("\n" + "=" * 80)
-    print("✓ 测试通过！")
-    print("=" * 80)
+    temp_dir = tempfile.mkdtemp(prefix="test_feature_fused_")
+    try:
+        model.save(temp_dir)
+        print(f"  模型已保存到临时目录: {temp_dir}")
+        
+        # 加载模型
+        model2 = FeatureFusedRouterModel(
+            config,
+            use_spacy=False,
+            feature_normalize=True,
+            use_projection=True
+        )
+        model2.load(temp_dir)
+        print(f"  模型已加载")
+        
+        # 验证加载后的预测
+        routes2 = model2.route(test_queries)
+        print(f"  加载后预测结果: {routes2}")
+        
+        print("\n" + "=" * 80)
+        print("✓ 测试通过！")
+        print("=" * 80)
+    finally:
+        # 清理临时目录
+        shutil.rmtree(temp_dir)
+        print(f"\n已清理临时目录: {temp_dir}")
 
 
 if __name__ == '__main__':
