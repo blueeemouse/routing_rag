@@ -242,7 +242,7 @@ rag:
 # 1. 训练模型: python router/train_router.py --train_data evaluation_results --output_dir router_models
 # 2. 修改router配置使用trainable类型
 trainable_router:
-  # 模型类型: "dc" (对比学习), "knn", "mf" (矩阵分解)
+  # 模型类型: "dc" (对比学习)
   model_type: "dc"
   
   # 模型路径 (训练后的模型)

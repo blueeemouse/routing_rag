@@ -32,14 +32,16 @@
 
 param(
     [Parameter(Mandatory=$true, HelpMessage="First model path")]
-    [string]$Model1,
+    # [string]$Model1,
+    [string]$Model1 = 'D:\Develop\all_RAG\routing_rag\router_models\BAAI-bge-base-en-v1.5\no_tie_sampled_1000_non_balanced\dc\weight_decay_search_phaseB\wd_10.0\checkpoint_step_50',
     
     [Parameter(Mandatory=$true, HelpMessage="Second model path")]
-    [string]$Model2,
+    # [string]$Model2,
+    [string]$Model2 = 'D:\Develop\all_RAG\routing_rag\router_models\backbone_search_sampled1000\bge-base-en-v1.5\checkpoint_step_50',
     
     [Parameter(HelpMessage="Training data path")]
-    # [string]$TrainData = "HotpotQA_train_data/label_analysis/all_labels_no_tie_sampled1000.json",
-    [string]$TrainData = "HotpotQA_train_data/label_analysis/all_labels_with_tie_converted.json",
+    [string]$TrainData = "HotpotQA_train_data/label_analysis/all_labels_no_tie_sampled1000.json",
+    # [string]$TrainData = "HotpotQA_train_data/label_analysis/all_labels_with_tie_converted.json",
     
     [Parameter(HelpMessage="Validation data path")]
     [string]$ValData = "evaluation_results/router_test_labels.json",
