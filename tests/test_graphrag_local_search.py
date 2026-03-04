@@ -31,7 +31,8 @@ def test_local_search():
             return False
         
         # 使用已构建的测试数据路径
-        test_data_path = os.path.join(project_root, "graphrag_class_test_data")
+        # test_data_path = os.path.join(project_root, "graphrag_class_test_data")
+        test_data_path = os.path.join(project_root, "graphrag_ollama_hotpotqa_15_test_data")
         
         print(f"测试数据路径: {test_data_path}")
         
@@ -43,10 +44,12 @@ def test_local_search():
         
         print("开始测试_local_search方法...")
         
+        context = {'config_filename':'graphrag_hotpotqa_config.yml'}
         # 调用_local_search方法
         result = graph_rag._local_search(
-            query="人工智能的定义是什么？",
-            data_path=test_data_path
+            query="Which magazine was started first Arthur's Magazine or First for Women?",
+            data_path=test_data_path,
+            context=context
         )
         
         print(f"查询结果: {result}")
