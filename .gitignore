@@ -27,3 +27,5 @@ graphrag_index_hotpotqa_train_5000_samples/
 *.pt
 router_models/
 no_use/
+temp/
+analysis/

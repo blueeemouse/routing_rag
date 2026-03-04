@@ -26,18 +26,18 @@ class GraphRAG(RAGInterface):
         初始化GraphRAG
 
         Args:
-            config: 配置参数字典
+            config: 配置参数字典（可选）
         """
         self.config = config or {}
 
-        # 从配置中获取参数
-        self.api_url = settings.graph_rag_api_url
-        self.api_key = settings.graph_rag_api_key
-        self.model = settings.graph_rag_model
-        self.embedding_model = settings.graph_rag_embedding_model
-        self.chunk_size = settings.graph_rag_chunk_size
-        self.top_k = settings.graph_rag_top_k
-        self.temperature = settings.graph_rag_temperature
+        # 优先使用传入的配置，否则使用全局配置
+        self.api_url = self.config.get('api_url', settings.graph_rag_api_url)
+        self.api_key = self.config.get('api_key', settings.graph_rag_api_key)
+        self.model = self.config.get('model', settings.graph_rag_model)
+        self.embedding_model = self.config.get('embedding_model', settings.graph_rag_embedding_model)
+        self.chunk_size = self.config.get('chunk_size', settings.graph_rag_chunk_size)
+        self.top_k = self.config.get('top_k', settings.graph_rag_top_k)
+        self.temperature = self.config.get('temperature', settings.graph_rag_temperature)
 
         # 设置日志
         self.logger = logging.getLogger(__name__)
@@ -272,28 +272,75 @@ class GraphRAG(RAGInterface):
 
         Returns:
             VectorStoreSchemaConfig对象
+            
+        维度确定优先级：
+        1. embedding_dim 配置（优先级：context > self.config）
+        2. 从 embedding_model 名推断（必须在 dimension_map 中）
+        3. 推断失败 → 报错并退出
         """
         from graphrag.config.models.vector_store_schema_config import VectorStoreSchemaConfig
 
-        # 默认配置
+        # 准备合并配置
+        # 字典解包合并规则：后面的字典覆盖前面的字典
+        # 因此优先级：context > self.config
+        merged_config = {**self.config, **(context or {})}
+        
+        # 1. 尝试从配置中获取显式的维度
+        dimensions = None
+        if 'embedding_dim' in merged_config:
+            dimensions = merged_config['embedding_dim']
+        
+        # 3. 如果没有显式配置，尝试从 embedding_model 推断
+        if dimensions is None:
+            # 从 GraphRAG 的 config 对象中提取 embedding_model
+            embedding_model = None
+            if hasattr(config, 'models'):
+                for model_id, model_config in config.models.items():
+                    if hasattr(model_config, 'type') and model_config.type == 'embedding':
+                        embedding_model = model_config.model
+                        break
+            
+            # 优先使用 merged_config 中的 embedding_model
+            embedding_model = merged_config.get('embedding_model', embedding_model or self.embedding_model)
+            
+            # 根据模型推断维度
+            dimension_map = {
+                'nomic-embed-text': 768,
+                'text-embedding-ada-002': 1536,
+                'text-embedding-3-small': 1536,
+                'text-embedding-3-large': 3072,
+            }
+            
+            if embedding_model and embedding_model in dimension_map:
+                dimensions = dimension_map[embedding_model]
+                self.logger.info(f"从embedding模型推断维度: {embedding_model} -> {dimensions}")
+            else:
+                # 既没有显式配置，模型又不在map中 → 严格报错
+                raise ValueError(
+                    f"无法确定embedding模型 '{embedding_model}' 的维度。\n"
+                    f"请通过以下方式之一解决：\n"
+                    f"  1. 在配置中显式指定 'embedding_dim' 参数\n"
+                    f"  2. 或使用已知模型: {list(dimension_map.keys())}"
+                )
+        
+        # 构建schema配置
         default_schema = {
             'index_name': 'default-entity-description',
             'id_field': 'id',
             'text_field': 'text',
             'vector_field': 'vector',
             'attributes_field': 'attributes',
-            'vector_size': 1536
+            'vector_size': dimensions
         }
-
-        # 尝试从context中获取自定义配置
+        
+        # 如果有自定义schema，合并（后面的覆盖前面的）
+        # 优先级：context['vector_store_schema'] > default_schema
         if context and 'vector_store_schema' in context:
-            custom_schema = context['vector_store_schema']
-            # 合并默认配置和自定义配置
-            merged_schema = {**default_schema, **custom_schema}
-            self.logger.info("使用自定义向量存储schema配置")
+            merged_schema = {**default_schema, **context['vector_store_schema']}
+            self.logger.info(f"使用自定义向量存储schema配置，向量维度: {merged_schema['vector_size']}")
         else:
             merged_schema = default_schema
-            self.logger.info("使用默认向量存储schema配置")
+            self.logger.info(f"使用默认向量存储schema配置，向量维度: {dimensions}")
 
         # 创建VectorStoreSchemaConfig对象
         return VectorStoreSchemaConfig(**merged_schema)
@@ -547,21 +594,8 @@ class GraphRAG(RAGInterface):
             # 检查向量存储是否存在
             if entity_description_vector_store_path.exists():
                 # 创建向量存储配置
-                # index_name: 向量数据库中集合的名称
-                # id_field: 存储文档ID的字段名
-                # text_field: 存储文本内容的字段名
-                # vector_field: 存储向量嵌入的字段名
-                # attributes_field: 存储额外属性的字段名
-                # vector_size: 向量的维度（如text-embedding-ada-002是1536维）
-                from graphrag.config.models.vector_store_schema_config import VectorStoreSchemaConfig
-                schema_config = VectorStoreSchemaConfig(
-                    index_name="default-entity-description",
-                    id_field="id",
-                    text_field="text",
-                    vector_field="vector",
-                    attributes_field="attributes",
-                    vector_size=1536
-                )
+                # 使用_get_vector_store_schema方法从config推断向量维度
+                schema_config = self._get_vector_store_schema(config, context)
 
                 # 初始化向量存储
                 entity_description_embedding_store = LanceDBVectorStore(

@@ -1,0 +1,80 @@
+# ============================================
+# Settings 配置模板
+# 此文件仅用于说明参数结构，不包含实际可用值
+# 实际配置请修改 settings.yaml
+# ============================================
+
+# ============================================
+# GraphRAG 配置示例
+# ============================================
+graph_rag:
+  # LLM 配置
+  api_url: "YOUR_API_URL"              # API 地址，如 http://127.0.0.1:11434
+  api_key: "YOUR_API_KEY"              # API 密钥，Ollama 通常为 "ollama"
+  model: "YOUR_LLM_MODEL"              # LLM 模型名称，如 qwen2.5:3b
+  
+  # Embedding 配置（重点）
+  embedding_model: "YOUR_EMBEDDING_MODEL"  # Embedding 模型名称，如 nomic-embed-text
+  embedding_dim: 768                       # 向量维度（必须和 embedding_model 同级）
+  
+  # 其他参数
+  chunk_size: 512                      # 文本分块大小
+  top_k: 5                             # 检索返回的top-k文档数
+  temperature: 0.0                     # 生成温度
+
+# ============================================
+# NaiveRAG 配置示例
+# ============================================
+naive_rag:
+  api_url: "YOUR_API_URL"
+  api_key: "YOUR_API_KEY"
+  model: "YOUR_LLM_MODEL"
+  embedding_model: "YOUR_EMBEDDING_MODEL"
+  embedding_dim: 768                   # 可选：显式指定向量维度
+  chunk_size: 512
+  top_k: 5
+  temperature: 0.0
+
+# ============================================
+# NoRAG 配置示例
+# ============================================
+no_rag:
+  api_url: "YOUR_API_URL"
+  api_key: "YOUR_API_KEY"
+  model: "YOUR_LLM_MODEL"
+  temperature: 0.0
+
+# ============================================
+# Router 配置示例
+# ============================================
+router:
+  api_url: "YOUR_API_URL"
+  api_key: "YOUR_API_KEY"
+  model: "YOUR_LLM_MODEL"
+  temperature: 0.0
+
+# ============================================
+# 重要说明
+# ============================================
+# 1. embedding_dim 配置优先级：
+#    - 显式指定的 embedding_dim > 从 embedding_model 推断
+#    - 如果不指定 embedding_dim，系统会自动从已知模型推断
+#    - 已知模型维度映射：
+#      * nomic-embed-text: 768
+#      * text-embedding-ada-002: 1536
+#      * text-embedding-3-small: 1536
+#      * text-embedding-3-large: 3072
+#
+# 2. embedding_dim 必须和 embedding_model 同级：
+#    ✓ 正确：
+#      graph_rag:
+#        embedding_model: "model-name"
+#        embedding_dim: 768
+#
+#    ✗ 错误：
+#      graph_rag:
+#        embedding_model: "model-name"
+#        some_field:
+#          embedding_dim: 768
+#
+# 3. 使用未知模型时必须显式指定 embedding_dim，否则会报错
