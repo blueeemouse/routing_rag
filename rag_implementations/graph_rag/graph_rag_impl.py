@@ -145,7 +145,7 @@ class GraphRAG(RAGInterface):
         # 模拟GraphRAG查询结果
         return f"GraphRAG已处理查询: '{query}'，使用图数据进行增强检索。"
 
-    def build_index_from_path(self, root_dir: str, config_filepath: str = None, output_dir: str = None, **kwargs):
+    def build_index_from_path(self, root_dir: str, config_filepath: str = None, output_dir: str = None, method: str = None, **kwargs):
         """
         从路径构建索引（适用于文件系统驱动的RAG）
         Build index from file path (suitable for file system-based RAG)
@@ -154,6 +154,9 @@ class GraphRAG(RAGInterface):
             root_dir (str): 项目根目录路径，配置文件中的相对路径将相对于此目录解析
             config_filepath (str, optional): 配置文件路径
             output_dir (str, optional): 输出目录路径，可覆盖配置文件中的设置
+            method (str, optional): 索引构建方法，可选值: 'fast', 'standard'。默认为 'standard'
+                - 'fast': 快速模式，使用NLP提取实体和关系，减少LLM调用
+                - 'standard': 标准模式，使用LLM进行完整的图构建
             **kwargs: 额外的参数，用于特定实现的配置
         """
         if not self._graph_rag_available:
@@ -175,6 +178,20 @@ class GraphRAG(RAGInterface):
                 self.logger.error(f"根目录不存在: {root_dir}")
                 return False
 
+            # 解析索引方法
+            # 支持的method值: 'fast', 'standard'，不区分大小写
+            indexing_method = IndexingMethod.Standard  # 默认使用标准模式
+            if method:
+                method_lower = method.lower()
+                if method_lower == 'fast':
+                    indexing_method = IndexingMethod.Fast
+                    self.logger.info("使用Fast模式构建索引（NLP + LLM混合模式）")
+                elif method_lower == 'standard':
+                    indexing_method = IndexingMethod.Standard
+                    self.logger.info("使用Standard模式构建索引（完整LLM模式）")
+                else:
+                    self.logger.warning(f"未知的索引方法 '{method}'，使用默认的Standard模式")
+
             # 使用CLI接口构建索引
             # root_dir参数是项目根目录，配置文件中的相对路径将相对于此目录解析
             index_cli(
@@ -187,7 +204,7 @@ class GraphRAG(RAGInterface):
                 skip_validation=False,
                 # output_dir=Path(output_dir) if output_dir else None,
                 output_dir=None,
-                method=IndexingMethod.Standard
+                method=indexing_method
             )
 
             self.logger.info("GraphRAG索引构建成功")

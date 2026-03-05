@@ -94,6 +94,46 @@ result = graph_rag.query(
 )
 ```
 
+## 索引构建方法
+
+GraphRAG 支持两种索引构建方法：
+
+### Standard 模式（默认）
+- 使用 LLM 进行完整的图构建
+- 实体提取、关系识别、社区发现全部使用 LLM
+- 构建速度较慢，但图质量较高
+- 适用于对图精度要求较高的场景
+
+### Fast 模式
+- 使用 NLP 技术提取实体和关系，减少 LLM 调用
+- 构建速度快，适合大规模数据集
+- 图精度略低于 Standard 模式
+- 适用于快速原型或资源受限场景
+
+### 使用方法
+
+```python
+# 方式1：使用 Standard 模式（默认）
+graph_rag.build_index_from_path(
+    root_dir="/path/to/project",
+    config_filepath="/path/to/config.yml"
+)
+
+# 方式2：使用 Fast 模式
+graph_rag.build_index_from_path(
+    root_dir="/path/to/project",
+    config_filepath="/path/to/config.yml",
+    method="fast"
+)
+
+# 方式3：显式指定 Standard 模式
+graph_rag.build_index_from_path(
+    root_dir="/path/to/project",
+    config_filepath="/path/to/config.yml",
+    method="standard"
+)
+```
+
 ## 文件结构
 - `graph_rag_impl.py` - 使用微软GraphRAG的实现
 - `__init__.py` - 模块初始化文件
