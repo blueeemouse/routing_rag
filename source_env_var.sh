@@ -1,6 +1,8 @@
-# 在你的项目根目录下执行
-Get-Content .env | ForEach-Object {
-    if ($_ -match '^([^=]+)=(.*)$') {
-        [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2])
-    }
-}
+#!/bin/bash
+# 加载 .env 环境变量
+
+set -a
+source .env
+set +a
+
+echo "环境变量已加载"

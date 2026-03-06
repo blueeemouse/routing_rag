@@ -32,8 +32,8 @@ import re
 import string
 import time
 
-# Add routing_rag path
-ROUTING_RAG_ROOT = r"D:\Develop\all_RAG\routing_rag"
+# Add routing_rag path (使用相对路径，自动获取项目根目录)
+ROUTING_RAG_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROUTING_RAG_ROOT)
 
 # 加载环境变量（从.env文件）
@@ -802,21 +802,21 @@ def main():
     parser.add_argument(
         '--output_dir',
         type=str,
-        default=r"D:\Develop\all_RAG\routing_rag\evaluation_results",
-        help='输出目录'
+        default=None,
+        help='输出目录（默认: 项目根目录/evaluation_results）'
     )
 
     parser.add_argument(
         '--settings_file',
         type=str,
-        default=r"D:\Develop\all_RAG\routing_rag\config\settings.yaml",
-        help='配置文件路径'
+        default=None,
+        help='配置文件路径（默认: 项目根目录/config/settings.yaml）'
     )
 
     parser.add_argument(
         '--graphrag_work_dir',
         type=str,
-        default=r"D:\Develop\all_RAG\routing_rag\graphrag_hotpotqa_data",
+        default=None,
         help='GraphRAG工作目录'
     )
 
@@ -848,6 +848,12 @@ def main():
     )
 
     args = parser.parse_args()
+
+    # 设置默认路径（基于项目根目录）
+    if args.settings_file is None:
+        args.settings_file = os.path.join(ROUTING_RAG_ROOT, 'config', 'settings.yaml')
+    if args.output_dir is None:
+        args.output_dir = os.path.join(ROUTING_RAG_ROOT, 'evaluation_results')
 
     # 解析要评测的模型
     models_to_eval: Set[str] = set()
