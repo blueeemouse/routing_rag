@@ -187,21 +187,33 @@ class FeatureFusedTrainer(BaseTrainer):
             labels = torch.where(is_tie, torch.tensor(no_rag_idx, device=self.device), labels)
         
         # 计算交叉熵损失
-        num_strategies = len(self.model.strategy_names)
-        pos_weight = torch.ones(num_strategies).to(self.device)
-        
-        # 从config获取权重
-        if self.class_weights:
-            for strategy_name, weight in self.class_weights.items():
-                if strategy_name in strategy_to_idx:
-                    idx = strategy_to_idx[strategy_name]
-                    pos_weight[idx] = weight
+        # 检查是否使用样本权重
+        if 'sample_weights' in batch:
+            # 使用样本权重
+            loss_fn = torch.nn.CrossEntropyLoss(reduction='none')
+            losses = loss_fn(logits, labels)  # shape: (batch_size,)
+            sample_weights = batch['sample_weights'].to(self.device)
+            loss = (losses * sample_weights).sum() / sample_weights.sum()  # 加权平均
             
             if self.debug_mode:
-                print(f"Using Weighted Loss: {self.class_weights}")
-        
-        loss_fn = torch.nn.CrossEntropyLoss(weight=pos_weight)
-        loss = loss_fn(logits, labels)
+                print(f"Using Sample Weights: mean={sample_weights.mean():.4f}, min={sample_weights.min():.4f}, max={sample_weights.max():.4f}")
+        else:
+            # 使用类别权重（或默认无权重）
+            num_strategies = len(self.model.strategy_names)
+            pos_weight = torch.ones(num_strategies).to(self.device)
+            
+            # 从config获取权重
+            if self.class_weights:
+                for strategy_name, weight in self.class_weights.items():
+                    if strategy_name in strategy_to_idx:
+                        idx = strategy_to_idx[strategy_name]
+                        pos_weight[idx] = weight
+                
+                if self.debug_mode:
+                    print(f"Using Weighted Loss: {self.class_weights}")
+            
+            loss_fn = torch.nn.CrossEntropyLoss(weight=pos_weight)
+            loss = loss_fn(logits, labels)
 
         # 记录训练loss
         if self.global_step % self.training_config.eval_steps == 0:

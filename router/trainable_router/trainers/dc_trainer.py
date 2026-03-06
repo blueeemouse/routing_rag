@@ -29,7 +29,7 @@ except ImportError:
 class DCTrainer(BaseTrainer):
     """DCRouter训练器"""
     
-    def __init__(self, model, config: TrainableRouterConfig, output_dir: str = "outputs"):
+    def __init__(self, model, config: TrainableRouterConfig, output_dir: str = "outputs", logger=None):
         """
         初始化
 
@@ -37,8 +37,9 @@ class DCTrainer(BaseTrainer):
             model: DCRouter模型
             config: 配置
             output_dir: 输出目录
+            logger: (可选) 标准 logging.Logger 对象
         """
-        super().__init__(model, config, output_dir)
+        super().__init__(model, config, output_dir, logger)
 
         self.training_config = config.training
         self.data_config = config.data

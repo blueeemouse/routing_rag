@@ -66,6 +66,7 @@ def parse_args():
     parser.add_argument('--eval_steps', type=int, default=None, help='评估步数')
     parser.add_argument('--save_steps', type=int, default=None, help='保存步数')
     parser.add_argument('--seed', type=int, default=None, help='随机种子')
+    parser.add_argument('--trainer_type', type=str, default=None, help='训练器类型 (dc, classification, feature_fused)')
     
     # 损失配置
     parser.add_argument('--top_k', type=int, default=None, help='正样本数量')
@@ -75,6 +76,8 @@ def parse_args():
     parser.add_argument('--num_clusters', type=int, default=None, help='Cluster数量')
     parser.add_argument('--class_weights', type=str, default=None,
                         help='类别权重，格式: "no_rag=3.0,naive_rag=1.0"')
+    parser.add_argument('--tie_weight', type=float, default=None,
+                        help='Tie样本权重（默认非tie样本权重为1.0）')
     
     # 输出配置
     parser.add_argument('--output_dir', type=str, default=None, help='输出目录')
@@ -153,6 +156,8 @@ def create_config_from_args(args) -> TrainableRouterConfig:
         config.training.save_steps = args.save_steps
     if args.seed is not None:
         config.training.seed = args.seed
+    if args.trainer_type is not None:
+        config.training.trainer_type = args.trainer_type
     if args.top_k is not None:
         config.training.top_k = args.top_k
     if args.last_k is not None:
@@ -441,9 +446,16 @@ def main():
         'router_labels' in config.data.train_path or
         'all_labels' in config.data.train_path or
         'curriculum_stage2' in config.data.train_path):
-        logger_instance.info("检测到路由标签格式，使用RouterLabelDataset")
-        from trainable_router.datasets.router_label_dataset import RouterLabelDataset
-        train_dataset = RouterLabelDataset(config)
+        
+        # 根据tie_weight参数选择数据集
+        if args.tie_weight is not None:
+            logger_instance.info(f"使用WeightedRouterLabelDataset（tie_weight={args.tie_weight}）")
+            from trainable_router.datasets.weighted_router_label_dataset import WeightedRouterLabelDataset
+            train_dataset = WeightedRouterLabelDataset(config, tie_weight=args.tie_weight)
+        else:
+            logger_instance.info("使用RouterLabelDataset")
+            from trainable_router.datasets.router_label_dataset import RouterLabelDataset
+            train_dataset = RouterLabelDataset(config)
     else:
         from trainable_router.datasets.hotpotqa_dataset import GenericRouterDataset
         train_dataset = GenericRouterDataset(config)
@@ -487,6 +499,14 @@ def main():
             'cluster_ids': torch.tensor([item['cluster_id'] for item in x], dtype=torch.long),
             'queries': [item['queries'] for item in x],
         }
+        
+        # 如果item中有sample_weight，添加到batch
+        if 'sample_weight' in x[0]:
+            batch_data['sample_weights'] = torch.tensor(
+                [item['sample_weight'] for item in x], 
+                dtype=torch.float32
+            )
+        
         # 统一使用transformers方式，始终添加分词数据
         if 'input_ids' in x[0]:
             # 数据已经分词好（如 GenericRouterDataset）

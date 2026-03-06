@@ -56,7 +56,7 @@
 | 文件 | 条数 | 说明 |
 |------|------|------|
 | `all_labels_no_tie.json` | ~2451 | 非 tie 样本（仅含明确最优策略的样本） |
-| `all_labels_converted.json` | ~2451 | 同上，RouterLabelDataset 格式 |
+| `all_labels_no_tie_converted.json` | ~2451 | 同上，RouterLabelDataset 格式 |（原名all_labels_converted.json）
 | `all_labels_with_tie_converted.json` | 5000 | 全部样本，tie 标签转换为 no_rag（效率优先） |
 | `all_labels_no_tie_sampled1000.json` | 1000 | 非 tie 样本抽样，用于快速训练搜参 |
 
