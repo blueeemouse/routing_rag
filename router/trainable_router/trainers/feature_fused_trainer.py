@@ -80,11 +80,8 @@ class FeatureFusedTrainer(BaseTrainer):
         # 跟踪最佳性能
         self.best_train_loss = float('inf')
         self.best_train_step = 0
-        self.best_val_accuracy = 0.0
+        self.best_val_accuracy = float('-inf')  # 初始化为负无穷，确保第一次评估能正确记录
         self.best_val_step = 0
-
-        # 记录保存步数计数
-        self.save_step_counter = 0
     
     def _init_optimizer(self) -> torch.optim.Optimizer:
         """初始化优化器"""
@@ -220,13 +217,6 @@ class FeatureFusedTrainer(BaseTrainer):
             loss_str = f"Step {self.global_step}: Loss = {loss:.6f}"
             if self.logger:
                 self.logger.info(loss_str)
-
-            # 跟踪最佳train loss
-            if loss < self.best_train_loss:
-                self.best_train_loss = float(loss)
-                self.best_train_step = self.global_step
-                if self.logger:
-                    self.logger.info(f"🏆 新的最佳Train Loss！Step={self.global_step}, Loss={loss:.6f}")
         
         # Monitor accuracy
         if self.monitor_accuracy:
@@ -305,7 +295,18 @@ class FeatureFusedTrainer(BaseTrainer):
                     if self.logger:
                         self.logger.info(f"评估 (Step {self.global_step}): Acc={val_acc:.4f}, Loss={val_loss:.4f}")
 
-                    is_new_best_val = val_acc > self.best_val_accuracy
+                    # 判断并更新最佳val性能，如果是最佳则保存checkpoint
+                    if val_acc > self.best_val_accuracy:
+                        self.best_val_accuracy = val_acc
+                        self.best_val_step = self.global_step
+                        
+                        # 保存最佳val checkpoint
+                        checkpoint_path = f"{self.output_dir}/checkpoint_best_val"
+                        self.save_checkpoint(checkpoint_path)
+                        
+                        if self.logger:
+                            self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
+                            self.logger.info(f"最佳Val模型已保存到: {checkpoint_path}")
 
                 # TensorBoard 记录评估指标
                 if self.tensorboard_writer is not None:
@@ -316,29 +317,6 @@ class FeatureFusedTrainer(BaseTrainer):
                     strategy_acc = val_metrics.get('strategy_accuracy', {})
                     for strategy, acc in strategy_acc.items():
                         self.tensorboard_writer.add_scalar(f'Recall/val_{strategy}', acc, self.global_step)
-
-            # 定期保存检查点
-            if self.global_step % self.training_config.save_steps == 0:
-                checkpoint_path = f"{self.output_dir}/checkpoint_step_{self.global_step}"
-
-                # 判断是否为最佳val checkpoint
-                if self.global_step % self.training_config.eval_steps == 0:
-                    if is_new_best_val:
-                        self.best_val_accuracy = val_acc
-                        self.best_val_step = self.global_step
-                        if self.logger:
-                            self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
-
-                # 保存checkpoint
-                self.save_checkpoint(checkpoint_path)
-
-                # 定期清理旧checkpoint
-                self.save_step_counter += 1
-                if self.save_step_counter % 5 == 0:
-                    self._cleanup_old_checkpoints()
-
-                if self.logger:
-                    self.logger.info(f"Step {self.global_step}: Checkpoint saved to {checkpoint_path}")
         
         return {
             'loss': total_loss / num_batches if num_batches > 0 else 0.0
@@ -471,56 +449,6 @@ class FeatureFusedTrainer(BaseTrainer):
             if self.logger:
                 self.logger.warning(f"删除checkpoint失败: {path}, 错误: {e}")
 
-    def _cleanup_old_checkpoints(self):
-        """
-        清理旧checkpoint，只保留 best_val 和 best_train_loss 对应的 checkpoint
-        
-        保留的checkpoint：
-        - best_val_step: 最佳验证准确率对应的checkpoint
-        - best_train_step: 最低训练损失对应的checkpoint
-        """
-        import shutil
-
-        checkpoints = []
-        try:
-            for item in os.listdir(self.output_dir):
-                if item.startswith('checkpoint_step_'):
-                    step = int(item.split('_')[-1])
-                    checkpoints.append({
-                        'path': os.path.join(self.output_dir, item),
-                        'step': step
-                    })
-        except Exception as e:
-            if self.logger:
-                self.logger.warning(f"扫描checkpoint目录失败: {e}")
-            return
-
-        if not checkpoints:
-            return
-
-        to_keep_steps = set()
-
-        # 只保留最佳checkpoint
-        if self.best_val_step > 0:
-            to_keep_steps.add(self.best_val_step)
-        if self.best_train_step > 0:
-            to_keep_steps.add(self.best_train_step)
-
-        # 删除其他checkpoint
-        deleted_count = 0
-        for ckpt in checkpoints:
-            if ckpt['step'] not in to_keep_steps:
-                self._delete_checkpoint(ckpt['path'])
-                deleted_count += 1
-
-        if deleted_count > 0 and self.logger:
-            kept_info = []
-            if self.best_val_step > 0:
-                kept_info.append(f"best_val(step={self.best_val_step}, acc={self.best_val_accuracy:.4f})")
-            if self.best_train_step > 0:
-                kept_info.append(f"best_train(step={self.best_train_step}, loss={self.best_train_loss:.6f})")
-            self.logger.info(f"清理checkpoint: 只保留最佳模型 ({', '.join(kept_info)})，删除 {deleted_count} 个其他checkpoint")
-    
     def load_checkpoint(self, path: str):
         """加载检查点"""
         checkpoint = torch.load(os.path.join(path, 'model.pt'), map_location=self.device)
@@ -546,8 +474,6 @@ class FeatureFusedTrainer(BaseTrainer):
                 'learning_rate': self.training_config.learning_rate,
                 'best_val_accuracy': round(self.best_val_accuracy, 4),
                 'best_val_step': self.best_val_step,
-                'best_train_loss': round(self.best_train_loss, 6),
-                'best_train_step': self.best_train_step,
             }
             json.dump(training_info, f, indent=2)
     

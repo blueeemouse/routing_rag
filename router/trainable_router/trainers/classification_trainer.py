@@ -74,13 +74,8 @@ class ClassificationTrainer(BaseTrainer):
         # 【新增】跟踪最佳性能
         self.best_train_loss = float('inf')
         self.best_train_step = 0
-        self.best_val_accuracy = 0.0
+        self.best_val_accuracy = float('-inf')  # 初始化为负无穷，确保第一次评估能正确记录
         self.best_val_step = 0
-
-        # 【新增】记录最佳val的step（用于清理时保留）
-
-        # 【新增】记录保存步数计数（用于减少清理频率）
-        self.save_step_counter = 0
     
     def _init_optimizer(self) -> torch.optim.Optimizer:
         """初始化优化器"""
@@ -239,18 +234,11 @@ class ClassificationTrainer(BaseTrainer):
 
 
 
-        # 按eval_steps间隔记录训练loss（同时输出到控制台和文件）
+            # 按eval_steps间隔记录训练loss（同时输出到控制台和文件）
         if self.global_step % self.training_config.eval_steps == 0:
             loss_str = f"Step {self.global_step}: Loss = {loss:.6f}, Logits range = [{logits.min():.4f}, {logits.max():.4f}]"
             if self.logger:
                 self.logger.info(loss_str)
-
-            # 【新增】跟踪最佳train loss
-            if loss < self.best_train_loss:
-                self.best_train_loss = float(loss)
-                self.best_train_step = self.global_step
-                if self.logger:
-                    self.logger.info(f"🏆 新的最佳Train Loss！Step={self.global_step}, Loss={loss:.6f}")
         
         # 【关键点2】不改返回值！但把logits存到self里
         # 使用detach()是为了切断计算图，省显存，且不影响loss反向传播
@@ -335,9 +323,18 @@ class ClassificationTrainer(BaseTrainer):
                     if self.logger:
                         self.logger.info(f"评估 (Step {self.global_step}): Acc={val_acc:.4f}, Loss={val_loss:.4f}")
 
-                    # 【新增】记录最佳val性能（延迟更新，在save块中更新）
-                    # 只记录是否是新的最佳，不立即更新self.best_val_accuracy
-                    is_new_best_val = val_acc > self.best_val_accuracy
+                    # 判断并更新最佳val性能，如果是最佳则保存checkpoint
+                    if val_acc > self.best_val_accuracy:
+                        self.best_val_accuracy = val_acc
+                        self.best_val_step = self.global_step
+                        
+                        # 保存最佳val checkpoint
+                        checkpoint_path = f"{self.output_dir}/checkpoint_best_val"
+                        self.save_checkpoint(checkpoint_path)
+                        
+                        if self.logger:
+                            self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
+                            self.logger.info(f"最佳Val模型已保存到: {checkpoint_path}")
 
                 # TensorBoard 记录评估指标
                 if self.tensorboard_writer is not None:
@@ -353,31 +350,6 @@ class ClassificationTrainer(BaseTrainer):
                     routing_dist = val_metrics.get('routing_distribution', {})
                     for strategy, ratio in routing_dist.items():
                         self.tensorboard_writer.add_scalar(f'RoutingDistribution/val_{strategy}', ratio, self.global_step)
-
-            # 定期保存检查点
-            if self.global_step % self.training_config.save_steps == 0:
-                checkpoint_path = f"{self.output_dir}/checkpoint_step_{self.global_step}"
-
-                # 【新增】在save前判断是否为最佳val checkpoint
-                # 只有在eval step时才检查是否为最佳val checkpoint
-                if self.global_step % self.training_config.eval_steps == 0:
-                    if is_new_best_val:
-                        # 【延迟更新】在这里更新best_val，确保同一个step的判断正确
-                        self.best_val_accuracy = val_acc
-                        self.best_val_step = self.global_step
-                        if self.logger:
-                            self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
-
-                # 保存checkpoint
-                self.save_checkpoint(checkpoint_path)
-
-                # 【新增】每5次保存才清理一次（减少I/O）
-                self.save_step_counter += 1
-                if self.save_step_counter % 5 == 0:
-                    self._cleanup_old_checkpoints()
-
-                if self.logger:
-                    self.logger.info(f"Step {self.global_step}: Checkpoint saved to {checkpoint_path}")
         
         return {
             'loss': total_loss / num_batches if num_batches > 0 else 0.0
@@ -533,59 +505,6 @@ class ClassificationTrainer(BaseTrainer):
             if self.logger:
                 self.logger.warning(f"删除checkpoint失败: {path}, 错误: {e}")
 
-    def _cleanup_old_checkpoints(self):
-        """
-        清理旧checkpoint，只保留 best_val 和 best_train_loss 对应的 checkpoint
-        
-        保留的checkpoint：
-        - best_val_step: 最佳验证准确率对应的checkpoint
-        - best_train_step: 最低训练损失对应的checkpoint
-        """
-        import shutil
-
-        # 获取所有checkpoint目录
-        checkpoints = []
-        try:
-            for item in os.listdir(self.output_dir):
-                if item.startswith('checkpoint_step_'):
-                    step = int(item.split('_')[-1])
-                    checkpoints.append({
-                        'path': os.path.join(self.output_dir, item),
-                        'step': step
-                    })
-        except Exception as e:
-            if self.logger:
-                self.logger.warning(f"扫描checkpoint目录失败: {e}")
-            return
-
-        if not checkpoints:
-            return
-
-        to_keep_steps = set()
-
-        # 只保留最佳checkpoint
-        if self.best_val_step > 0:
-            to_keep_steps.add(self.best_val_step)
-        if self.best_train_step > 0:
-            to_keep_steps.add(self.best_train_step)
-
-        # 删除其他checkpoint
-        deleted_count = 0
-        for ckpt in checkpoints:
-            if ckpt['step'] not in to_keep_steps:
-                self._delete_checkpoint(ckpt['path'])
-                deleted_count += 1
-
-        if deleted_count > 0 and self.logger:
-            kept_info = []
-            if self.best_val_step > 0:
-                kept_info.append(f"best_val(step={self.best_val_step}, acc={self.best_val_accuracy:.4f})")
-            if self.best_train_step > 0:
-                kept_info.append(f"best_train(step={self.best_train_step}, loss={self.best_train_loss:.6f})")
-            self.logger.info(f"清理checkpoint: 只保留最佳模型 ({', '.join(kept_info)})，删除 {deleted_count} 个其他checkpoint")
-
-
-    
     def load_checkpoint(self, path: str):
         """加载检查点"""
         checkpoint = torch.load(os.path.join(path, 'model.pt'), map_location=self.device)
@@ -609,11 +528,8 @@ class ClassificationTrainer(BaseTrainer):
                 'training_steps': self.global_step,
                 'epochs': self.epoch + 1,
                 'learning_rate': self.training_config.learning_rate,
-                # 【新增】最佳性能信息
                 'best_val_accuracy': round(self.best_val_accuracy, 4),
                 'best_val_step': self.best_val_step,
-                'best_train_loss': round(self.best_train_loss, 6),
-                'best_train_step': self.best_train_step,
             }
             json.dump(training_info, f, indent=2)
     
