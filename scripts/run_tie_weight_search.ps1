@@ -20,8 +20,8 @@ Write-Host "Tie Weight Search Script"
 Write-Host "========================================"
 Write-Host ""
 Write-Host "Configuration:"
-Write-Host "  Backbone: bge-base-en-v1.5 (feature_fused, lr=7e-5, wd=10)"
-Write-Host "  Temperature: 0.5"
+Write-Host "  Backbone 1: all-MiniLM-L6-v2 (dc, config=train_classification_5000.yaml)"
+Write-Host "  Backbone 2: bge-base-en-v1.5 (feature_fused, config=train_feature_fused.yaml)"
 Write-Host "  Epochs: 5"
 Write-Host "  Tie weights: $($TIE_WEIGHTS -join ', ')"
 Write-Host "  Output dir: $EXPERIMENTS_ROOT"
@@ -37,36 +37,31 @@ if (-not (Test-Path $EXPERIMENTS_ROOT)) {
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 "[$timestamp] Tie weight search started" | Out-File -FilePath $LOG_FILE -Encoding UTF8
 "Configuration:" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
-"  Backbone: bge-base-en-v1.5 (feature_fused)" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
-"  Temperature: 0.5" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
+"  Backbone 1: all-MiniLM-L6-v2 (dc)" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
+"  Backbone 2: bge-base-en-v1.5 (feature_fused)" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
 "  Epochs: 5" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
 "  Tie weights: $($TIE_WEIGHTS -join ', ')" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
 "" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
 
 # Statistics variables
-$TOTAL = $TIE_WEIGHTS.Count
+$TOTAL = $TIE_WEIGHTS.Count * 2  # 2 backbones
 $COMPLETED = 0
 $FAILED = 0
 $START_TIME = Get-Date
 
-Write-Host "Preparing to run $TOTAL experiments..."
+Write-Host "Preparing to run $TOTAL experiments (2 backbones x $($TIE_WEIGHTS.Count) tie weights)..."
 Write-Host ""
 
 # ============================================
-# Backbone: BAAI/bge-base-en-v1.5 (feature_fused model)
+# Backbone 1: all-MiniLM-L6-v2 (dc model)
 # ============================================
-$BACKBONE_NAME = "bge-base-en-v1.5"
-$BACKBONE = "BAAI/bge-base-en-v1.5"
-$MODEL_TYPE = "feature_fused"
-$TRAINER_TYPE = "feature_fused"
-$HIDDEN_SIZE = "768"
-$LEARNING_RATE = "7e-5"
-$TEMPERATURE = "0.5"
-$EPOCHS = "5"
-$WEIGHT_DECAY = "10"
+$BACKBONE_NAME = "all-MiniLM-L6-v2"
+$CONFIG_FILE = "config/train_classification_5000.yaml"
+$MODEL_TYPE = "dc"
+$TRAINER_TYPE = "classification"
 
 Write-Host "----------------------------------------"
-Write-Host "Backbone: $BACKBONE_NAME (model_type=$MODEL_TYPE, lr=$LEARNING_RATE, wd=$WEIGHT_DECAY)"
+Write-Host "Backbone 1: $BACKBONE_NAME (model_type=$MODEL_TYPE, trainer_type=$TRAINER_TYPE)"
 Write-Host "----------------------------------------"
 Write-Host ""
 
@@ -82,7 +77,55 @@ foreach ($tie_weight in $TIE_WEIGHTS) {
     "[$timestamp] Started: $BACKBONE_NAME, tie_weight=$tie_weight" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
     
     # Execute training
-    $command = "python router/train_router.py --model_type $MODEL_TYPE --trainer_type $TRAINER_TYPE --backbone $BACKBONE --train_data $TRAIN_DATA --val_data $VAL_DATA --learning_rate $LEARNING_RATE --temperature $TEMPERATURE --epochs $EPOCHS --weight_decay $WEIGHT_DECAY --tie_weight $tie_weight --output_dir $OUTPUT_DIR"
+    $command = "python router/train_router.py --config $CONFIG_FILE --train_data $TRAIN_DATA --val_data $VAL_DATA --epochs 5 --tie_weight $tie_weight --output_dir $OUTPUT_DIR"
+    Write-Host "Command: $command"
+    
+    Invoke-Expression $command
+    
+    # Check result
+    if ($LASTEXITCODE -eq 0) {
+        $COMPLETED++
+        Write-Host "[SUCCESS] Experiment completed: $BACKBONE_NAME, tie_weight=$tie_weight"
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        "[$timestamp] [SUCCESS] Experiment completed: $BACKBONE_NAME, tie_weight=$tie_weight" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
+    }
+    else {
+        $FAILED++
+        Write-Host "[FAILED] Experiment failed: $BACKBONE_NAME, tie_weight=$tie_weight (exit code: $LASTEXITCODE)"
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        "[$timestamp] [FAILED] Experiment failed: $BACKBONE_NAME, tie_weight=$tie_weight (exit code: $LASTEXITCODE)" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
+    }
+    
+    "" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
+    Write-Host ""
+}
+
+# ============================================
+# Backbone 2: BAAI/bge-base-en-v1.5 (feature_fused model)
+# ============================================
+$BACKBONE_NAME = "bge-base-en-v1.5"
+$CONFIG_FILE = "config/train_feature_fused.yaml"
+$MODEL_TYPE = "feature_fused"
+$TRAINER_TYPE = "feature_fused"
+
+Write-Host "----------------------------------------"
+Write-Host "Backbone 2: $BACKBONE_NAME (model_type=$MODEL_TYPE, trainer_type=$TRAINER_TYPE)"
+Write-Host "----------------------------------------"
+Write-Host ""
+
+foreach ($tie_weight in $TIE_WEIGHTS) {
+    # Generate output directory name
+    $OUTPUT_DIR = "$EXPERIMENTS_ROOT/$BACKBONE_NAME/tie_weight_$tie_weight"
+    
+    # Display current experiment info
+    $progress = "[$($COMPLETED + $FAILED + 1)/$TOTAL] $BACKBONE_NAME, tie_weight=$tie_weight"
+    Write-Host $progress
+    
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "[$timestamp] Started: $BACKBONE_NAME, tie_weight=$tie_weight" | Out-File -FilePath $LOG_FILE -Encoding UTF8 -Append
+    
+    # Execute training
+    $command = "python router/train_router.py --config $CONFIG_FILE --train_data $TRAIN_DATA --val_data $VAL_DATA --epochs 5 --tie_weight $tie_weight --output_dir $OUTPUT_DIR"
     Write-Host "Command: $command"
     
     Invoke-Expression $command
