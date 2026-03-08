@@ -80,11 +80,17 @@ class DCRouter(RouterInterface):
         """加载权重"""
         model_file = os.path.join(self.model_path, 'model.pt')
         if os.path.exists(model_file):
-            checkpoint = torch.load(model_file, map_location='cpu')
+            checkpoint = torch.load(model_file, map_location='cpu', weights_only=False)
             
-            if 'state_dict' in checkpoint:
+            # 兼容不同的保存格式
+            if 'model_state_dict' in checkpoint:
+                # 标准格式：trainer保存的checkpoint
+                self.model.load_state_dict(checkpoint['model_state_dict'])
+            elif 'state_dict' in checkpoint:
+                # 旧格式：部分训练器使用的格式
                 self.model.load_state_dict(checkpoint['state_dict'])
             else:
+                # 直接保存的state_dict
                 self.model.load_state_dict(checkpoint)
             
             print(f"已加载模型权重: {self.model_path}")

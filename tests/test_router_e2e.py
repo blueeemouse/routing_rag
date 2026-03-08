@@ -4,14 +4,24 @@
 
 测试训练好的路由器在完整 RAG 流程中的性能：
 1. 加载训练好的 Router
-2. 对测试集进行 routing 决策
-3. 根据 routing 选择执行对应的 RAG 策略
-4. 评估最终答案质量（EM, F1）和成本指标
+2. 对HotpotQA测试集进行 routing 决策
+3. 根据 routing 选择执行对应的 RAG 策略（NoRAG、NaiveRAG，可选GraphRAG）
+4. 评估最终答案质量（EM, F1）和成本指标（retrieval time, generation time）
 
 使用方法:
-    python test_router_e2e.py --model_path router_models/train_dc_em_f1/final \
-                          --test_data HotpotQA_train_data \
-                          --output results/router_e2e_test.json
+    # 只使用 NoRAG 和 NaiveRAG（默认）
+    python test_router_e2e.py --model_path router_models/.../checkpoint_best_val \
+                          --hotpotqa_file HotpotQA/hotpot_dev_distractor_1000_samples.jsonl \
+                          --naive_rag_index_path naive_rag_index_hotpotqa_1000_samples \
+                          --output results/router_eval.json
+    
+    # 使用所有三种策略（包括GraphRAG）
+    python test_router_e2e.py --model_path router_models/.../checkpoint_best_val \
+                          --hotpotqa_file HotpotQA/hotpot_dev_distractor_1000_samples.jsonl \
+                          --naive_rag_index_path naive_rag_index_hotpotqa_1000_samples \
+                          --use_graphrag \
+                          --graphrag_work_dir graphrag_index_hotpotqa \
+                          --output results/router_eval.json
 """
 
 import os
@@ -31,10 +41,10 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from router.trainable_router.routers.dc_router import DCRouter
-from rag_implementations.naive_rag.naive_rag import NaiveRAG
-from rag_implementations.no_rag.no_rag import NoRAG
-from rag_implementations.graph_rag.graph_rag import GraphRAG
-from config.settings import Settings
+from rag_implementations.naive_rag.naive_rag_impl import NaiveRAG
+from rag_implementations.no_rag.no_rag_impl import NoRAG
+from rag_implementations.graph_rag.graph_rag_impl import GraphRAG
+from config.config import settings
 
 
 def compute_em(gold_answer: List[str], prediction: str) -> float:
@@ -99,44 +109,46 @@ def compute_f1(gold_answer: List[str], prediction: str) -> float:
     return best_f1
 
 
-def load_test_data(data_path: str) -> List[Dict[str, Any]]:
+def load_test_data(data_path: str, max_samples: int = None) -> List[Dict[str, Any]]:
     """
-    加载测试数据
+    加载HotpotQA JSONL格式的测试数据
     
     Args:
-        data_path: 数据路径（文件或目录）
+        data_path: HotpotQA JSONL文件路径
+        max_samples: 最大加载样本数（None 表示全部）
         
     Returns:
-        测试数据列表
+        测试数据列表，每个元素包含：
+        - question: 问题文本
+        - gold_answer: 标准答案列表
     """
     items = []
     
-    if os.path.isdir(data_path):
-        # 目录：加载所有 JSON 文件
-        for filename in os.listdir(data_path):
-            if not filename.endswith('.json'):
-                continue
-            
-            file_path = os.path.join(data_path, filename)
-            with open(file_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            
-            # 提取 predictions
-            if 'predictions' in data:
-                items.extend(data['predictions'])
-            else:
-                # 单个 item 格式
-                items.append(data)
+    if not os.path.exists(data_path):
+        print(f"错误：数据文件不存在: {data_path}")
+        return items
     
-    elif os.path.isfile(data_path):
-        # 单个文件
-        with open(data_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        
-        if 'predictions' in data:
-            items = data['predictions']
-        else:
-            items = [data]
+    # 加载 JSONL 文件
+    with open(data_path, 'r', encoding='utf-8') as f:
+        for i, line in enumerate(f):
+            if max_samples and i >= max_samples:
+                break
+            
+            try:
+                data = json.loads(line.strip())
+                
+                # 提取标准答案（answer + answer_aliases）
+                gold_answers = [data['answer']]
+                if 'answer_aliases' in data:
+                    gold_answers.extend(data['answer_aliases'])
+                
+                items.append({
+                    'question': data['question'],
+                    'gold_answer': gold_answers
+                })
+            except Exception as e:
+                print(f"警告：跳过第 {i+1} 行，解析错误: {e}")
+                continue
     
     return items
 
@@ -420,7 +432,12 @@ def compute_aggregate_metrics(results: List[Dict[str, Any]]) -> Dict[str, Any]:
 def main():
     parser = argparse.ArgumentParser(description='端到端路由器测试')
     parser.add_argument('--model_path', type=str, required=True, help='Router 模型路径')
-    parser.add_argument('--test_data', type=str, required=True, help='测试数据路径（文件或目录）')
+    parser.add_argument('--hotpotqa_file', type=str, required=True, help='HotpotQA JSONL文件路径')
+    parser.add_argument('--naive_rag_index_path', type=str, required=True, help='NaiveRAG索引路径')
+    parser.add_argument('--use_graphrag', action='store_true', default=False, 
+                        help='是否使用GraphRAG（默认不使用）')
+    parser.add_argument('--graphrag_work_dir', type=str, default='', 
+                        help='GraphRAG工作目录（仅在use_graphrag=True时需要）')
     parser.add_argument('--output', type=str, default='', help='输出结果路径')
     parser.add_argument('--max_samples', type=int, default=None, help='最大测试样本数')
     parser.add_argument('--device', type=str, default='auto', help='Router 设备 (auto, cpu, cuda)')
@@ -434,11 +451,10 @@ def main():
     if not os.path.exists(args.model_path):
         print(f"错误：模型不存在: {args.model_path}")
         return
-    
-    # 加载配置
-    print(f"加载配置: {args.config}")
-    settings = Settings(args.config)
-    
+
+    # 配置已通过全局settings加载（from config.config import settings）
+    print(f"Using config: config/settings.yaml")
+
     # 初始化 Router
     print(f"\n加载 Router 模型: {args.model_path}")
     router = DCRouter(args.model_path)
@@ -455,51 +471,66 @@ def main():
     # 初始化 RAG 实现
     print("\n初始化 RAG 实现...")
     rag_implementations = {}
-    
+
+    # 初始化 NoRAG
     try:
         print("  - NoRAG")
-        no_rag = NoRAG(settings)
-        no_rag.build_index(None)  # NoRAG 不需要索引
+        no_rag = NoRAG()  # NoRAG直接使用，不需要索引
         rag_implementations['no_rag'] = no_rag
+        print("    NoRAG 初始化成功")
     except Exception as e:
-        print(f"  警告：NoRAG 初始化失败: {e}")
-    
+        print(f"    警告：NoRAG 初始化失败: {e}")
+
+    # 初始化 NaiveRAG
     try:
         print("  - NaiveRAG")
-        naive_rag = NaiveRAG(settings)
-        # 检查是否已有索引
-        if os.path.exists(naive_rag.index_path):
-            print(f"    加载已有索引: {naive_rag.index_path}")
-            naive_rag.load_index()
+        naive_rag = NaiveRAG()  # 不传递config，使用全局settings
+
+        # 检查索引是否存在
+        if os.path.exists(args.naive_rag_index_path):
+            print(f"    加载索引: {args.naive_rag_index_path}")
+            naive_rag.load_index(args.naive_rag_index_path)
+            rag_implementations['naive_rag'] = naive_rag
+            print("    NaiveRAG 初始化成功")
         else:
-            print(f"    构建索引: {naive_rag.index_path}")
-            naive_rag.build_index()
-        rag_implementations['naive_rag'] = naive_rag
+            print(f"    错误：索引路径不存在: {args.naive_rag_index_path}")
+            print("    请先构建NaiveRAG索引，或检查路径是否正确")
     except Exception as e:
-        print(f"  警告：NaiveRAG 初始化失败: {e}")
+        print(f"    警告：NaiveRAG 初始化失败: {e}")
     
-    try:
-        print("  - GraphRAG")
-        graph_rag = GraphRAG(settings)
-        # GraphRAG 索引路径在 settings.graphrag.root_dir
-        graph_rag.build_index_from_path(settings.graphrag.root_dir)
-        rag_implementations['graph_rag'] = graph_rag
-    except Exception as e:
-        print(f"  警告：GraphRAG 初始化失败: {e}")
+    # 初始化 GraphRAG（可选）
+    if args.use_graphrag:
+        try:
+            print("  - GraphRAG")
+            graph_rag = GraphRAG()  # 不传递config，使用全局settings
+
+            # 使用指定的GraphRAG工作目录
+            if not args.graphrag_work_dir:
+                print("    错误：未指定GraphRAG工作目录")
+                print("    请通过 --graphrag_work_dir 参数指定")
+            else:
+                print(f"    加载GraphRAG索引: {args.graphrag_work_dir}")
+                graph_rag.build_index_from_path(args.graphrag_work_dir)
+                rag_implementations['graph_rag'] = graph_rag
+                print("    GraphRAG 初始化成功")
+        except Exception as e:
+            print(f"    警告：GraphRAG 初始化失败: {e}")
     
     if not rag_implementations:
         print("错误：没有可用的 RAG 实现")
         return
     
-    # 加载测试数据
-    print(f"\n加载测试数据: {args.test_data}")
-    test_data = load_test_data(args.test_data)
+    print(f"\n成功初始化 {len(rag_implementations)} 个 RAG 实现: {list(rag_implementations.keys())}")
     
-    if args.max_samples:
-        test_data = test_data[:args.max_samples]
-        print(f"测试样本数: {len(test_data)} (限制为 {args.max_samples})")
-    else:
-        print(f"测试样本数: {len(test_data)}")
+    # 加载测试数据
+    print(f"\n加载测试数据: {args.hotpotqa_file}")
+    test_data = load_test_data(args.hotpotqa_file, args.max_samples)
+    
+    if not test_data:
+        print("错误：未加载到任何测试数据")
+        return
+    
+    print(f"成功加载 {len(test_data)} 个测试样本")
     
     # 运行端到端测试
     print("\n" + "=" * 60)
@@ -554,7 +585,10 @@ def main():
         output_data = {
             'config': {
                 'model_path': args.model_path,
-                'test_data': args.test_data,
+                'hotpotqa_file': args.hotpotqa_file,
+                'naive_rag_index_path': args.naive_rag_index_path,
+                'use_graphrag': args.use_graphrag,
+                'graphrag_work_dir': args.graphrag_work_dir if args.use_graphrag else None,
                 'max_samples': args.max_samples,
                 'device': device,
                 'use_parallel': args.use_parallel,

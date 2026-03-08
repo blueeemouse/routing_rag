@@ -429,8 +429,18 @@ class DCRouterModel(BaseRouterModel):
         # 加载模型状态
         model_path = os.path.join(path, 'model.pt')
         if os.path.exists(model_path):
-            model_state = torch.load(model_path, map_location=self.device)
-            self.load_state_dict(model_state['state_dict'])
+            model_state = torch.load(model_path, map_location=self.device, weights_only=False)
+
+            # 兼容不同的保存格式
+            if 'model_state_dict' in model_state:
+                # 标准格式：trainer保存的checkpoint
+                self.load_state_dict(model_state['model_state_dict'])
+            elif 'state_dict' in model_state:
+                # 旧格式：部分训练器使用的格式
+                self.load_state_dict(model_state['state_dict'])
+            else:
+                # 直接保存的state_dict
+                self.load_state_dict(model_state)
 
 
 # 注册到工厂（这里给同一个模型注册两个名字，倒也不怎么影响使用吧……可以认为兼容性比较好）

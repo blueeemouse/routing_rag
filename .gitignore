@@ -30,3 +30,4 @@ no_use/
 temp/
 analysis/
 graphrag_index_hotpotqa_train_5000_samples_fast/
+results/
