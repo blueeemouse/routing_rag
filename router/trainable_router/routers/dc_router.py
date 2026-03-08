@@ -61,7 +61,8 @@ class DCRouter(RouterInterface):
                 hidden_size=raw_config.get('hidden_size', 384),
                 strategy_names=raw_config.get('strategy_names', ['no_rag', 'naive_rag', 'graph_rag']),
                 num_strategies=raw_config.get('num_strategies', 3),
-                similarity_function='cos',
+                similarity_function=raw_config.get('similarity_function', 'cos'),
+                temperature=raw_config.get('temperature', 1.0),
                 device='auto',
             )
         else:

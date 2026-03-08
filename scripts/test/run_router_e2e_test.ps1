@@ -39,7 +39,8 @@ Write-Host ""
 # Check required files
 Write-Host "Checking required files..." -ForegroundColor Yellow
 
-$ModelPath = "router_models\tie_weight_search\all-MiniLM-L6-v2\tie_weight_1\checkpoint_best_val"
+# $ModelPath = "router_models\tie_weight_search\all-MiniLM-L6-v2\tie_weight_1\checkpoint_best_val"
+$ModelPath = "D:\Develop\all_RAG\routing_rag\router_models\filtered_data_training\all-MiniLM-L6-v2\checkpoint_best_val"
 $HotpotqaFile = "HotpotQA\hotpot_dev_distractor_1000_samples.jsonl"
 $NaiveRagIndex = "naive_rag_index_hotpotqa_1000_samples"
 

@@ -59,11 +59,18 @@
 | `all_labels_no_tie_converted.json` | ~2451 | 同上，RouterLabelDataset 格式 |（原名all_labels_converted.json）
 | `all_labels_with_tie_converted.json` | 5000 | 全部样本，tie 标签转换为 no_rag（效率优先） |
 | `all_labels_no_tie_sampled1000.json` | 1000 | 非 tie 样本抽样，用于快速训练搜参 |
+| `no_rag_strictly_better_removed.json` | 4639 | 移除 no_rag 严格优于 naive_rag 的361条样本，保留 tie 和 naive_rag 更优的样本 |
 
 ### 标签转换规则（tie 处理）
 - `all_labels_with_tie_converted.json` 将 tie 样本转为 no_rag，遵循效率优先原则：
   - 当两个策略性能相同时，优先选择更快的方法（no_rag）
 - 最终分布：no_rag=2910 (361+2549), naive_rag=2090
+
+### 过滤数据（移除 no_rag 严格更优样本）
+- `all_labels_no_rag_strictly_better_removed.json` 移除了 no_rag 严格优于 naive_rag 的 361 条样本：
+  - 原因：no_rag 严格更优的样本占比仅 7.22%，数量较少
+  - 保留：naive_rag 更优样本 2090 条 + tie 样本 2549 条（标记为 no_rag）
+  - 最终分布：no_rag=2549 (tie), naive_rag=2090
 
 ### 两者都答对的例子（11.48%）
 ```

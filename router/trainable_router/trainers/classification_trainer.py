@@ -487,6 +487,23 @@ class ClassificationTrainer(BaseTrainer):
         }
         with open(os.path.join(path, 'train_state.json'), 'w') as f:
             json.dump(state, f, indent=2)
+        
+        # 保存模型配置（用于推理加载）
+        model_config = {
+            'strategy_names': self.model.strategy_names,
+            'hidden_size': self.model.hidden_size,
+            'num_strategies': self.model.num_strategies,
+        }
+        # 添加可选配置（如果模型有这些属性）
+        if hasattr(self.model, 'backbone_name'):
+            model_config['backbone_name'] = self.model.backbone_name if hasattr(self.model.backbone, 'name_or_path') else self.config.model.backbone_name
+        if hasattr(self.model, 'temperature'):
+            model_config['temperature'] = self.model.temperature
+        if hasattr(self.model, 'similarity_function'):
+            model_config['similarity_function'] = self.model.similarity_function
+            
+        with open(os.path.join(path, 'config.json'), 'w', encoding='utf-8') as f:
+            json.dump(model_config, f, indent=2, ensure_ascii=False)
 
     def _delete_checkpoint(self, path: str):
         """

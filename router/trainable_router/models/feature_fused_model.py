@@ -320,13 +320,15 @@ class FeatureFusedRouterModel(BaseRouterModel):
         }
         torch.save(model_state, os.path.join(path, 'model.pt'))
         
-        # 保存配置
+        # 保存配置（用于推理加载）
         config_path = os.path.join(path, 'config.json')
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump({
                 'strategy_names': self.strategy_names,
                 'hidden_size': self.hidden_size,
                 'num_strategies': self.num_strategies,
+                'backbone_name': self.config.backbone_name,
+                'temperature': self.temperature,
                 'use_spacy': self.use_spacy,
                 'feature_normalize': self.feature_normalize,
                 'use_projection': self.use_projection,
@@ -346,6 +348,15 @@ class FeatureFusedRouterModel(BaseRouterModel):
                 config = json.load(f)
             self.strategy_names = config.get('strategy_names', self.strategy_names)
             self.num_strategies = config.get('num_strategies', len(self.strategy_names))
+            # 加载其他配置
+            if 'temperature' in config:
+                self.temperature = config['temperature']
+            if 'use_spacy' in config:
+                self.use_spacy = config['use_spacy']
+            if 'feature_normalize' in config:
+                self.feature_normalize = config['feature_normalize']
+            if 'use_projection' in config:
+                self.use_projection = config['use_projection']
         
         # 加载模型状态
         model_path = os.path.join(path, 'model.pt')

@@ -402,13 +402,16 @@ class DCRouterModel(BaseRouterModel):
         }
         torch.save(model_state, os.path.join(path, 'model.pt'))
         
-        # 保存配置
+        # 保存配置（用于推理加载）
         config_path = os.path.join(path, 'config.json')
         with open(config_path, 'w', encoding='utf-8') as f:
             json.dump({
                 'strategy_names': self.strategy_names,
                 'hidden_size': self.hidden_size,
                 'num_strategies': self.num_strategies,
+                'backbone_name': self.config.backbone_name,
+                'similarity_function': self.similarity_function,
+                'temperature': self.temperature,
             }, f, indent=2, ensure_ascii=False)
     
     def load(self, path: str):
@@ -425,6 +428,11 @@ class DCRouterModel(BaseRouterModel):
                 config = json.load(f)
             self.strategy_names = config.get('strategy_names', self.strategy_names)
             self.num_strategies = config.get('num_strategies', len(self.strategy_names))
+            # 加载其他配置
+            if 'temperature' in config:
+                self.temperature = config['temperature']
+            if 'similarity_function' in config:
+                self.similarity_function = config['similarity_function']
         
         # 加载模型状态
         model_path = os.path.join(path, 'model.pt')
