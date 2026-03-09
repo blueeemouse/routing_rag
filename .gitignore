@@ -32,3 +32,5 @@ analysis/
 graphrag_index_hotpotqa_train_5000_samples_fast/
 results/
 todo/
+
+naive_rag_index_storage_10000_train_samples/

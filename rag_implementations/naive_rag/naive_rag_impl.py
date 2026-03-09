@@ -265,7 +265,7 @@ Answer:""")
         # 如果 API URL 包含 11434 端口，很可能是 Ollama 服务
         return '11434' in self.api_url or 'ollama' in self.api_url.lower()
 
-    def build_index_from_data(self, data, metadata=None, **kwargs):
+    def build_index_from_data(self, data, metadata=None, show_progress=True, **kwargs):
         """
         从数据列表构建索引（适用于内存驱动的RAG）
         Build index from data list (suitable for in-memory RAG)
@@ -273,6 +273,7 @@ Answer:""")
         Args:
             data (List[str]): 用于构建索引的文档数据列表
             metadata (Optional[List[Dict[str, Any]]]): 与文档关联的元数据列表
+            show_progress (bool): 是否显示进度条（默认为True）
             **kwargs: 额外的参数，用于特定实现的配置
 
         Returns:
@@ -299,7 +300,8 @@ Answer:""")
 
             # 创建索引 - 使用全局设置中的嵌入模型
             self.index = self.VectorStoreIndex.from_documents(
-                llama_docs
+                llama_docs,
+                show_progress=show_progress
             )
 
             # 标记索引已初始化
