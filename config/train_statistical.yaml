@@ -1,0 +1,58 @@
+# Statistical Router Training Config
+# 纯统计特征路由器训练配置（仅使用63维手工特征，不依赖语义embedding）
+
+# 模型类型
+model_type: "statistical"
+
+# 模型配置
+model:
+  # 注意：statistical模型不使用backbone，这里提供dummy值
+  backbone_name: "dummy"
+  hidden_size: 768  # dummy值
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  temperature: 0.5
+  device: "auto"
+  
+  # 统计特征路由器特有配置
+  use_spacy: true  # 使用spaCy进行特征提取（推荐设为true以获得更准确特征）
+  spacy_model: "en_core_web_sm"
+  feature_normalize: true  # 对特征进行归一化
+  
+  # MLP配置
+  threshold: 0.5  # 路由阈值
+  mlp_hidden_dims: [256, 128, 64]  # MLP隐藏层维度
+  dropout: 0.1  # Dropout概率
+  use_attention: true  # 使用特征注意力
+  use_residual: true  # 使用残差连接
+  label_smoothing: 0.1  # 标签平滑
+
+# 训练配置
+training:
+  trainer_type: "statistical"  # 使用统计特征训练器
+  learning_rate: 0.001  # 1e-3，适合MLP训练
+  batch_size: 32
+  epochs: 10
+  training_steps: 0  # 0表示使用epochs动态计算
+  eval_steps: 50
+  save_steps: 50
+  max_grad_norm: 1.0
+  
+  # 优化器配置
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.0001  # 1e-4
+    
+  scheduler_type: "cosine"  # 余弦退火调度器
+
+# 数据配置
+data:
+  # train_path: "HotpotQA_train_data/label_analysis/balanced_samples/all_labels_balanced_1000.json"
+  train_path: "HotpotQA_train_data/label_analysis/all_labels_no_rag_strictly_better_removed.json"
+  val_path: "evaluation_results/router_test_labels.json"
+  source: "router_label"
+  shuffle: true
+
+# 输出配置
+# output_dir会在训练脚本中动态生成
+log_level: "info"

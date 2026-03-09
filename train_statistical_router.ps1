@@ -1,0 +1,1 @@
+python router/train_router.py --config config/train_statistical.yaml --output_dir router_models/statistical_router_no_tie_all_samples
