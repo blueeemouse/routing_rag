@@ -42,7 +42,8 @@ $Epochs = 10
 
 # Data
 # $TrainData = "HotpotQA_train_data/label_analysis/balanced_samples/all_labels_balanced_1000.json"
-$TrainData = "HotpotQA_train_data/label_analysis/all_labels_no_rag_strictly_better_removed.json"
+# $TrainData = "HotpotQA_train_data/label_analysis/all_labels_no_rag_strictly_better_removed.json"
+$TrainData = "D:/Develop/all_RAG/routing_rag/HotpotQA_train_data/10000/all_labels.json"
 $ValData = "evaluation_results/router_test_labels.json"
 
 # Output directory
