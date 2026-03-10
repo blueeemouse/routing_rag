@@ -27,6 +27,7 @@ import os
 import sys
 import argparse
 import json
+import shutil
 import torch
 import copy
 from pathlib import Path
@@ -386,9 +387,10 @@ def main():
         logging_steps=args.logging_steps,
         eval_strategy='steps' if eval_dataset else 'no',
         eval_steps=args.eval_steps if eval_dataset else None,
-        save_strategy='steps',
-        save_steps=args.save_steps,
-        save_total_limit=args.save_total_limit,
+        # 保存策略: 与eval策略一致，但只保留最佳模型
+        save_strategy='steps' if eval_dataset else 'no',
+        save_steps=args.eval_steps if eval_dataset else None,  # 与eval同步，避免多余保存
+        save_total_limit=1,  # 只保留1个最佳模型
         max_length=args.max_length,
         max_prompt_length=args.max_length,
         max_completion_length=1,  # 分类任务不使用
@@ -438,19 +440,10 @@ def main():
     trainer.train()
     
     # =============================
-    # 7. 保存最终模型和最佳模型
+    # 7. 保存最佳模型
     # =============================
-    print("\n保存最终模型...")
-    
-    final_model_path = output_dir / 'final'
-    trainer.save_model(str(final_model_path))
-    tokenizer.save_pretrained(str(final_model_path))
-    
-    # 保存策略名称映射
-    with open(final_model_path / 'strategy_names.json', 'w', encoding='utf-8') as f:
-        json.dump(args.strategy_names, f, ensure_ascii=False, indent=2)
-    
-    print(f"✓ 最终模型已保存到: {final_model_path}")
+    # 注意: 只保存验证集最好的模型，不保存中间checkpoint和最终模型
+    # 节省磁盘空间，避免保存多个大模型文件
     
     # 保存最佳模型（根据验证集准确率）
     if eval_dataset is not None and trainer.state.best_model_checkpoint is not None:
@@ -463,10 +456,9 @@ def main():
         print(f"  Step: {best_step}")
         print(f"  Val Accuracy: {best_metric:.4f}")
         
-        # 创建 checkpoint_best_val 链接
+        # 创建 checkpoint_best_val
         best_model_path = output_dir / 'checkpoint_best_val'
         
-        import shutil
         if best_model_path.exists():
             if best_model_path.is_symlink():
                 best_model_path.unlink()
@@ -476,10 +468,14 @@ def main():
         # 复制最佳模型到 checkpoint_best_val
         shutil.copytree(best_checkpoint, best_model_path)
         
+        # 保存策略名称映射到最佳模型目录
+        with open(best_model_path / 'strategy_names.json', 'w', encoding='utf-8') as f:
+            json.dump(args.strategy_names, f, ensure_ascii=False, indent=2)
+        
         # 保存最佳模型信息
         best_info = {
             'best_step': best_step,
-            'best_metric': best_metric,
+            'eval_accuracy': best_metric,
             'metric_name': 'eval_rewards/accuracies',
             'original_checkpoint': best_checkpoint,
             'model_path': str(best_model_path),
@@ -488,6 +484,13 @@ def main():
             json.dump(best_info, f, indent=2, ensure_ascii=False)
         
         print(f"✓ 最佳模型已保存到: {best_model_path}")
+        
+        # 清理其他checkpoint，只保留 best_val
+        print("\n清理中间checkpoint...")
+        for checkpoint_dir in output_dir.glob('checkpoint-*'):
+            if checkpoint_dir.name != 'checkpoint_best_val':
+                shutil.rmtree(checkpoint_dir)
+                print(f"  已删除: {checkpoint_dir.name}")
     
     # 最终评估
     if eval_dataset is not None:

@@ -35,7 +35,7 @@ EPOCHS=10
 LEARNING_RATE=1e-5
 BETA=0.1
 MAX_LENGTH=512
-GPU_ID="0,1"  # 不指定则使用所有可用GPU
+GPU_ID="0,1,2"  # 不指定则使用所有可用GPU
 
 # 解析额外参数
 while [[ $# -gt 0 ]]; do
