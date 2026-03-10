@@ -22,7 +22,7 @@
 #   - beta: 控制策略偏离参考模型的程度，分类任务建议 0.01~0.2
 #   - learning_rate: 先定数量级再细化，MiniLM常用 1e-5
 
-set -e  # 遇到错误立即退出，便于调试
+# set -e  # 禁用严格模式，确保一个实验失败不会终止整个搜索
 
 cd "$(dirname "$0")/../.."
 
@@ -125,7 +125,10 @@ for BETA in "${BETAS[@]}"; do
         if [[ -f "$OUTPUT_DIR/eval_result.json" ]]; then
             echo "实验已存在，跳过训练，直接读取结果..."
         else
-            # 运行训练 (不使用管道，避免set -e问题)
+            # 确保输出目录存在（在运行tee之前创建）
+            mkdir -p "$OUTPUT_DIR"
+            
+            # 运行训练
             echo "开始训练实验 $CURRENT/$TOTAL ..."
             python router/train_dpo.py \
                 --model_name "$MODEL_NAME" \
@@ -142,11 +145,7 @@ for BETA in "${BETAS[@]}"; do
                 --save_steps 1000 \
                 --save_total_limit 1 \
                 --warmup_steps 100 \
-                --fp16 2>&1 | tee "$OUTPUT_DIR/training_console.log"
-            TRAIN_EXIT_CODE=${PIPESTATUS[0]}
-            if [[ $TRAIN_EXIT_CODE -ne 0 ]]; then
-                echo "警告: 训练实验 $CURRENT 退出码为 $TRAIN_EXIT_CODE"
-            fi
+                --fp16 2>&1 | tee "$OUTPUT_DIR/training_console.log" || true
         fi
         
         # 读取最佳验证准确率
