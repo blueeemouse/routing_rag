@@ -25,16 +25,17 @@ echo ""
 
 # 默认配置
 MODEL_NAME="sentence-transformers/all-MiniLM-L6-v2"
-TRAIN_FILE="HotpotQA_train_data/label_analysis/dpo_data/dpo_preference_pairs_full.json"
+# TRAIN_FILE="HotpotQA_train_data/label_analysis/dpo_data/dpo_preference_pairs_full.json"
+TRAIN_FILE="HotpotQA_train_data/10000/dpo_preference_pairs.json"
 VAL_FILE="HotpotQA_train_data/label_analysis/dpo_data/dpo_preference_pairs_val.json"
-OUTPUT_DIR="router_models/dpo_router"
+OUTPUT_DIR="router_models/dpo_router_10000"
 
 BATCH_SIZE=16
 EPOCHS=10
 LEARNING_RATE=1e-5
 BETA=0.1
 MAX_LENGTH=512
-GPU_ID=""  # 默认不指定，使用所有可用GPU
+GPU_ID="0,1"  # 不指定则使用所有可用GPU
 
 # 解析额外参数
 while [[ $# -gt 0 ]]; do

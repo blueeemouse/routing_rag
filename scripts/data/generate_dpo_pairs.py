@@ -11,17 +11,56 @@ DPO偏好对数据生成脚本
 三分类及以上场景（预留）:
 - 根据最优策略生成所有可能的偏好对
 
-用法:
-    python generate_dpo_pairs.py \
-        --input_file data/router_test_labels.json \
-        --output_file data/dpo_preference_pairs.json \
-        --strategy_names no_rag naive_rag
-
-    # 或者使用简单格式（只有question和optimal_strategy）
+用法示例:
+    # 基本用法 - 二分类 (no_rag vs naive_rag)
     python generate_dpo_pairs.py \
         --input_file data/all_labels_no_tie.json \
         --output_file data/dpo_preference_pairs.json \
         --strategy_names no_rag naive_rag
+
+    # 指定输入输出路径
+    python scripts/data/generate_dpo_pairs.py \
+        --input_file data/all_labels_no_tie.json \
+        --output_file data/dpo/dpo_preference_pairs.json \
+        --strategy_names no_rag naive_rag
+
+    # 多分类模式（3个及以上策略）
+    python generate_dpo_pairs.py \
+        --input_file data/multi_strategy_labels.json \
+        --output_file data/dpo_multiclass_pairs.json \
+        --strategy_names no_rag naive_rag advanced_rag \
+        --multiclass
+
+输入文件格式:
+    支持两种JSON格式:
+    1. 完整格式（含scores）:
+        {"samples": [
+            {"question": "...", "optimal_strategy": "no_rag", 
+             "no_rag_score": 0.8, "naive_rag_score": 0.5}
+        ]}
+    2. 简单格式（只有label）:
+        {"samples": [
+            {"question": "...", "optimal_strategy": "no_rag"}
+        ]}
+
+输出文件格式:
+    DPO偏好对列表:
+    [
+        {
+            "prompt": "问题文本",
+            "chosen": 0,           // 偏好策略的索引
+            "rejected": 1,         // 非偏好策略的索引
+            "question_id": "q_0",
+            "optimal_strategy": "no_rag",
+            "strategy_names": ["no_rag", "naive_rag"]
+        }
+    ]
+
+参数说明:
+    --input_file, -i    输入的label数据文件路径（JSON格式，必需）
+    --output_file, -o   输出的DPO偏好对文件路径（JSON格式，必需）
+    --strategy_names    策略名称列表，默认: no_rag naive_rag
+    --multiclass        使用多分类模式（3+策略）
 """
 
 import json
@@ -91,13 +130,18 @@ def generate_binary_preference_pairs(
             print(f"警告: 跳过第{idx}个样本，缺少question或optimal_strategy")
             continue
         
-        if optimal_strategy not in strategy_to_idx:
+        # 处理tie情况：标记为no_rag (index 0)
+        if optimal_strategy == 'tie':
+            optimal_idx = 0  # no_rag
+            other_idx = 1    # naive_rag
+            optimal_strategy = 'no_rag'  # 更新标记
+        elif optimal_strategy not in strategy_to_idx:
             print(f"警告: 跳过第{idx}个样本，未知的策略: {optimal_strategy}")
             continue
-        
-        # 确定chosen和rejected
-        optimal_idx = strategy_to_idx[optimal_strategy]
-        other_idx = 1 - optimal_idx  # 二分类中另一个策略的索引
+        else:
+            # 确定chosen和rejected
+            optimal_idx = strategy_to_idx[optimal_strategy]
+            other_idx = 1 - optimal_idx  # 二分类中另一个策略的索引
         
         pair = {
             "prompt": question,
