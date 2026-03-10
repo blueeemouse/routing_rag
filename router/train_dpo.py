@@ -399,6 +399,10 @@ def main():
         dataset_num_proc=None,
         report_to=['tensorboard'],
         logging_dir=str(output_dir / 'logs'),
+        # 保存最佳模型（根据验证集准确率）
+        load_best_model_at_end=True,
+        metric_for_best_model='eval_rewards/accuracies',
+        greater_is_better=True,
     )
     
     # =============================
@@ -434,7 +438,7 @@ def main():
     trainer.train()
     
     # =============================
-    # 7. 保存最终模型
+    # 7. 保存最终模型和最佳模型
     # =============================
     print("\n保存最终模型...")
     
@@ -446,7 +450,44 @@ def main():
     with open(final_model_path / 'strategy_names.json', 'w', encoding='utf-8') as f:
         json.dump(args.strategy_names, f, ensure_ascii=False, indent=2)
     
-    print(f"✓ 模型已保存到: {final_model_path}")
+    print(f"✓ 最终模型已保存到: {final_model_path}")
+    
+    # 保存最佳模型（根据验证集准确率）
+    if eval_dataset is not None and trainer.state.best_model_checkpoint is not None:
+        best_checkpoint = trainer.state.best_model_checkpoint
+        best_step = trainer.state.best_global_step
+        best_metric = trainer.state.best_metric
+        
+        print(f"\n最佳模型信息:")
+        print(f"  Checkpoint: {best_checkpoint}")
+        print(f"  Step: {best_step}")
+        print(f"  Val Accuracy: {best_metric:.4f}")
+        
+        # 创建 checkpoint_best_val 链接
+        best_model_path = output_dir / 'checkpoint_best_val'
+        
+        import shutil
+        if best_model_path.exists():
+            if best_model_path.is_symlink():
+                best_model_path.unlink()
+            else:
+                shutil.rmtree(best_model_path)
+        
+        # 复制最佳模型到 checkpoint_best_val
+        shutil.copytree(best_checkpoint, best_model_path)
+        
+        # 保存最佳模型信息
+        best_info = {
+            'best_step': best_step,
+            'best_metric': best_metric,
+            'metric_name': 'eval_rewards/accuracies',
+            'original_checkpoint': best_checkpoint,
+            'model_path': str(best_model_path),
+        }
+        with open(output_dir / 'best_model_info.json', 'w', encoding='utf-8') as f:
+            json.dump(best_info, f, indent=2, ensure_ascii=False)
+        
+        print(f"✓ 最佳模型已保存到: {best_model_path}")
     
     # 最终评估
     if eval_dataset is not None:

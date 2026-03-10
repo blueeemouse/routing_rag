@@ -3,17 +3,27 @@
 端到端路由器测试脚本
 
 测试训练好的路由器在完整 RAG 流程中的性能：
-1. 加载训练好的 Router
+1. 加载训练好的 Router（支持 DC Router 和 DPO Router）
 2. 对HotpotQA测试集进行 routing 决策
 3. 根据 routing 选择执行对应的 RAG 策略（NoRAG、NaiveRAG，可选GraphRAG）
 4. 评估最终答案质量（EM, F1）和成本指标（retrieval time, generation time）
 
+支持的 Router 类型:
+    - DC Router: router_models/.../checkpoint_best_val (包含 model.pt)
+    - DPO Router: router_models/dpo_router/checkpoint_best_val (包含 model.safetensors)
+
 使用方法:
-    # 只使用 NoRAG 和 NaiveRAG（默认）
+    # 测试 DC Router
     python test_router_e2e.py --model_path router_models/.../checkpoint_best_val \
                           --hotpotqa_file HotpotQA/hotpot_dev_distractor_1000_samples.jsonl \
                           --naive_rag_index_path naive_rag_index_hotpotqa_1000_samples \
                           --output results/router_eval.json
+    
+    # 测试 DPO Router
+    python test_router_e2e.py --model_path router_models/dpo_router/checkpoint_best_val \
+                          --hotpotqa_file HotpotQA/hotpot_dev_distractor_1000_samples.jsonl \
+                          --naive_rag_index_path naive_rag_index_hotpotqa_1000_samples \
+                          --output results/dpo_router_eval.json
     
     # 使用所有三种策略（包括GraphRAG）
     python test_router_e2e.py --model_path router_models/.../checkpoint_best_val \
@@ -22,6 +32,11 @@
                           --use_graphrag \
                           --graphrag_work_dir graphrag_index_hotpotqa \
                           --output results/router_eval.json
+
+Router 类型自动检测:
+    脚本会自动检测模型类型：
+    - 如果目录包含 model.safetensors 或 pytorch_model.bin → 使用 DPO Router
+    - 如果目录包含 model.pt → 使用 DC Router
 """
 
 import os
@@ -41,10 +56,38 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from router.trainable_router.routers.dc_router import DCRouter
+from router.trainable_router.routers.dpo_router import DPORouter
 from rag_implementations.naive_rag.naive_rag_impl import NaiveRAG
 from rag_implementations.no_rag.no_rag_impl import NoRAG
 from rag_implementations.graph_rag.graph_rag_impl import GraphRAG
 from config.config import settings
+
+
+def detect_router_type(model_path: str) -> str:
+    """
+    自动检测 router 类型
+    
+    Args:
+        model_path: 模型路径
+        
+    Returns:
+        'dc' 或 'dpo'
+    """
+    # 检查是否存在 transformers 标准格式的模型文件
+    safetensors_path = os.path.join(model_path, 'model.safetensors')
+    pytorch_path = os.path.join(model_path, 'pytorch_model.bin')
+    
+    # 如果存在 safetensors 或 pytorch_model.bin，认为是 DPO 模型
+    if os.path.exists(safetensors_path) or os.path.exists(pytorch_path):
+        return 'dpo'
+    
+    # 如果存在 model.pt，认为是 DC 模型
+    model_pt_path = os.path.join(model_path, 'model.pt')
+    if os.path.exists(model_pt_path):
+        return 'dc'
+    
+    # 默认尝试 DPO（因为 transformers 格式更常见）
+    return 'dpo'
 
 
 def compute_em(gold_answer: List[str], prediction: str) -> float:
@@ -455,18 +498,24 @@ def main():
     # 配置已通过全局settings加载（from config.config import settings）
     print(f"Using config: config/settings.yaml")
 
-    # 初始化 Router
-    print(f"\n加载 Router 模型: {args.model_path}")
-    router = DCRouter(args.model_path)
-    
     # 设置设备
     if args.device == 'auto':
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
     else:
         device = args.device
     
-    print(f"Router 设备: {device}")
-    router.to(device)
+    # 自动检测 Router 类型
+    router_type = detect_router_type(args.model_path)
+    print(f"\n检测到 Router 类型: {router_type.upper()}")
+    
+    # 初始化 Router
+    print(f"\n加载 Router 模型: {args.model_path}")
+    if router_type == 'dpo':
+        router = DPORouter(args.model_path, device=device)
+    else:
+        router = DCRouter(args.model_path)
+        print(f"Router 设备: {device}")
+        router.to(device)
     
     # 初始化 RAG 实现
     print("\n初始化 RAG 实现...")
