@@ -9,7 +9,7 @@
 #   - 在确定最佳beta和lr后，搜索最优训练轮数
 #   - 防止过拟合或训练不足
 
-set -e
+# set -e  # 禁用严格模式，确保一个实验失败不会终止整个搜索
 
 cd "$(dirname "$0")/../.."
 
@@ -89,6 +89,9 @@ for EPOCHS in "${EPOCHS_LIST[@]}"; do
     if [[ -f "$OUTPUT_DIR/eval_result.json" ]]; then
         echo "实验已存在，跳过..."
     else
+        # 确保输出目录存在
+        mkdir -p "$OUTPUT_DIR"
+        
         python router/train_dpo.py \
             --model_name "$MODEL_NAME" \
             --train_file "$TRAIN_FILE" \
@@ -104,12 +107,12 @@ for EPOCHS in "${EPOCHS_LIST[@]}"; do
             --save_total_limit 1 \
             --warmup_steps 100 \
             --fp16 \
-            2>&1 | tee "$OUTPUT_DIR/training_console.log"
+            2>&1 | tee "$OUTPUT_DIR/training_console.log" || true
     fi
     
     # 读取结果
     if [[ -f "$OUTPUT_DIR/best_model_info.json" ]]; then
-        BEST_ACC=$(python3 -c "import json; print(json.load(open('$OUTPUT_DIR/best_model_info.json')).get('eval_accuracy', 'N/A'))")
+        BEST_ACC=$(python3 -c "import json; data=json.load(open('$OUTPUT_DIR/best_model_info.json')); print(data.get('eval_accuracy', 'N/A'))" 2>/dev/null || echo "N/A")
     else
         BEST_ACC="N/A"
     fi

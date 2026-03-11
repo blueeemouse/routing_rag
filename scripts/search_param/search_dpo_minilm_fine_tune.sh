@@ -10,7 +10,7 @@
 #   - 在该数量级附近细化搜索（如 5e-6, 1e-5, 2e-5）
 #   - 同时更精细地搜索beta值
 
-set -e
+# set -e  # 禁用严格模式，确保一个实验失败不会终止整个搜索
 
 cd "$(dirname "$0")/../.."
 
@@ -109,6 +109,9 @@ for BETA in "${BETAS[@]}"; do
         if [[ -f "$OUTPUT_DIR/eval_result.json" ]]; then
             echo "已存在，跳过..."
         else
+            # 确保输出目录存在
+            mkdir -p "$OUTPUT_DIR"
+            
             python router/train_dpo.py \
                 --model_name "$MODEL_NAME" \
                 --train_file "$TRAIN_FILE" \
@@ -124,11 +127,11 @@ for BETA in "${BETAS[@]}"; do
                 --save_total_limit 1 \
                 --warmup_steps 100 \
                 --fp16 \
-                2>&1 | tee "$OUTPUT_DIR/training_console.log"
+                2>&1 | tee "$OUTPUT_DIR/training_console.log" || true
         fi
         
         if [[ -f "$OUTPUT_DIR/best_model_info.json" ]]; then
-            BEST_ACC=$(python3 -c "import json; print(json.load(open('$OUTPUT_DIR/best_model_info.json')).get('eval_accuracy', 'N/A'))")
+            BEST_ACC=$(python3 -c "import json; data=json.load(open('$OUTPUT_DIR/best_model_info.json')); print(data.get('eval_accuracy', 'N/A'))" 2>/dev/null || echo "N/A")
         else
             BEST_ACC="N/A"
         fi
@@ -142,34 +145,49 @@ echo ""
 cat "$RESULTS_FILE"
 
 # 汇总最佳
-python3 << 'EOF'
+python3 << 'PYEOF' || echo "警告: 汇总结果时出错"
 import json
 from pathlib import Path
 
-base_dir = Path("router_models/dpo_search_minilm_fine")
-results = []
-
-for exp_dir in base_dir.iterdir():
-    if not exp_dir.is_dir() or not exp_dir.name.startswith('fine_'):
-        continue
+try:
+    base_dir = Path("router_models/dpo_search_minilm_fine")
+    results = []
     
-    best_acc = None
-    for fname in ['best_model_info.json', 'eval_result.json']:
-        fpath = exp_dir / fname
-        if fpath.exists():
-            with open(fpath) as f:
-                data = json.load(f)
-                best_acc = data.get('eval_accuracy') or data.get('accuracy')
-                if best_acc:
-                    break
+    if not base_dir.exists():
+        print(f"目录不存在: {base_dir}")
+        exit(0)
     
-    if best_acc:
-        name = exp_dir.name.replace('fine_beta', '').replace('_lr', ' ')
-        parts = name.split()
-        if len(parts) >= 2:
-            results.append({'beta': parts[0], 'lr': parts[1], 'acc': float(best_acc)})
-
-if results:
-    best = max(results, key=lambda x: x['acc'])
-    print(f"\n最佳细搜配置: Beta={best['beta']}, LR={best['lr']}, Acc={best['acc']:.4f}")
-EOF
+    for exp_dir in base_dir.iterdir():
+        if not exp_dir.is_dir() or not exp_dir.name.startswith('fine_'):
+            continue
+        
+        best_acc = None
+        for fname in ['best_model_info.json', 'eval_result.json']:
+            fpath = exp_dir / fname
+            if fpath.exists():
+                try:
+                    with open(fpath) as f:
+                        data = json.load(f)
+                        best_acc = data.get('eval_accuracy') or data.get('accuracy')
+                        if best_acc:
+                            break
+                except:
+                    pass
+        
+        if best_acc:
+            try:
+                name = exp_dir.name.replace('fine_beta', '').replace('_lr', ' ')
+                parts = name.split()
+                if len(parts) >= 2:
+                    results.append({'beta': parts[0], 'lr': parts[1], 'acc': float(best_acc)})
+            except:
+                pass
+    
+    if results:
+        best = max(results, key=lambda x: x['acc'])
+        print(f"\n最佳细搜配置: Beta={best['beta']}, LR={best['lr']}, Acc={best['acc']:.4f}")
+    else:
+        print("未找到有效的实验结果")
+except Exception as e:
+    print(f"汇总结果时出错: {e}")
+PYEOF
