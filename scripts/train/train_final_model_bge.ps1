@@ -20,15 +20,18 @@ Write-Host ""
 # 最优超参数
 $Backbone = "BAAI/bge-base-en-v1.5"
 $LearningRate = "7e-5"
-$ClassWeights = "no_rag=6.8,naive_rag=1.0"
-$WeightDecay = "10"
+# $ClassWeights = "no_rag=6.8,naive_rag=1.0"
+# $WeightDecay = "10"
 $Temperature = "0.5"
+$ClassWeights = "no_rag=1,naive_rag=1.5"
+$WeightDecay = "0.01"
 
 # 数据
-$TrainData = "HotpotQA_train_data/label_analysis/all_labels_no_tie.json"
+# $TrainData = "HotpotQA_train_data/label_analysis/all_labels_no_tie.json"
+$TrainData = "D:/Develop/all_RAG/routing_rag/HotpotQA_train_data/10000/all_labels.json"
 
 # 输出目录
-$OutputDir = "router_models/final_model_bge"
+$OutputDir = "router_models/model_bge_10000_naive_1.5"
 
 Write-Host "配置:" -ForegroundColor Yellow
 Write-Host "  Backbone: $Backbone" -ForegroundColor Cyan

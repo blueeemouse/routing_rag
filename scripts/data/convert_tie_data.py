@@ -35,18 +35,19 @@ from collections import Counter
 
 def main():
     # 路径
-    input_path = "HotpotQA_train_data/label_analysis/all_labels.json"
-    output_path = "HotpotQA_train_data/label_analysis/all_labels_with_tie_converted.json"
+    input_path = "D:/Develop/all_RAG/routing_rag/HotpotQA_train_data/10000/all_labels.json"
+    output_path = "D:/Develop/all_RAG/routing_rag/HotpotQA_train_data/10000/all_labels_converted.json"
     
     # 加载原始数据
     print(f"加载原始数据: {input_path}")
     with open(input_path, 'r', encoding='utf-8') as f:
-        raw_data = json.load(f)
+        data = json.load(f)
     
+    raw_data = data.get('samples', [])
     print(f"原始数据条数: {len(raw_data)}")
     
     # 统计原始标签分布
-    raw_labels = Counter(s['label'] for s in raw_data)
+    raw_labels = Counter(s['optimal_strategy'] for s in raw_data)
     print(f"原始标签分布: {raw_labels}")
     
     # 转换数据
@@ -54,7 +55,7 @@ def main():
     tie_count = 0
     
     for item in raw_data:
-        label = item['label']
+        label = item['optimal_strategy']
         
         # tie → no_rag（效率优先）
         if label == 'tie':

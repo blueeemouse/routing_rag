@@ -207,8 +207,23 @@ class StatisticalTrainer(BaseTrainer):
                     val_acc = val_metrics.get('accuracy', 0)
                     val_loss = val_metrics.get('loss', 0)
                     
+                    # 记录详细评估结果到日志
                     if self.logger:
                         self.logger.info(f"评估 (Step {self.global_step}): Acc={val_acc:.4f}, Loss={val_loss:.4f}")
+                        
+                        # 记录预测路由分布
+                        routing_dist = val_metrics.get('routing_distribution', {})
+                        self.logger.info("预测路由分布:")
+                        for strategy, ratio in sorted(routing_dist.items()):
+                            self.logger.info(f"    {strategy}: {ratio*100:.2f}%")
+                        
+                        # 记录各策略召回率
+                        strategy_acc = val_metrics.get('strategy_accuracy', {})
+                        self.logger.info("各策略召回率:")
+                        for strategy, acc in sorted(strategy_acc.items()):
+                            self.logger.info(f"    {strategy}: {acc:.4f}")
+                        
+                        self.logger.info("")  # 空行分隔
                     
                     # 保存最佳模型
                     if val_acc > self.best_val_accuracy:
@@ -220,6 +235,7 @@ class StatisticalTrainer(BaseTrainer):
                         
                         if self.logger:
                             self.logger.info(f"🏆 新的最佳Val性能！Step={self.global_step}, Acc={val_acc:.4f}")
+                            self.logger.info("")  # 空行分隔
         
         return {
             'loss': total_loss / num_batches if num_batches > 0 else 0.0
