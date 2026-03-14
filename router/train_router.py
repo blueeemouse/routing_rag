@@ -436,16 +436,19 @@ def main():
     
     # 创建数据集
     logger_instance.info("加载数据集...")
-    # from trainable_router.datasets.hotpotqa_dataset import GenericRouterDataset
-
-    # train_dataset = GenericRouterDataset(config)
-    # 根据数据路径判断数据集类型
-    # if 'router_test_labels' in config.data.train_path or 'router_labels' in config.data.train_path:
-
-    if ('router_test_labels' in config.data.train_path or 
-        'router_labels' in config.data.train_path or
-        'all_labels' in config.data.train_path or
-        'curriculum_stage2' in config.data.train_path):
+    
+    # 优先根据 config.data.source 选择数据集类型
+    source_type = getattr(config.data, 'source', '').lower()
+    
+    if source_type == 'soft_label':
+        # 软标签数据集
+        logger_instance.info(f"使用SoftLabelRouterDataset (source={source_type})")
+        from trainable_router.datasets.soft_label_dataset import SoftLabelRouterDataset
+        train_dataset = SoftLabelRouterDataset(config)
+    elif ('router_test_labels' in config.data.train_path or 
+          'router_labels' in config.data.train_path or
+          'all_labels' in config.data.train_path or
+          'curriculum_stage2' in config.data.train_path):
         
         # 根据tie_weight参数选择数据集
         if args.tie_weight is not None:
