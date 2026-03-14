@@ -1,35 +1,33 @@
 """
-BinarySoftLabelTrainer实现
+FusionSoftLabelTrainer实现
 
-【重要】此类仅支持二分类任务（no_rag vs naive_rag）
+【重要】此类支持多分类任务，配合融合模型（如 GatedFusionModel）使用
 
-用于二分类软标签训练的训练器。
-
-与 ClassificationTrainer / StatisticalTrainer 的区别：
+与 BinarySoftLabelTrainer 的区别：
 ================================================================================
 
-1. **分类器式模型** (StatisticalRouterModel等)
-   - forward(query) 直接返回 logits (batch_size, 1)
-   - 内部提取手工特征，通过MLP输出
-   
-2. **Embedding相似度式模型** (DCRouterModel等)  
-   - forward(input_ids, attention_mask) 返回 query_embedding
-   - 需要 compute_similarity(query_emb, strategy_emb) 计算相似度作为 logits
-   - logits 形状 (batch_size, num_strategies)
+| 特性             | BinarySoftLabelTrainer      | FusionSoftLabelTrainer         |
+|------------------|----------------------------|--------------------------------|
+| 分类类型         | 仅二分类                   | 支持多分类                     |
+| 模型输入         | queries                    | input_ids, attention_mask, queries |
+| 模型输出         | (batch, 1) 单值 logits     | (batch, num_strategies) logits |
+| 损失函数         | BCEWithLogitsLoss          | CrossEntropyLoss (支持软标签)  |
+| 软标签格式       | 单值 (float)               | 向量 (tensor)                  |
 
-本 Trainer 主要针对**分类器式模型**设计：
-- 使用 BCEWithLogitsLoss 进行二分类训练
-- 支持软标签 (soft_label ∈ [0, 1]) 而非硬标签
-- 评估时使用 sigmoid + threshold 判断
+CrossEntropyLoss 支持软标签：
+================================================================================
 
-软标签含义：
-- soft_label → 0: no_rag 更好
-- soft_label → 0.5: 两者差不多 (tie)
-- soft_label → 1: naive_rag 更好
+PyTorch >= 1.10 的 CrossEntropyLoss 直接支持概率分布作为 target：
+```python
+loss_fn = nn.CrossEntropyLoss()
+logits = model(input_ids, attention_mask, queries)  # (batch, num_classes)
+soft_labels = torch.tensor([[0.1, 0.7, 0.2], ...])  # (batch, num_classes)
+loss = loss_fn(logits, soft_labels)  # 直接支持！
+```
 
-与 FusionSoftLabelTrainer 的区别：
-- 本类：仅支持二分类，输出单值logit，使用 BCEWithLogitsLoss
-- FusionSoftLabelTrainer：支持多分类，输出多值logits，使用 CrossEntropyLoss
+配合使用：
+- FusionSoftLabelDataset（返回 input_ids, attention_mask, soft_label向量）
+- GatedFusionModel（语义特征 + 统计特征融合）
 
 ================================================================================
 """
@@ -39,6 +37,7 @@ import json
 from typing import Dict, List, Any, Optional
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import numpy as np
@@ -48,22 +47,24 @@ from ..factory import TrainableRouterFactory
 from ..config import TrainableRouterConfig
 
 
-class BinarySoftLabelTrainer(BaseTrainer):
+class FusionSoftLabelTrainer(BaseTrainer):
     """
-    二分类软标签训练器
+    融合模型软标签训练器
     
-    【限制】仅支持二分类任务（no_rag vs naive_rag）
+    【特点】支持多分类，配合融合模型使用
     
     特点：
-    - 使用 BCEWithLogitsLoss 进行二分类
-    - 支持软标签 (soft_label ∈ [0, 1])
-    - 评估时使用 sigmoid + threshold
-    - 主要用于分类器式模型 (如 StatisticalRouterModel)
+    - 使用 CrossEntropyLoss 进行多分类（支持软标签）
+    - 支持软标签向量 (soft_label ∈ [0, 1]^num_strategies, sum = 1)
+    - 评估时使用 argmax 获取预测
+    - 主要用于融合模型 (如 GatedFusionModel)
     
     数据要求：
-    - batch['queries']: query 文本列表
-    - batch['soft_label']: 软标签 (0~1)
-    - batch['scores']: 兼容字段，用于获取硬标签 (评估时)
+    - batch['input_ids']: token IDs
+    - batch['attention_mask']: 注意力掩码
+    - batch['queries']: query 文本列表（用于统计特征提取）
+    - batch['soft_label']: 软标签向量 (batch, num_strategies)
+    - batch['label']: 硬标签 (用于评估)
     """
     
     def __init__(
@@ -77,7 +78,7 @@ class BinarySoftLabelTrainer(BaseTrainer):
         初始化
         
         Args:
-            model: 模型 (支持分类器式forward)
+            model: 模型 (支持融合式forward)
             config: 配置
             output_dir: 输出目录
             logger: 日志记录器
@@ -96,9 +97,6 @@ class BinarySoftLabelTrainer(BaseTrainer):
         # 学习率调度器
         self.scheduler = self._init_scheduler()
         
-        # 软标签阈值 (评估时使用)
-        self.threshold = getattr(self.training_config, 'soft_label_threshold', 0.5)
-        
         # Debug 模式
         self.debug_mode = os.getenv("DEBUG_ROUTER", "false").lower() == "true"
         
@@ -108,8 +106,9 @@ class BinarySoftLabelTrainer(BaseTrainer):
         self.best_val_loss = float('inf')
         self.best_val_loss_step = 0
         
-        print(f"SoftLabelTrainer 初始化完成")
-        print(f"  软标签阈值: {self.threshold}")
+        print(f"FusionSoftLabelTrainer 初始化完成")
+        print(f"  策略数量: {self.model.num_strategies}")
+        print(f"  策略名称: {self.model.strategy_names}")
     
     def _init_optimizer(self):
         """初始化优化器"""
@@ -161,46 +160,44 @@ class BinarySoftLabelTrainer(BaseTrainer):
     
     def compute_loss(self, batch) -> torch.Tensor:
         """
-        计算软标签二分类损失
+        计算软标签多分类损失
         
         Args:
             batch: 批次数据
-                - queries: query文本列表 (分类器式模型)
-                - soft_label: 软标签 (0~1), shape: (batch_size,)
-                - scores: 策略分数 (兼容字段, 用于获取硬标签)
+                - input_ids: token IDs
+                - attention_mask: 注意力掩码
+                - queries: query文本列表
+                - soft_label: 软标签向量 (batch, num_strategies)
+                - label: 硬标签 (可选，用于评估)
                 
         Returns:
             损失值
         """
-        queries = batch.get('queries', [])
+        input_ids = batch['input_ids'].to(self.device)
+        attention_mask = batch['attention_mask'].to(self.device)
+        queries = batch['queries']
         
-        if not queries:
-            raise ValueError("Batch中缺少'queries'字段")
+        # 前向传播 - 融合模型接收三个输入
+        logits = self.model.forward(input_ids, attention_mask, queries)  # (batch, num_strategies)
         
-        # 前向传播 - 分类器式模型直接接收 queries
-        logits = self.model.forward(queries)  # (batch_size, 1)
+        # 获取软标签向量
+        soft_labels = batch['soft_label'].to(self.device).float()  # (batch, num_strategies)
         
-        # 获取软标签
-        if 'soft_label' in batch:
-            soft_labels = batch['soft_label'].to(self.device).float()  # (batch_size,)
-        else:
-            # 兼容：从 scores 推断软标签
-            scores = batch['scores'].to(self.device)
-            # 假设 scores[1] 是 naive_rag 的分数
-            soft_labels = scores[:, 1].float()
-        
-        # BCEWithLogitsLoss (适用于软标签)
-        loss_fn = nn.BCEWithLogitsLoss()
-        loss = loss_fn(logits.squeeze(-1), soft_labels)
+        # CrossEntropyLoss 支持软标签 (PyTorch >= 1.10)
+        # 注意：CrossEntropyLoss 期望 target 是概率分布时不需要 squeeze
+        loss_fn = nn.CrossEntropyLoss()
+        loss = loss_fn(logits, soft_labels)
         
         # 记录
         if self.global_step % self.training_config.eval_steps == 0:
-            loss_str = f"Step {self.global_step}: Loss = {loss:.6f}, Logits = [{logits.min():.4f}, {logits.max():.4f}]"
+            probs = F.softmax(logits, dim=-1)
+            loss_str = f"Step {self.global_step}: Loss = {loss:.6f}, Probs range = [{probs.min():.4f}, {probs.max():.4f}]"
             if self.logger:
                 self.logger.info(loss_str)
             
             if self.debug_mode:
                 print(f"[DEBUG] soft_labels mean={soft_labels.mean():.4f}, std={soft_labels.std():.4f}")
+                print(f"[DEBUG] logits mean={logits.mean():.4f}, std={logits.std():.4f}")
         
         return loss
     
@@ -307,41 +304,37 @@ class BinarySoftLabelTrainer(BaseTrainer):
         
         all_predictions = []
         all_labels = []
-        all_soft_labels = []  # 用于计算软标签相关指标
+        all_soft_labels = []
         total_loss = 0.0
         num_batches = 0
         
-        loss_fn = nn.BCEWithLogitsLoss()
+        loss_fn = nn.CrossEntropyLoss()
         
         with torch.no_grad():
             for batch in tqdm(dataloader, desc="Evaluating", ascii=True):
-                queries = batch.get('queries', [])
+                input_ids = batch['input_ids'].to(self.device)
+                attention_mask = batch['attention_mask'].to(self.device)
+                queries = batch['queries']
                 
                 # 前向传播
-                logits = self.model.forward(queries)
+                logits = self.model.forward(input_ids, attention_mask, queries)
                 
                 # 获取软标签
-                if 'soft_label' in batch:
-                    soft_labels = batch['soft_label'].to(self.device).float()
-                else:
-                    scores = batch['scores'].to(self.device)
-                    soft_labels = scores[:, 1].float()
+                soft_labels = batch['soft_label'].to(self.device).float()
                 
-                # 获取硬标签 (用于评估准确率)
-                scores = batch['scores'].to(self.device)
-                hard_labels = scores.argmax(dim=-1).long()  # 0 或 1
+                # 获取硬标签
+                labels = batch['label'].to(self.device).long()
                 
                 # 计算损失
-                loss = loss_fn(logits.squeeze(-1), soft_labels)
+                loss = loss_fn(logits, soft_labels)
                 total_loss += loss.item()
                 num_batches += 1
                 
-                # 预测 (sigmoid + threshold)
-                probs = torch.sigmoid(logits.squeeze(-1))
-                predictions = (probs >= self.threshold).long()
+                # 预测 (argmax)
+                predictions = logits.argmax(dim=-1)
                 
                 all_predictions.extend(predictions.cpu().tolist())
-                all_labels.extend(hard_labels.cpu().tolist())
+                all_labels.extend(labels.cpu().tolist())
                 all_soft_labels.extend(soft_labels.cpu().tolist())
         
         # 计算准确率 (基于硬标签)
@@ -373,18 +366,8 @@ class BinarySoftLabelTrainer(BaseTrainer):
         all_soft_labels = np.array(all_soft_labels)
         all_predictions = np.array(all_predictions)
         
-        # 按 soft_label 分组统计预测准确率
-        soft_label_bins = {
-            '< 0.3 (倾向no_rag)': (all_soft_labels < 0.3, 'no_rag should be predicted'),
-            '0.3~0.7 (模糊)': ((all_soft_labels >= 0.3) & (all_soft_labels <= 0.7), 'uncertain'),
-            '> 0.7 (倾向naive_rag)': (all_soft_labels > 0.7, 'naive_rag should be predicted'),
-        }
-        
-        bin_accuracy = {}
-        for bin_name, (mask, _) in soft_label_bins.items():
-            if mask.sum() > 0:
-                bin_correct = (all_predictions[mask] == (all_soft_labels[mask] > 0.5).astype(int)).sum()
-                bin_accuracy[bin_name] = bin_correct / mask.sum()
+        # 计算预期校准误差 (ECE) - 衡量预测概率与实际准确率的差异
+        ece = self._compute_ece(all_predictions, all_labels, all_soft_labels)
         
         metrics = {
             'accuracy': accuracy,
@@ -393,7 +376,7 @@ class BinarySoftLabelTrainer(BaseTrainer):
             'routing_distribution': routing_distribution,
             'label_distribution': label_distribution,
             'num_samples': len(all_labels),
-            'bin_accuracy': bin_accuracy,
+            'ece': ece,
         }
         
         # 打印评估结果
@@ -402,6 +385,7 @@ class BinarySoftLabelTrainer(BaseTrainer):
         print(f"{'='*80}")
         print(f"  整体准确率: {accuracy:.4f}")
         print(f"  平均损失: {metrics['loss']:.4f}")
+        print(f"  ECE (校准误差): {ece:.4f}")
         print(f"\n  真实标签分布:")
         for strategy, ratio in label_distribution.items():
             print(f"    {strategy}: {ratio:.2%}")
@@ -411,12 +395,40 @@ class BinarySoftLabelTrainer(BaseTrainer):
         print(f"\n  各策略召回率:")
         for strategy, acc in strategy_accuracy.items():
             print(f"    {strategy}: {acc:.4f}")
-        print(f"\n  软标签分组预测准确率:")
-        for bin_name, acc in bin_accuracy.items():
-            print(f"    {bin_name}: {acc:.4f}")
         print(f"{'='*80}\n")
         
         return metrics
+    
+    def _compute_ece(self, predictions, labels, soft_labels, n_bins=10):
+        """
+        计算预期校准误差 (Expected Calibration Error)
+        
+        Args:
+            predictions: 预测标签
+            labels: 真实标签
+            soft_labels: 软标签（预测概率）
+            n_bins: 分箱数量
+            
+        Returns:
+            ECE 值
+        """
+        # 获取预测概率
+        pred_probs = np.max(soft_labels, axis=1)
+        correct = (predictions == labels).astype(float)
+        
+        bin_boundaries = np.linspace(0, 1, n_bins + 1)
+        ece = 0.0
+        
+        for i in range(n_bins):
+            in_bin = (pred_probs >= bin_boundaries[i]) & (pred_probs < bin_boundaries[i + 1])
+            prop_in_bin = np.mean(in_bin)
+            
+            if prop_in_bin > 0:
+                avg_confidence = np.mean(pred_probs[in_bin])
+                avg_accuracy = np.mean(correct[in_bin])
+                ece += np.abs(avg_accuracy - avg_confidence) * prop_in_bin
+        
+        return ece
     
     def save_checkpoint(self, path: str):
         """保存检查点"""
@@ -449,13 +461,13 @@ class BinarySoftLabelTrainer(BaseTrainer):
         model_config = {
             'strategy_names': self.model.strategy_names,
             'num_strategies': self.model.num_strategies,
-            'threshold': self.threshold,
+            'trainer_type': 'fusion_soft_label',
         }
         # 添加模型特定配置
-        if hasattr(self.model, 'mlp_hidden_dims'):
-            model_config['mlp_hidden_dims'] = self.model.mlp_hidden_dims
-        if hasattr(self.model, 'threshold'):
-            model_config['model_threshold'] = self.model.threshold
+        if hasattr(self.model, 'hidden_size'):
+            model_config['hidden_size'] = self.model.hidden_size
+        if hasattr(self.model, 'config') and hasattr(self.model.config, 'backbone_name'):
+            model_config['backbone_name'] = self.model.config.backbone_name
             
         with open(os.path.join(path, 'config.json'), 'w', encoding='utf-8') as f:
             json.dump(model_config, f, indent=2, ensure_ascii=False)
@@ -487,13 +499,10 @@ class BinarySoftLabelTrainer(BaseTrainer):
                 'learning_rate': self.training_config.learning_rate,
                 'best_val_accuracy': round(self.best_val_accuracy, 4),
                 'best_val_step': self.best_val_step,
-                'threshold': self.threshold,
+                'trainer_type': 'fusion_soft_label',
             }
             json.dump(training_info, f, indent=2)
 
 
 # 注册到工厂
-TrainableRouterFactory.register_trainer('binary_soft_label')(BinarySoftLabelTrainer)
-
-# 兼容旧名称（deprecated，将在未来版本移除）
-SoftLabelTrainer = BinarySoftLabelTrainer
+TrainableRouterFactory.register_trainer('fusion_soft_label')(FusionSoftLabelTrainer)

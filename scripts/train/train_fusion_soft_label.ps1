@@ -1,28 +1,26 @@
-# Binary Soft Label Router Training Script
-# 二分类软标签路由器训练脚本
+# Fusion Soft Label Router Training Script
+# 融合模型软标签路由器训练脚本
 #
-# 【重要】此脚本仅支持二分类任务（no_rag vs naive_rag）
+# 【特点】语义特征 + 统计特征 + 软标签训练
 #
 # 训练配置：
-# - 模型: StatisticalRouterModel (纯统计特征, 63维手工特征)
-# - 训练器: BinarySoftLabelTrainer (BCEWithLogitsLoss)
-# - 数据集: BinarySoftLabelDataset (单值软标签)
+# - 模型: GatedFusionModel (语义 + 统计特征融合)
+# - 训练器: FusionSoftLabelTrainer (CrossEntropyLoss 支持软标签)
+# - 数据集: FusionSoftLabelDataset (返回 input_ids, attention_mask, soft_label向量)
 # - 数据: all_labels_soft.json (包含 soft_label 字段)
-# - 软标签公式: sigmoid((Q_naive_rag - Q_no_rag) / τ), τ=0.1
 #
 # 使用方法:
-#   .\train_soft_label.ps1                    # 正常训练
-#   .\train_soft_label.ps1 -QuickTest         # 快速测试 (10 steps)
-#   .\train_soft_label.ps1 -Epochs 20         # 自定义 epochs
+#   .\train_fusion_soft_label.ps1                    # 正常训练
+#   .\train_fusion_soft_label.ps1 -QuickTest         # 快速测试 (10 steps)
+#   .\train_fusion_soft_label.ps1 -Epochs 10         # 自定义 epochs
 
 param(
-    [string]$Config = "config/train_soft_label.yaml",
+    [string]$Config = "config/train_fusion_soft_label.yaml",
     [string]$OutputDir = "",
-    [int]$Epochs = 10,
-    [int]$BatchSize = 32,
-    [double]$LearningRate = 0.0001,
-    [double]$Threshold = 0.5,
-    [int]$EvalSteps = 50,
+    [int]$Epochs = 5,
+    [int]$BatchSize = 16,
+    [double]$LearningRate = 0.00005,
+    [int]$EvalSteps = 100,
     [int]$Seed = 42,
     [switch]$QuickTest = $false,
     [string]$Resume = ""
@@ -33,18 +31,17 @@ $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
 
 # 输出目录
 if ($OutputDir -eq "") {
-    $OutputDir = "router_models/soft_label_${timestamp}"
+    $OutputDir = "router_models/fusion_soft_label_${timestamp}"
 }
 
 Write-Host "=========================================" -ForegroundColor Cyan
-Write-Host "软标签路由器训练" -ForegroundColor Cyan
+Write-Host "融合模型软标签路由器训练" -ForegroundColor Cyan
 Write-Host "=========================================" -ForegroundColor Cyan
 Write-Host "配置文件: $Config"
 Write-Host "输出目录: $OutputDir"
 Write-Host "Epochs: $Epochs"
 Write-Host "Batch Size: $BatchSize"
 Write-Host "Learning Rate: $LearningRate"
-Write-Host "Threshold: $Threshold"
 Write-Host "Eval Steps: $EvalSteps"
 Write-Host "Seed: $Seed"
 Write-Host "=========================================" -ForegroundColor Cyan

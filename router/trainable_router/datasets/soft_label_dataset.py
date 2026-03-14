@@ -1,8 +1,21 @@
 """
-软标签路由数据集
+二分类软标签路由数据集
 
-支持软标签训练，返回 soft_label 而非硬标签
-用于处理 tie 样本和模糊边界情况
+【重要】此类仅支持二分类任务（no_rag vs naive_rag）
+
+支持软标签训练，返回 soft_label 而非硬标签。
+软标签为单值（0~1），用于表示倾向程度：
+- soft_label → 0: no_rag 更好
+- soft_label → 0.5: 两者差不多 (tie)
+- soft_label → 1: naive_rag 更好
+
+与 FusionSoftLabelDataset 的区别：
+- 本类：仅支持二分类，软标签为单值，适用于纯统计特征模型
+- FusionSoftLabelDataset：支持多分类，软标签为向量，适用于融合模型
+
+配合使用：
+- BinarySoftLabelTrainer（使用 BCEWithLogitsLoss）
+- StatisticalRouterModel（纯统计特征模型）
 """
 
 import os
@@ -15,9 +28,11 @@ from ..config import TrainableRouterConfig
 from ..data_utils import TrainingItem
 
 
-class SoftLabelRouterDataset(BaseRouterDataset):
+class BinarySoftLabelDataset(BaseRouterDataset):
     """
-    软标签路由数据集
+    二分类软标签路由数据集
+    
+    【限制】仅支持二分类任务（no_rag vs naive_rag）
     
     与 RouterLabelDataset 的区别:
     - 返回 soft_label (0~1 的连续值) 而非硬标签
@@ -28,7 +43,7 @@ class SoftLabelRouterDataset(BaseRouterDataset):
         "samples": [
             {
                 "question": "...",
-                "soft_label": 0.85,  # 0~1 的软标签
+                "soft_label": 0.85,  # 0~1 的软标签（单值）
                 "utility_gap": 0.2,  # 可选, ΔU 值
                 "no_rag_em": 0.0,    # 可选
                 "no_rag_f1": 0.0,    # 可选
@@ -193,4 +208,7 @@ class SoftLabelRouterDataset(BaseRouterDataset):
 
 
 # 注册到工厂
-TrainableRouterFactory.register_dataset('soft_label')(SoftLabelRouterDataset)
+TrainableRouterFactory.register_dataset('binary_soft_label')(BinarySoftLabelDataset)
+
+# 兼容旧名称（deprecated，将在未来版本移除）
+SoftLabelRouterDataset = BinarySoftLabelDataset

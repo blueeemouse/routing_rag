@@ -1,9 +1,11 @@
-# Soft Label Statistical Router Training Config
-# 软标签统计特征路由器训练配置
+# Binary Soft Label Statistical Router Training Config
+# 二分类软标签统计特征路由器训练配置
 # 
+# 【重要】此配置仅支持二分类任务（no_rag vs naive_rag）
+#
 # 与 train_statistical.yaml 的区别：
-# - 使用 soft_label 数据集
-# - 使用 soft_label 训练器
+# - 使用 binary_soft_label 数据集
+# - 使用 binary_soft_label 训练器
 # - 支持软标签阈值配置
 #
 # 软标签含义：
@@ -38,7 +40,7 @@ model:
 
 # 训练配置
 training:
-  trainer_type: "soft_label"  # 使用软标签训练器
+  trainer_type: "binary_soft_label"  # 使用二分类软标签训练器
   learning_rate: 0.001  # 1e-3，适合MLP训练
   batch_size: 32
   epochs: 10
@@ -63,7 +65,7 @@ data:
   # train_path: "HotpotQA_train_data/label_analysis/all_labels_soft.json"
   train_path: "HotpotQA_train_data/label_analysis/all_labels_soft_with_cost.json"
   val_path: "evaluation_results/router_test_labels.json"
-  source: "soft_label"  # 使用软标签数据集
+  source: "binary_soft_label"  # 使用二分类软标签数据集
   shuffle: true
 
 # 输出配置
