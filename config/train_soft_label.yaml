@@ -1,0 +1,70 @@
+# Soft Label Statistical Router Training Config
+# 软标签统计特征路由器训练配置
+# 
+# 与 train_statistical.yaml 的区别：
+# - 使用 soft_label 数据集
+# - 使用 soft_label 训练器
+# - 支持软标签阈值配置
+#
+# 软标签含义：
+# - soft_label → 0: no_rag 更好
+# - soft_label → 0.5: 两者差不多 (tie)
+# - soft_label → 1: naive_rag 更好
+
+# 模型类型
+model_type: "statistical"
+
+# 模型配置
+model:
+  # 注意：statistical模型不使用backbone，这里提供dummy值
+  backbone_name: "dummy"
+  hidden_size: 768  # dummy值
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  temperature: 0.5
+  device: "auto"
+  
+  # 统计特征路由器特有配置
+  use_spacy: true  # 使用spaCy进行特征提取（推荐设为true以获得更准确特征）
+  spacy_model: "en_core_web_sm"
+  feature_normalize: true  # 对特征进行归一化
+  
+  # MLP配置
+  threshold: 0.5  # 模型内部阈值（训练时可能被覆盖）
+  mlp_hidden_dims: [256, 128, 64]  # MLP隐藏层维度
+  dropout: 0.1  # Dropout概率
+  use_attention: true  # 使用特征注意力
+  use_residual: true  # 使用残差连接
+
+# 训练配置
+training:
+  trainer_type: "soft_label"  # 使用软标签训练器
+  learning_rate: 0.001  # 1e-3，适合MLP训练
+  batch_size: 32
+  epochs: 10
+  training_steps: 0  # 0表示使用epochs动态计算
+  eval_steps: 50
+  save_steps: 50
+  max_grad_norm: 1.0
+  
+  # 软标签特有配置
+  soft_label_threshold: 0.5  # 评估时的预测阈值（soft_label > threshold 预测为 naive_rag）
+  
+  # 优化器配置
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.0001  # 1e-4
+    
+  scheduler_type: "cosine"  # 余弦退火调度器
+
+# 数据配置
+data:
+  # 软标签数据文件
+  train_path: "HotpotQA_train_data/label_analysis/all_labels_soft.json"
+  val_path: "evaluation_results/router_test_labels.json"
+  source: "soft_label"  # 使用软标签数据集
+  shuffle: true
+
+# 输出配置
+# output_dir会在训练脚本中动态生成
+log_level: "info"
