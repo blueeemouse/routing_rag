@@ -4,7 +4,7 @@ from .hotpotqa_dataset import GenericRouterDataset
 from .llm_judge_dataset import LLMJudgeRouterDataset
 from .router_label_dataset import RouterLabelDataset
 from .weighted_router_label_dataset import WeightedRouterLabelDataset
-from .soft_label_dataset import SoftLabelRouterDataset
+from .soft_label_dataset import BinarySoftLabelDataset, SoftLabelRouterDataset  # SoftLabelRouterDataset 为兼容别名
 from .dpo_dataset import DPOPreferenceDataset, DPOBinaryPreferenceDataset
 
 __all__ = [
@@ -12,7 +12,8 @@ __all__ = [
     'LLMJudgeRouterDataset', 
     'RouterLabelDataset', 
     'WeightedRouterLabelDataset',
-    'SoftLabelRouterDataset',
+    'BinarySoftLabelDataset',
+    'SoftLabelRouterDataset',  # 兼容旧名称
     'DPOPreferenceDataset',
     'DPOBinaryPreferenceDataset',
 ]

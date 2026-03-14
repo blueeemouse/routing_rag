@@ -1,7 +1,9 @@
 """
-SoftLabelTrainer实现
+BinarySoftLabelTrainer实现
 
-用于软标签训练的训练器
+【重要】此类仅支持二分类任务（no_rag vs naive_rag）
+
+用于二分类软标签训练的训练器。
 
 与 ClassificationTrainer / StatisticalTrainer 的区别：
 ================================================================================
@@ -25,6 +27,10 @@ SoftLabelTrainer实现
 - soft_label → 0.5: 两者差不多 (tie)
 - soft_label → 1: naive_rag 更好
 
+与 FusionSoftLabelTrainer 的区别：
+- 本类：仅支持二分类，输出单值logit，使用 BCEWithLogitsLoss
+- FusionSoftLabelTrainer：支持多分类，输出多值logits，使用 CrossEntropyLoss
+
 ================================================================================
 """
 
@@ -42,9 +48,11 @@ from ..factory import TrainableRouterFactory
 from ..config import TrainableRouterConfig
 
 
-class SoftLabelTrainer(BaseTrainer):
+class BinarySoftLabelTrainer(BaseTrainer):
     """
-    软标签训练器
+    二分类软标签训练器
+    
+    【限制】仅支持二分类任务（no_rag vs naive_rag）
     
     特点：
     - 使用 BCEWithLogitsLoss 进行二分类
@@ -485,4 +493,7 @@ class SoftLabelTrainer(BaseTrainer):
 
 
 # 注册到工厂
-TrainableRouterFactory.register_trainer('soft_label')(SoftLabelTrainer)
+TrainableRouterFactory.register_trainer('binary_soft_label')(BinarySoftLabelTrainer)
+
+# 兼容旧名称（deprecated，将在未来版本移除）
+SoftLabelTrainer = BinarySoftLabelTrainer

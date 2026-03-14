@@ -1,9 +1,12 @@
-# Soft Label Router Training Script
-# 软标签路由器训练脚本
+# Binary Soft Label Router Training Script
+# 二分类软标签路由器训练脚本
+#
+# 【重要】此脚本仅支持二分类任务（no_rag vs naive_rag）
 #
 # 训练配置：
 # - 模型: StatisticalRouterModel (纯统计特征, 63维手工特征)
-# - 训练器: SoftLabelTrainer (BCEWithLogitsLoss)
+# - 训练器: BinarySoftLabelTrainer (BCEWithLogitsLoss)
+# - 数据集: BinarySoftLabelDataset (单值软标签)
 # - 数据: all_labels_soft.json (包含 soft_label 字段)
 # - 软标签公式: sigmoid((Q_naive_rag - Q_no_rag) / τ), τ=0.1
 #
