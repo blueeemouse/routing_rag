@@ -93,7 +93,7 @@ class FusionSoftLabelDataset(BaseRouterDataset):
         super().__init__(config, tokenizer)
         
         self.strategy_names = config.model.strategy_names
-        self.num_strategies = config.num_strategies
+        self.num_strategies = config.model.num_strategies
         self.strategy_to_idx = {name: idx for idx, name in enumerate(self.strategy_names)}
         self.max_length = max_length
         self.raw_samples = []  # 存储原始数据

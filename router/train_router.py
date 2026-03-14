@@ -441,10 +441,15 @@ def main():
     source_type = getattr(config.data, 'source', '').lower()
     
     if source_type == 'soft_label':
-        # 软标签数据集
+        # 软标签数据集（纯统计特征）
         logger_instance.info(f"使用SoftLabelRouterDataset (source={source_type})")
         from trainable_router.datasets.soft_label_dataset import SoftLabelRouterDataset
         train_dataset = SoftLabelRouterDataset(config)
+    elif source_type == 'fusion_soft_label':
+        # 融合模型软标签数据集（语义+统计特征）
+        logger_instance.info(f"使用FusionSoftLabelDataset (source={source_type})")
+        from trainable_router.datasets.fusion_soft_label_dataset import FusionSoftLabelDataset
+        train_dataset = FusionSoftLabelDataset(config)
     elif ('router_test_labels' in config.data.train_path or 
           'router_labels' in config.data.train_path or
           'all_labels' in config.data.train_path or
@@ -468,8 +473,16 @@ def main():
 
     val_dataset = None
     if config.data.val_path:
-        # 检查是否是路由标签格式
-        if 'router_test_labels' in config.data.val_path or 'router_labels' in config.data.val_path:
+        # 根据 source 类型选择验证数据集
+        if source_type == 'fusion_soft_label':
+            logger_instance.info(f"使用FusionSoftLabelDataset加载验证集 (source={source_type})")
+            from trainable_router.datasets.fusion_soft_label_dataset import FusionSoftLabelDataset
+            val_dataset = FusionSoftLabelDataset(config)
+        elif source_type == 'soft_label':
+            logger_instance.info(f"使用SoftLabelRouterDataset加载验证集 (source={source_type})")
+            from trainable_router.datasets.soft_label_dataset import SoftLabelRouterDataset
+            val_dataset = SoftLabelRouterDataset(config)
+        elif 'router_test_labels' in config.data.val_path or 'router_labels' in config.data.val_path:
             logger_instance.info("检测到路由标签格式，使用RouterLabelDataset")
             from trainable_router.datasets.router_label_dataset import RouterLabelDataset
             val_dataset = RouterLabelDataset(config)
@@ -497,6 +510,27 @@ def main():
 
     # 创建collate_fn
     def collate_fn(x):
+        # 处理软标签数据集（如 FusionSoftLabelDataset）
+        if 'soft_label' in x[0]:
+            soft_labels_tensor = torch.tensor([item['soft_label'] for item in x], dtype=torch.float32)
+            batch_data = {
+                'scores': soft_labels_tensor,  # 兼容其他训练器
+                'soft_label': soft_labels_tensor,  # FusionSoftLabelTrainer 需要
+                'cluster_ids': torch.tensor([item['cluster_id'] for item in x], dtype=torch.long),
+                'queries': [item['queries'] for item in x],
+            }
+            
+            # 软标签数据集已经分词好
+            batch_data['input_ids'] = torch.stack([item['input_ids'] for item in x])
+            batch_data['attention_mask'] = torch.stack([item['attention_mask'] for item in x])
+            
+            # 如果有硬标签也加上
+            if 'label' in x[0]:
+                batch_data['labels'] = torch.tensor([item['label'] for item in x], dtype=torch.long)
+            
+            return batch_data
+        
+        # 普通数据集处理
         batch_data = {
             'scores': torch.tensor([item['scores'] for item in x], dtype=torch.float32),
             'cluster_ids': torch.tensor([item['cluster_id'] for item in x], dtype=torch.long),
