@@ -1,0 +1,76 @@
+# Fusion Soft Label Router Training Script
+# 融合模型软标签路由器训练脚本
+#
+# 【特点】语义特征 + 统计特征 + 软标签训练
+#
+# 训练配置：
+# - 模型: GatedFusionModel (语义 + 统计特征融合)
+# - 训练器: FusionSoftLabelTrainer (CrossEntropyLoss 支持软标签)
+# - 数据集: FusionSoftLabelDataset (返回 input_ids, attention_mask, soft_label向量)
+# - 数据: all_labels_soft.json (包含 soft_label 字段)
+#
+# 使用方法:
+#   .\train_fusion_soft_label.ps1                    # 正常训练
+#   .\train_fusion_soft_label.ps1 -QuickTest         # 快速测试 (10 steps)
+#   .\train_fusion_soft_label.ps1 -Epochs 10         # 自定义 epochs
+
+param(
+    [string]$Config = "config/train_fusion_soft_label.yaml",
+    [string]$OutputDir = "",
+    [int]$Epochs = 5,
+    [int]$BatchSize = 16,
+    [double]$LearningRate = 0.00005,
+    [int]$EvalSteps = 100,
+    [int]$Seed = 42,
+    [switch]$QuickTest = $false,
+    [string]$Resume = ""
+)
+
+# 时间戳
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+
+# 输出目录
+if ($OutputDir -eq "") {
+    $OutputDir = "router_models/fusion_soft_label_${timestamp}"
+}
+
+Write-Host "=========================================" -ForegroundColor Cyan
+Write-Host "融合模型软标签路由器训练" -ForegroundColor Cyan
+Write-Host "=========================================" -ForegroundColor Cyan
+Write-Host "配置文件: $Config"
+Write-Host "输出目录: $OutputDir"
+Write-Host "Epochs: $Epochs"
+Write-Host "Batch Size: $BatchSize"
+Write-Host "Learning Rate: $LearningRate"
+Write-Host "Eval Steps: $EvalSteps"
+Write-Host "Seed: $Seed"
+Write-Host "=========================================" -ForegroundColor Cyan
+
+# 构建命令
+$command = "python router/train_router.py"
+$command += " --config $Config"
+$command += " --output_dir $OutputDir"
+$command += " --epochs $Epochs"
+$command += " --batch_size $BatchSize"
+$command += " --learning_rate $LearningRate"
+$command += " --eval_steps $EvalSteps"
+$command += " --seed $Seed"
+
+if ($Resume -ne "") {
+    $command += " --resume $Resume"
+}
+
+# 快速测试模式
+if ($QuickTest) {
+    $command += " --max_steps 10 --overfit_single_batch"
+    Write-Host "`n快速测试模式 (10 steps)..." -ForegroundColor Yellow
+} else {
+    Write-Host "`n开始训练..." -ForegroundColor Green
+}
+
+# 执行训练
+Write-Host "命令: $command" -ForegroundColor Gray
+Invoke-Expression $command
+
+Write-Host "`n训练完成!" -ForegroundColor Green
+Write-Host "模型保存路径: $OutputDir" -ForegroundColor Green

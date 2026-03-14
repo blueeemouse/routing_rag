@@ -1,0 +1,62 @@
+# Fusion Soft Label Router Training Config
+# 融合模型软标签路由器训练配置
+# 
+# 【特点】语义特征 + 统计特征 + 软标签训练
+#
+# 与 train_gated_fusion.yaml 的区别：
+# - 使用 fusion_soft_label 数据集（返回 input_ids, attention_mask）
+# - 使用 fusion_soft_label 训练器（支持软标签向量）
+# - 数据源为软标签格式
+#
+# 软标签含义：
+# - 二分类: soft_label = [p_no_rag, p_naive_rag]
+# - 多分类: soft_label = [p_no_rag, p_naive_rag, p_graphrag]
+#
+# 损失函数：CrossEntropyLoss（支持软标签）
+
+# 模型类型
+model_type: "gated_fusion"
+
+# 模型配置
+model:
+  backbone_name: "BAAI/bge-base-en-v1.5"
+  hidden_size: 768  # BGE-base的维度
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  temperature: 0.5
+  device: "auto"
+  
+  # 手工特征配置
+  use_spacy: true  # 使用spaCy进行依存分析和NER
+  spacy_model: "en_core_web_sm"
+  feature_normalize: true  # 对特征进行归一化
+  use_residual: true  # 使用残差连接
+
+# 训练配置
+training:
+  trainer_type: "fusion_soft_label"  # 融合软标签训练器
+  learning_rate: 0.00005  # 5e-5，融合模型用较小学习率
+  batch_size: 16  # 融合模型显存占用较大，减小batch size
+  epochs: 5
+  training_steps: 0  # 0表示使用epochs动态计算
+  eval_steps: 100
+  save_steps: 100
+  max_grad_norm: 1.0
+  
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.01
+    
+  scheduler_type: "linear"
+
+# 数据配置
+data:
+  # 软标签数据文件
+  train_path: "HotpotQA_train_data/label_analysis/all_labels_soft.json"
+  val_path: "evaluation_results/router_test_labels.json"
+  source: "fusion_soft_label"  # 使用融合软标签数据集
+  shuffle: true
+
+# 输出配置
+# output_dir会在训练脚本中动态生成
+log_level: "info"
