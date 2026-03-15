@@ -57,7 +57,7 @@ class BaseRouterDataset(Dataset, ABC):
         self.data_path = self._get_data_path()
         
         # 初始化样本存储
-        self.raw_samples: List[Dict[str, Any]] = []
+        self.data: List[Dict[str, Any]] = []
         
         # 策略映射（从配置读取）
         self.strategy_names: List[str] = config.model.strategy_names
@@ -104,8 +104,8 @@ class BaseRouterDataset(Dataset, ABC):
             with open(self.data_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             
-            self.raw_samples = data.get('samples', [])
-            print(f"成功加载 {len(self.raw_samples)} 条样本 from {self.data_path}")
+        self.data = data.get('samples', [])
+        print(f"成功加载 {len(self.data)} 条样本 from {self.data_path}")
             
             # 子类可以重写此方法进行额外处理
             self._process_samples()
@@ -225,7 +225,7 @@ class BaseRouterDataset(Dataset, ABC):
     
     def __len__(self) -> int:
         """返回数据集长度"""
-        return len(self.raw_samples)
+        return len(self.data)
     
     def get_sample_info(self, idx: int = 0) -> Dict[str, Any]:
         """获取样本信息（用于调试）
@@ -236,13 +236,13 @@ class BaseRouterDataset(Dataset, ABC):
         Returns:
             样本信息字典
         """
-        if not self.raw_samples:
+        if not self.data:
             return {"error": "无数据"}
         
-        sample = self.raw_samples[idx]
+        sample = self.data[idx]
         return {
             "index": idx,
-            "total_samples": len(self.raw_samples),
+            "total_samples": len(self.data),
             "has_question": "question" in sample,
             "has_label": "optimal_strategy" in sample or "label" in sample,
             "has_soft_label": "soft_label" in sample or "soft_label_vector" in sample,
@@ -255,13 +255,13 @@ class BaseRouterDataset(Dataset, ABC):
         Returns:
             验证结果字典
         """
-        if not self.raw_samples:
+        if not self.data:
             return {"valid": False, "error": "无数据"}
         
         issues = []
         valid_count = 0
         
-        for i, sample in enumerate(self.raw_samples[:100]):  # 只检查前100条
+        for i, sample in enumerate(self.data[:100]):  # 只检查前100条
             # 检查必需字段
             if "question" not in sample:
                 issues.append(f"样本 {i}: 缺少 question 字段")
@@ -275,8 +275,8 @@ class BaseRouterDataset(Dataset, ABC):
         
         return {
             "valid": len(issues) == 0,
-            "total": len(self.raw_samples),
-            "checked": min(100, len(self.raw_samples)),
+            "total": len(self.data),
+            "checked": min(100, len(self.data)),
             "valid_in_checked": valid_count,
             "issues": issues[:10]  # 只返回前10个问题
         }

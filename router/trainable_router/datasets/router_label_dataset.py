@@ -75,6 +75,7 @@ class RouterLabelDataset(BaseRouterDataset):
 
             # 构建策略分数：最优策略=1.0，其他=0.0
             # 这样argmax就能直接得到最优策略
+            # 每一条item都有一个strategy_scores字典，它里面有所有的候选方法对应的scores
             strategy_scores = {}
             for strategy_name in self.strategy_names:
                 if strategy_name == optimal_strategy:
