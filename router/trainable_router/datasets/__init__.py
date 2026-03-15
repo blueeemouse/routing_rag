@@ -1,5 +1,6 @@
 """数据集模块"""
 
+from .base_dataset import BaseRouterDataset
 from .hotpotqa_dataset import GenericRouterDataset
 from .llm_judge_dataset import LLMJudgeRouterDataset
 from .router_label_dataset import RouterLabelDataset
@@ -9,6 +10,7 @@ from .fusion_soft_label_dataset import FusionSoftLabelDataset, fusion_soft_label
 from .dpo_dataset import DPOPreferenceDataset, DPOBinaryPreferenceDataset
 
 __all__ = [
+    'BaseRouterDataset',  # 抽象基类
     'GenericRouterDataset', 
     'LLMJudgeRouterDataset', 
     'RouterLabelDataset', 
