@@ -180,8 +180,15 @@ class FusionSoftLabelTrainer(BaseTrainer):
         # 前向传播 - 融合模型接收三个输入
         logits = self.model.forward(input_ids, attention_mask, queries)  # (batch, num_strategies)
         
-        # 获取软标签向量
-        soft_labels = batch['soft_label'].to(self.device).float()  # (batch, num_strategies)
+        # 获取软标签向量（优先使用 soft_label，否则从 scores 或 label）
+        if 'soft_label' in batch:
+            soft_labels = batch['soft_label'].to(self.device).float()  # (batch, num_strategies)
+        elif 'scores' in batch:
+            soft_labels = batch['scores'].to(self.device).float()
+        else:
+            # 从硬标签生成 one-hot 编码作为软标签
+            labels = batch['label'].to(self.device).long()
+            soft_labels = F.one_hot(labels, num_classes=logits.size(-1)).float()
         
         # CrossEntropyLoss 支持软标签 (PyTorch >= 1.10)
         # 注意：CrossEntropyLoss 期望 target 是概率分布时不需要 squeeze
@@ -319,11 +326,22 @@ class FusionSoftLabelTrainer(BaseTrainer):
                 # 前向传播
                 logits = self.model.forward(input_ids, attention_mask, queries)
                 
-                # 获取软标签
-                soft_labels = batch['soft_label'].to(self.device).float()
+                # 获取软标签（优先使用 soft_label，否则从 scores 或 label）
+                if 'soft_label' in batch:
+                    soft_labels = batch['soft_label'].to(self.device).float()
+                elif 'scores' in batch:
+                    # 从 scores 作为软标签（硬标签数据集）
+                    soft_labels = batch['scores'].to(self.device).float()
+                else:
+                    # 从硬标签生成 one-hot 编码
+                    labels = batch['label'].to(self.device).long()
+                    soft_labels = F.one_hot(labels, num_classes=logits.size(-1)).float()
                 
-                # 获取硬标签
-                labels = batch['label'].to(self.device).long()
+                # 获取硬标签（从 label 或 scores 推断）
+                if 'label' in batch:
+                    labels = batch['label'].to(self.device).long()
+                else:
+                    labels = soft_labels.argmax(dim=-1).long()
                 
                 # 计算损失
                 loss = loss_fn(logits, soft_labels)
