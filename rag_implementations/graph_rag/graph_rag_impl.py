@@ -27,17 +27,11 @@ class GraphRAG(RAGInterface):
 
         Args:
             config: 配置参数字典（可选）
+            
+        注意：GraphRAG的实际查询行为由独立的.yml配置文件控制（如graphrag_hotpotqa_config.yml）
+        settings.yaml中的graph_rag配置不会被使用
         """
         self.config = config or {}
-
-        # 优先使用传入的配置，否则使用全局配置
-        self.api_url = self.config.get('api_url', settings.graph_rag_api_url)
-        self.api_key = self.config.get('api_key', settings.graph_rag_api_key)
-        self.model = self.config.get('model', settings.graph_rag_model)
-        self.embedding_model = self.config.get('embedding_model', settings.graph_rag_embedding_model)
-        self.chunk_size = self.config.get('chunk_size', settings.graph_rag_chunk_size)
-        self.top_k = self.config.get('top_k', settings.graph_rag_top_k)
-        self.temperature = self.config.get('temperature', settings.graph_rag_temperature)
 
         # 设置日志
         self.logger = logging.getLogger(__name__)
@@ -309,7 +303,7 @@ class GraphRAG(RAGInterface):
         
         # 3. 如果没有显式配置，尝试从 embedding_model 推断
         if dimensions is None:
-            # 从 GraphRAG 的 config 对象中提取 embedding_model
+            # 从 GraphRAG 的 config 对象中提取 embedding_model（来自.yml配置文件）
             embedding_model = None
             if hasattr(config, 'models'):
                 for model_id, model_config in config.models.items():
@@ -317,8 +311,8 @@ class GraphRAG(RAGInterface):
                         embedding_model = model_config.model
                         break
             
-            # 优先使用 merged_config 中的 embedding_model
-            embedding_model = merged_config.get('embedding_model', embedding_model or self.embedding_model)
+            # 优先使用 merged_config 中的 embedding_model（如果通过context传递）
+            embedding_model = merged_config.get('embedding_model', embedding_model)
             
             # 根据模型推断维度
             dimension_map = {

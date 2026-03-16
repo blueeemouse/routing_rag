@@ -201,34 +201,44 @@ naive_rag:
 #     Answer:
 
 # 选项 2: 使用本地 Ollama（当前启用）
+# 注意：实际的GraphRAG查询行为由独立的.yml配置文件控制（如graphrag_hotpotqa_config.yml）
+# 在查询时，以下参数不会被使用，因为GraphRAG会加载.yml文件中的完整配置：
+# - model: 使用.yml中的models.default_chat_model.model（当前为qwen2.5:3b-8k）
+# - embedding_model: 使用.yml中的models.default_embedding_model.model（当前为nomic-embed-text）
+# - chunk_size: 使用.yml中的chunks.size（当前为300）
+# - top_k: 使用.yml中的local_search.top_k_entities（当前为5）
+# - temperature: 使用.yml中的models.default_chat_model.temperature（当前为0）
+# - prompt_template: 使用.yml中的local_search.prompt（已优化为简洁格式）
 graph_rag:
   api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
   api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
-  model: "qwen2.5:3b"  # 本地 LLM 模型
-  embedding_model: "nomic-embed-text"  # 本地 embedding 模型
-  chunk_size: 512
-  top_k: 5
-  temperature: 0.0
-  prompt_template: |
-    Context information is below.
-    ---------------------
-    {context_str}
-    ---------------------
-    Given the context information and not prior knowledge, answer the query.
-
-    Guidelines:
-    1. Provide ONLY the answer, no explanations or reasoning
-    2. Keep the answer as short as possible - typically 1-5 words
-    3. For yes/no questions, answer only "yes" or "no"
-    4. For dates, use the exact format (e.g., "December 31, 2015")
-    5. For numbers, provide just the number (e.g., "1522")
-    6. For names, provide just the name (e.g., "Terry Crews")
-    7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
-    8. DO NOT add any additional context or information
-    9. If the answer is not in the context, say "I don't know"
-
-    Query: {query_str}
-    Answer:
+  # 注意：model和embedding_model在settings中配置，但实际查询时使用.yml配置文件中的值
+  model: "qwen2.5:3b"  # 本地 LLM模型
+  embedding_model: "nomic-embed-text"  # 本地embedding模型
+  # 以下参数保留原始内容但已注释，供参考
+  # chunk_size: 512
+  # top_k: 5
+  # temperature: 0.0
+  # prompt_template: |
+  #   Context information is below.
+  #   ---------------------
+  #   {context_str}
+  #   ---------------------
+  #   Given the context information and not prior knowledge, answer the query.
+  #
+  #   Guidelines:
+  #   1. Provide ONLY the answer, no explanations or reasoning
+  #   2. Keep the answer as short as possible - typically 1-5 words
+  #   3. For yes/no questions, answer only "yes" or "no"
+  #   4. For dates, use the exact format (e.g., "December 31, 2015")
+  #   5. For numbers, provide just the number (e.g., "1522")
+  #   6. For names, provide just the name (e.g., "Terry Crews")
+  #   7. DO NOT include phrases like "The answer is", "According to", "Based on", etc.
+  #   8. DO NOT add any additional context or information
+  #   9. If the answer is not in the context, say "I don't know"
+  #
+  #   Query: {query_str}
+  #   Answer:
 
 rag:
   naive_rag_enabled: true
