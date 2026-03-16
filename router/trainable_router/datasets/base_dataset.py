@@ -104,8 +104,8 @@ class BaseRouterDataset(Dataset, ABC):
             with open(self.data_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             
-        self.data = data.get('samples', [])
-        print(f"成功加载 {len(self.data)} 条样本 from {self.data_path}")
+            self.data = data.get('samples', [])
+            print(f"成功加载 {len(self.data)} 条样本 from {self.data_path}")
             
             # 子类可以重写此方法进行额外处理
             self._process_samples()
