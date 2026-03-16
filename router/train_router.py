@@ -475,6 +475,7 @@ def main():
     if config.data.val_path:
         # 根据 source 类型选择验证数据集
         if source_type == 'fusion_soft_label':
+            # 融合模型使用 FusionSoftLabelDataset，支持验证集无 soft_label
             logger_instance.info(f"使用FusionSoftLabelDataset加载验证集 (source={source_type})")
             from trainable_router.datasets.fusion_soft_label_dataset import FusionSoftLabelDataset
             val_dataset = FusionSoftLabelDataset(config)
@@ -526,7 +527,12 @@ def main():
             
             # 如果有硬标签也加上
             if 'label' in x[0]:
-                batch_data['labels'] = torch.tensor([item['label'] for item in x], dtype=torch.long)
+                batch_data['label'] = torch.tensor([item['label'] for item in x], dtype=torch.long)
+            else:
+                # 从 soft_label 推断硬标签（取概率最大的）
+                soft_labels_np = soft_labels_tensor.numpy()
+                inferred_labels = soft_labels_np.argmax(axis=-1)
+                batch_data['label'] = torch.tensor(inferred_labels, dtype=torch.long)
             
             return batch_data
         

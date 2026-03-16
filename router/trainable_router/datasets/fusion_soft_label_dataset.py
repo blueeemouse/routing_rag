@@ -297,8 +297,8 @@ class FusionSoftLabelDataset(BaseRouterDataset):
         if soft_label is None:
             soft_label = [1.0 / self.num_strategies] * self.num_strategies  # 均匀分布作为 fallback
         
-        # 获取硬标签
-        label_str = raw_sample.get('label', '')
+        # 获取硬标签（支持 'label' 或 'optimal_strategy' 字段）
+        label_str = raw_sample.get('label') or raw_sample.get('optimal_strategy', '')
         label = self.strategy_to_idx.get(label_str, 0)
         
         return {
