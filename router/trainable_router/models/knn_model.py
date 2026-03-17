@@ -50,10 +50,10 @@ class KNNRouterModel(BaseRouterModel):
         self.hidden_size = config.hidden_size
         self.temperature = config.temperature
         
-        # KNN特有配置
-        self.k = getattr(config, 'k', 5)  # 默认k=5
-        self.distance_metric = getattr(config, 'distance_metric', 'cosine')  # 默认使用余弦距离
-        self.weighted_voting = getattr(config, 'weighted_voting', True)  # 是否使用距离加权投票
+        # KNN特有配置（从 ModelConfig 获取，已有默认值）
+        self.k = config.k
+        self.distance_metric = config.distance_metric
+        self.weighted_voting = config.weighted_voting
         
         # 训练数据存储
         self.train_embeddings: Optional[np.ndarray] = None  # (num_samples, hidden_size)
@@ -83,60 +83,73 @@ class KNNRouterModel(BaseRouterModel):
         except Exception as e:
             raise ImportError(f"无法加载模型 {backbone_name}: {e}")
     
-    def encode(self, queries: List[str]) -> torch.Tensor:
+    def encode(self, queries: List[str], batch_size: int = None, show_progress: bool = False, return_numpy: bool = False) -> Any:
         """
         编码query列表为embedding
         
         Args:
             queries: query字符串列表
-            
-        Returns:
-            shape: (batch_size, hidden_size)
-        """
-        self.eval()
-        with torch.no_grad():
-            inputs = self.tokenize(queries)
-            inputs = {k: v.to(self.device) for k, v in inputs.items()}
-            outputs = self.backbone(**inputs)
-            last_hidden = outputs.last_hidden_state  # (B, L, H)
-
-            attention_mask = inputs.get('attention_mask', None)
-            if attention_mask is not None:
-                mask = attention_mask.unsqueeze(-1).to(last_hidden.dtype)  # (B, L, 1)
-                summed = (last_hidden * mask).sum(dim=1)
-                denom = mask.sum(dim=1).clamp(min=1e-9)
-                embeddings = summed / denom
-            else:
-                embeddings = last_hidden[:, 0, :]
-
-        return embeddings
-    
-    def encode_batch(self, queries: List[str], batch_size: int = 32, show_progress: bool = True) -> np.ndarray:
-        """
-        批量编码query列表为embedding（用于训练阶段存储所有样本）
-        
-        Args:
-            queries: query字符串列表
-            batch_size: 批量大小
+            batch_size: 批量大小（当queries很多时自动分批处理）
             show_progress: 是否显示进度条
+            return_numpy: 是否返回numpy array（用于KNN存储）
             
         Returns:
-            shape: (num_samples, hidden_size) numpy array
+            默认返回 torch.Tensor, shape: (batch_size, hidden_size)
+            如果 return_numpy=True，返回 np.ndarray
         """
+        # 如果不需要分批处理，直接编码
+        if batch_size is None or len(queries) <= batch_size:
+            self.eval()
+            with torch.no_grad():
+                inputs = self.tokenize(queries)
+                inputs = {k: v.to(self.device) for k, v in inputs.items()}
+                outputs = self.backbone(**inputs)
+                last_hidden = outputs.last_hidden_state  # (B, L, H)
+
+                attention_mask = inputs.get('attention_mask', None)
+                if attention_mask is not None:
+                    mask = attention_mask.unsqueeze(-1).to(last_hidden.dtype)  # (B, L, 1)
+                    summed = (last_hidden * mask).sum(dim=1)
+                    denom = mask.sum(dim=1).clamp(min=1e-9)
+                    embeddings = summed / denom
+                else:
+                    embeddings = last_hidden[:, 0, :]
+            
+            if return_numpy:
+                return embeddings.cpu().numpy()
+            return embeddings
+        
+        # 需要分批处理（用于训练时编码大量样本）
         from tqdm import tqdm
         
         all_embeddings = []
-        
         iterator = range(0, len(queries), batch_size)
         if show_progress:
             iterator = tqdm(iterator, desc="Encoding queries", ascii=True)
         
-        for i in iterator:
-            batch_queries = queries[i:i + batch_size]
-            batch_emb = self.encode(batch_queries)
-            all_embeddings.append(batch_emb.cpu().numpy())
+        self.eval()
+        with torch.no_grad():
+            for i in iterator:
+                batch_queries = queries[i:i + batch_size]
+                inputs = self.tokenize(batch_queries)
+                inputs = {k: v.to(self.device) for k, v in inputs.items()}
+                outputs = self.backbone(**inputs)
+                last_hidden = outputs.last_hidden_state
+                
+                attention_mask = inputs.get('attention_mask', None)
+                if attention_mask is not None:
+                    mask = attention_mask.unsqueeze(-1).to(last_hidden.dtype)
+                    summed = (last_hidden * mask).sum(dim=1)
+                    denom = mask.sum(dim=1).clamp(min=1e-9)
+                    batch_emb = summed / denom
+                else:
+                    batch_emb = last_hidden[:, 0, :]
+                
+                all_embeddings.append(batch_emb.cpu().numpy() if return_numpy else batch_emb)
         
-        return np.vstack(all_embeddings)
+        if return_numpy:
+            return np.vstack(all_embeddings)
+        return torch.vstack(all_embeddings)
     
     def tokenize(self, texts: List[str]) -> Dict[str, torch.Tensor]:
         """分词"""
@@ -159,7 +172,7 @@ class KNNRouterModel(BaseRouterModel):
         print(f"KNNRouter: 开始拟合 {len(queries)} 个训练样本...")
         
         # 编码所有训练样本
-        self.train_embeddings = self.encode_batch(queries, show_progress=True)
+        self.train_embeddings = self.encode(queries, batch_size=32, show_progress=True, return_numpy=True)
         self.train_labels = np.array(labels, dtype=np.int64)
         self.train_queries = queries
         
@@ -277,7 +290,7 @@ class KNNRouterModel(BaseRouterModel):
             raise RuntimeError("KNNRouter尚未拟合训练数据，请先调用fit()方法或加载预训练模型")
         
         # 编码所有query
-        query_embs = self.encode_batch(queries, show_progress=False)
+        query_embs = self.encode(queries, batch_size=32, show_progress=False, return_numpy=True)
         
         # 对每个query进行预测
         predictions = []
@@ -304,7 +317,7 @@ class KNNRouterModel(BaseRouterModel):
             raise RuntimeError("KNNRouter尚未拟合训练数据，请先调用fit()方法或加载预训练模型")
         
         # 编码所有query
-        query_embs = self.encode_batch(queries, show_progress=False)
+        query_embs = self.encode(queries, batch_size=32, show_progress=False, return_numpy=True)
         
         # 对每个query计算概率分布
         all_probas = []
@@ -342,7 +355,7 @@ class KNNRouterModel(BaseRouterModel):
         if not self.is_fitted:
             raise RuntimeError("KNNRouter尚未拟合训练数据")
         
-        query_emb = self.encode([query])[0].cpu().numpy()
+        query_emb = self.encode([query], return_numpy=True)[0]
         distances = self._compute_distances(query_emb)
         
         k_nearest_indices = np.argsort(distances)[:self.k]

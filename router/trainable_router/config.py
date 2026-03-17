@@ -36,6 +36,16 @@ class ModelConfig:
     
     # 预训练模型路径
     pretrained_model_path: Optional[str] = None
+    
+    # ========== KNN特有参数 ==========
+    # KNN的k值
+    k: int = 5
+    
+    # 距离度量方式: "cosine" or "euclidean"
+    distance_metric: str = "cosine"
+    
+    # 是否使用距离加权投票
+    weighted_voting: bool = True
 
 
 @dataclass
@@ -181,6 +191,10 @@ class TrainableRouterConfig:
             temperature=model_config.get('temperature', 1.0),
             device=model_config.get('device', 'cpu'),
             pretrained_model_path=model_config.get('pretrained_model_path'),
+            # KNN特有参数
+            k=model_config.get('k', 5),
+            distance_metric=model_config.get('distance_metric', 'cosine'),
+            weighted_voting=model_config.get('weighted_voting', True),
         )
         
         training = TrainingConfig(
