@@ -1,0 +1,54 @@
+# KNN Router Training Config
+# KNN路由器训练配置
+# 
+# 【特点】基于K近邻的路由器，不需要梯度传播
+#
+# 训练过程：
+# 1. 编码所有训练样本的embedding并存储
+# 2. 推理时找最近的k个邻居投票决定路由
+#
+# 模型保存内容：
+# - backbone encoder
+# - 训练样本的embeddings
+# - 训练样本的标签
+
+# 模型类型
+model_type: "knn"
+
+# 模型配置
+model:
+  backbone_name: "BAAI/bge-base-en-v1.5"  # 使用BGE作为encoder
+  hidden_size: 768  # BGE-base的维度
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  temperature: 0.5  # 用于距离加权投票的温度参数
+  device: "auto"
+  
+  # KNN特有配置
+  k: 5  # KNN的k值（可在训练时搜索最优k）
+  distance_metric: "cosine"  # 距离度量方式: "cosine" 或 "euclidean"
+  weighted_voting: true  # 是否使用距离加权投票
+
+# 训练配置
+training:
+  trainer_type: "knn"
+  batch_size: 64  # 编码时的batch size
+  epochs: 1  # KNN只需一个epoch来编码所有样本
+  training_steps: 0
+  eval_steps: 100
+  save_steps: 100
+  seed: 42
+  
+  # KNN特有配置
+  search_k: false  # 是否搜索最优k值
+  k_candidates: [1, 3, 5, 7, 9, 11, 15, 21]  # k值候选列表
+
+# 数据配置
+data:
+  train_path: "HotpotQA_train_data/10000/all_labels.json"
+  val_path: "evaluation_results/router_test_labels.json"
+  source: "router_label"  # 使用RouterLabelDataset
+  shuffle: true
+
+# 输出配置
+log_level: "info"

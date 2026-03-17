@@ -6,6 +6,7 @@ from .statistical_trainer import StatisticalTrainer
 from .soft_label_trainer import BinarySoftLabelTrainer, SoftLabelTrainer  # SoftLabelTrainer 为兼容别名
 from .fusion_soft_label_trainer import FusionSoftLabelTrainer
 from .dpo_trainer import RouterDPOTrainer, ClassificationDPOTrainer
+from .knn_trainer import KNNTrainer
 
 __all__ = [
     'DCTrainer', 
@@ -16,4 +17,5 @@ __all__ = [
     'FusionSoftLabelTrainer',
     'RouterDPOTrainer',
     'ClassificationDPOTrainer',
+    'KNNTrainer',
 ]
