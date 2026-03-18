@@ -7,6 +7,7 @@ from .soft_label_trainer import BinarySoftLabelTrainer, SoftLabelTrainer  # Soft
 from .fusion_soft_label_trainer import FusionSoftLabelTrainer
 from .dpo_trainer import RouterDPOTrainer, ClassificationDPOTrainer
 from .knn_trainer import KNNTrainer
+from .decision_router_trainer import DecisionRouterTrainer  # 新增：决策式路由训练器
 
 __all__ = [
     'DCTrainer', 
@@ -18,4 +19,5 @@ __all__ = [
     'RouterDPOTrainer',
     'ClassificationDPOTrainer',
     'KNNTrainer',
+    'DecisionRouterTrainer',  # 新增：决策式路由训练器
 ]

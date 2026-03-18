@@ -1,0 +1,100 @@
+# Decision Router Training Config
+# 决策式路由器训练配置
+#
+# 核心思想：
+# 1. 输入query，预测各策略的性能(Q)和成本(cost)
+# 2. 计算utility = Q - λ × cost
+# 3. 选择utility最高的策略
+#
+# 训练目标：
+# - Q回归损失：MSE(Q_pred, Q_true)
+# - Cost回归损失：MSE(cost_pred, cost_true)
+# - 可选：决策损失（cross-entropy）
+
+# 模型类型
+model_type: "decision_router"
+
+# 模型配置
+model:
+  # Backbone配置（推荐使用BGE）
+  backbone_name: "BAAI/bge-small-en-v1.5"  # 可选: bge-base-en-v1.5, bge-large-en-v1.5
+  hidden_size: 384  # bge-small: 384, bge-base: 768, bge-large: 1024
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  temperature: 1.0
+  device: "auto"
+  
+  # 决策式Router特有配置
+  lambda_cost: 1.0  # cost在utility计算中的权重
+  
+  # 网络配置
+  hidden_dropout_prob: 0.1
+  use_shared_hidden: true  # 是否使用共享隐藏层
+  shared_hidden_dim: 512
+  q_head_hidden_dim: 256  # Q预测头隐藏层维度
+  cost_head_hidden_dim: 128  # Cost预测头隐藏层维度
+
+# 训练配置
+training:
+  trainer_type: "decision_router"
+  
+  # 学习率配置
+  learning_rate: 2.0e-5  # backbone使用 2e-6, 其他参数使用 2e-5
+  
+  # 批次配置
+  batch_size: 16  # 根据GPU内存调整
+  
+  # 训练轮数
+  epochs: 5
+  
+  # 其他训练配置
+  training_steps: 0  # 0表示使用epochs动态计算
+  eval_steps: 50
+  save_steps: 50
+  max_grad_norm: 1.0
+  
+  # 损失权重配置
+  q_loss_weight: 1.0  # Q回归损失权重
+  cost_loss_weight: 0.5  # Cost回归损失权重（通常设为较小值）
+  decision_loss_weight: 0.0  # 决策损失权重（可选，0表示不使用）
+  
+  # 优化器配置
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.01
+    
+  # 学习率调度器
+  scheduler_type: "cosine"
+  
+  # 正则化
+  dropout: 0.1
+
+# 数据配置
+data:
+  # 数据路径
+  train_path: "HotpotQA_train_data/label_analysis/decision_router_train.json"
+  val_path: "HotpotQA_train_data/label_analysis/decision_router_test.json"
+  
+  # 数据源类型
+  source: "decision_router"
+  
+  # 数据处理
+  shuffle: true
+  normalize_scores: true
+  
+  # lambda_cost（与模型配置保持一致）
+  lambda_cost: 1.0
+
+# 输出配置
+# output_dir会在训练脚本中动态生成
+log_level: "info"
+
+# 备注：
+# 1. bge-small-en-v1.5: 参数量33M, 隐藏层384
+# 2. bge-base-en-v1.5: 参数量110M, 隐藏层768
+# 3. bge-large-en-v1.5: 参数量335M, 隐藏层1024
+#
+# lambda_cost的调整建议：
+# - lambda_cost = 0: 只考虑性能，不考虑成本
+# - lambda_cost = 1: 平衡性能和成本
+# - lambda_cost > 1: 更重视成本控制

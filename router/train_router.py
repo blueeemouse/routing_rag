@@ -440,7 +440,12 @@ def main():
     # 优先根据 config.data.source 选择数据集类型
     source_type = getattr(config.data, 'source', '').lower()
     
-    if source_type == 'soft_label':
+    if source_type == 'decision_router':
+        # 决策式路由数据集（预测Q和cost）
+        logger_instance.info(f"使用DecisionRouterDataset (source={source_type})")
+        from trainable_router.datasets.decision_router_dataset import DecisionRouterDataset
+        train_dataset = DecisionRouterDataset(config)
+    elif source_type == 'soft_label':
         # 软标签数据集（纯统计特征）
         logger_instance.info(f"使用SoftLabelRouterDataset (source={source_type})")
         from trainable_router.datasets.soft_label_dataset import SoftLabelRouterDataset
@@ -474,7 +479,12 @@ def main():
     val_dataset = None
     if config.data.val_path:
         # 根据 source 类型选择验证数据集
-        if source_type == 'fusion_soft_label':
+        if source_type == 'decision_router':
+            # 决策式路由使用DecisionRouterDataset
+            logger_instance.info(f"使用DecisionRouterDataset加载验证集 (source={source_type})")
+            from trainable_router.datasets.decision_router_dataset import DecisionRouterDataset
+            val_dataset = DecisionRouterDataset(config)
+        elif source_type == 'fusion_soft_label':
             # 融合模型使用 FusionSoftLabelDataset，支持验证集无 soft_label
             logger_instance.info(f"使用FusionSoftLabelDataset加载验证集 (source={source_type})")
             from trainable_router.datasets.fusion_soft_label_dataset import FusionSoftLabelDataset
@@ -511,6 +521,19 @@ def main():
 
     # 创建collate_fn
     def collate_fn(x):
+        # 处理决策式路由数据集（DecisionRouterDataset）- 新格式
+        if 'Q' in x[0] and 'costs' in x[0]:
+            batch_data = {
+                'input_ids': torch.stack([item['input_ids'] for item in x]),
+                'attention_mask': torch.stack([item['attention_mask'] for item in x]),
+                'queries': [item['queries'] for item in x],
+                'Q': torch.tensor([item['Q'] for item in x], dtype=torch.float32),
+                'costs': torch.tensor([item['costs'] for item in x], dtype=torch.float32),
+                'label': torch.tensor([item['label'] for item in x], dtype=torch.long),
+                'cluster_id': torch.tensor([item['cluster_id'] for item in x], dtype=torch.long),
+            }
+            return batch_data
+        
         # 处理软标签数据集（如 FusionSoftLabelDataset）
         if 'soft_label' in x[0]:
             soft_labels_tensor = torch.tensor([item['soft_label'] for item in x], dtype=torch.float32)

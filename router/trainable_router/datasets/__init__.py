@@ -9,6 +9,7 @@ from .weighted_router_label_dataset import WeightedRouterLabelDataset
 from .soft_label_dataset import BinarySoftLabelDataset, SoftLabelRouterDataset  # SoftLabelRouterDataset 为兼容别名
 from .fusion_soft_label_dataset import FusionSoftLabelDataset, fusion_soft_label_collate_fn
 from .dpo_dataset import DPOPreferenceDataset, DPOBinaryPreferenceDataset
+from .decision_router_dataset import DecisionRouterDataset  # 新增：决策式路由数据集
 
 __all__ = [
     'BaseRouterDataset',  # 抽象基类
@@ -23,4 +24,5 @@ __all__ = [
     'fusion_soft_label_collate_fn',
     'DPOPreferenceDataset',
     'DPOBinaryPreferenceDataset',
+    'DecisionRouterDataset',  # 新增：决策式路由数据集
 ]
