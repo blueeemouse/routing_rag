@@ -263,3 +263,33 @@ trainable_router:
   
   # 批处理大小
   batch_size: 32
+
+# ============================================
+# LLM Router 配置
+# ============================================
+# 纯LLM路由器，支持 zero-shot 和 few-shot 模式
+# 无需训练，直接使用LLM API进行路由决策
+llm_router:
+  # API配置
+  api_url: "${API_BASE_URL}"
+  api_key: "${ROUTER_API_KEY}"
+  model: "qwen2.5:3b"
+  temperature: 0.0
+  max_tokens: 20
+  
+  # 路由模式: "zero_shot" 或 "few_shot"
+  # zero_shot: 仅使用prompt，无样例
+  # few_shot: 使用ICL样例辅助决策
+  mode: "zero_shot"
+  
+  # few-shot 配置 (仅在mode为few_shot时生效)
+  few_shot_k: 5  # 使用的样例数量
+  examples_file: "evaluation_results/router_test_labels.json"  # 样例数据文件
+  
+  # 可选：自定义prompt模板
+  # prompt_template: |
+  #   任务：判断查询应该使用哪种检索策略
+  #   ...
+  
+  # 策略名称列表
+  strategy_names: ["no_rag", "naive_rag"]

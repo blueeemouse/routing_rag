@@ -210,6 +210,64 @@ class Config:
         """检查是否启用graph RAG"""
         return self.config.get('rag', {}).get('graph_rag_enabled', True)
 
+    # ============================================
+    # LLM Router 配置属性
+    # ============================================
+    @property
+    def llm_router_api_url(self) -> str:
+        """获取llm_router API URL"""
+        return self.config.get('llm_router', {}).get('api_url', '')
+    
+    @property
+    def llm_router_api_key(self) -> str:
+        """获取llm_router API密钥"""
+        return self.config.get('llm_router', {}).get('api_key', '')
+    
+    @property
+    def llm_router_model(self) -> str:
+        """获取llm_router模型名称"""
+        return self.config.get('llm_router', {}).get('model', 'gpt-3.5-turbo')
+    
+    @property
+    def llm_router_temperature(self) -> float:
+        """获取llm_router温度参数"""
+        return self.config.get('llm_router', {}).get('temperature', 0.0)
+    
+    @property
+    def llm_router_max_tokens(self) -> int:
+        """获取llm_router最大token数"""
+        return self.config.get('llm_router', {}).get('max_tokens', 20)
+    
+    @property
+    def llm_router_mode(self) -> str:
+        """获取llm_router模式 (zero_shot 或 few_shot)"""
+        return self.config.get('llm_router', {}).get('mode', 'zero_shot')
+    
+    @property
+    def llm_router_few_shot_k(self) -> int:
+        """获取llm_router few-shot样例数量"""
+        return self.config.get('llm_router', {}).get('few_shot_k', 5)
+    
+    @property
+    def llm_router_examples_file(self) -> str:
+        """获取llm_router样例文件路径"""
+        return self.config.get('llm_router', {}).get('examples_file', '')
+    
+    @property
+    def llm_router_prompt_template(self) -> str:
+        """获取llm_router自定义prompt模板"""
+        return self.config.get('llm_router', {}).get('prompt_template', '')
+    
+    @property
+    def llm_router_strategy_names(self) -> list:
+        """获取llm_router策略名称列表"""
+        return self.config.get('llm_router', {}).get('strategy_names', ['no_rag', 'naive_rag', 'graph_rag'])
+    
+    @property
+    def llm_router_config(self) -> dict:
+        """获取完整的llm_router配置字典"""
+        return self.config.get('llm_router', {})
+
 
 # 全局配置实例
 settings = Config()

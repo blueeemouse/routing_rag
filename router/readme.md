@@ -20,6 +20,7 @@
 
 ### 基础路由器
 - `router.py` - 查询路由器的实现（基于 LLM 的规则路由）
+- `llm_router.py` - LLM Router 实现（支持 zero-shot 和 few-shot 模式）
 - `__init__.py` - 模块初始化文件
 
 ### 可训练路由器
@@ -75,6 +76,29 @@ router:
 
     查询：{sub_query}
     策略：
+```
+
+### LLM Router 配置
+
+LLM Router 支持两种模式：**zero-shot**（仅使用prompt）和 **few-shot**（使用ICL样例）：
+
+```yaml
+llm_router:
+  api_url: "${API_BASE_URL}"
+  api_key: "${ROUTER_API_KEY}"
+  model: "qwen2.5:3b"
+  temperature: 0.0
+  max_tokens: 20
+  
+  # 模式: "zero_shot" 或 "few_shot"
+  mode: "zero_shot"
+  
+  # few-shot 配置
+  few_shot_k: 5
+  examples_file: "evaluation_results/router_test_labels.json"
+  
+  # 策略名称列表
+  strategy_names: ["no_rag", "naive_rag"]
 ```
 
 ### 可训练路由器配置
@@ -137,6 +161,39 @@ from router.router import Router
 router = Router()
 strategy = router.route("什么是人工智能？")
 print(strategy)  # 输出: no_rag, naive_rag, 或 graph_rag
+```
+
+### LLM Router
+
+```python
+from router.llm_router import LLMRouter
+from config.config import settings
+
+# 方式1: 从配置创建
+config = settings.llm_router_config
+router = LLMRouter.from_config(config)
+
+# 方式2: 直接创建
+router = LLMRouter(
+    api_url="http://localhost:11434/v1",
+    api_key="ollama",
+    model="qwen2.5:3b",
+    mode="zero_shot"  # 或 "few_shot"
+)
+
+# 路由决策
+strategy = router.route("谁是2020年美国总统？")
+print(strategy)  # 输出: no_rag 或 naive_rag
+
+# 批量路由
+queries = ["1+1等于几？", "Python创始人是谁？"]
+strategies = router.route_batch(queries)
+print(strategies)
+
+# 评估性能
+test_data = [{"question": "...", "optimal_strategy": "no_rag"}, ...]
+results = router.evaluate(test_data)
+print(f"准确率: {results['accuracy']:.2%}")
 ```
 
 ### 可训练路由器
