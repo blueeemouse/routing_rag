@@ -30,6 +30,8 @@ class NaiveRAG(RAGInterface):
         self.api_key = self.config.get('api_key', settings.naive_rag_api_key)
         self.model = self.config.get('model', settings.naive_rag_model)
         self.embedding_model = self.config.get('embedding_model', settings.naive_rag_embedding_model)
+        # embedding_provider: 可选值 'ollama', 'openai', 'vllm', 或 'auto'（自动检测）
+        self.embedding_provider = self.config.get('embedding_provider', 'auto')
         self.chunk_size = self.config.get('chunk_size', settings.naive_rag_chunk_size)
         self.top_k = self.config.get('top_k', settings.naive_rag_top_k)
         self.temperature = self.config.get('temperature', settings.naive_rag_temperature)
@@ -89,11 +91,19 @@ class NaiveRAG(RAGInterface):
         return self.api_url
 
     def _setup_global_embed_model(self):
-        """设置全局嵌入模型"""
+        """设置全局嵌入模型
+        
+        支持三种 embedding 提供者:
+        - ollama: 使用 OllamaEmbedding（Ollama 专用）
+        - openai/vllm: 使用 OpenAIEmbedding（OpenAI 兼容协议，支持 vLLM）
+        - auto: 自动检测（根据模型名和端点判断）
+        """
         from llama_index.core import Settings
 
-        # 检查是否使用 Ollama embedding 模型
-        if self.embedding_model in ['nomic-embed-text', 'mxbai-embed-large', 'all-minilm']:
+        # 确定使用哪种 embedding 提供者
+        provider = self._detect_embedding_provider()
+        
+        if provider == 'ollama':
             # 使用 Ollama 嵌入模型
             try:
                 from llama_index.embeddings.ollama import OllamaEmbedding
@@ -108,19 +118,70 @@ class NaiveRAG(RAGInterface):
                 self.logger.info("请确保 Ollama 服务正在运行，并且模型已下载。例如：ollama pull nomic-embed-text")
                 raise
         else:
-            # 使用标准 OpenAI embedding 模型
+            # 使用 OpenAI 兼容 embedding 模型（支持 vLLM 和其他兼容服务）
             from llama_index.embeddings.openai import OpenAIEmbedding
-            # 对于 OpenAI 兼容的 API，可能需要调整 URL 格式
+            
+            # 构建正确的 API 端点 URL
+            api_base = self._get_embedding_api_base()
+            
             embed_model = OpenAIEmbedding(
                 api_key=self.api_key,
-                api_base=self.api_url,
+                api_base=api_base,
                 model=self.embedding_model,
                 timeout=300.0  # 增加超时时间
             )
-            self.logger.info(f"使用 OpenAI embedding 模型: {self.embedding_model}")
+            self.logger.info(f"使用 OpenAI 兼容 embedding 模型: {self.embedding_model} (provider: {provider})")
 
         # 设置到全局配置（关键步骤）
         Settings.embed_model = embed_model
+    
+    def _detect_embedding_provider(self) -> str:
+        """检测 embedding 提供者类型
+        
+        Returns:
+            str: 'ollama', 'openai', 或 'vllm'
+        """
+        # 如果显式指定了 provider，则使用指定的值
+        if self.embedding_provider != 'auto':
+            provider = self.embedding_provider.lower()
+            if provider in ['ollama', 'openai', 'vllm']:
+                return provider
+        
+        # 自动检测：检查是否是 Ollama 特有的 embedding 模型
+        ollama_embedding_models = ['nomic-embed-text', 'mxbai-embed-large', 'all-minilm']
+        if self.embedding_model in ollama_embedding_models:
+            return 'ollama'
+        
+        # 检查端点类型
+        if self._is_ollama_endpoint():
+            return 'ollama'
+        elif self._is_vllm_endpoint():
+            return 'vllm'
+        
+        # 默认使用 OpenAI 兼容模式
+        return 'openai'
+    
+    def _is_vllm_endpoint(self) -> bool:
+        """判断是否为 vLLM 服务端点"""
+        return '8000' in self.api_url or 'vllm' in self.api_url.lower()
+    
+    def _get_embedding_api_base(self) -> str:
+        """获取 embedding API 的基础 URL
+        
+        对于 vLLM 和 OpenAI 兼容服务，需要确保 URL 包含 /v1 后缀
+        """
+        api_base = self.api_url.rstrip('/')
+        
+        # 如果 URL 已经包含 /v1，直接返回
+        if api_base.endswith('/v1'):
+            return api_base
+        
+        # 对于 vLLM 和 OpenAI 兼容服务，添加 /v1 后缀
+        if self._is_vllm_endpoint() or not self._is_ollama_endpoint():
+            api_base = api_base + '/v1'
+            self.logger.info(f"为 OpenAI 兼容 embedding 服务调整 URL: {api_base}")
+        
+        return api_base
 
 
     def execute(self, query: str, context: Dict[str, Any] = None) -> str:
@@ -380,43 +441,8 @@ Answer:""")
             storage_context = StorageContext.from_defaults(persist_dir=storage_dir)
             self.index = load_index_from_storage(storage_context)
 
-            # 重新设置嵌入模型（重要！）
-            from llama_index.core import Settings
-
-            # 检查是否使用 Ollama embedding 模型
-            if self.embedding_model in ['nomic-embed-text', 'mxbai-embed-large', 'all-minilm']:
-                # 尝试导入 Ollama 嵌入模型
-                try:
-                    from llama_index.embeddings.ollama import OllamaEmbedding
-                    embed_model = OllamaEmbedding(
-                        model_name=self.embedding_model,
-                        base_url=self.api_url,
-                        ollama_additional_kwargs={"temperature": self.temperature},
-                    )
-                    self.logger.info(f"使用 Ollama embedding 模型: {self.embedding_model}")
-                except ImportError:
-                    # 如果 OllamaEmbedding 不可用，尝试使用 OpenAIEmbedding 并指定基础URL
-                    from llama_index.embeddings.openai import OpenAIEmbedding
-                    embed_model = OpenAIEmbedding(
-                        api_key=self.api_key,
-                        api_base=self.api_url,
-                        model=self.embedding_model,
-                        embed_batch_size=10,
-                        timeout=300.0  # 增加超时时间
-                    )
-                    self.logger.info(f"使用 OpenAIEmbedding 适配 Ollama 模型: {self.embedding_model}")
-            else:
-                # 使用标准 OpenAI embedding 模型
-                from llama_index.embeddings.openai import OpenAIEmbedding
-                embed_model = OpenAIEmbedding(
-                    api_key=self.api_key,
-                    api_base=self.api_url,
-                    model=self.embedding_model,
-                    timeout=300.0  # 增加超时时间
-                )
-                self.logger.info(f"使用 OpenAI embedding 模型: {self.embedding_model}")
-
-            Settings.embed_model = embed_model
+            # 重新设置嵌入模型（重要！）- 使用统一的方法
+            self._setup_global_embed_model()
 
             self.is_index_initialized = True
             self.logger.info(f"索引已从 {storage_dir} 加载")

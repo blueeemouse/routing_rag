@@ -1,4 +1,28 @@
 # ============================================
+# LLM 后端选择说明
+# ============================================
+# 本项目支持以下 LLM 后端，可通过修改配置在它们之间切换：
+#
+# 1. Ollama (默认)
+#    - 端点: http://127.0.0.1:11434
+#    - 模型名: qwen2.5:3b, llama3:8b 等
+#    - 特点: 简单易用，适合本地开发
+#
+# 2. vLLM
+#    - 端点: http://127.0.0.1:8000/v1
+#    - 模型名: Qwen/Qwen2.5-3B-Instruct 等 (HuggingFace 格式)
+#    - 特点: 高性能推理，支持连续批处理
+#    - 启动命令: vllm serve Qwen/Qwen2.5-3B-Instruct --port 8000
+#
+# 3. OpenAI API / 其他兼容服务
+#    - 端点: 由服务提供商指定
+#    - 模型名: gpt-4o, gpt-3.5-turbo 等
+#    - 特点: 云端服务，需要 API Key
+#
+# 切换方式：修改各组件的 api_url 和 model 参数即可
+# ============================================
+
+# ============================================
 # Decomposer 配置
 # ============================================
 # 选项 1: 使用 API 服务（当前注释）
@@ -138,6 +162,27 @@ no_rag:
 #   temperature: 0.0
 
 # 选项 2: 使用本地 Ollama（当前启用）
+# naive_rag:
+#   api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
+#   api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
+#   model: "qwen2.5:3b"
+#   embedding_model: "nomic-embed-text"  # Ollama embedding 模型
+#   chunk_size: 512
+#   top_k: 5
+#   temperature: 0.0
+
+# 选项 3: 使用本地 vLLM（示例配置）
+# naive_rag:
+#   api_url: "http://127.0.0.1:8000/v1"  # vLLM 默认端点，需要 /v1 后缀
+#   api_key: "EMPTY"  # vLLM 通常不需要 API key，填任意值即可
+#   model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 加载的模型名（HuggingFace 格式）
+#   embedding_model: "BAAI/bge-small-en-v1.5"  # vLLM embedding 模型（需启动时配置）
+#   chunk_size: 512
+#   top_k: 5
+#   temperature: 0.0
+#   # 注意：vLLM embedding 需要启动时添加 --enable-auto-tool-choice 或使用专门的 embedding 模型
+
+# 当前启用配置 (Ollama)
 naive_rag:
   api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
   api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
@@ -170,6 +215,35 @@ naive_rag:
 # ============================================
 # GraphRAG 配置
 # ============================================
+# 注意：GraphRAG 使用独立的 .yml 配置文件（如 graphrag_hotpotqa_config.yml）
+# settings.yaml 中的配置仅作为参考，实际查询时使用独立配置文件中的值
+#
+# 后端切换方式（修改 graphrag_xxx_config.yml）：
+#
+# Ollama 配置:
+#   models:
+#     default_chat_model:
+#       api_base: http://127.0.0.1:11434/v1
+#       api_key: ollama
+#       model: qwen2.5:3b
+#       model_provider: openai
+#
+# vLLM 配置:
+#   models:
+#     default_chat_model:
+#       api_base: http://127.0.0.1:8000/v1
+#       api_key: EMPTY
+#       model: Qwen/Qwen2.5-3B-Instruct
+#       model_provider: openai  # 使用 OpenAI 兼容协议
+#
+# OpenAI API 配置:
+#   models:
+#     default_chat_model:
+#       api_base: ${API_BASE_URL}
+#       api_key: ${GRAPHRAG_API_KEY}
+#       model: gpt-4o
+#       model_provider: openai
+
 # 选项 1: 使用 API 服务（当前注释）
 # graph_rag:
 #   api_url: "${API_BASE_URL}/chat/completions"
