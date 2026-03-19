@@ -188,6 +188,7 @@ naive_rag:
   api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
   model: "qwen2.5:3b"
   embedding_model: "nomic-embed-text"
+  embedding_provider: "auto"  # 可选值: ollama, openai, vllm, auto（自动检测）
   chunk_size: 512
   top_k: 5
   temperature: 0.0

@@ -146,6 +146,11 @@ class Config:
         return self.config.get('naive_rag', {}).get('temperature', 0.7)
 
     @property
+    def naive_rag_embedding_provider(self) -> str:
+        """获取naive_rag embedding提供者类型 (ollama/openai/vllm/auto)"""
+        return self.config.get('naive_rag', {}).get('embedding_provider', 'auto')
+
+    @property
     def no_rag_api_url(self) -> str:
         """获取no_rag API URL"""
         return self.config.get('no_rag', {}).get('api_url', '')

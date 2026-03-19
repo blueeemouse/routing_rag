@@ -31,7 +31,7 @@ class NaiveRAG(RAGInterface):
         self.model = self.config.get('model', settings.naive_rag_model)
         self.embedding_model = self.config.get('embedding_model', settings.naive_rag_embedding_model)
         # embedding_provider: 可选值 'ollama', 'openai', 'vllm', 或 'auto'（自动检测）
-        self.embedding_provider = self.config.get('embedding_provider', 'auto')
+        self.embedding_provider = self.config.get('embedding_provider', settings.naive_rag_embedding_provider)
         self.chunk_size = self.config.get('chunk_size', settings.naive_rag_chunk_size)
         self.top_k = self.config.get('top_k', settings.naive_rag_top_k)
         self.temperature = self.config.get('temperature', settings.naive_rag_temperature)
