@@ -241,6 +241,7 @@ naive_rag:
   # model: "qwen2.5:3b"  # Ollama 模型名
   model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   embedding_model: "nomic-embed-text"
+  embedding_provider: "auto"  # 可选值: ollama, openai, vllm, auto（自动检测）
   chunk_size: 512
   top_k: 5
   temperature: 0.0
