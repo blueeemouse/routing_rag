@@ -2,13 +2,145 @@
 Naive RAG Implementation using LlamaIndex
 基于LlamaIndex的简单RAG实现
 """
-from typing import Dict, Any
+from typing import Dict, Any, List
 from interfaces.rag_interface import RAGInterface
 from config.config import settings
 import logging
 import time
+import requests
 
 import os
+
+
+class VLLMEmbedding:
+    """
+    vLLM Embedding 类，支持 OpenAI 兼容的 embedding API
+    
+    用于绕过 LlamaIndex OpenAIEmbedding 的模型名限制，
+    支持任意自定义 embedding 模型名称。
+    
+    注意：此类会在 _setup_global_embed_model 中被转换为 LlamaIndex 兼容的 embedding 对象。
+    """
+    
+    def __init__(self, api_base: str, model: str, timeout: float = 60.0):
+        """
+        初始化 VLLMEmbedding
+        
+        Args:
+            api_base: API 基础 URL（不含 /v1/embeddings）
+            model: 模型名称
+            timeout: 请求超时时间
+        """
+        self._api_base = api_base.rstrip('/')
+        self._model = model
+        self._timeout = timeout
+    
+    def get_text_embedding(self, text: str) -> List[float]:
+        """获取单个文本的 embedding"""
+        return self._call_api(text)
+    
+    def get_query_embedding(self, query: str) -> List[float]:
+        """获取查询的 embedding"""
+        return self._call_api(query)
+    
+    def _call_api(self, text: str) -> List[float]:
+        """调用 vLLM embedding API"""
+        response = requests.post(
+            f'{self._api_base}/v1/embeddings',
+            json={'input': text, 'model': self._model},
+            timeout=self._timeout
+        )
+        response.raise_for_status()
+        return response.json()['data'][0]['embedding']
+
+
+def _create_llama_index_embedding(api_base: str, model: str, timeout: float = 60.0):
+    """
+    创建 LlamaIndex 兼容的 embedding 对象
+    
+    使用自定义类继承 BaseEmbedding，绕过 OpenAIEmbedding 的模型名限制。
+    """
+    from llama_index.core.base.embeddings.base import BaseEmbedding
+    
+    class _VLLMEmbeddingAdapter(BaseEmbedding):
+        """LlamaIndex BaseEmbedding 适配器"""
+        embed_batch_size: int = 10
+        
+        def __init__(self, api_base: str, model: str, timeout: float = 60.0, **kwargs):
+            super().__init__(**kwargs)
+            self._api_base = api_base.rstrip('/')
+            self._model = model
+            self._timeout = timeout
+        
+        def _get_query_embedding(self, query: str) -> List[float]:
+            return self._call_api(query)
+        
+        def _get_text_embedding(self, text: str) -> List[float]:
+            return self._call_api(text)
+        
+        def _get_text_embeddings(self, texts: List[str]) -> List[List[float]]:
+            return [self._call_api(t) for t in texts]
+        
+        async def _aget_query_embedding(self, query: str) -> List[float]:
+            return self._call_api(query)
+        
+        def _call_api(self, text: str) -> List[float]:
+            response = requests.post(
+                f'{self._api_base}/v1/embeddings',
+                json={'input': text, 'model': self._model},
+                timeout=self._timeout
+            )
+            response.raise_for_status()
+            return response.json()['data'][0]['embedding']
+    
+    return _VLLMEmbeddingAdapter(api_base=api_base, model=model, timeout=timeout)
+
+
+def _create_vllm_llm(api_base: str, model: str, temperature: float = 0.0, timeout: float = 300.0):
+    """
+    创建 LlamaIndex 兼容的 vLLM LLM 对象
+    
+    使用自定义类继承 CustomLLM，绕过 OpenAI 类的模型名限制。
+    """
+    from llama_index.core.llms import CustomLLM, CompletionResponse, LLMMetadata
+    
+    class _VLLMLLMAdapter(CustomLLM):
+        """LlamaIndex CustomLLM 适配器，用于 vLLM"""
+        
+        def __init__(self, api_base: str, model: str, temperature: float = 0.0, timeout: float = 300.0, **kwargs):
+            super().__init__(**kwargs)
+            # 确保 URL 包含 /v1 前缀
+            self._api_base = api_base.rstrip('/')
+            if not self._api_base.endswith('/v1'):
+                self._api_base = self._api_base + '/v1'
+            self._model = model
+            self._temperature = temperature
+            self._timeout = timeout
+        
+        @property
+        def metadata(self) -> LLMMetadata:
+            return LLMMetadata(model_name=self._model)
+        
+        def complete(self, prompt: str, **kwargs) -> CompletionResponse:
+            response = requests.post(
+                f'{self._api_base}/chat/completions',
+                json={
+                    'model': self._model,
+                    'messages': [{'role': 'user', 'content': prompt}],
+                    'temperature': self._temperature,
+                    'max_tokens': 512
+                },
+                headers={'Content-Type': 'application/json'},
+                timeout=self._timeout
+            )
+            response.raise_for_status()
+            return CompletionResponse(text=response.json()['choices'][0]['message']['content'])
+        
+        def stream_complete(self, prompt: str, **kwargs):
+            """流式生成（简化实现，直接调用 complete）"""
+            yield self.complete(prompt, **kwargs)
+    
+    return _VLLMLLMAdapter(api_base=api_base, model=model, temperature=temperature, timeout=timeout)
 
 class NaiveRAG(RAGInterface):
     """
@@ -30,8 +162,10 @@ class NaiveRAG(RAGInterface):
         self.api_key = self.config.get('api_key', settings.naive_rag_api_key)
         self.model = self.config.get('model', settings.naive_rag_model)
         self.embedding_model = self.config.get('embedding_model', settings.naive_rag_embedding_model)
+        # embedding_url: 独立的 embedding 端点（默认使用 api_url）
+        self.embedding_url = self.config.get('embedding_url', settings.naive_rag_embedding_url)
         # embedding_provider: 可选值 'ollama', 'openai', 'vllm', 或 'auto'（自动检测）
-        self.embedding_provider = self.config.get('embedding_provider', 'auto')
+        self.embedding_provider = self.config.get('embedding_provider', settings.naive_rag_embedding_provider)
         self.chunk_size = self.config.get('chunk_size', settings.naive_rag_chunk_size)
         self.top_k = self.config.get('top_k', settings.naive_rag_top_k)
         self.temperature = self.config.get('temperature', settings.naive_rag_temperature)
@@ -95,7 +229,8 @@ class NaiveRAG(RAGInterface):
         
         支持三种 embedding 提供者:
         - ollama: 使用 OllamaEmbedding（Ollama 专用）
-        - openai/vllm: 使用 OpenAIEmbedding（OpenAI 兼容协议，支持 vLLM）
+        - vllm: 使用 VLLMEmbedding（vLLM 专用，支持自定义模型名）
+        - openai: 使用 OpenAIEmbedding（仅支持 OpenAI 官方模型）
         - auto: 自动检测（根据模型名和端点判断）
         """
         from llama_index.core import Settings
@@ -109,16 +244,28 @@ class NaiveRAG(RAGInterface):
                 from llama_index.embeddings.ollama import OllamaEmbedding
                 embed_model = OllamaEmbedding(
                     model_name=self.embedding_model,
-                    base_url=self.api_url,
+                    base_url=self.embedding_url,
                     ollama_additional_kwargs={"temperature": self.temperature},
                 )
-                self.logger.info(f"使用 Ollama embedding 模型: {self.embedding_model}")
+                self.logger.info(f"使用 Ollama embedding 模型: {self.embedding_model} @ {self.embedding_url}")
             except Exception as e:
                 self.logger.error(f"无法初始化 Ollama embedding 模型 {self.embedding_model}: {str(e)}")
                 self.logger.info("请确保 Ollama 服务正在运行，并且模型已下载。例如：ollama pull nomic-embed-text")
                 raise
+        elif provider == 'vllm':
+            # 使用自定义 embedding（支持任意模型名，兼容 LlamaIndex）
+            try:
+                embed_model = _create_llama_index_embedding(
+                    api_base=self.embedding_url,
+                    model=self.embedding_model,
+                    timeout=300.0
+                )
+                self.logger.info(f"使用 vLLM embedding 模型: {self.embedding_model} @ {self.embedding_url}")
+            except Exception as e:
+                self.logger.error(f"无法初始化 vLLM embedding 模型 {self.embedding_model}: {str(e)}")
+                raise
         else:
-            # 使用 OpenAI 兼容 embedding 模型（支持 vLLM 和其他兼容服务）
+            # provider == 'openai': 使用 OpenAI 官方 embedding 模型
             from llama_index.embeddings.openai import OpenAIEmbedding
             
             # 构建正确的 API 端点 URL
@@ -130,7 +277,7 @@ class NaiveRAG(RAGInterface):
                 model=self.embedding_model,
                 timeout=300.0  # 增加超时时间
             )
-            self.logger.info(f"使用 OpenAI 兼容 embedding 模型: {self.embedding_model} (provider: {provider})")
+            self.logger.info(f"使用 OpenAI embedding 模型: {self.embedding_model} (provider: {provider})")
 
         # 设置到全局配置（关键步骤）
         Settings.embed_model = embed_model
@@ -163,7 +310,9 @@ class NaiveRAG(RAGInterface):
     
     def _is_vllm_endpoint(self) -> bool:
         """判断是否为 vLLM 服务端点"""
-        return '8000' in self.api_url or 'vllm' in self.api_url.lower()
+        # 检查 embedding_url 或 api_url 是否包含 vLLM 特征
+        url_to_check = self.embedding_url or self.api_url
+        return '8000' in url_to_check or '8001' in url_to_check or 'vllm' in url_to_check.lower()
     
     def _get_embedding_api_base(self) -> str:
         """获取 embedding API 的基础 URL
@@ -266,8 +415,15 @@ Answer:""")
                     temperature=self.temperature,
                     request_timeout=300.0
                 )
+            elif self._is_vllm_endpoint():
+                # 使用自定义 vLLM LLM（支持任意模型名）
+                llm = _create_vllm_llm(
+                    api_base=self.api_url,
+                    model=self.model,
+                    temperature=self.temperature
+                )
             else:
-                # 使用 OpenAI 兼容的 LLM
+                # 使用 OpenAI 官方 LLM（仅支持 OpenAI 官方模型）
                 llm = self.OpenAI(model=self.model, api_key=self.api_key, api_base=self.api_url)
 
             # 创建自定义的 query_engine
@@ -299,6 +455,10 @@ Answer:""")
 
     def _is_ollama_model(self, model_name: str) -> bool:
         """判断是否为 Ollama 模型"""
+        # HuggingFace 格式的模型名（包含 /）不是 Ollama 模型
+        if '/' in model_name:
+            return False
+        
         # 检查模型名称是否包含 Ollama 特有的参数格式（如 :3b, :7b 等）
         ollama_param_patterns = [':3b', ':7b', ':8b', ':13b', ':70b', ':9b', ':34b', ':67b', ':110b', ':latest']
 

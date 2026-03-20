@@ -131,6 +131,16 @@ class Config:
         return self.config.get('naive_rag', {}).get('embedding_model', 'text-embedding-ada-002')
 
     @property
+    def naive_rag_embedding_url(self) -> str:
+        """获取naive_rag embedding URL（默认使用api_url）"""
+        return self.config.get('naive_rag', {}).get('embedding_url', self.naive_rag_api_url)
+
+    @property
+    def naive_rag_embedding_provider(self) -> str:
+        """获取naive_rag embedding provider（ollama/openai/vllm/auto）"""
+        return self.config.get('naive_rag', {}).get('embedding_provider', 'auto')
+
+    @property
     def naive_rag_chunk_size(self) -> int:
         """获取naive_rag文档切块大小"""
         return self.config.get('naive_rag', {}).get('chunk_size', 512)
