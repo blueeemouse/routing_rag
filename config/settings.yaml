@@ -12,7 +12,7 @@
 #    - 端点: http://127.0.0.1:8000/v1
 #    - 模型名: Qwen/Qwen2.5-3B-Instruct 等 (HuggingFace 格式)
 #    - 特点: 高性能推理，支持连续批处理
-#    - 启动命令: vllm serve Qwen/Qwen2.5-3B-Instruct --port 8000
+#    - 启动命令: python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-3B-Instruct --port 8000
 #
 # 3. OpenAI API / 其他兼容服务
 #    - 端点: 由服务提供商指定
@@ -20,6 +20,52 @@
 #    - 特点: 云端服务，需要 API Key
 #
 # 切换方式：修改各组件的 api_url 和 model 参数即可
+# ============================================
+
+# ============================================
+# Ollama vs vLLM 切换指南
+# ============================================
+#
+# 【关键差异】
+#
+# 1. 模型名称格式不同：
+#    - Ollama: "qwen2.5:3b" (模型名:标签)
+#    - vLLM:   "Qwen/Qwen2.5-3B-Instruct" (HuggingFace格式)
+#
+# 2. API URL 格式不同（重要！）：
+#    - Ollama: API_BASE_URL="http://127.0.0.1:11434"  (不带/v1)
+#    - vLLM:   API_BASE_URL="http://127.0.0.1:8000/v1" (必须带/v1)
+#
+#    原因：代码会自动添加路径后缀
+#    - Decomposer/Router: 自动添加 /v1/chat/completions
+#    - NoRAG: 自动添加 /chat/completions (不处理/v1)
+#    - 所以 vLLM 的 API_BASE_URL 必须带 /v1 后缀
+#
+# 【环境变量设置】
+#
+# Ollama 环境：
+#   export API_BASE_URL="http://127.0.0.1:11434"
+#   export DECOMPOSER_API_KEY="ollama"
+#   export ROUTER_API_KEY="ollama"
+#   export NO_RAG_API_KEY="ollama"
+#
+# vLLM 环境：
+#   export API_BASE_URL="http://127.0.0.1:8000/v1"
+#   export DECOMPOSER_API_KEY="EMPTY"
+#   export ROUTER_API_KEY="EMPTY"
+#   export NO_RAG_API_KEY="EMPTY"
+#
+# 【切换步骤】
+#
+# 切换到 Ollama：
+#   1. 设置环境变量（见上）
+#   2. 将下方各组件的 model 改为 "qwen2.5:3b"
+#
+# 切换到 vLLM：
+#   1. 启动 vLLM 服务
+#   2. 设置环境变量（见上）
+#   3. 将下方各组件的 model 改为 "Qwen/Qwen2.5-3B-Instruct"
+#
 # ============================================
 
 # ============================================
@@ -36,7 +82,8 @@
 decomposer:
   api_url: "${API_BASE_URL}"  # 基础 URL，代码中会自动添加 /chat/completions
   api_key: "${DECOMPOSER_API_KEY}"
-  model: "qwen2.5:3b"
+  # model: "qwen2.5:3b"  # Ollama 模型名
+  model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   temperature: 0.0
   prompt: |
     任务：将复杂查询分解为简单子查询
@@ -80,7 +127,8 @@ decomposer:
 router:
   api_url: "${API_BASE_URL}"  # 基础 URL，代码中会自动添加 /chat/completions
   api_key: "${ROUTER_API_KEY}"
-  model: "qwen2.5:3b"
+  # model: "qwen2.5:3b"  # Ollama 模型名
+  model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   temperature: 0.0
   prompt: |
     任务：确定查询处理策略
@@ -128,9 +176,12 @@ router:
 
 # 选项 2: 使用本地 Ollama（当前启用）
 no_rag:
-  api_url: "${API_BASE_URL}/chat/completions"
+  # vLLM配置: 使用 /v1 后缀，代码会自动添加 /chat/completions
+  # Ollama配置: 使用 http://127.0.0.1:11434 (不需要/v1)
+  api_url: "${API_BASE_URL}"  # vLLM: http://127.0.0.1:8000/v1
   api_key: "${NO_RAG_API_KEY}"
-  model: "qwen2.5:3b"
+  # model: "qwen2.5:3b"  # Ollama 模型名
+  model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   temperature: 0.0
   prompt_template: |
     You are a precise question-answering assistant. Your task is to answer the given question directly and concisely.
@@ -173,20 +224,22 @@ no_rag:
 
 # 选项 3: 使用本地 vLLM（示例配置）
 # naive_rag:
-#   api_url: "http://127.0.0.1:8000/v1"  # vLLM 默认端点，需要 /v1 后缀
+#   api_url: "http://127.0.0.1:8000/v1"  # vLLM LLM 端点
 #   api_key: "EMPTY"  # vLLM 通常不需要 API key，填任意值即可
 #   model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 加载的模型名（HuggingFace 格式）
-#   embedding_model: "BAAI/bge-small-en-v1.5"  # vLLM embedding 模型（需启动时配置）
+#   embedding_model: "nomic-ai/nomic-embed-text-v1"  # vLLM embedding 模型（HuggingFace 格式）
+#   embedding_url: "http://127.0.0.1:8001"  # vLLM embedding 端点（独立部署）
+#   embedding_provider: "vllm"  # 指定使用 vLLM embedding
 #   chunk_size: 512
 #   top_k: 5
 #   temperature: 0.0
-#   # 注意：vLLM embedding 需要启动时添加 --enable-auto-tool-choice 或使用专门的 embedding 模型
 
 # 当前启用配置 (Ollama)
 naive_rag:
   api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
   api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
-  model: "qwen2.5:3b"
+  # model: "qwen2.5:3b"  # Ollama 模型名
+  model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   embedding_model: "nomic-embed-text"
   embedding_provider: "auto"  # 可选值: ollama, openai, vllm, auto（自动检测）
   chunk_size: 512
@@ -288,7 +341,8 @@ graph_rag:
   api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
   api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
   # 注意：model和embedding_model在settings中配置，但实际查询时使用.yml配置文件中的值
-  model: "qwen2.5:3b"  # 本地 LLM模型
+  # model: "qwen2.5:3b"  # Ollama 模型名
+  model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   embedding_model: "nomic-embed-text"  # 本地embedding模型
   # 以下参数保留原始内容但已注释，供参考
   # chunk_size: 512
@@ -348,7 +402,8 @@ llm_router:
   # API配置
   api_url: "${API_BASE_URL}"
   api_key: "${ROUTER_API_KEY}"
-  model: "qwen2.5:3b"
+  # model: "qwen2.5:3b"  # Ollama 模型名
+  model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   temperature: 0.0
   max_tokens: 20
   

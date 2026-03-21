@@ -315,8 +315,18 @@ class GraphRAG(RAGInterface):
             embedding_model = merged_config.get('embedding_model', embedding_model)
             
             # 根据模型推断维度
+            # 支持 Ollama 格式 (如 nomic-embed-text) 和 vLLM/HuggingFace 格式 (如 nomic-ai/nomic-embed-text-v1)
             dimension_map = {
+                # Ollama 格式
                 'nomic-embed-text': 768,
+                'mxbai-embed-large': 1024,
+                'all-minilm': 384,
+                # vLLM/HuggingFace 格式
+                'nomic-ai/nomic-embed-text-v1': 768,
+                'BAAI/bge-small-en-v1.5': 384,
+                'BAAI/bge-base-en-v1.5': 768,
+                'BAAI/bge-large-en-v1.5': 1024,
+                # OpenAI 格式
                 'text-embedding-ada-002': 1536,
                 'text-embedding-3-small': 1536,
                 'text-embedding-3-large': 3072,

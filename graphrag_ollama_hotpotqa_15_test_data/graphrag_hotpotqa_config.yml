@@ -68,7 +68,9 @@ models:
   #   request_timeout: 180.0
   #   type: embedding
 
-  # ===== Ollama 本地配置（当前启用） =====
+  # ===== 纯 Ollama 配置（当前启用） =====
+  # 修改原因：测试纯 Ollama 模式，验证原有功能仍然可用
+  # 对应：LLM 和 Embedding 都使用 Ollama @ 11434
   default_chat_model:
     api_base: http://127.0.0.1:11434/v1
     api_key: ollama
@@ -76,19 +78,25 @@ models:
     max_tokens: 4096
     model: qwen2.5:3b
     model_provider: openai
-    # request_timeout: 180.0
     request_timeout: 600.0
     temperature: 0
     type: chat
+    # ===== vLLM LLM 配置（已注释） =====
+    # api_base: http://127.0.0.1:8000/v1
+    # api_key: EMPTY
+    # model: Qwen/Qwen2.5-3B-Instruct
   default_embedding_model:
     api_base: http://127.0.0.1:11434/v1
     api_key: ollama
     concurrent_requests: 25
     model: nomic-embed-text
     model_provider: openai
-    # request_timeout: 180.0
     request_timeout: 600.0
     type: embedding
+    # ===== vLLM Embedding 配置（已注释） =====
+    # api_base: http://127.0.0.1:8001/v1
+    # api_key: EMPTY
+    # model: nomic-ai/nomic-embed-text-v1
 output:
   base_dir: D:\Develop\all_RAG\routing_rag\graphrag_ollama_hotpotqa_15_test_data\output
   type: file
