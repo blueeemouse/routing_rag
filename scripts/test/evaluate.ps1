@@ -9,6 +9,7 @@
 #     --hotpotqa_file "D:\Develop\all_RAG\routing_rag\HotpotQA\hotpot_train_v1.1_10000_samples.jsonl"
 
 # Alternative: with GraphRAG
+# 可以考虑加上delay为0的
 python ./tests/unified_evaluate_hotpotqa.py `
     --models graph_rag `
     --graphrag_work_dir "D:\Develop\all_RAG\routing_rag\graphrag_index_hotpotqa_train_5000_samples_fast" `
