@@ -34,3 +34,4 @@ results/
 todo/
 
 naive_rag_index_storage_10000_train_samples/
+vllm-0.17.1-cp38-abi3-manylinux_2_31_x86_64.whl
