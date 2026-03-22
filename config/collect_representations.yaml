@@ -1,0 +1,24 @@
+# 内部表征收集配置
+model:
+  name: "Qwen/Qwen2.5-3B-Instruct"
+  dtype: "float16"
+  device: "cpu"                 # cpu 或 cuda
+  attn_implementation: "eager"  # eager / sdpa / flash_attention_2
+
+layers:
+  # 模型共 36 层 (0-indexed: 0-35)
+  # 每个级别取一个代表层
+  shallow: 11                   # 第 12 层 (1-indexed)
+  middle: 23                    # 第 24 层 (1-indexed)
+  deep: 35                      # 第 36 层 (1-indexed)
+
+data:
+  input_file: "HotpotQA_train_data/label_analysis/all_labels_with_tie_converted.json"
+  batch_size: 8
+  shard_size: 500
+
+output:
+  dir: "outputs/representations/fp16_qwen2.5-3b-instruct"
+
+# 是否收集 next token logits（vocab_size=151936，每条约 300KB）
+collect_logits: true
