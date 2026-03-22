@@ -50,8 +50,8 @@ local_search:
 models:
   # ===== OpenAI 云端配置（已注释） =====
   # default_chat_model:
-  #   api_base: ${API_BASE_URL}
-  #   api_key: ${GRAPHRAG_API_KEY}
+  #   api_base: https://api.openai.com/v1
+  #   api_key: YOUR_OPENAI_KEY
   #   concurrent_requests: 25
   #   max_tokens: 4096
   #   model: gpt-3.5-turbo
@@ -60,8 +60,8 @@ models:
   #   temperature: 0
   #   type: chat
   # default_embedding_model:
-  #   api_base: ${API_BASE_URL}
-  #   api_key: ${GRAPHRAG_API_KEY}
+  #   api_base: https://api.openai.com/v1
+  #   api_key: YOUR_OPENAI_KEY
   #   concurrent_requests: 25
   #   model: text-embedding-ada-002
   #   model_provider: openai
