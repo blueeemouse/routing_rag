@@ -37,6 +37,10 @@ class ModelConfig:
     # 预训练模型路径
     pretrained_model_path: Optional[str] = None
     
+    # ========== 内部表征模型参数 ==========
+    # 输入表征维度
+    representation_dim: Optional[int] = None
+    
     # ========== KNN特有参数 ==========
     # KNN的k值
     k: int = 5
@@ -136,6 +140,10 @@ class DataConfig:
     
     # 评分公式（支持自定义公式，如 "em * 0.3 + f1 * 0.7"）
     score_formula: str = "em"
+    
+    # ========== 内部表征数据集参数 ==========
+    # 表征类型 (shallow_mean, deep_last_token, concat_all 等)
+    representation_type: str = "deep_last_token"
 
 
 # 这是总的配置类
@@ -191,6 +199,8 @@ class TrainableRouterConfig:
             temperature=model_config.get('temperature', 1.0),
             device=model_config.get('device', 'cpu'),
             pretrained_model_path=model_config.get('pretrained_model_path'),
+            # 内部表征参数
+            representation_dim=model_config.get('representation_dim'),
             # KNN特有参数
             k=model_config.get('k', 5),
             distance_metric=model_config.get('distance_metric', 'cosine'),
@@ -224,6 +234,8 @@ class TrainableRouterConfig:
             normalize_scores=data_config.get('normalize_scores', True),
             shuffle=data_config.get('shuffle', True),
             score_formula=data_config.get('score_formula', 'em'),
+            # 内部表征参数
+            representation_type=data_config.get('representation_type', 'deep_last_token'),
         )
         
         # 设置日志目录默认值
