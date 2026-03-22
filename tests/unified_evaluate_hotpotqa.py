@@ -17,7 +17,9 @@
     python unified_evaluate_hotpotqa.py --models all --num_samples 100
 参数说明：
     total_time是一个rag方法处理所有query的时间（即执行execute方法的时间之和）（所以包含了检索和生成）
-    total_retrieval_time是一个rag方法在所有query上检索的时间的综合（但目前只支持NaiveRAG，GraphRAG需要等进一步修改其源码）
+    total_retrieval_time是一个rag方法在所有query上检索的时间的综合（支持NaiveRAG和GraphRAG）
+    - NaiveRAG: retriever.retrieve() 的执行时间（包含嵌入生成 + 向量搜索）
+    - GraphRAG: map_query_to_entities() 的执行时间（包含嵌入生成 + 向量搜索 + 实体匹配后处理）
 
 
 """
@@ -1036,7 +1038,7 @@ def main():
         model_display_name = model_name.replace('_', '').title()
         print(f"\n开始评测 {model_display_name}...")
 
-        record_retrieval = (model_name == 'naive_rag')
+        record_retrieval = (model_name in ['naive_rag', 'graph_rag'])
 
         # print('query:', queries)
         # print('graphrag_context:', graphrag_context)

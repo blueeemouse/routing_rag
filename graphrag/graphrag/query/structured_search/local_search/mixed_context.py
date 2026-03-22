@@ -136,6 +136,10 @@ class LocalSearchMixedContext(LocalContextBuilder):
             )
             query = f"{query}\n{pre_user_questions}"
 
+        # 计时：测量检索时间（嵌入生成 + 向量搜索）
+        import time
+        retrieval_start = time.time()
+        
         selected_entities = map_query_to_entities(
             query=query,
             text_embedding_vectorstore=self.entity_text_embeddings,
@@ -147,6 +151,9 @@ class LocalSearchMixedContext(LocalContextBuilder):
             k=top_k_mapped_entities,
             oversample_scaler=2,
         )
+        
+        retrieval_end = time.time()
+        retrieval_time = retrieval_end - retrieval_start
 
         # build context
         final_context = list[str]()
@@ -219,6 +226,7 @@ class LocalSearchMixedContext(LocalContextBuilder):
         return ContextBuilderResult(
             context_chunks="\n\n".join(final_context),
             context_records=final_context_data,
+            retrieval_time=retrieval_time,
         )
 
     def _build_community_context(

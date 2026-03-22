@@ -707,26 +707,19 @@ Guidelines:
                 total_time = total_end - total_start
 
                 # GraphRAG 的 search 方法包含了检索（图数据查询）和生成（LLM 回答）
-                # 根据源码分析，LocalSearch.search() 分为两个阶段：
-                # 1. context_builder.build_context() - 检索阶段（向量检索、图遍历）
-                # 2. model.achat_stream() - 生成阶段（LLM 生成答案）
-                #
-                # 由于 search 是一个整体操作，我们无法从外部精确分离这两部分的时间
-                # 但可以根据 SearchResult 中的信息来估算比例：
-                # - llm_calls_categories: build_context 和 response 的 LLM 调用次数
-                # - output_tokens_categories: 各阶段的输出 token 数
-                #
-                # 默认使用经验比例：检索 75%，生成 25%
-                # 这个比例基于 GraphRAG 的设计：图检索通常是主要耗时部分
-                retrieval_ratio = 0.75
-                generation_ratio = 0.25
+                # SearchResult 现在包含精确的 retrieval_time 字段
+                # retrieval_time = 嵌入生成时间 + 向量搜索时间 + 实体匹配后处理时间
+                if hasattr(result, 'retrieval_time') and result.retrieval_time > 0:
+                    self.last_retrieval_time = result.retrieval_time
+                    self.last_generation_time = result.completion_time - result.retrieval_time
+                else:
+                    # 如果没有 retrieval_time（向后兼容），使用经验比例估算
+                    retrieval_ratio = 0.75
+                    self.last_retrieval_time = total_time * retrieval_ratio
+                    self.last_generation_time = total_time * (1 - retrieval_ratio)
 
-                # result有completion_time属性，且根据graphrag源码可知，它表示检索和生成两部分的总的时间
                 if hasattr(result, 'completion_time'):
                     total_time = result.completion_time
-
-                self.last_retrieval_time = total_time * retrieval_ratio
-                self.last_generation_time = total_time * generation_ratio
 
                 # 最终输出: 检查 result 对象是否有 'response' 属性
                 if hasattr(result, 'response'):

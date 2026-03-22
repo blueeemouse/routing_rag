@@ -115,6 +115,7 @@ class LocalSearch(BaseSearch[LocalContextBuilder]):
                 llm_calls_categories=llm_calls,
                 prompt_tokens_categories=prompt_tokens,
                 output_tokens_categories=output_tokens,
+                retrieval_time=context_result.retrieval_time,
             )
 
         except Exception:

@@ -22,6 +22,7 @@ class ContextBuilderResult:
     llm_calls: int = 0
     prompt_tokens: int = 0
     output_tokens: int = 0
+    retrieval_time: float = 0.0
 
 
 class GlobalContextBuilder(ABC):

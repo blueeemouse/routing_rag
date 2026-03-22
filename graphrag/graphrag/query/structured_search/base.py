@@ -41,6 +41,8 @@ class SearchResult:
     llm_calls_categories: dict[str, int] | None = None
     prompt_tokens_categories: dict[str, int] | None = None
     output_tokens_categories: dict[str, int] | None = None
+    # retrieval time (embedding generation + vector search)
+    retrieval_time: float = 0.0
 
 
 T = TypeVar(
