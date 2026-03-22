@@ -194,13 +194,15 @@ def main():
                         help='处理的样本数量（默认全部）')
     parser.add_argument('--output_dir', type=str, default=None,
                         help='输出目录（覆盖配置）')
+    parser.add_argument('--input_file', type=str, default=None,
+                        help='输入数据文件路径（覆盖配置）')
     args = parser.parse_args()
 
     # 加载配置
     config = load_config(args.config)
 
-    # 加载训练数据
-    data_path = config['data']['input_file']
+    # 加载数据
+    data_path = args.input_file or config['data']['input_file']
     samples = load_training_data(data_path, args.num_samples)
     total_samples = len(samples)
     print(f"Loaded {total_samples} samples from {data_path}")
@@ -317,13 +319,14 @@ def main():
         metadata_path = os.path.join(output_dir, 'metadata.json')
         metadata = []
         for i in range(total_samples):
-            metadata.append({
+            meta = {
                 'question': samples[i]['question'],
-                'optimal_strategy': samples[i]['optimal_strategy'],
-                'no_rag_score': samples[i].get('no_rag_score', 0.0),
-                'naive_rag_score': samples[i].get('naive_rag_score', 0.0),
-                'source': samples[i].get('source', ''),
-            })
+            }
+            for key in ['optimal_strategy', 'no_rag_score', 'naive_rag_score', 'source',
+                        'no_rag_em', 'no_rag_f1', 'naive_rag_em', 'naive_rag_f1', 'score_diff']:
+                if key in samples[i]:
+                    meta[key] = samples[i][key]
+            metadata.append(meta)
         with open(metadata_path, 'w', encoding='utf-8') as f:
             json.dump(metadata, f, ensure_ascii=False, indent=2)
         print(f"\nMetadata saved to {metadata_path}")
