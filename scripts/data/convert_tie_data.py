@@ -31,12 +31,21 @@
 
 import json
 import os
+import argparse
 from collections import Counter
 
 def main():
-    # 路径
-    input_path = "D:/Develop/all_RAG/routing_rag/HotpotQA_train_data/10000/all_labels.json"
-    output_path = "D:/Develop/all_RAG/routing_rag/HotpotQA_train_data/10000/all_labels_converted.json"
+    parser = argparse.ArgumentParser(description='转换 tie 样本为 no_rag')
+    parser.add_argument('--input', type=str,
+                        default="/home/lhz/code/routing_rag/HotpotQA_train_data/label_analysis/all_labels_vllm_qwen.json",
+                        help='输入的 all_labels.json 文件路径')
+    parser.add_argument('--output', type=str,
+                        default="/home/lhz/code/routing_rag/HotpotQA_train_data/label_analysis/all_labels_vllm_qwen_with_tie_converted.json",
+                        help='输出文件路径')
+    args = parser.parse_args()
+    
+    input_path = args.input
+    output_path = args.output
     
     # 加载原始数据
     print(f"加载原始数据: {input_path}")

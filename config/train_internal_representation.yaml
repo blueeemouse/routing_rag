@@ -1,0 +1,75 @@
+# 内部表征路由器训练配置
+# 使用预提取的 LLM 内部表征训练路由器
+
+model_type: "internal_representation"
+
+model:
+  # 表征维度 (deep_last_token = 2048)
+  representation_dim: 2048
+  
+  # 隐藏层维度
+  hidden_size: 512
+  
+  # 策略名称
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  
+  # 温度参数
+  temperature: 1.0
+  
+  # 设备
+  device: "auto"
+
+training:
+  # 训练器类型
+  trainer_type: "internal_representation"
+  
+  # 批量大小
+  batch_size: 32
+  
+  # 学习率
+  learning_rate: 1.0e-4
+  
+  # 训练轮数
+  epochs: 10
+  
+  # 评估间隔
+  eval_steps: 50
+  
+  # 保存间隔
+  save_steps: 50
+  
+  # 优化器
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.01
+  
+  # 学习率调度器
+  scheduler_type: "linear"
+  
+  # 梯度裁剪
+  max_grad_norm: 1.0
+  
+  # 随机种子
+  seed: 42
+
+data:
+  # 数据源类型
+  source: "internal_representation"
+  
+  # 表征类型 (可选: shallow_mean, shallow_last_token, middle_mean, middle_last_token, deep_mean, deep_last_token)
+  representation_type: "deep_last_token"
+  
+  # 训练数据路径 (表征目录)
+  train_path: "outputs/representations/fp16_qwen2.5-3b-instruct"
+  
+  # 验证数据路径
+  val_path: "outputs/representations/fp16_qwen2.5-3b-instruct_test1000"
+
+# 输出配置
+output_dir: "outputs/internal_representation_router"
+save_model_path: "outputs/internal_representation_router/final_model"
+
+# 日志配置
+logging_dir: "outputs/internal_representation_router/logs"
+log_level: "info"

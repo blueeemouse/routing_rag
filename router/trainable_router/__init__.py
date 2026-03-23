@@ -35,15 +35,18 @@ from .data_utils import DataAdapter, TrainingItem, ScoreComputer
 
 # 数据集
 from .datasets.hotpotqa_dataset import GenericRouterDataset, RouterDataLoader
+from .datasets.internal_representation_dataset import InternalRepresentationDataset
 
 # 模型
 from .models.dc_model import DCRouterModel
 from .models.feature_fused_model import FeatureFusedRouterModel
 from .models.gated_fusion_model import GatedFusionRouterModel
+from .models.internal_representation_router_model import InternalRepresentationRouterModel
 
 # 训练器
 from .trainers.dc_trainer import DCTrainer
 from .trainers.feature_fused_trainer import FeatureFusedTrainer
+from .trainers.internal_representation_trainer import InternalRepresentationTrainer
 
 # 路由器
 from .routers.dc_router import DCRouter
@@ -72,15 +75,18 @@ __all__ = [
     # 数据集
     'GenericRouterDataset',
     'RouterDataLoader',
+    'InternalRepresentationDataset',
     
     # 模型
     'DCRouterModel',
     'FeatureFusedRouterModel',
     'GatedFusionRouterModel',
+    'InternalRepresentationRouterModel',
     
     # 训练器
     'DCTrainer',
     'FeatureFusedTrainer',
+    'InternalRepresentationTrainer',
     
     # 路由器
     'DCRouter',

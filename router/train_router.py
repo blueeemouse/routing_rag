@@ -58,6 +58,12 @@ def parse_args():
     parser.add_argument('--test_data', type=str, default=None, help='测试数据路径')
     parser.add_argument('--data_source', type=str, default=None, help='数据源类型')
     
+    # 内部表征配置
+    parser.add_argument('--representation_type', type=str, default=None, 
+                        help='表征类型 (shallow_mean, deep_last_token, concat_all 等)')
+    parser.add_argument('--representation_dim', type=int, default=None,
+                        help='表征维度 (单一2048, concat_deep=4096, concat_all=12288)')
+    
     # 训练配置
     parser.add_argument('--batch_size', type=int, default=None, help='批量大小')
     parser.add_argument('--learning_rate', type=float, default=None, help='学习率')
@@ -201,6 +207,12 @@ def create_config_from_args(args) -> TrainableRouterConfig:
         config.data.test_path = args.test_data
     if args.num_clusters is not None:
         config.data.num_clusters = args.num_clusters
+    
+    # 内部表征配置
+    if args.representation_type is not None:
+        config.data.representation_type = args.representation_type
+    if args.representation_dim is not None:
+        config.model.representation_dim = args.representation_dim
     
     # 输出配置
     if args.output_dir is not None:
@@ -370,19 +382,20 @@ def main():
     # 加载配置（智能合并：命令行参数覆盖配置文件）
     config = create_config_from_args(args)
     
-    # 【新增】自动生成实验输出目录
+    # 设置输出目录：优先级 命令行 > 配置文件 > 自动生成
     if not args.output_dir:
-        exp_name = generate_exp_name(config)
-        args.output_dir = f"router_models/experiments/{exp_name}"
-        config.output_dir = args.output_dir
+        # 命令行未指定，检查配置文件是否指定了 output_dir
+        if config.output_dir:
+            # 配置文件有指定，使用它
+            args.output_dir = config.output_dir
+        else:
+            # 配置文件也没有，自动生成
+            exp_name = generate_exp_name(config)
+            args.output_dir = f"router_models/experiments/{exp_name}"
+            config.output_dir = args.output_dir
     
     # 初始化日志系统 (必须在加载配置之后)
-    if args.output_dir:
-        # 命令行指定了output_dir，强制使用output_dir/logs
-        log_dir = f"{config.output_dir}/logs"
-    else:
-        # 命令行未指定，优先用yaml的logging_dir，否则fallback到output_dir/logs
-        log_dir = config.logging_dir or f"{config.output_dir}/logs"
+    log_dir = f"{config.output_dir}/logs"
 
     logger = setup_logging(
         log_dir=log_dir,
@@ -440,7 +453,16 @@ def main():
     # 优先根据 config.data.source 选择数据集类型
     source_type = getattr(config.data, 'source', '').lower()
     
-    if source_type == 'decision_router':
+    if source_type == 'internal_representation' or source_type == 'internal_rep':
+        # 内部表征数据集（预提取的 LLM 表征）
+        logger_instance.info(f"使用InternalRepresentationDataset (source={source_type})")
+        from trainable_router.datasets.internal_representation_dataset import InternalRepresentationDataset
+        representation_type = getattr(config.data, 'representation_type', 'deep_last_token')
+        train_dataset = InternalRepresentationDataset(
+            config, 
+            representation_type=representation_type
+        )
+    elif source_type == 'decision_router':
         # 决策式路由数据集（预测Q和cost）
         logger_instance.info(f"使用DecisionRouterDataset (source={source_type})")
         from trainable_router.datasets.decision_router_dataset import DecisionRouterDataset
@@ -479,7 +501,16 @@ def main():
     val_dataset = None
     if config.data.val_path:
         # 根据 source 类型选择验证数据集
-        if source_type == 'decision_router':
+        if source_type == 'internal_representation' or source_type == 'internal_rep':
+            # 内部表征数据集
+            logger_instance.info(f"使用InternalRepresentationDataset加载验证集 (source={source_type})")
+            from trainable_router.datasets.internal_representation_dataset import InternalRepresentationDataset
+            representation_type = getattr(config.data, 'representation_type', 'deep_last_token')
+            val_dataset = InternalRepresentationDataset(
+                config,
+                representation_type=representation_type
+            )
+        elif source_type == 'decision_router':
             # 决策式路由使用DecisionRouterDataset
             logger_instance.info(f"使用DecisionRouterDataset加载验证集 (source={source_type})")
             from trainable_router.datasets.decision_router_dataset import DecisionRouterDataset
@@ -508,7 +539,12 @@ def main():
     # 先创建模型，以便collate_fn能根据模型属性做出一致判断
     logger_instance.info("创建模型...")
     # 根据config里的model_type参数创建router模型
-    model = TrainableRouterFactory.create_model(config)
+    # 对于内部表征模型，传递 representation_dim
+    if source_type == 'internal_representation' or source_type == 'internal_rep':
+        representation_dim = getattr(config.model, 'representation_dim', 2048)
+        model = TrainableRouterFactory.create_model(config, representation_dim=representation_dim)
+    else:
+        model = TrainableRouterFactory.create_model(config)
     logger_instance.info(f"模型创建成功: {config.model_type}")
 
     # 将model的tokenizer传递给数据集（如果有的话），以便dataset能生成input_ids
@@ -521,6 +557,15 @@ def main():
 
     # 创建collate_fn
     def collate_fn(x):
+        # 处理内部表征数据集（InternalRepresentationDataset）
+        if 'representation' in x[0]:
+            batch_data = {
+                'representation': torch.stack([item['representation'] for item in x]),
+                'label': torch.stack([item['label'] for item in x]),
+                'query': [item['query'] for item in x],
+            }
+            return batch_data
+        
         # 处理决策式路由数据集（DecisionRouterDataset）- 新格式
         if 'Q' in x[0] and 'costs' in x[0]:
             batch_data = {

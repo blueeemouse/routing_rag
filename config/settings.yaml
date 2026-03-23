@@ -178,8 +178,10 @@ router:
 no_rag:
   # vLLM配置: 使用 /v1 后缀，代码会自动添加 /chat/completions
   # Ollama配置: 使用 http://127.0.0.1:11434 (不需要/v1)
-  api_url: "${API_BASE_URL}"  # vLLM: http://127.0.0.1:8000/v1
-  api_key: "${NO_RAG_API_KEY}"
+  # api_url: "${API_BASE_URL}"  # vLLM: http://127.0.0.1:8000/v1
+  api_url: "http://127.0.0.1:8000/v1"
+  # api_key: "${NO_RAG_API_KEY}"
+  api_key: "EMPTY"
   # model: "qwen2.5:3b"  # Ollama 模型名
   model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
   temperature: 0.0
@@ -236,12 +238,17 @@ no_rag:
 
 # 当前启用配置 (Ollama)
 naive_rag:
-  api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
-  api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
+  # api_url: "http://127.0.0.1:11434"  # Ollama 不需要 /v1 后缀
+  api_url: "http://127.0.0.1:8000/v1"
+  # api_key: "ollama"  # Ollama 通常使用 "ollama" 作为 API key
+  api_key: "EMPTY"  # vLLM 通常不需要 API key，填任意值即可
   # model: "qwen2.5:3b"  # Ollama 模型名
   model: "Qwen/Qwen2.5-3B-Instruct"  # vLLM 模型名 (HuggingFace格式)
-  embedding_model: "nomic-embed-text"
-  embedding_provider: "auto"  # 可选值: ollama, openai, vllm, auto（自动检测）
+  # embedding_model: "nomic-embed-text"
+  # embedding_provider: "auto"  # 可选值: ollama, openai, vllm, auto（自动检测）
+  embedding_model: "nomic-ai/nomic-embed-text-v1"  # vLLM embedding 模型（HuggingFace 格式）
+  embedding_url: "http://127.0.0.1:8001"  # vLLM embedding 端点（独立部署）
+  embedding_provider: "vllm"  # 指定使用 vLLM embedding
   chunk_size: 512
   top_k: 5
   temperature: 0.0

@@ -3,7 +3,7 @@
 端到端路由器测试脚本
 
 测试训练好的路由器在完整 RAG 流程中的性能：
-1. 加载训练好的 Router（支持 DC Router 和 DPO Router）
+1. 加载训练好的 Router（支持 DC Router、DPO Router、Internal Representation Router）
 2. 对HotpotQA测试集进行 routing 决策
 3. 根据 routing 选择执行对应的 RAG 策略（NoRAG、NaiveRAG，可选GraphRAG）
 4. 评估最终答案质量（EM, F1）和成本指标（retrieval time, generation time）
@@ -11,6 +11,8 @@
 支持的 Router 类型:
     - DC Router: router_models/.../checkpoint_best_val (包含 model.pt)
     - DPO Router: router_models/dpo_router/checkpoint_best_val (包含 model.safetensors)
+    - Internal Representation Router: outputs/internal_rep_router_experiments/.../final 
+      (包含 model.pt 和 config.json，config 中有 representation_dim)
 
 使用方法:
     # 测试 DC Router
@@ -25,6 +27,14 @@
                           --naive_rag_index_path naive_rag_index_hotpotqa_1000_samples \
                           --output results/dpo_router_eval.json
     
+    # 测试 Internal Representation Router
+    python test_router_e2e.py --model_path outputs/internal_rep_router_experiments/deep_last_token/final \
+                          --hotpotqa_file HotpotQA/hotpot_dev_distractor_1000_samples.jsonl \
+                          --naive_rag_index_path naive_rag_index_hotpotqa_1000_samples \
+                          --router_type internal_representation \
+                          --representation_type deep_last_token \
+                          --output results/internal_rep_router_eval.json
+    
     # 使用所有三种策略（包括GraphRAG）
     python test_router_e2e.py --model_path router_models/.../checkpoint_best_val \
                           --hotpotqa_file HotpotQA/hotpot_dev_distractor_1000_samples.jsonl \
@@ -35,6 +45,7 @@
 
 Router 类型自动检测:
     脚本会自动检测模型类型：
+    - 如果 config.json 中包含 representation_dim → 使用 Internal Representation Router
     - 如果目录包含 model.safetensors 或 pytorch_model.bin → 使用 DPO Router
     - 如果目录包含 model.pt → 使用 DC Router
 """
@@ -57,6 +68,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from router.trainable_router.routers.dc_router import DCRouter
 from router.trainable_router.routers.dpo_router import DPORouter
+from router.trainable_router.routers.internal_representation_router import InternalRepresentationRouter
 from rag_implementations.naive_rag.naive_rag_impl import NaiveRAG
 from rag_implementations.no_rag.no_rag_impl import NoRAG
 from rag_implementations.graph_rag.graph_rag_impl import GraphRAG
@@ -71,8 +83,21 @@ def detect_router_type(model_path: str) -> str:
         model_path: 模型路径
         
     Returns:
-        'dc' 或 'dpo'
+        'dc', 'dpo', 或 'internal_representation'
     """
+    # 首先检查 config.json 是否包含 representation_dim（内部表征路由器的特征）
+    config_path = os.path.join(model_path, 'config.json')
+    if os.path.exists(config_path):
+        try:
+            import json
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+            # 如果有 representation_dim，认为是内部表征路由器
+            if 'representation_dim' in config:
+                return 'internal_representation'
+        except Exception:
+            pass
+    
     # 检查是否存在 transformers 标准格式的模型文件
     safetensors_path = os.path.join(model_path, 'model.safetensors')
     pytorch_path = os.path.join(model_path, 'pytorch_model.bin')
@@ -488,6 +513,25 @@ def main():
     parser.add_argument('--use_parallel', action='store_true', default=False, help='是否使用并行处理')
     parser.add_argument('--num_workers', type=int, default=4, help='并行工作线程数（仅在 use_parallel=True 时生效）')
     
+    # 内部表征路由器相关参数
+    parser.add_argument('--router_type', type=str, default='auto', 
+                        choices=['auto', 'dc', 'dpo', 'internal_representation'],
+                        help='路由器类型 (auto 为自动检测)')
+    parser.add_argument('--representation_type', type=str, default='deep_last_token',
+                        help='内部表征类型 (deep_last_token, shallow_mean 等)')
+    parser.add_argument('--llm_model_name', type=str, default='Qwen/Qwen2.5-3B-Instruct',
+                        help='用于提取表征的 LLM 模型名称')
+    parser.add_argument('--llm_device', type=str, default='auto',
+                        help='LLM 设备 (auto, cpu, cuda)')
+    parser.add_argument('--llm_dtype', type=str, default='float16',
+                        help='LLM 数据类型 (float16, bfloat16, float32)')
+    # 预加载表征模式参数（推荐）
+    parser.add_argument('--representations_path', type=str, 
+                        default='/home/lhz/code/routing_rag/outputs/representations/fp16_qwen2.5-3b-instruct_test1000',
+                        help='预提取的表征目录路径（包含 shard_*.npz 和 metadata.json）')
+    parser.add_argument('--questions_file', type=str, default=None,
+                        help='问题文件路径（JSONL 格式，用于匹配预加载的表征）')
+    
     args = parser.parse_args()
     
     # 检查模型路径
@@ -504,13 +548,37 @@ def main():
     else:
         device = args.device
     
-    # 自动检测 Router 类型
-    router_type = detect_router_type(args.model_path)
+    # 检测 Router 类型
+    if args.router_type == 'auto':
+        router_type = detect_router_type(args.model_path)
+    else:
+        router_type = args.router_type
     print(f"\n检测到 Router 类型: {router_type.upper()}")
     
     # 初始化 Router
     print(f"\n加载 Router 模型: {args.model_path}")
-    if router_type == 'dpo':
+    if router_type == 'internal_representation':
+        router = InternalRepresentationRouter(
+            model_path=args.model_path,
+            # 预加载表征模式参数（推荐）
+            representations_path=args.representations_path,
+            questions_file=args.questions_file,
+            # 实时提取模式参数
+            llm_model_name=args.llm_model_name,
+            representation_type=args.representation_type,
+            device=device,
+            llm_device=args.llm_device,
+            dtype=args.llm_dtype,
+        )
+        print(f"Router 类型: Internal Representation Router")
+        print(f"  - 表征类型: {args.representation_type}")
+        if args.representations_path:
+            print(f"  - 预加载表征: {args.representations_path}")
+            if args.questions_file:
+                print(f"  - 问题文件: {args.questions_file}")
+        else:
+            print(f"  - LLM: {args.llm_model_name}")
+    elif router_type == 'dpo':
         router = DPORouter(args.model_path, device=device)
     else:
         router = DCRouter(args.model_path)
@@ -634,6 +702,7 @@ def main():
         output_data = {
             'config': {
                 'model_path': args.model_path,
+                'router_type': router_type,
                 'hotpotqa_file': args.hotpotqa_file,
                 'naive_rag_index_path': args.naive_rag_index_path,
                 'use_graphrag': args.use_graphrag,
@@ -642,6 +711,14 @@ def main():
                 'device': device,
                 'use_parallel': args.use_parallel,
                 'num_workers': args.num_workers,
+                # 内部表征路由器参数
+                'representation_type': args.representation_type if router_type == 'internal_representation' else None,
+                'llm_model_name': args.llm_model_name if router_type == 'internal_representation' else None,
+                'llm_device': args.llm_device if router_type == 'internal_representation' else None,
+                'llm_dtype': args.llm_dtype if router_type == 'internal_representation' else None,
+                # 预加载表征参数
+                'representations_path': args.representations_path,
+                'questions_file': args.questions_file,
             },
             'metrics': metrics,
             'results': results,
