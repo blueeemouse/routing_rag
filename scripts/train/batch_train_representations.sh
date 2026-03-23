@@ -9,7 +9,7 @@ EVAL_STEPS=50
 LEARNING_RATE=1e-4
 
 # 训练数据目录
-TRAIN_DATA="outputs/representations/fp16_qwen2.5-3b-instruct"
+TRAIN_DATA="outputs/representations/fp16_qwen2.5-3b-instruct_train5000"
 VAL_DATA="outputs/representations/fp16_qwen2.5-3b-instruct_test1000"
 
 # 定义表征类型及其维度
@@ -27,7 +27,7 @@ declare -A REPR_DIMS=(
 )
 
 # 创建输出目录
-OUTPUT_BASE="outputs/internal_rep_router_experiments"
+OUTPUT_BASE="outputs/internal_rep_router_experiments_5000_no_0.8_naive_1.2"
 mkdir -p "$OUTPUT_BASE"
 
 # 日志文件
@@ -60,6 +60,7 @@ for REPR_TYPE in "${!REPR_DIMS[@]}"; do
         --output_dir "$OUTPUT_DIR" \
         --representation_type "$REPR_TYPE" \
         --representation_dim $DIM \
+        --class_weights "no_rag=0.8,naive_rag=1.2"
         2>&1 | tee -a "$LOG_FILE"
     
     echo "完成: $REPR_TYPE" | tee -a "$LOG_FILE"

@@ -12,8 +12,15 @@ def load_predictions_from_file(filepath):
     else:
         raise ValueError(f"无法从 {filepath} 中找到 predictions 数据")
 
-def merge_results(no_rag_file, naive_rag_file, output_dir):
-    """合并 no_rag 和 naive_rag 结果，生成 all_labels.json 和 all_labels_no_tie.json"""
+def merge_results(no_rag_file, naive_rag_file, output_dir, output_name="all_labels.json"):
+    """合并 no_rag 和 naive_rag 结果，生成标签文件
+    
+    Args:
+        no_rag_file: no_rag 结果文件路径
+        naive_rag_file: naive_rag 结果文件路径
+        output_dir: 输出目录
+        output_name: 输出文件名 (默认 all_labels.json)
+    """
     
     # 加载数据
     no_rag_predictions = load_predictions_from_file(no_rag_file)
@@ -90,15 +97,16 @@ def merge_results(no_rag_file, naive_rag_file, output_dir):
     print(f"  tie: {tie_count}")
     print(f"  no_tie 总计: {len(no_tie_samples)}")
     
-    # 保存 all_labels.json (使用 samples 包装格式)
-    all_labels_file = os.path.join(output_dir, "all_labels.json")
+    # 保存主文件 (使用 samples 包装格式)
+    all_labels_file = os.path.join(output_dir, output_name)
     all_labels_data = {"samples": all_labels}
     with open(all_labels_file, 'w', encoding='utf-8') as f:
         json.dump(all_labels_data, f, ensure_ascii=False, indent=2)
     print(f"\n已保存: {all_labels_file}")
     
-    # 保存 all_labels_no_tie.json
-    no_tie_file = os.path.join(output_dir, "all_labels_no_tie.json")
+    # 保存 no_tie 文件 (自动生成文件名)
+    base_name = output_name.replace('.json', '')
+    no_tie_file = os.path.join(output_dir, f"{base_name}_no_tie.json")
     no_tie_data = {"samples": no_tie_samples}
     with open(no_tie_file, 'w', encoding='utf-8') as f:
         json.dump(no_tie_data, f, ensure_ascii=False, indent=2)
@@ -107,22 +115,36 @@ def merge_results(no_rag_file, naive_rag_file, output_dir):
     return all_labels_file, no_tie_file
 
 def main():
-    # 文件路径
-    data_dir = "D:/Develop/all_RAG/routing_rag/HotpotQA_train_data/10000"
-    no_rag_file = os.path.join(data_dir, "Norag_results_20260309_144929.json")
-    naive_rag_file = os.path.join(data_dir, "Naiverag_results_20260309_144929.json")
+    import argparse
+    parser = argparse.ArgumentParser(description='合并 no_rag 和 naive_rag 结果')
+    parser.add_argument('--no_rag_file', type=str, 
+                        default="/home/lhz/code/routing_rag/HotpotQA_train_data/Norag_results_20260322_132705_vllm_qwen.json",
+                        help='no_rag 结果文件路径')
+    parser.add_argument('--naive_rag_file', type=str,
+                        default="/home/lhz/code/routing_rag/HotpotQA_train_data/Naiverag_results_20260321_225008_vllm_qwen.json",
+                        help='naive_rag 结果文件路径')
+    parser.add_argument('--output_dir', type=str,
+                        default="/home/lhz/code/routing_rag/HotpotQA_train_data/label_analysis",
+                        help='输出目录')
+    parser.add_argument('--output_name', type=str,
+                        default="all_labels_vllm_qwen.json",
+                        help='输出文件名 (不含路径)')
+    args = parser.parse_args()
     
     # 检查文件是否存在
-    if not os.path.exists(no_rag_file):
-        print(f"错误: 文件不存在 {no_rag_file}")
+    if not os.path.exists(args.no_rag_file):
+        print(f"错误: 文件不存在 {args.no_rag_file}")
         return
-    if not os.path.exists(naive_rag_file):
-        print(f"错误: 文件不存在 {naive_rag_file}")
+    if not os.path.exists(args.naive_rag_file):
+        print(f"错误: 文件不存在 {args.naive_rag_file}")
         return
+    
+    # 确保输出目录存在
+    os.makedirs(args.output_dir, exist_ok=True)
     
     # 执行合并
     try:
-        merge_results(no_rag_file, naive_rag_file, data_dir)
+        merge_results(args.no_rag_file, args.naive_rag_file, args.output_dir, args.output_name)
         print("\n处理完成!")
     except Exception as e:
         print(f"处理失败: {str(e)}")
