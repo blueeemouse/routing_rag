@@ -5,7 +5,7 @@
 
 python ./tests/unified_evaluate_hotpotqa.py \
     --models graph_rag \
-    --graphrag_work_dir "/home/lhz/code/routing_rag/graphrag_index_hotpotqa_train_5000_samples_fast" \
+    --graphrag_work_dir "/home/lhz/code/routing_rag/graphrag_ollama_hotpotqa_1000_test_data" \
     --num_samples 2 \
     --skip_graphrag_index \
     --delay 0 \

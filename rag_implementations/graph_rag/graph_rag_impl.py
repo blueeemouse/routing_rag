@@ -37,10 +37,14 @@ class GraphRAG(RAGInterface):
         self.logger = logging.getLogger(__name__)
 
         # 记录最后一次检索和生成的时间（用于性能评测）
-        # 注意：GraphRAG 的 search 方法是检索+生成的一体化操作，我们无法精确分离这两部分的时间
-        # 因此使用经验比例进行估算：检索 75%，生成 25%
+        # 注意：如果 SearchResult 有精确的 retrieval_time 字段，则使用精确值；
+        # 否则使用经验比例估算：检索 75%，生成 25%
         self.last_retrieval_time = 0.0
         self.last_generation_time = 0.0
+
+        # 搜索引擎实例及其就绪标志（延迟初始化，首次 execute() 时创建）
+        self._search_engine = None
+        self._search_engine_ready = False
 
         # 尝试导入微软GraphRAG，如果不存在则后续处理
         try:
@@ -366,280 +370,174 @@ class GraphRAG(RAGInterface):
         # 创建VectorStoreSchemaConfig对象
         return VectorStoreSchemaConfig(**merged_schema)
 
-    def _local_search(self, query: str, data_path: str, context: Dict[str, Any] = None) -> str:
+    def _clean_row(self, row_dict: dict, string_keys: list) -> dict:
         """
-        本地搜索模式
-        Local search mode
+        清理DataFrame行数据，处理NaN值和数据类型
 
         Args:
-            query: 查询字符串
-            data_path: 数据目录路径
-            context: 上下文信息，可包含：
-                - config_filename: 配置文件名（相对于data_path）
-                - response_type: 搜索响应类型
-                - vector_store_schema: 向量存储schema配置
-                - 其他自定义配置
+            row_dict: 行数据字典
+            string_keys: 需要强制转为字符串的字段名列表
+
+        Returns:
+            清理后的字典
+        """
+        import numpy as np
+        import pandas as pd
+        cleaned_row = {}
+        for key, value in row_dict.items():
+            if isinstance(value, np.ndarray):
+                cleaned_row[key] = value.tolist()
+            elif pd.isna(value):
+                cleaned_row[key] = None
+            elif isinstance(value, (np.integer, int)):
+                cleaned_row[key] = str(value) if key in string_keys else int(value)
+            elif isinstance(value, (np.floating, float)):
+                cleaned_row[key] = float(value) if not pd.isna(value) else None
+            else:
+                cleaned_row[key] = value
+        return cleaned_row
+
+    def _init_search_engine(self, data_path: str, context: Dict[str, Any] = None) -> str:
+        """
+        初始化搜索引擎（数据加载、对象转换、向量库连接、引擎创建）。
+        只需调用一次，之后通过 self._search_engine 复用。
+
+        为什么拆出来：
+          微软官方的 api/query.py 是一次性使用模式（每次查询都重建引擎），
+          但 LocalSearch 类本身是无状态的，天然支持多次 search() 调用。
+          评测场景下需要对同一个 GraphRAG 实例执行多次查询，
+          如果每次都重复加载 parquet + DataFrame→对象转换 + 创建引擎，
+          大量时间会浪费在重复初始化上（占总时间 ~90%）。
+
+        Returns:
+            成功返回空字符串 ""，失败返回非空的错误信息字符串。
+            调用方通过 "if error:" 判断是否初始化成功。
         """
         if context is None:
             context = {}
+
         try:
             from graphrag.query.factory import get_local_search_engine
-            from graphrag.config.models.graph_rag_config import GraphRagConfig
             from graphrag.config.load_config import load_config
+            from graphrag.data_model.community_report import CommunityReport
+            from graphrag.data_model.text_unit import TextUnit
+            from graphrag.data_model.entity import Entity
+            from graphrag.data_model.relationship import Relationship
+            from graphrag.vector_stores.lancedb import LanceDBVectorStore
             from pathlib import Path
             import pandas as pd
-            import os
+            import numpy as np
 
-            # 要使用本地搜索，需要加载GraphRAG生成的数据
             data_dir = Path(data_path)
             output_dir = data_dir / "output"
 
             if not output_dir.exists():
                 return f"错误：输出目录不存在: {output_dir}"
 
-            # 尝试加载GraphRAG的索引数据
-            # 读取实体、关系、报告和文本单元数据
-            # 注意：根据实际生成的文件名进行调整
+            # 读取parquet文件
             entities_path = output_dir / "entities.parquet"
             relationships_path = output_dir / "relationships.parquet"
             reports_path = output_dir / "community_reports.parquet"
             text_units_path = output_dir / "text_units.parquet"
 
-            # 检查必要的文件是否存在
-            if not entities_path.exists():
-                return f"错误：实体数据文件不存在: {entities_path}"
-            if not relationships_path.exists():
-                return f"错误：关系数据文件不存在: {relationships_path}"
-            if not reports_path.exists():
-                return f"错误：报告数据文件不存在: {reports_path}"
-            if not text_units_path.exists():
-                return f"错误：文本单元数据文件不存在: {text_units_path}"
+            for path, name in [(entities_path, "实体"), (relationships_path, "关系"),
+                               (reports_path, "报告"), (text_units_path, "文本单元")]:
+                if not path.exists():
+                    return f"错误：{name}数据文件不存在: {path}"
 
-            # 尝试加载这些parquet文件
             entities_df = pd.read_parquet(entities_path)
             relationships_df = pd.read_parquet(relationships_path)
             reports_df = pd.read_parquet(reports_path)
             text_units_df = pd.read_parquet(text_units_path)
 
-            # 加载配置文件 - 使用新的参数化方式
-            # 优先从context中获取配置文件名
+            # 加载配置文件
             config_filename = context.get('config_filename', None)
             if config_filename:
-                # 如果用户指定了配置文件名
                 config_file_path = data_dir / config_filename
                 if not config_file_path.exists():
                     return f"错误：指定的配置文件不存在: {config_file_path}"
                 self.logger.info(f"使用指定的配置文件: {config_file_path}")
             else:
-                # 如果用户没有指定，尝试自动查找
                 config_file_path = self._find_config_file(data_dir)
                 if not config_file_path:
                     return f"错误：未找到GraphRAG配置文件。尝试过的文件名: config.yml, settings.yml, graphrag_config.yml, graphrag.yml。请在context中指定'config_filename'参数。"
                 self.logger.info(f"自动找到配置文件: {config_file_path}")
 
-            # 加载配置
-            config_dir = data_dir  # 配置文件所在目录作为root_dir
-            config = load_config(root_dir=Path(config_dir), config_filepath=Path(config_file_path))
+            config = load_config(root_dir=data_dir, config_filepath=Path(config_file_path))
 
-            # 尝试加载LanceDB向量存储（GraphRAG使用）
             lancedb_path = output_dir / "lancedb"
-
-            # 将pandas数据转换为GraphRAG所需的格式
-            from graphrag.data_model.community_report import CommunityReport
-            from graphrag.data_model.text_unit import TextUnit
-            from graphrag.data_model.entity import Entity
-            from graphrag.data_model.relationship import Relationship
-            from graphrag.data_model.covariate import Covariate
-
-            # 将DataFrame转换为相应对象列表（使用from_dict方法）
-            import numpy as np
-            entities = []
-            for _, row in entities_df.iterrows():
-                row_dict = row.to_dict()
-                # 处理NaN值和数据类型，确保标识符字段是字符串
-                # 对于Identified和Named基类要求的字段，需要确保是字符串类型
-                cleaned_row = {}
-                for key, value in row_dict.items():
-                    if isinstance(value, np.ndarray):
-                        cleaned_row[key] = value.tolist()  # 转换numpy数组
-                    elif pd.isna(value):
-                        cleaned_row[key] = None
-                    elif isinstance(value, (np.integer, int)):
-                        # 对于id、short_id（human_readable_id）和title字段，必须是字符串
-                        if key in ['id', 'human_readable_id', 'title']:
-                            cleaned_row[key] = str(value)
-                        else:
-                            # 其他数值字段可以保持数值类型
-                            cleaned_row[key] = int(value)
-                    elif isinstance(value, (np.floating, float)):
-                        cleaned_row[key] = float(value) if not pd.isna(value) else None
-                    else:
-                        cleaned_row[key] = value
-                # 使用Entity的from_dict方法来正确构建对象
-                entity = Entity.from_dict(cleaned_row)
-                entities.append(entity)
-
-            relationships = []
-            reports = []
-            text_units = []
-            # 同样处理其他数据类型，但先简化处理避免复杂性
-            # 对于其他类型，我们先使用基本构造方法
-            from graphrag.data_model.relationship import Relationship
-            from graphrag.data_model.community_report import CommunityReport
-            from graphrag.data_model.text_unit import TextUnit
-
-            # 为Relationship、CommunityReport和TextUnit也使用适当的方法
-            import numpy as np
-            for _, row in relationships_df.iterrows():
-                row_dict = row.to_dict()
-                # 处理NaN值和数据类型，确保标识符字段是字符串
-                cleaned_row = {}
-                for key, value in row_dict.items():
-                    if isinstance(value, np.ndarray):
-                        cleaned_row[key] = value.tolist()
-                    elif pd.isna(value):
-                        cleaned_row[key] = None
-                    elif isinstance(value, (np.integer, int)):
-                        # 对于id和human_readable_id字段，必须是字符串
-                        if key in ['id', 'human_readable_id', 'source', 'target']:
-                            cleaned_row[key] = str(value)
-                        else:
-                            cleaned_row[key] = int(value)
-                    elif isinstance(value, (np.floating, float)):
-                        cleaned_row[key] = float(value) if not pd.isna(value) else None
-                    else:
-                        cleaned_row[key] = value
-                # 使用Relationship的from_dict方法来正确构建对象
-                try:
-                    relationship = Relationship.from_dict(cleaned_row)
-                except Exception:
-                    # 如果from_dict失败，尝试手动构造
-                    relationship = Relationship(
-                        id=cleaned_row.get('id', ''),
-                        short_id=cleaned_row.get('human_readable_id'),
-                        source=cleaned_row.get('source', ''),
-                        target=cleaned_row.get('target', ''),
-                        description=cleaned_row.get('description', ''),
-                        rank=cleaned_row.get('rank', 1),
-                        weight=cleaned_row.get('weight', 1.0),
-                        text_unit_ids=cleaned_row.get('text_unit_ids'),
-                        attributes=cleaned_row.get('attributes')
-                    )
-                relationships.append(relationship)
-
-            for _, row in reports_df.iterrows():
-                row_dict = row.to_dict()
-                # 处理NaN值和数据类型，确保标识符字段是字符串
-                cleaned_row = {}
-                for key, value in row_dict.items():
-                    if isinstance(value, np.ndarray):
-                        cleaned_row[key] = value.tolist()
-                    elif pd.isna(value):
-                        cleaned_row[key] = None
-                    elif isinstance(value, (np.integer, int)):
-                        # 对于id、human_readable_id和title字段，必须是字符串
-                        if key in ['id', 'human_readable_id', 'title', 'community', 'community_id']:
-                            cleaned_row[key] = str(value)
-                        else:
-                            cleaned_row[key] = int(value)
-                    elif isinstance(value, (np.floating, float)):
-                        cleaned_row[key] = float(value) if not pd.isna(value) else None
-                    else:
-                        cleaned_row[key] = value
-                # 使用CommunityReport的from_dict方法来正确构建对象
-                try:
-                    report = CommunityReport.from_dict(cleaned_row)
-                except Exception:
-                    # 如果from_dict失败，尝试手动构造
-                    report = CommunityReport(
-                        id=cleaned_row.get('id', ''),
-                        title=cleaned_row.get('title', ''),
-                        short_id=cleaned_row.get('human_readable_id'),
-                        community_id=cleaned_row.get('community', ''),
-                        summary=cleaned_row.get('summary', ''),
-                        full_content=cleaned_row.get('full_content', ''),
-                        rank=cleaned_row.get('rank', 1.0),
-                        attributes=cleaned_row.get('attributes'),
-                        size=cleaned_row.get('size'),
-                        period=cleaned_row.get('period')
-                    )
-                reports.append(report)
-
-            for _, row in text_units_df.iterrows():
-                row_dict = row.to_dict()
-                # 处理NaN值和数据类型，确保标识符字段是字符串
-                cleaned_row = {}
-                for key, value in row_dict.items():
-                    if isinstance(value, np.ndarray):
-                        cleaned_row[key] = value.tolist()
-                    elif pd.isna(value):
-                        cleaned_row[key] = None
-                    elif isinstance(value, (np.integer, int)):
-                        # 对于id和human_readable_id字段，必须是字符串
-                        if key in ['id', 'human_readable_id']:
-                            cleaned_row[key] = str(value)
-                        else:
-                            cleaned_row[key] = int(value)
-                    elif isinstance(value, (np.floating, float)):
-                        cleaned_row[key] = float(value) if not pd.isna(value) else None
-                    else:
-                        cleaned_row[key] = value
-                # 使用TextUnit的from_dict方法来正确构建对象
-                try:
-                    text_unit = TextUnit.from_dict(cleaned_row)
-                except Exception:
-                    # 如果from_dict失败，尝试手动构造
-                    text_unit = TextUnit(
-                        id=cleaned_row.get('id', ''),
-                        short_id=cleaned_row.get('human_readable_id'),
-                        text=cleaned_row.get('text', ''),
-                        entity_ids=cleaned_row.get('entity_ids'),
-                        relationship_ids=cleaned_row.get('relationship_ids'),
-                        covariate_ids=cleaned_row.get('covariate_ids'),
-                        n_tokens=cleaned_row.get('n_tokens'),
-                        document_ids=cleaned_row.get('document_ids'),
-                        attributes=cleaned_row.get('attributes')
-                    )
-                text_units.append(text_unit)
-
-            # 尝试创建本地搜索引擎
-            # 注意：这需要向量存储，而不仅仅是DataFrame
-            from graphrag.vector_stores.lancedb import LanceDBVectorStore
-            from graphrag.vector_stores.base import BaseVectorStore
-
-            # 实际的向量存储路径
             entity_description_vector_store_path = lancedb_path / "default-entity-description.lance"
-            community_full_content_vector_store_path = lancedb_path / "default-community-full_content.lance"
-            text_unit_text_vector_store_path = lancedb_path / "default-text_unit-text.lance"
 
-            # 检查向量存储是否存在
-            if entity_description_vector_store_path.exists():
-                # 创建向量存储配置
-                # 使用_get_vector_store_schema方法从config推断向量维度
-                schema_config = self._get_vector_store_schema(config, context)
-
-                # 初始化向量存储
-                entity_description_embedding_store = LanceDBVectorStore(
-                    vector_store_schema_config=schema_config
-                )
-                # 连接数据库
-                entity_description_embedding_store.connect(
-                    db_uri=str(lancedb_path),
-                    collection_name="default-entity-description"
-                )
-            else:
-                # 如果向量存储不存在，返回错误
+            if not entity_description_vector_store_path.exists():
                 return f"错误：未找到实体描述向量存储: {entity_description_vector_store_path}"
 
-            # 创建本地搜索引擎
-            # response_type选项:
-            # - "general": 详细格式，包含数据引用标记
-            # - "multiple paragraphs": 多段落格式，较少引用标记
-            # - "single paragraph": 单段落格式，最简洁
-            # - "list": 列表格式
-            print("创建本地搜索引擎...")
+            # 将DataFrame转换为GraphRAG对象
+            entity_string_keys = ['id', 'human_readable_id', 'title']
+            entities = [
+                Entity.from_dict(self._clean_row(row.to_dict(), entity_string_keys))
+                for _, row in entities_df.iterrows()
+            ]
 
-            # 使用 system_prompt 参数来传递优化的 prompt
+            relationship_string_keys = ['id', 'human_readable_id', 'source', 'target']
+            relationships = []
+            for _, row in relationships_df.iterrows():
+                cleaned = self._clean_row(row.to_dict(), relationship_string_keys)
+                try:
+                    relationships.append(Relationship.from_dict(cleaned))
+                except Exception:
+                    relationships.append(Relationship(
+                        id=cleaned.get('id', ''), short_id=cleaned.get('human_readable_id'),
+                        source=cleaned.get('source', ''), target=cleaned.get('target', ''),
+                        description=cleaned.get('description', ''), rank=cleaned.get('rank', 1),
+                        weight=cleaned.get('weight', 1.0), text_unit_ids=cleaned.get('text_unit_ids'),
+                        attributes=cleaned.get('attributes')
+                    ))
+
+            report_string_keys = ['id', 'human_readable_id', 'title', 'community', 'community_id']
+            reports = []
+            for _, row in reports_df.iterrows():
+                cleaned = self._clean_row(row.to_dict(), report_string_keys)
+                try:
+                    reports.append(CommunityReport.from_dict(cleaned))
+                except Exception:
+                    reports.append(CommunityReport(
+                        id=cleaned.get('id', ''), title=cleaned.get('title', ''),
+                        short_id=cleaned.get('human_readable_id'),
+                        community_id=cleaned.get('community', ''),
+                        summary=cleaned.get('summary', ''),
+                        full_content=cleaned.get('full_content', ''),
+                        rank=cleaned.get('rank', 1.0), attributes=cleaned.get('attributes'),
+                        size=cleaned.get('size'), period=cleaned.get('period')
+                    ))
+
+            text_unit_string_keys = ['id', 'human_readable_id']
+            text_units = []
+            for _, row in text_units_df.iterrows():
+                cleaned = self._clean_row(row.to_dict(), text_unit_string_keys)
+                try:
+                    text_units.append(TextUnit.from_dict(cleaned))
+                except Exception:
+                    text_units.append(TextUnit(
+                        id=cleaned.get('id', ''), short_id=cleaned.get('human_readable_id'),
+                        text=cleaned.get('text', ''), entity_ids=cleaned.get('entity_ids'),
+                        relationship_ids=cleaned.get('relationship_ids'),
+                        covariate_ids=cleaned.get('covariate_ids'),
+                        n_tokens=cleaned.get('n_tokens'),
+                        document_ids=cleaned.get('document_ids'),
+                        attributes=cleaned.get('attributes')
+                    ))
+
+            # 初始化向量存储
+            schema_config = self._get_vector_store_schema(config, context)
+            entity_description_embedding_store = LanceDBVectorStore(
+                vector_store_schema_config=schema_config
+            )
+            entity_description_embedding_store.connect(
+                db_uri=str(lancedb_path),
+                collection_name="default-entity-description"
+            )
+
+            # 创建搜索引擎
             system_prompt = """You are a precise question-answering assistant. Answer the question based on the provided context.
 
 Guidelines:
@@ -653,90 +551,100 @@ Guidelines:
 8. DO NOT add any additional context or information
 9. If the answer is not in the context, say "I don't know" """
 
-            search_engine = get_local_search_engine(
+            self._search_engine = get_local_search_engine(
                 config=config,
                 reports=reports,
                 text_units=text_units,
                 entities=entities,
                 relationships=relationships,
                 covariates={},
-                response_type="single paragraph",  # 使用最简洁的输出格式
+                response_type="single paragraph",
                 description_embedding_store=entity_description_embedding_store,
-                system_prompt=system_prompt  # 使用 system_prompt 参数
+                system_prompt=system_prompt
             )
 
-            # # 执行查询
-            # result = search_engine.search(query=query)
-            # return str(result)
-
-            # 执行查询 - search方法是异步的，需要在同步函数中调用
-            # 使用 asyncio.run() 是在同步环境中运行异步代码的标准做法
-            import asyncio
-            import time
-
-            # 记录总开始时间
-            total_start = time.time()
-
-            try:
-                if asyncio.iscoroutinefunction(search_engine.search):
-                    # 如果search是协程函数，使用asyncio.run来运行它
-                    result = asyncio.run(search_engine.search(query=query))
-                else:
-                    # 如果不是（未来版本可能变化），则直接调用
-                    result = search_engine.search(query=query)
-
-                # 记录总结束时间
-                total_end = time.time()
-                print(f"\n{'='*60}")
-                print(f"Query: {query}")
-                print(f"{'='*60}")
-                print(f"Retrieved Context Summary:")
-                print(f"  - Entities: {len(result.context_data.get('entities', []))}")
-                print(f"  - Relationships: {len(result.context_data.get('relationships', []))}")
-                print(f"  - Sources: {len(result.context_data.get('sources', []))}")
-                print(f"\nContext Text (first 2000 chars):")
-                print(result.context_text[:2000] if len(result.context_text) > 2000 else result.context_text)
-                context_text = result.context_text
-                print(f"\nContext Text type: {type(context_text)}")
-                print(f"Context Text length: {len(context_text) if context_text else 0}")
-                print(f"Context Text repr: {repr(context_text[:200]) if context_text else 'None'}")
-                print(f"\n{'='*60}")
-                print(f"Response: {result.response}")
-                print(f"Completion Time: {result.completion_time:.2f}s")
-                print(f"{'='*60}\n")
-                total_time = total_end - total_start
-
-                # GraphRAG 的 search 方法包含了检索（图数据查询）和生成（LLM 回答）
-                # SearchResult 现在包含精确的 retrieval_time 字段
-                # retrieval_time = 嵌入生成时间 + 向量搜索时间 + 实体匹配后处理时间
-                if hasattr(result, 'retrieval_time') and result.retrieval_time > 0:
-                    self.last_retrieval_time = result.retrieval_time
-                    self.last_generation_time = result.completion_time - result.retrieval_time
-                else:
-                    # 如果没有 retrieval_time（向后兼容），使用经验比例估算
-                    retrieval_ratio = 0.75
-                    self.last_retrieval_time = total_time * retrieval_ratio
-                    self.last_generation_time = total_time * (1 - retrieval_ratio)
-
-                if hasattr(result, 'completion_time'):
-                    total_time = result.completion_time
-
-                # 最终输出: 检查 result 对象是否有 'response' 属性
-                if hasattr(result, 'response'):
-                    # 如果有，返回答案
-                    return result.response
-                else:
-                    # 如果没有，返回一个错误信息或者整个对象的字符串表示作为备选
-                    self.logger.warning("Search result object does not have a 'response' attribute.")
-                    return "错误：无法从搜索结果中提取答案。"
-                # return str(result)
-            except Exception as e:
-                # 捕获 asyncio.run 或 search 本身可能抛出的异常
-                self.logger.error(f"执行异步搜索时出错: {str(e)}")
-                return f"执行异步搜索时出错: {str(e)}"
+            # 初始化完成，标记为就绪（后续查询将直接复用 self._search_engine）
+            self._search_engine_ready = True
+            self.logger.info("搜索引擎初始化完成")
+            return ""  # 成功：返回空字符串
 
         except Exception as e:
-            self.logger.error(f"本地搜索执行错误: {str(e)}")
+            self.logger.error(f"初始化搜索引擎时出错: {str(e)}")
             import traceback
             traceback.print_exc()
-            return f"本地搜索错误: {str(e)}"
+            return f"初始化搜索引擎时出错: {str(e)}"  # 失败：返回非空错误信息
+
+    def _local_search(self, query: str, data_path: str, context: Dict[str, Any] = None) -> str:
+        """
+        本地搜索模式（初始化只执行一次，之后复用搜索引擎）
+
+        采用延迟初始化（lazy init）模式：
+          - 首次调用时，_search_engine_ready 为 False，执行完整的初始化流程
+          - 后续调用时，直接复用已创建的 self._search_engine 实例
+        """
+        if context is None:
+            context = {}
+
+        # 延迟初始化搜索引擎：仅在第一次调用时执行
+        # 后续调用时 _search_engine_ready 已为 True，直接跳过
+        if not self._search_engine_ready:
+            error = self._init_search_engine(data_path, context)
+            if error:
+                # 初始化失败，返回错误信息（error 为非空字符串）
+                return error
+
+        # 执行查询
+        import asyncio
+        import time
+
+        total_start = time.time()
+        try:
+            if asyncio.iscoroutinefunction(self._search_engine.search):
+                result = asyncio.run(self._search_engine.search(query=query))
+            else:
+                result = self._search_engine.search(query=query)
+
+            total_end = time.time()
+            print(f"\n{'='*60}")
+            print(f"Query: {query}")
+            print(f"{'='*60}")
+            print(f"Retrieved Context Summary:")
+            print(f"  - Entities: {len(result.context_data.get('entities', []))}")
+            print(f"  - Relationships: {len(result.context_data.get('relationships', []))}")
+            print(f"  - Sources: {len(result.context_data.get('sources', []))}")
+            print(f"\nContext Text (first 2000 chars):")
+            print(result.context_text[:2000] if len(result.context_text) > 2000 else result.context_text)
+            context_text = result.context_text
+            print(f"\nContext Text type: {type(context_text)}")
+            print(f"Context Text length: {len(context_text) if context_text else 0}")
+            print(f"Context Text repr: {repr(context_text[:200]) if context_text else 'None'}")
+            print(f"\n{'='*60}")
+            print(f"Response: {result.response}")
+            print(f"Completion Time: {result.completion_time:.2f}s")
+            print(f"{'='*60}\n")
+            total_time = total_end - total_start
+
+            # GraphRAG 的 search 方法包含了检索（图数据查询）和生成（LLM 回答）
+            # SearchResult 现在包含精确的 retrieval_time 字段
+            # retrieval_time = 嵌入生成时间 + 向量搜索时间 + 实体匹配后处理时间
+            if hasattr(result, 'retrieval_time') and result.retrieval_time > 0:
+                self.last_retrieval_time = result.retrieval_time
+                self.last_generation_time = result.completion_time - result.retrieval_time
+            else:
+                # 如果没有 retrieval_time（向后兼容），使用经验比例估算
+                retrieval_ratio = 0.75
+                self.last_retrieval_time = total_time * retrieval_ratio
+                self.last_generation_time = total_time * (1 - retrieval_ratio)
+
+            if hasattr(result, 'completion_time'):
+                total_time = result.completion_time
+
+            # 最终输出: 检查 result 对象是否有 'response' 属性
+            if hasattr(result, 'response'):
+                return result.response
+            else:
+                self.logger.warning("Search result object does not have a 'response' attribute.")
+                return "错误：无法从搜索结果中提取答案。"
+        except Exception as e:
+            self.logger.error(f"执行异步搜索时出错: {str(e)}")
+            return f"执行异步搜索时出错: {str(e)}"
