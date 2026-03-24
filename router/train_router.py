@@ -64,6 +64,18 @@ def parse_args():
     parser.add_argument('--representation_dim', type=int, default=None,
                         help='表征维度 (单一2048, concat_deep=4096, concat_all=12288)')
     
+    # 混合表征融合配置
+    parser.add_argument('--representation_dir', type=str, default=None,
+                        help='内部表征目录路径')
+    parser.add_argument('--labels_path', type=str, default=None,
+                        help='标签JSON文件路径')
+    parser.add_argument('--fusion_type', type=str, default=None,
+                        help='融合方式 (cross_attn, bidirectional_cross_attn)')
+    parser.add_argument('--freeze_backbone', action='store_true',
+                        help='冻结 MiniLM backbone')
+    parser.add_argument('--freeze_internal_rep_proj', action='store_true',
+                        help='冻结内部表征投影层')
+    
     # 训练配置
     parser.add_argument('--batch_size', type=int, default=None, help='批量大小')
     parser.add_argument('--learning_rate', type=float, default=None, help='学习率')
@@ -213,6 +225,18 @@ def create_config_from_args(args) -> TrainableRouterConfig:
         config.data.representation_type = args.representation_type
     if args.representation_dim is not None:
         config.model.representation_dim = args.representation_dim
+    
+    # 混合表征融合配置
+    if args.representation_dir is not None:
+        config.data.representation_dir = args.representation_dir
+    if args.labels_path is not None:
+        config.data.labels_path = args.labels_path
+    if args.fusion_type is not None:
+        config.model.fusion_type = args.fusion_type
+    if args.freeze_backbone:
+        config.model.freeze_backbone = True
+    if args.freeze_internal_rep_proj:
+        config.model.freeze_internal_rep_proj = True
     
     # 输出配置
     if args.output_dir is not None:
@@ -450,10 +474,28 @@ def main():
     # 创建数据集
     logger_instance.info("加载数据集...")
     
+    # 标记是否跳过后续的 load_data 调用
+    skip_train_load = False
+    skip_val_load = False
+    
     # 优先根据 config.data.source 选择数据集类型
     source_type = getattr(config.data, 'source', '').lower()
     
-    if source_type == 'internal_representation' or source_type == 'internal_rep':
+    if source_type == 'hybrid_representation_fusion' or source_type == 'hybrid_rep_fusion':
+        # 混合表征融合数据集（内部表征 + 语义表征）
+        logger_instance.info(f"使用HybridRepresentationFusionDataset (source={source_type})")
+        from trainable_router.datasets.hybrid_representation_fusion_dataset import HybridRepresentationFusionDataset
+        representation_type = getattr(config.data, 'representation_type', 'deep_last_token')
+        train_dataset = HybridRepresentationFusionDataset(
+            config, 
+            representation_type=representation_type
+        )
+        # 设置数据路径（从配置读取）并加载
+        train_dataset.representation_dir = config.data.representation_dir
+        train_dataset.labels_path = config.data.labels_path
+        train_dataset.load_data(config.data.representation_dir)
+        skip_train_load = True
+    elif source_type == 'internal_representation' or source_type == 'internal_rep':
         # 内部表征数据集（预提取的 LLM 表征）
         logger_instance.info(f"使用InternalRepresentationDataset (source={source_type})")
         from trainable_router.datasets.internal_representation_dataset import InternalRepresentationDataset
@@ -494,14 +536,33 @@ def main():
     else:
         from trainable_router.datasets.hotpotqa_dataset import GenericRouterDataset
         train_dataset = GenericRouterDataset(config)
-    train_dataset.load_data(config.data.train_path)
+    
+    # 加载训练数据（除非已经在数据集创建时加载）
+    if not skip_train_load:
+        train_dataset.load_data(config.data.train_path)
 
     print('length of train_dataset:', len(train_dataset))
 
     val_dataset = None
-    if config.data.val_path:
+    # 对于 hybrid_representation_fusion，检查是否有验证表征目录
+    val_representation_dir = getattr(config.data, 'val_representation_dir', None)
+    
+    if config.data.val_path or val_representation_dir:
         # 根据 source 类型选择验证数据集
-        if source_type == 'internal_representation' or source_type == 'internal_rep':
+        if source_type == 'hybrid_representation_fusion' or source_type == 'hybrid_rep_fusion':
+            # 混合表征融合数据集
+            logger_instance.info(f"使用HybridRepresentationFusionDataset加载验证集 (source={source_type})")
+            from trainable_router.datasets.hybrid_representation_fusion_dataset import HybridRepresentationFusionDataset
+            representation_type = getattr(config.data, 'representation_type', 'deep_last_token')
+            val_dataset = HybridRepresentationFusionDataset(
+                config,
+                representation_type=representation_type
+            )
+            # 使用验证表征目录（如果指定），强制从 metadata 加载标签
+            if val_representation_dir:
+                val_dataset.load_data(val_representation_dir, from_metadata=True)
+                skip_val_load = True
+        elif source_type == 'internal_representation' or source_type == 'internal_rep':
             # 内部表征数据集
             logger_instance.info(f"使用InternalRepresentationDataset加载验证集 (source={source_type})")
             from trainable_router.datasets.internal_representation_dataset import InternalRepresentationDataset
@@ -524,23 +585,26 @@ def main():
             logger_instance.info(f"使用SoftLabelRouterDataset加载验证集 (source={source_type})")
             from trainable_router.datasets.soft_label_dataset import SoftLabelRouterDataset
             val_dataset = SoftLabelRouterDataset(config)
-        elif 'router_test_labels' in config.data.val_path or 'router_labels' in config.data.val_path:
+        elif config.data.val_path and ('router_test_labels' in config.data.val_path or 'router_labels' in config.data.val_path):
             logger_instance.info("检测到路由标签格式，使用RouterLabelDataset")
             from trainable_router.datasets.router_label_dataset import RouterLabelDataset
             val_dataset = RouterLabelDataset(config)
         else:
             val_dataset = GenericRouterDataset(config)
 
-        val_dataset.load_data(config.data.val_path)
-        logger_instance.info(f"验证数据集已加载: {config.data.val_path}")
+        # 加载验证数据（除非已经在数据集创建时加载）
+        if not skip_val_load and config.data.val_path and config.data.val_path != '-':
+            val_dataset.load_data(config.data.val_path)
+        logger_instance.info(f"验证数据集已加载")
     else:
         logger_instance.info("未提供验证数据集，将跳过验证")
 
     # 先创建模型，以便collate_fn能根据模型属性做出一致判断
     logger_instance.info("创建模型...")
     # 根据config里的model_type参数创建router模型
-    # 对于内部表征模型，传递 representation_dim
-    if source_type == 'internal_representation' or source_type == 'internal_rep':
+    # 对于内部表征模型或混合表征融合模型，传递 representation_dim
+    if (source_type == 'internal_representation' or source_type == 'internal_rep' or
+        source_type == 'hybrid_representation_fusion' or source_type == 'hybrid_rep_fusion'):
         representation_dim = getattr(config.model, 'representation_dim', 2048)
         model = TrainableRouterFactory.create_model(config, representation_dim=representation_dim)
     else:
@@ -557,6 +621,17 @@ def main():
 
     # 创建collate_fn
     def collate_fn(x):
+        # 处理混合表征融合数据集（HybridRepresentationFusionDataset）
+        if 'representation' in x[0] and 'input_ids' in x[0]:
+            batch_data = {
+                'representation': torch.stack([item['representation'] for item in x]),
+                'input_ids': torch.stack([item['input_ids'] for item in x]),
+                'attention_mask': torch.stack([item['attention_mask'] for item in x]),
+                'label': torch.stack([item['label'] for item in x]),
+                'queries': [item['query'] for item in x],
+            }
+            return batch_data
+        
         # 处理内部表征数据集（InternalRepresentationDataset）
         if 'representation' in x[0]:
             batch_data = {

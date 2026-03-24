@@ -1,0 +1,97 @@
+# 混合表征融合路由器训练配置
+# 融合 LLM 内部表征 + MiniLM 语义表征，使用 Cross Attention
+
+model_type: "hybrid_representation_fusion"
+
+model:
+  # 语义编码器骨干 (MiniLM, 384-d, 可训练)
+  backbone_name: "sentence-transformers/all-MiniLM-L6-v2"
+  
+  # 内部表征维度 (deep_last_token = 2048)
+  # representation_dim: 2048
+  representation_dim: 6144
+  
+  # 隐藏层维度
+  hidden_size: 512
+  
+  # 策略名称
+  strategy_names: ["no_rag", "naive_rag"]
+  num_strategies: 2
+  
+  # 温度参数
+  temperature: 1.0
+  
+  # Cross Attention 配置
+  fusion_type: "cross_attn"  # 可选: "cross_attn", "bidirectional_cross_attn"
+  num_attention_heads: 4
+  attention_dropout: 0.1
+  
+  # 冻结配置
+  freeze_internal_rep_proj: false  # 是否冻结内部表征投影层
+  freeze_backbone: false           # 是否冻结 MiniLM backbone
+  
+  # 设备
+  device: "auto"
+
+training:
+  # 训练器类型
+  trainer_type: "hybrid_representation_fusion"
+  
+  # 批量大小
+  batch_size: 32
+  
+  # 学习率
+  learning_rate: 1.0e-4
+  
+  # 训练轮数
+  epochs: 10
+  
+  # 评估间隔
+  eval_steps: 50
+  
+  # 保存间隔
+  save_steps: 50
+  
+  # 优化器
+  optimizer_type: "adamw"
+  optimizer_kwargs:
+    weight_decay: 0.01
+  
+  # 学习率调度器
+  scheduler_type: "linear"
+  
+  # 梯度裁剪
+  max_grad_norm: 1.0
+  
+  # 随机种子
+  seed: 42
+  
+  # 类别权重 (处理类别不平衡，可选)
+  # class_weights:
+  #   no_rag: 1.5
+  #   naive_rag: 1.0
+
+data:
+  # 数据源类型
+  source: "hybrid_representation_fusion"
+  
+  # 表征类型 (可选: shallow_mean, deep_last_token, concat_deep, concat_all_mean, concat_all_last, concat_all)
+  representation_type: "deep_last_token"
+  
+  # 训练数据
+  representation_dir: "outputs/representations/fp16_qwen2.5-3b-instruct_train5000"
+  labels_path: "HotpotQA_train_data/label_analysis/all_labels_no_rag_strictly_better_removed.json"
+  
+  # 验证数据（使用单独的表征目录，标签从 metadata.json 加载）
+  val_representation_dir: "outputs/representations/fp16_qwen2.5-3b-instruct_test1000"
+  
+  # 最大序列长度
+  max_length: 512
+
+# 输出配置
+output_dir: "outputs/hybrid_representation_fusion_router"
+save_model_path: "outputs/hybrid_representation_fusion_router/final_model"
+
+# 日志配置
+logging_dir: "outputs/hybrid_representation_fusion_router/logs"
+log_level: "info"
