@@ -10,6 +10,7 @@ from .soft_label_dataset import BinarySoftLabelDataset, SoftLabelRouterDataset  
 from .fusion_soft_label_dataset import FusionSoftLabelDataset, fusion_soft_label_collate_fn
 from .dpo_dataset import DPOPreferenceDataset, DPOBinaryPreferenceDataset
 from .decision_router_dataset import DecisionRouterDataset  # 新增：决策式路由数据集
+from .hybrid_representation_fusion_dataset import HybridRepresentationFusionDataset, hybrid_representation_fusion_collate_fn  # 新增：混合表征融合数据集
 
 __all__ = [
     'BaseRouterDataset',  # 抽象基类
@@ -25,4 +26,6 @@ __all__ = [
     'DPOPreferenceDataset',
     'DPOBinaryPreferenceDataset',
     'DecisionRouterDataset',  # 新增：决策式路由数据集
+    'HybridRepresentationFusionDataset',
+    'hybrid_representation_fusion_collate_fn',
 ]

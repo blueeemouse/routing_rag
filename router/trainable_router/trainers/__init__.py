@@ -8,6 +8,7 @@ from .fusion_soft_label_trainer import FusionSoftLabelTrainer
 from .dpo_trainer import RouterDPOTrainer, ClassificationDPOTrainer
 from .knn_trainer import KNNTrainer
 from .decision_router_trainer import DecisionRouterTrainer  # 新增：决策式路由训练器
+from .hybrid_representation_fusion_trainer import HybridRepresentationFusionTrainer  # 新增：混合表征融合训练器
 
 __all__ = [
     'DCTrainer', 
@@ -20,4 +21,5 @@ __all__ = [
     'ClassificationDPOTrainer',
     'KNNTrainer',
     'DecisionRouterTrainer',  # 新增：决策式路由训练器
+    'HybridRepresentationFusionTrainer',
 ]

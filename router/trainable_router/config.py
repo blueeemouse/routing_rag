@@ -50,6 +50,22 @@ class ModelConfig:
     
     # 是否使用距离加权投票
     weighted_voting: bool = True
+    
+    # ========== 混合表征融合模型参数 ==========
+    # 融合方式: "cross_attn" or "bidirectional_cross_attn"
+    fusion_type: str = "cross_attn"
+    
+    # Cross Attention 头数
+    num_attention_heads: int = 4
+    
+    # Attention dropout
+    attention_dropout: float = 0.1
+    
+    # 是否冻结内部表征投影层
+    freeze_internal_rep_proj: bool = False
+    
+    # 是否冻结 backbone
+    freeze_backbone: bool = False
 
 
 @dataclass
@@ -144,6 +160,29 @@ class DataConfig:
     # ========== 内部表征数据集参数 ==========
     # 表征类型 (shallow_mean, deep_last_token, concat_all 等)
     representation_type: str = "deep_last_token"
+    
+    # ========== 混合表征融合数据集参数 ==========
+    # 训练表征目录
+    representation_dir: str = ""
+    
+    # 验证表征目录
+    val_representation_dir: str = ""
+    
+    # 标签文件路径
+    labels_path: str = ""
+    
+    # 最大序列长度
+    max_length: int = 512
+    
+    # ========== 混合表征融合数据集参数 ==========
+    # 内部表征目录
+    representation_dir: Optional[str] = None
+    
+    # 标签文件路径
+    labels_path: Optional[str] = None
+    
+    # 最大序列长度
+    max_length: int = 512
 
 
 # 这是总的配置类
@@ -205,6 +244,12 @@ class TrainableRouterConfig:
             k=model_config.get('k', 5),
             distance_metric=model_config.get('distance_metric', 'cosine'),
             weighted_voting=model_config.get('weighted_voting', True),
+            # 混合表征融合参数
+            fusion_type=model_config.get('fusion_type', 'cross_attn'),
+            num_attention_heads=model_config.get('num_attention_heads', 4),
+            attention_dropout=model_config.get('attention_dropout', 0.1),
+            freeze_internal_rep_proj=model_config.get('freeze_internal_rep_proj', False),
+            freeze_backbone=model_config.get('freeze_backbone', False),
         )
         
         training = TrainingConfig(
@@ -222,7 +267,8 @@ class TrainableRouterConfig:
             last_k=training_config.get('last_k', 3),
             trainer_type=training_config.get('trainer_type', 'dc'),
             overfit_single_batch=training_config.get('overfit_single_batch', False),
-            fast_dev_steps=training_config.get('fast_dev_steps', 100)
+            fast_dev_steps=training_config.get('fast_dev_steps', 100),
+            class_weights=training_config.get('class_weights'),
         )
         
         data = DataConfig(
@@ -236,6 +282,11 @@ class TrainableRouterConfig:
             score_formula=data_config.get('score_formula', 'em'),
             # 内部表征参数
             representation_type=data_config.get('representation_type', 'deep_last_token'),
+            # 混合表征融合参数
+            representation_dir=data_config.get('representation_dir', ''),
+            val_representation_dir=data_config.get('val_representation_dir', ''),
+            labels_path=data_config.get('labels_path', ''),
+            max_length=data_config.get('max_length', 512),
         )
         
         # 设置日志目录默认值
