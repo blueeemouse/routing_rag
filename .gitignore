@@ -38,3 +38,4 @@ vllm-0.17.1-cp38-abi3-manylinux_2_31_x86_64.whl
 outputs/
 AGENTS.md
 env_requirements_no_use.txt
+representations/
